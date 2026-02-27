@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #00A6FF;
+  --color-neon: #00FF1A;
+  --color-yellow: #FBFF8C;
+  --color-background: #000000;
+  --color-foreground: #e2e8f0;
+  --color-muted: #8a8a8a;
+  --color-surface: #0a0a0a;
+  --color-surface-card: #111111;
+  --color-surface-elevated: #1a1a1a;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #00A6FF #000000;
+}
+
+body {
+  color: var(--color-foreground);
+  background: var(--color-background);
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #000000; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00A6FF, #00FF1A);
+  border-radius: 3px;
+}
+
+::selection {
+  background: rgba(0, 166, 255, 0.35);
+  color: #ffffff;
+}
+
+/* Film Grain Overlay */
+.grain-overlay::after {
+  content: "";
+  position: fixed;
+  top: -50%; left: -50%; right: -50%; bottom: -50%;
+  width: 200%; height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 9999;
+  animation: grain 8s steps(10) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain-overlay::after { animation: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 166, 255, 0.12);
+  }
+  .glass-strong {
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 166, 255, 0.18);
+  }
+  .glass-card {
+    background: rgba(17, 17, 17, 0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 166, 255, 0.08);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  }
+  .text-gradient-blue-green {
+    background: linear-gradient(135deg, #00A6FF 0%, #00FF1A 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .text-gradient-blue-yellow {
+    background: linear-gradient(135deg, #00A6FF 0%, #FBFF8C 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .text-gradient-green-yellow {
+    background: linear-gradient(135deg, #00FF1A 0%, #FBFF8C 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .glow-blue {
+    box-shadow: 0 0 20px rgba(0, 166, 255, 0.3), 0 0 40px rgba(0, 166, 255, 0.1);
+  }
+  .glow-green {
+    box-shadow: 0 0 20px rgba(0, 255, 26, 0.3), 0 0 40px rgba(0, 255, 26, 0.1);
+  }
+}
+
+*:focus-visible {
+  outline: 2px solid #00A6FF;
+  outline-offset: 2px;
+}
