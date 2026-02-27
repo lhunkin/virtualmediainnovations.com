@@ -56,7 +56,7 @@ export default function Contact() {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl sm:text-5xl font-bold text-gradient-blue-green mb-4">
-            Let's Work Together
+            Let&apos;s Work Together
           </h2>
           <p className="text-foreground/70">
             Get in touch to discuss your next creative project
@@ -180,7 +180,7 @@ export default function Contact() {
             >
               <CheckCircle className="text-neon flex-shrink-0" size={24} />
               <p className="text-neon font-medium">
-                Thanks for reaching out! We'll be in touch soon.
+                Thanks for reaching out! We&apos;ll be in touch soon.
               </p>
             </motion.div>
           )}

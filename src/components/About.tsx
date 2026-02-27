@@ -45,7 +45,7 @@ export default function About() {
             </p>
             <p className="text-foreground/70 mb-8 leading-relaxed">
               With a passion for storytelling and cutting-edge design, we help creators
-              bring their visions to life. Whether you're building a game world, designing
+              bring their visions to life. Whether you&apos;re building a game world, designing
               characters, or creating an entire universe, we have the expertise to make
               it extraordinary.
             </p>
