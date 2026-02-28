@@ -2,73 +2,189 @@
 
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown, Volume2, VolumeX, Music } from 'lucide-react';
+import { ChevronDown, Volume2, VolumeX, Music, Play, Pause, SkipForward } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
 const ParticleField = dynamic(() => import('./ParticleField'), {
   ssr: false,
 });
 
-const PLAYLIST_ID = 'PLW8gSdbXbt_um43KRwmoaiS8qKoERe0NG';
-const FIRST_VIDEO_ID = 't4LF3PItOFg'; // "The Black Fleet"
+// First 5 tracks from Whispers of Morgath playlist
+const TRACKS = [
+  { id: 't4LF3PItOFg', title: 'The Black Fleet' },
+  { id: '2t-bZI5EBxo', title: 'Ravencrest Hungers' },
+  { id: 'XtsBlg2Bfuw', title: "Mistress's Might" },
+  { id: '9pVs_mA85DA', title: 'The Knot That Remains' },
+  { id: 'HTZ5BiiXeXs', title: 'The Eternal Flame' },
+];
+
+declare global {
+  interface Window {
+    YT: any;
+    onYouTubeIframeAPIReady: () => void;
+  }
+}
 
 export default function Hero() {
   const [isMuted, setIsMuted] = useState(true);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTrack, setCurrentTrack] = useState(0);
+  const [playerReady, setPlayerReady] = useState(false);
+  const playerRef = useRef<any>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const suppressPauseRef = useRef(false);
 
-  // First 5 tracks from Whispers of Morgath playlist — avoids "More videos" overlay
-  const TRACK_IDS = 't4LF3PItOFg,2t-bZI5EBxo,XtsBlg2Bfuw,9pVs_mA85DA,HTZ5BiiXeXs';
-  const embedUrl = `https://www.youtube.com/embed/${FIRST_VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${TRACK_IDS}&rel=0&modestbranding=1&iv_load_policy=3&controls=1&playsinline=1&enablejsapi=1&origin=${typeof window !== 'undefined' ? encodeURIComponent(window.location.origin) : ''}`;
-
-  const toggleMute = useCallback(() => {
-    if (iframeRef.current?.contentWindow) {
-      if (isMuted) {
-        // Use postMessage to unmute via YouTube iframe API
-        iframeRef.current.contentWindow.postMessage(
-          JSON.stringify({ event: 'command', func: 'unMute', args: [] }),
-          '*'
-        );
-        iframeRef.current.contentWindow.postMessage(
-          JSON.stringify({ event: 'command', func: 'setVolume', args: [100] }),
-          '*'
-        );
-      } else {
-        iframeRef.current.contentWindow.postMessage(
-          JSON.stringify({ event: 'command', func: 'mute', args: [] }),
-          '*'
-        );
-      }
-    }
-    setIsMuted(!isMuted);
-  }, [isMuted]);
-
-  // Attempt auto-unmute after video has had time to start playing
-  // Browsers block unmute without user interaction, so we also listen for
-  // any click/tap on the page as a "user gesture" to piggyback the unmute
+  // Load YouTube IFrame API and create player
   useEffect(() => {
-    const attemptUnmute = () => {
-      if (iframeRef.current?.contentWindow) {
-        iframeRef.current.contentWindow.postMessage(
-          JSON.stringify({ event: 'command', func: 'unMute', args: [] }),
-          '*'
-        );
-        iframeRef.current.contentWindow.postMessage(
-          JSON.stringify({ event: 'command', func: 'setVolume', args: [100] }),
-          '*'
-        );
-        setIsMuted(false);
-      }
+    // If API is already loaded, create player directly
+    if (window.YT && window.YT.Player) {
+      createPlayer();
+      return;
+    }
+
+    // Load the API script
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+
+    // YouTube API calls this when ready
+    window.onYouTubeIframeAPIReady = () => {
+      createPlayer();
     };
 
-    // Try after a delay (works on some browsers/desktop)
-    const timer = setTimeout(attemptUnmute, 3000);
+    function createPlayer() {
+      if (playerRef.current) return; // already created
 
-    // Also unmute on first user interaction anywhere on the page
+      playerRef.current = new window.YT.Player('yt-player', {
+        videoId: TRACKS[0].id,
+        playerVars: {
+          autoplay: 1,
+          mute: 1,
+          controls: 0,        // Hide native controls — prevents "More videos" overlay
+          rel: 0,
+          modestbranding: 1,
+          iv_load_policy: 3,   // Hide annotations
+          playsinline: 1,
+          disablekb: 1,        // Disable keyboard controls
+          fs: 0,               // Disable fullscreen button
+          showinfo: 0,
+          loop: 0,             // We handle looping manually via playlist cycling
+        },
+        events: {
+          onReady: onPlayerReady,
+          onStateChange: onPlayerStateChange,
+        },
+      });
+    }
+
+    return () => {
+      if (playerRef.current && playerRef.current.destroy) {
+        playerRef.current.destroy();
+        playerRef.current = null;
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const onPlayerReady = useCallback(() => {
+    setPlayerReady(true);
+    setIsPlaying(true);
+    // Player auto-starts muted due to playerVars
+  }, []);
+
+  const onPlayerStateChange = useCallback(
+    (event: any) => {
+      const state = event.data;
+
+      // YT.PlayerState.PLAYING = 1
+      if (state === 1) {
+        setIsPlaying(true);
+      }
+
+      // YT.PlayerState.PAUSED = 2
+      // Auto-resume if YouTube paused it (e.g., "More videos" overlay)
+      if (state === 2 && !suppressPauseRef.current) {
+        // YouTube paused the video — fight back!
+        setTimeout(() => {
+          if (playerRef.current && playerRef.current.getPlayerState() === 2) {
+            playerRef.current.playVideo();
+          }
+        }, 100);
+      }
+
+      // YT.PlayerState.ENDED = 0  — play next track
+      if (state === 0) {
+        const nextIndex = (currentTrack + 1) % TRACKS.length;
+        setCurrentTrack(nextIndex);
+        if (playerRef.current) {
+          playerRef.current.loadVideoById({
+            videoId: TRACKS[nextIndex].id,
+            startSeconds: 0,
+          });
+        }
+      }
+    },
+    [currentTrack]
+  );
+
+  // Re-attach event listener when currentTrack changes
+  useEffect(() => {
+    if (playerRef.current && playerRef.current.addEventListener) {
+      // The YT API doesn't support removing/re-adding listeners easily,
+      // but the callback closure captures currentTrack, so we need to
+      // update the player's internal reference
+      playerRef.current.removeEventListener?.('onStateChange', onPlayerStateChange);
+      playerRef.current.addEventListener('onStateChange', onPlayerStateChange);
+    }
+  }, [onPlayerStateChange]);
+
+  const toggleMute = useCallback(() => {
+    if (!playerRef.current || !playerReady) return;
+    if (isMuted) {
+      playerRef.current.unMute();
+      playerRef.current.setVolume(100);
+      setIsMuted(false);
+    } else {
+      playerRef.current.mute();
+      setIsMuted(true);
+    }
+  }, [isMuted, playerReady]);
+
+  const togglePlay = useCallback(() => {
+    if (!playerRef.current || !playerReady) return;
+    if (isPlaying) {
+      suppressPauseRef.current = true;
+      playerRef.current.pauseVideo();
+      setIsPlaying(false);
+      // Reset suppress after a moment
+      setTimeout(() => {
+        suppressPauseRef.current = false;
+      }, 500);
+    } else {
+      playerRef.current.playVideo();
+      setIsPlaying(true);
+    }
+  }, [isPlaying, playerReady]);
+
+  const skipTrack = useCallback(() => {
+    if (!playerRef.current || !playerReady) return;
+    const nextIndex = (currentTrack + 1) % TRACKS.length;
+    setCurrentTrack(nextIndex);
+    playerRef.current.loadVideoById({
+      videoId: TRACKS[nextIndex].id,
+      startSeconds: 0,
+    });
+  }, [currentTrack, playerReady]);
+
+  // Auto-unmute on first user interaction
+  useEffect(() => {
     const handleInteraction = () => {
-      attemptUnmute();
-      document.removeEventListener('click', handleInteraction);
-      document.removeEventListener('touchstart', handleInteraction);
-      document.removeEventListener('keydown', handleInteraction);
+      if (playerRef.current && playerReady) {
+        playerRef.current.unMute();
+        playerRef.current.setVolume(100);
+        setIsMuted(false);
+      }
     };
 
     document.addEventListener('click', handleInteraction, { once: true });
@@ -76,12 +192,11 @@ export default function Hero() {
     document.addEventListener('keydown', handleInteraction, { once: true });
 
     return () => {
-      clearTimeout(timer);
       document.removeEventListener('click', handleInteraction);
       document.removeEventListener('touchstart', handleInteraction);
       document.removeEventListener('keydown', handleInteraction);
     };
-  }, []);
+  }, [playerReady]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -123,18 +238,25 @@ export default function Hero() {
         <div className="relative group isolate">
           <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary/30 via-neon/30 to-primary/30 blur-md opacity-60" />
           <div className="relative rounded-lg overflow-hidden border border-primary/20 shadow-2xl">
-            <div className="aspect-video bg-black">
-              <iframe
-                ref={iframeRef}
-                src={embedUrl}
-                width="100%"
-                height="100%"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                title="Whispers of Morgath — Roll & Resonance"
-                className="absolute inset-0 w-full h-full"
-                style={{ border: 'none' }}
+            <div className="aspect-video bg-black relative" ref={containerRef}>
+              {/* YouTube player will be injected here */}
+              <div id="yt-player" className="absolute inset-0 w-full h-full" />
+
+              {/* Transparent overlay to block YouTube's click-to-pause and overlays */}
+              <div
+                className="absolute inset-0 z-10 cursor-pointer"
+                onClick={togglePlay}
+                title={isPlaying ? 'Click to pause' : 'Click to play'}
               />
+
+              {/* Play/Pause indicator on click */}
+              {!isPlaying && playerReady && (
+                <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
+                  <div className="w-16 h-16 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center">
+                    <Play size={28} className="text-white ml-1" />
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -145,22 +267,51 @@ export default function Hero() {
             <Music size={14} className="text-primary" />
             <div>
               <p className="text-primary text-xs font-semibold">Whispers of Morgath</p>
-              <p className="text-foreground/40 text-[10px]">Roll &amp; Resonance</p>
+              <p className="text-foreground/40 text-[10px]">
+                {TRACKS[currentTrack].title} — Roll &amp; Resonance
+              </p>
             </div>
           </div>
 
           <div className="flex items-center gap-3">
             {/* Equalizer */}
-            <div className="flex items-center gap-0.5">
-              <span className="w-0.5 h-2 bg-neon rounded-full animate-pulse" style={{ animationDelay: '0ms' }} />
-              <span className="w-0.5 h-3 bg-neon rounded-full animate-pulse" style={{ animationDelay: '150ms' }} />
-              <span className="w-0.5 h-1.5 bg-neon rounded-full animate-pulse" style={{ animationDelay: '300ms' }} />
-              <span className="w-0.5 h-4 bg-neon rounded-full animate-pulse" style={{ animationDelay: '100ms' }} />
-            </div>
+            {isPlaying && (
+              <div className="flex items-center gap-0.5">
+                <span className="w-0.5 h-2 bg-neon rounded-full animate-pulse" style={{ animationDelay: '0ms' }} />
+                <span className="w-0.5 h-3 bg-neon rounded-full animate-pulse" style={{ animationDelay: '150ms' }} />
+                <span className="w-0.5 h-1.5 bg-neon rounded-full animate-pulse" style={{ animationDelay: '300ms' }} />
+                <span className="w-0.5 h-4 bg-neon rounded-full animate-pulse" style={{ animationDelay: '100ms' }} />
+              </div>
+            )}
+
+            {/* Play/Pause */}
+            <button
+              onClick={togglePlay}
+              className="p-1.5 rounded-full bg-primary/20 hover:bg-primary/30 transition-colors"
+              title={isPlaying ? 'Pause' : 'Play'}
+            >
+              {isPlaying ? (
+                <Pause size={12} className="text-neon" />
+              ) : (
+                <Play size={12} className="text-neon ml-0.5" />
+              )}
+            </button>
+
+            {/* Skip */}
+            <button
+              onClick={skipTrack}
+              className="p-1.5 rounded-full bg-primary/20 hover:bg-primary/30 transition-colors"
+              title="Next track"
+            >
+              <SkipForward size={12} className="text-neon" />
+            </button>
 
             {/* Mute toggle */}
             <button
-              onClick={toggleMute}
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleMute();
+              }}
               className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full transition-colors ${
                 isMuted
                   ? 'bg-neon/20 hover:bg-neon/30 animate-pulse'
