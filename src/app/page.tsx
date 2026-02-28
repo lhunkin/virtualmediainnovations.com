@@ -17,8 +17,8 @@ export default function Home() {
     <main className="bg-background">
       <Navigation />
       <Hero />
-      <FlagshipProject />
       <SoundscapePlayer />
+      <FlagshipProject />
       <WorldBuilder />
       <About />
       <Contact />
