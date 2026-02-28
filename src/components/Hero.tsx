@@ -183,12 +183,9 @@ export default function Hero() {
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-neon/10 rounded-full filter blur-3xl animate-pulse" />
 
       {/* Video Player - separate stacking context, above grain overlay */}
-      <motion.div
+      <div
         className="relative w-full max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-10"
         style={{ zIndex: 50 }}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.3 }}
       >
         {/* Player frame with glow */}
         <div className="relative group isolate">
@@ -242,7 +239,7 @@ export default function Hero() {
             </button>
           </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Text Content */}
       <motion.div
