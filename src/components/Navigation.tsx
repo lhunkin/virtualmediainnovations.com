@@ -19,12 +19,9 @@ export default function Navigation() {
   }, []);
 
   const navLinks = [
-    { label: 'Services', href: '#services' },
-    { label: 'Portfolio', href: '#portfolio' },
+    { label: 'World of Asphodel', href: 'https://worldofasphodel.com', external: true },
+    { label: 'World Builder', href: '#world-builder' },
     { label: 'About', href: '#about' },
-    { label: 'Team', href: '#team' },
-    { label: 'FAQ', href: '#faq' },
-    { label: 'Blog', href: '/blog' },
     { label: 'Contact', href: '#contact' },
   ];
 
@@ -45,22 +42,39 @@ export default function Navigation() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-sm text-foreground hover:text-primary transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) =>
+              link.external ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-foreground hover:text-primary transition-colors"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm text-foreground hover:text-primary transition-colors"
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
           </div>
 
           {/* CTA and Mobile Menu */}
           <div className="flex items-center gap-4">
-            <button className="hidden md:inline-block px-6 py-2 bg-gradient-to-r from-primary to-neon text-black font-semibold rounded-lg hover:shadow-glow transition-all">
-              Start a Project
-            </button>
+            <a
+              href="https://worldofasphodel.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:inline-block px-6 py-2 bg-gradient-to-r from-primary to-neon text-black font-semibold rounded-lg hover:shadow-glow transition-all"
+            >
+              Explore Asphodel
+            </a>
 
             {/* Mobile Menu Button */}
             <button
@@ -82,19 +96,38 @@ export default function Navigation() {
               transition={{ duration: 0.3 }}
               className="md:hidden mt-4 space-y-3 pb-4"
             >
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="block text-sm text-foreground hover:text-primary transition-colors py-2"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <button className="w-full mt-4 px-4 py-2 bg-gradient-to-r from-primary to-neon text-black font-semibold rounded-lg hover:shadow-glow transition-all">
-                Start a Project
-              </button>
+              {navLinks.map((link) =>
+                link.external ? (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-sm text-foreground hover:text-primary transition-colors py-2"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="block text-sm text-foreground hover:text-primary transition-colors py-2"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                )
+              )}
+              <a
+                href="https://worldofasphodel.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full mt-4 px-4 py-2 bg-gradient-to-r from-primary to-neon text-black font-semibold rounded-lg hover:shadow-glow transition-all text-center"
+                onClick={() => setIsOpen(false)}
+              >
+                Explore Asphodel
+              </a>
             </motion.div>
           )}
         </AnimatePresence>

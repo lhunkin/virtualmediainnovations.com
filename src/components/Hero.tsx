@@ -51,27 +51,35 @@ export default function Hero() {
           variants={itemVariants}
           className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-6 text-gradient-blue-green"
         >
-          We Build Virtual Worlds
+          Enter the World of Asphodel
         </motion.h1>
 
         <motion.p
           variants={itemVariants}
           className="text-lg sm:text-xl text-foreground/80 mb-8 max-w-2xl mx-auto leading-relaxed"
         >
-          Concept art, game assets, RPG design, and immersive digital experiences
-          that bring your vision to life.
+          A living D&D 5e campaign setting with deep lore, immersive soundscapes,
+          and a world builder platform to create your own.
         </motion.p>
 
         <motion.div
           variants={itemVariants}
           className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
         >
-          <button className="px-8 py-3 bg-gradient-to-r from-primary to-neon text-black font-semibold rounded-lg hover:shadow-glow transition-all">
-            Start a Project
-          </button>
-          <button className="px-8 py-3 border border-primary text-primary font-semibold rounded-lg hover:bg-primary/10 transition-all">
-            View Our Work
-          </button>
+          <a
+            href="https://worldofasphodel.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-3 bg-gradient-to-r from-primary to-neon text-black font-semibold rounded-lg hover:shadow-glow transition-all text-center"
+          >
+            Explore Asphodel
+          </a>
+          <a
+            href="#world-builder"
+            className="px-8 py-3 border border-primary text-primary font-semibold rounded-lg hover:bg-primary/10 transition-all text-center"
+          >
+            World Builder
+          </a>
         </motion.div>
 
         {/* Scroll Indicator */}

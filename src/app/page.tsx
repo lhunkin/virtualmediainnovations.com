@@ -1,18 +1,15 @@
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
-import Services from '@/components/Services';
-import Portfolio from '@/components/Portfolio';
 import FlagshipProject from '@/components/FlagshipProject';
+import SoundscapePlayer from '@/components/SoundscapePlayer';
 import WorldBuilder from '@/components/WorldBuilder';
 import About from '@/components/About';
-import Team from '@/components/Team';
-import FAQ from '@/components/FAQ';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
 export const metadata = {
-  title: 'Virtual Media Innovations - Creative Studio',
-  description: 'Building virtual worlds, game art, RPG content, and immersive digital experiences.',
+  title: 'Virtual Media Innovations - World of Asphodel & World Builder',
+  description: 'Home of the World of Asphodel D&D 5e campaign setting and the World Builder platform. Immersive worldbuilding, soundscapes, and creative tools.',
 };
 
 export default function Home() {
@@ -20,13 +17,10 @@ export default function Home() {
     <main className="bg-background">
       <Navigation />
       <Hero />
-      <Services />
-      <Portfolio />
       <FlagshipProject />
+      <SoundscapePlayer />
       <WorldBuilder />
       <About />
-      <Team />
-      <FAQ />
       <Contact />
       <Footer />
     </main>

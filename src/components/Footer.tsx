@@ -11,27 +11,18 @@ const socialLinks = [
 
 const footerColumns = [
   {
-    title: 'Studio',
-    links: [
-      { label: 'Home', href: '/' },
-      { label: 'Services', href: '#services' },
-      { label: 'Portfolio', href: '#portfolio' },
-      { label: 'About', href: '#about' },
-    ],
-  },
-  {
-    title: 'Projects',
+    title: 'Explore',
     links: [
       { label: 'World of Asphodel', href: 'https://worldofasphodel.com' },
       { label: 'World Builder', href: '#world-builder' },
+      { label: 'Soundscapes', href: 'https://www.youtube.com/playlist?list=PLW8gSdbXbt_um43KRwmoaiS8qKoERe0NG' },
     ],
   },
   {
-    title: 'Resources',
+    title: 'Company',
     links: [
-      { label: 'Blog', href: '/blog' },
+      { label: 'About', href: '#about' },
       { label: 'Contact', href: '#contact' },
-      { label: 'FAQ', href: '#faq' },
       { label: 'contact@virtualmediainnovations.com', href: 'mailto:contact@virtualmediainnovations.com' },
     ],
   },
@@ -44,7 +35,7 @@ export default function Footer() {
     <footer className="bg-surface-elevated border-t border-primary/20">
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <Link href="/" className="block mb-4">

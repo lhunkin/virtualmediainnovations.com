@@ -3,10 +3,10 @@
 import { motion } from 'framer-motion';
 
 const stats = [
-  { number: '50+', label: 'Projects' },
-  { number: '12', label: 'Virtual Worlds' },
-  { number: '5K+', label: 'Assets' },
-  { number: '100%', label: 'Satisfaction' },
+  { number: '1', label: 'Living World' },
+  { number: '13', label: 'Soundscapes' },
+  { number: '5e', label: 'SRD Compatible' },
+  { number: '100%', label: 'Free to Explore' },
 ];
 
 export default function About() {
@@ -39,15 +39,15 @@ export default function About() {
               About Virtual Media Innovations
             </h2>
             <p className="text-foreground/80 text-lg mb-6 leading-relaxed">
-              Virtual Media Innovations is a creative studio dedicated to building
-              immersive digital experiences. We specialize in worldbuilding, concept
-              art, game design, and RPG content creation.
+              Virtual Media Innovations is the creative studio behind the World of
+              Asphodel and the upcoming World Builder platform. We craft immersive
+              campaign settings, ambient soundscapes, and tools for tabletop RPG creators.
             </p>
             <p className="text-foreground/70 mb-8 leading-relaxed">
-              With a passion for storytelling and cutting-edge design, we help creators
-              bring their visions to life. Whether you&apos;re building a game world, designing
-              characters, or creating an entire universe, we have the expertise to make
-              it extraordinary.
+              Our mission is to make professional-quality worldbuilding accessible to
+              every game master and storyteller. From deep lore and interactive maps to
+              the soundtrack that brings your table to life, we&apos;re building the future
+              of tabletop experiences.
             </p>
 
             {/* Stats Grid */}
