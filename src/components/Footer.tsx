@@ -48,7 +48,7 @@ export default function Footer() {
             </p>
             <p className="text-foreground/60 text-sm mb-6">
               Building immersive D&amp;D campaign worlds, ambient soundscapes,
-              and creative tools for tabletop RPG creators. Based in Nova Scotia, Canada.
+              and creative tools for tabletop RPG creators. Based in British Columbia, Canada.
             </p>
             <div className="flex gap-3">
               {socialLinks.map((social, index) => {
