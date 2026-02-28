@@ -1,13 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { Linkedin, Twitter, Github, Youtube } from 'lucide-react';
+import { Palette, Github, Youtube } from 'lucide-react';
 
 const socialLinks = [
   { icon: Youtube, href: 'https://www.youtube.com/@larryhunkin5207', label: 'YouTube' },
   { icon: Github, href: 'https://github.com/lhunkin', label: 'GitHub' },
-  { icon: Linkedin, href: '#', label: 'LinkedIn' },
-  { icon: Twitter, href: '#', label: 'Twitter' },
+  { icon: Palette, href: 'https://www.deviantart.com/larryhunkin', label: 'DeviantArt' },
 ];
 
 const footerColumns = [
@@ -49,7 +48,7 @@ export default function Footer() {
             </p>
             <p className="text-foreground/60 text-sm mb-6">
               Building immersive D&amp;D campaign worlds, ambient soundscapes,
-              and creative tools for tabletop RPG creators.
+              and creative tools for tabletop RPG creators. Based in Nova Scotia, Canada.
             </p>
             <div className="flex gap-3">
               {socialLinks.map((social, index) => {
@@ -136,13 +135,13 @@ export default function Footer() {
           </div>
           <div className="flex gap-6">
             <Link
-              href="#"
+              href="/privacy"
               className="text-foreground/60 hover:text-primary transition-colors text-sm"
             >
               Privacy Policy
             </Link>
             <Link
-              href="#"
+              href="/terms"
               className="text-foreground/60 hover:text-primary transition-colors text-sm"
             >
               Terms of Service

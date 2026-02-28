@@ -21,6 +21,7 @@ export default function Navigation() {
   const navLinks = [
     { label: 'World of Asphodel', href: 'https://worldofasphodel.com', external: true },
     { label: 'World Builder', href: '#world-builder' },
+    { label: 'Gallery', href: '#gallery' },
     { label: 'About', href: '#about' },
     { label: 'Contact', href: '#contact' },
   ];
@@ -79,6 +80,7 @@ export default function Navigation() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? 'Close menu' : 'Open menu'}
               className="md:hidden text-foreground hover:text-primary transition-colors"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}

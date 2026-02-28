@@ -87,7 +87,7 @@ export default function Contact() {
             Let&apos;s Work Together
           </h2>
           <p className="text-foreground/70">
-            Get in touch to discuss your next creative project
+            Get in touch to discuss your next creative project with Larry
           </p>
         </motion.div>
 
@@ -186,8 +186,8 @@ export default function Contact() {
                 onChange={handleChange}
                 required
                 rows={5}
-                className="w-full px-4 py-3 bg-surface rounded-lg border border-primary/30 text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary resize-none focus:outline-none focus:border-primary transition-colors"
-                placeholder="Tell us about your project..."
+                className="w-full px-4 py-3 bg-surface rounded-lg border border-primary/30 text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary resize-none transition-colors"
+                placeholder="Tell me about your project..."
               />
             </div>
 
@@ -216,7 +216,7 @@ export default function Contact() {
             >
               <CheckCircle className="text-neon flex-shrink-0" size={24} />
               <p className="text-neon font-medium">
-                Thanks for reaching out! We&apos;ll be in touch soon.
+                Thanks for reaching out! I&apos;ll be in touch soon.
               </p>
             </motion.div>
           )}

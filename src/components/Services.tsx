@@ -75,7 +75,7 @@ export default function Services() {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl sm:text-5xl font-bold text-gradient-blue-green mb-4">
-            Our Services
+            What I Do
           </h2>
           <p className="text-foreground/70 max-w-2xl mx-auto">
             Comprehensive creative solutions for your virtual world needs

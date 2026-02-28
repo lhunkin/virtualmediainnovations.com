@@ -7,39 +7,56 @@ import { ChevronDown } from 'lucide-react';
 const faqs = [
   {
     question: 'What services does Virtual Media Innovations offer?',
-    answer: 'We specialize in virtual world design, concept art, game assets, RPG design, animation, and creative direction. Our team creates immersive digital experiences tailored to your project needs.',
+    answer: 'I specialize in virtual world design, concept art, game assets, RPG design, animation, and creative direction. I create immersive digital experiences tailored to your project needs.',
   },
   {
     question: 'What is World of Asphodel?',
-    answer: 'World of Asphodel is our flagship D&D 5e campaign world featuring intricate lore, detailed maps, and community features. Visit worldofasphodel.com to explore this living world.',
+    answer: 'World of Asphodel is my flagship D&D 5e campaign world featuring intricate lore, detailed maps, and community features. Visit worldofasphodel.com to explore this living world.',
   },
   {
     question: 'When will the World Builder platform launch?',
-    answer: 'The World Builder platform is coming soon. Join the waitlist on our website to be notified when we launch. It will allow anyone to create professional campaign world websites using our proven design system.',
+    answer: 'The World Builder platform is coming soon. Join the waitlist on this site to be notified when it launches. It will allow anyone to create professional campaign world websites using my proven design system.',
   },
   {
     question: 'Are your worlds 5e SRD compatible?',
-    answer: 'Yes! All our RPG content, including World of Asphodel and the upcoming World Builder platform, is fully compatible with D&D 5e rules and the Open Game License.',
+    answer: 'Yes! All my RPG content, including World of Asphodel and the upcoming World Builder platform, is fully compatible with D&D 5e rules and the Open Game License.',
   },
   {
     question: 'What is your pricing structure?',
-    answer: 'Pricing varies based on project scope and requirements. We offer custom packages for concept art, game assets, worldbuilding, and more. Contact us for a detailed quote.',
+    answer: 'Pricing varies based on project scope and requirements. I offer custom packages for concept art, game assets, worldbuilding, and more. Get in touch for a detailed quote.',
   },
   {
     question: 'Do you work with indie developers?',
-    answer: 'Absolutely! We love working with indie developers and have flexible pricing options. Whether you need full-service creative direction or specific assets, we can tailor our services to your needs.',
+    answer: 'Absolutely! I love working with indie developers and have flexible pricing options. Whether you need full-service creative direction or specific assets, I can tailor my services to your needs.',
   },
   {
     question: 'Do you offer retainer work?',
-    answer: 'Yes, we offer retainer packages for ongoing creative projects. This is perfect for continuous asset creation, worldbuilding support, or sustained creative direction.',
+    answer: 'Yes, I offer retainer packages for ongoing creative projects. This is perfect for continuous asset creation, worldbuilding support, or sustained creative direction.',
   },
 ];
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  };
+
   return (
     <section id="faq" className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <div className="max-w-4xl mx-auto">
         <motion.div
           className="text-center mb-12"
@@ -52,7 +69,7 @@ export default function FAQ() {
             Frequently Asked Questions
           </h2>
           <p className="text-foreground/70">
-            Find answers to common questions about our services
+            Find answers to common questions about my services
           </p>
         </motion.div>
 

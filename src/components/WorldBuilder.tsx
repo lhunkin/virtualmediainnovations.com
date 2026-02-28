@@ -30,12 +30,33 @@ const steps = [
 export default function WorldBuilder() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setEmail('');
-    setTimeout(() => setSubmitted(false), 3000);
+    setSubmitting(true);
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY || 'f7923381-4559-4420-9a1e-56c591da6852',
+          from_name: 'VMI World Builder Waitlist',
+          subject: `World Builder Waitlist Signup: ${email}`,
+          email: email,
+          message: `New waitlist signup: ${email}`,
+        }),
+      });
+      const result = await response.json();
+      if (result.success) {
+        setSubmitted(true);
+        setEmail('');
+        setTimeout(() => setSubmitted(false), 5000);
+      }
+    } catch {
+      // Silent fail — form still resets
+    }
+    setSubmitting(false);
   };
 
   const containerVariants = {
@@ -142,9 +163,10 @@ export default function WorldBuilder() {
             </div>
             <button
               type="submit"
-              className="w-full px-6 py-3 bg-gradient-to-r from-primary to-neon text-black font-semibold rounded-lg hover:shadow-glow transition-all"
+              disabled={submitting}
+              className="w-full px-6 py-3 bg-gradient-to-r from-primary to-neon text-black font-semibold rounded-lg hover:shadow-glow transition-all disabled:opacity-70"
             >
-              {submitted ? 'Thanks for signing up!' : 'Get Early Access'}
+              {submitted ? 'Thanks for signing up!' : submitting ? 'Joining...' : 'Get Early Access'}
             </button>
           </form>
         </motion.div>

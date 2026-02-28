@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     description: "Home of the World of Asphodel D&D 5e campaign setting and the World Builder platform by Larry Hunkin. Immersive worldbuilding, soundscapes, and creative tools for tabletop RPG creators.",
     images: [
       {
-        url: "/images/og-image.png",
+        url: "/images/og-image.svg",
         width: 1200,
         height: 630,
         alt: "Virtual Media Innovations — World of Asphodel & World Builder",
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Virtual Media Innovations — World of Asphodel & D&D World Builder",
     description: "Home of the World of Asphodel D&D 5e campaign setting and the World Builder platform by Larry Hunkin.",
-    images: ["/images/og-image.png"],
+    images: ["/images/og-image.svg"],
   },
   robots: {
     index: true,
@@ -77,8 +77,7 @@ export const metadata: Metadata = {
     canonical: "https://www.virtualmediainnovations.com",
   },
   verification: {
-    // Add your Google Search Console verification code when you have it
-    // google: "your-verification-code",
+    google: "google13cec120772df836",
   },
   category: "technology",
 };
@@ -105,6 +104,7 @@ const jsonLd = {
         "https://worldofasphodel.com",
         "https://www.youtube.com/@larryhunkin5207",
         "https://github.com/lhunkin",
+        "https://www.deviantart.com/larryhunkin",
       ],
     },
     {
@@ -175,6 +175,7 @@ const jsonLd = {
       sameAs: [
         "https://www.youtube.com/@larryhunkin5207",
         "https://github.com/lhunkin",
+        "https://www.deviantart.com/larryhunkin",
       ],
     },
   ],
