@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown, Volume2, VolumeX, Music } from 'lucide-react';
 import dynamic from 'next/dynamic';
@@ -11,145 +11,34 @@ const ParticleField = dynamic(() => import('./ParticleField'), {
 
 const PLAYLIST_ID = 'PLW8gSdbXbt_um43KRwmoaiS8qKoERe0NG';
 
-// Extend window for YouTube IFrame API
-declare global {
-  interface Window {
-    YT: any;
-    onYouTubeIframeAPIReady: () => void;
-  }
-}
-
 export default function Hero() {
-  const [isMuted, setIsMuted] = useState(true); // Start muted (browser requires it)
-  const [isReady, setIsReady] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const playerRef = useRef<any>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const initAttempted = useRef(false);
-  const unmutedRef = useRef(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  // Load YouTube IFrame API and create player
-  useEffect(() => {
-    if (initAttempted.current) return;
-    initAttempted.current = true;
-
-    const createPlayer = () => {
-      // Make sure the target div exists
-      const targetEl = document.getElementById('yt-player');
-      if (!targetEl || playerRef.current) return;
-
-      playerRef.current = new window.YT.Player('yt-player', {
-        height: '100%',
-        width: '100%',
-        playerVars: {
-          listType: 'playlist',
-          list: PLAYLIST_ID,
-          autoplay: 1,
-          mute: 1, // MUST start muted for autoplay to work in all browsers
-          loop: 1,
-          rel: 0,
-          modestbranding: 1,
-          iv_load_policy: 3,
-          controls: 1,
-          playsinline: 1, // Critical for iOS autoplay
-          enablejsapi: 1,
-          origin: typeof window !== 'undefined' ? window.location.origin : '',
-        },
-        events: {
-          onReady: (event: any) => {
-            setIsReady(true);
-            // Force play muted first
-            event.target.mute();
-            event.target.playVideo();
-          },
-          onStateChange: (event: any) => {
-            if (event.data === window.YT.PlayerState.PLAYING) {
-              setIsPlaying(true);
-              // Once video is confirmed playing, unmute after a short delay
-              if (!unmutedRef.current) {
-                unmutedRef.current = true;
-                setTimeout(() => {
-                  try {
-                    event.target.unMute();
-                    event.target.setVolume(100);
-                    setIsMuted(false);
-                  } catch (e) {
-                    // Browser blocked unmute — user will need to click
-                  }
-                }, 1500);
-              }
-            }
-          },
-          onError: (event: any) => {
-            // On error, retry with next video in playlist
-            console.log('YT player error:', event.data);
-            try {
-              event.target.nextVideo();
-            } catch (e) {}
-          },
-        },
-      });
-    };
-
-    const waitForAPI = () => {
-      if (window.YT && window.YT.Player) {
-        createPlayer();
-      } else {
-        // Poll until YT API is ready (more reliable than callback)
-        const interval = setInterval(() => {
-          if (window.YT && window.YT.Player) {
-            clearInterval(interval);
-            createPlayer();
-          }
-        }, 100);
-        // Clear interval after 15 seconds as safety
-        setTimeout(() => clearInterval(interval), 15000);
-      }
-    };
-
-    // Load the API script if not already loaded
-    if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
-      const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      tag.async = true;
-      document.head.appendChild(tag);
-    }
-
-    // Also set the global callback as a fallback
-    const existingCallback = window.onYouTubeIframeAPIReady;
-    window.onYouTubeIframeAPIReady = () => {
-      if (existingCallback) existingCallback();
-      createPlayer();
-    };
-
-    // Start polling as the primary mechanism
-    waitForAPI();
-
-    return () => {
-      if (playerRef.current && playerRef.current.destroy) {
-        try { playerRef.current.destroy(); } catch (e) {}
-        playerRef.current = null;
-      }
-    };
-  }, []);
+  // Build the embed URL — autoplay=1 + mute=1 is the ONLY combo browsers allow without interaction
+  const embedUrl = `https://www.youtube.com/embed/videoseries?list=${PLAYLIST_ID}&autoplay=1&mute=1&loop=1&rel=0&modestbranding=1&iv_load_policy=3&controls=1&playsinline=1&enablejsapi=1`;
 
   const toggleMute = useCallback(() => {
-    if (playerRef.current) {
-      try {
-        if (isMuted) {
-          playerRef.current.unMute();
-          playerRef.current.setVolume(100);
-          // If not playing yet, try to start
-          if (!isPlaying) {
-            playerRef.current.playVideo();
-          }
-        } else {
-          playerRef.current.mute();
-        }
-      } catch (e) {}
+    if (iframeRef.current?.contentWindow) {
+      if (isMuted) {
+        // Use postMessage to unmute via YouTube iframe API
+        iframeRef.current.contentWindow.postMessage(
+          JSON.stringify({ event: 'command', func: 'unMute', args: [] }),
+          '*'
+        );
+        iframeRef.current.contentWindow.postMessage(
+          JSON.stringify({ event: 'command', func: 'setVolume', args: [100] }),
+          '*'
+        );
+      } else {
+        iframeRef.current.contentWindow.postMessage(
+          JSON.stringify({ event: 'command', func: 'mute', args: [] }),
+          '*'
+        );
+      }
     }
     setIsMuted(!isMuted);
-  }, [isMuted, isPlaying]);
+  }, [isMuted]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -191,8 +80,18 @@ export default function Hero() {
         <div className="relative group isolate">
           <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary/30 via-neon/30 to-primary/30 blur-md opacity-60" />
           <div className="relative rounded-lg overflow-hidden border border-primary/20 shadow-2xl">
-            <div className="aspect-video bg-black" ref={containerRef}>
-              <div id="yt-player" />
+            <div className="aspect-video bg-black">
+              <iframe
+                ref={iframeRef}
+                src={embedUrl}
+                width="100%"
+                height="100%"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                title="Whispers of Morgath — Roll & Resonance"
+                className="absolute inset-0 w-full h-full"
+                style={{ border: 'none' }}
+              />
             </div>
           </div>
         </div>
@@ -209,14 +108,12 @@ export default function Hero() {
 
           <div className="flex items-center gap-3">
             {/* Equalizer */}
-            {isReady && (
-              <div className="flex items-center gap-0.5">
-                <span className="w-0.5 h-2 bg-neon rounded-full animate-pulse" style={{ animationDelay: '0ms' }} />
-                <span className="w-0.5 h-3 bg-neon rounded-full animate-pulse" style={{ animationDelay: '150ms' }} />
-                <span className="w-0.5 h-1.5 bg-neon rounded-full animate-pulse" style={{ animationDelay: '300ms' }} />
-                <span className="w-0.5 h-4 bg-neon rounded-full animate-pulse" style={{ animationDelay: '100ms' }} />
-              </div>
-            )}
+            <div className="flex items-center gap-0.5">
+              <span className="w-0.5 h-2 bg-neon rounded-full animate-pulse" style={{ animationDelay: '0ms' }} />
+              <span className="w-0.5 h-3 bg-neon rounded-full animate-pulse" style={{ animationDelay: '150ms' }} />
+              <span className="w-0.5 h-1.5 bg-neon rounded-full animate-pulse" style={{ animationDelay: '300ms' }} />
+              <span className="w-0.5 h-4 bg-neon rounded-full animate-pulse" style={{ animationDelay: '100ms' }} />
+            </div>
 
             {/* Mute toggle */}
             <button
