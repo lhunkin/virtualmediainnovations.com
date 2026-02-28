@@ -16,9 +16,9 @@ export default function Hero() {
   const [isMuted, setIsMuted] = useState(true);
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  // Embed without playlist param to avoid "More videos" overlay on interaction
-  // loop=1 requires playlist param with same video ID for single-video looping
-  const embedUrl = `https://www.youtube.com/embed/${FIRST_VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${FIRST_VIDEO_ID}&rel=0&modestbranding=1&iv_load_policy=3&controls=1&playsinline=1&enablejsapi=1&origin=${typeof window !== 'undefined' ? encodeURIComponent(window.location.origin) : ''}`;
+  // First 5 tracks from Whispers of Morgath playlist — avoids "More videos" overlay
+  const TRACK_IDS = 't4LF3PItOFg,2t-bZI5EBxo,XtsBlg2Bfuw,9pVs_mA85DA,HTZ5BiiXeXs';
+  const embedUrl = `https://www.youtube.com/embed/${FIRST_VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${TRACK_IDS}&rel=0&modestbranding=1&iv_load_policy=3&controls=1&playsinline=1&enablejsapi=1&origin=${typeof window !== 'undefined' ? encodeURIComponent(window.location.origin) : ''}`;
 
   const toggleMute = useCallback(() => {
     if (iframeRef.current?.contentWindow) {
