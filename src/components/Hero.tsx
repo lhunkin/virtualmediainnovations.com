@@ -59,13 +59,13 @@ export default function Hero() {
         initial="hidden"
         animate="visible"
       >
-        {/* Video Player */}
-        <motion.div variants={itemVariants} className="mb-10">
+        {/* Video Player - elevated above grain overlay (z-9999) */}
+        <motion.div variants={itemVariants} className="mb-10 relative" style={{ zIndex: 10000 }}>
           <div className="max-w-3xl mx-auto">
             {/* Player frame with glow */}
-            <div className="relative group">
+            <div className="relative group isolate">
               <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary/30 via-neon/30 to-primary/30 blur-md opacity-60" />
-              <div className="relative rounded-lg overflow-hidden border border-primary/20">
+              <div className="relative rounded-lg overflow-hidden border border-primary/20 shadow-2xl">
                 <div className="aspect-video bg-black">
                   {showVideo && (
                     <iframe
