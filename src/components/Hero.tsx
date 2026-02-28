@@ -52,73 +52,77 @@ export default function Hero() {
       <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full filter blur-3xl animate-pulse" />
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-neon/10 rounded-full filter blur-3xl animate-pulse" />
 
-      {/* Content */}
+      {/* Video Player - separate stacking context, above grain overlay */}
+      <motion.div
+        className="relative w-full max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-10"
+        style={{ zIndex: 50 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.3 }}
+      >
+        {/* Player frame with glow */}
+        <div className="relative group isolate">
+          <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary/30 via-neon/30 to-primary/30 blur-md opacity-60" />
+          <div className="relative rounded-lg overflow-hidden border border-primary/20 shadow-2xl">
+            <div className="aspect-video bg-black">
+              {showVideo && (
+                <iframe
+                  src={`https://www.youtube.com/embed/videoseries?list=${PLAYLIST_ID}&autoplay=1&mute=${isMuted ? 1 : 0}&loop=1&shuffle=0&rel=0&modestbranding=1&iv_load_policy=3`}
+                  title="World of Asphodel - Whispers of Morgath Soundtrack"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full border-0"
+                />
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Player controls bar */}
+        <div className="mt-3 flex items-center justify-between px-1">
+          <div className="flex items-center gap-2">
+            <Music size={14} className="text-primary" />
+            <div>
+              <p className="text-primary text-xs font-semibold">Whispers of Morgath</p>
+              <p className="text-foreground/40 text-[10px]">Roll &amp; Resonance</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            {/* Equalizer */}
+            <div className="flex items-center gap-0.5">
+              <span className="w-0.5 h-2 bg-neon rounded-full animate-pulse" style={{ animationDelay: '0ms' }} />
+              <span className="w-0.5 h-3 bg-neon rounded-full animate-pulse" style={{ animationDelay: '150ms' }} />
+              <span className="w-0.5 h-1.5 bg-neon rounded-full animate-pulse" style={{ animationDelay: '300ms' }} />
+              <span className="w-0.5 h-4 bg-neon rounded-full animate-pulse" style={{ animationDelay: '100ms' }} />
+            </div>
+
+            {/* Mute toggle */}
+            <button
+              onClick={toggleMute}
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/20 hover:bg-primary/30 transition-colors"
+              title={isMuted ? 'Click to unmute' : 'Click to mute'}
+            >
+              {isMuted ? (
+                <VolumeX size={14} className="text-foreground/50" />
+              ) : (
+                <Volume2 size={14} className="text-neon" />
+              )}
+              <span className={`text-[10px] ${isMuted ? 'text-foreground/50' : 'text-neon'}`}>
+                {isMuted ? 'Unmute' : 'Playing'}
+              </span>
+            </button>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Text Content */}
       <motion.div
         className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        {/* Video Player - elevated above grain overlay (z-9999) */}
-        <motion.div variants={itemVariants} className="mb-10 relative" style={{ zIndex: 10000 }}>
-          <div className="max-w-3xl mx-auto">
-            {/* Player frame with glow */}
-            <div className="relative group isolate">
-              <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary/30 via-neon/30 to-primary/30 blur-md opacity-60" />
-              <div className="relative rounded-lg overflow-hidden border border-primary/20 shadow-2xl">
-                <div className="aspect-video bg-black">
-                  {showVideo && (
-                    <iframe
-                      src={`https://www.youtube.com/embed/videoseries?list=${PLAYLIST_ID}&autoplay=1&mute=${isMuted ? 1 : 0}&loop=1&shuffle=0&rel=0&modestbranding=1&iv_load_policy=3`}
-                      title="World of Asphodel - Whispers of Morgath Soundtrack"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="w-full h-full border-0"
-                    />
-                  )}
-                </div>
-              </div>
-            </div>
-
-            {/* Player controls bar */}
-            <div className="mt-3 flex items-center justify-between px-1">
-              <div className="flex items-center gap-2">
-                <Music size={14} className="text-primary" />
-                <div>
-                  <p className="text-primary text-xs font-semibold">Whispers of Morgath</p>
-                  <p className="text-foreground/40 text-[10px]">Roll &amp; Resonance</p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3">
-                {/* Equalizer */}
-                <div className="flex items-center gap-0.5">
-                  <span className="w-0.5 h-2 bg-neon rounded-full animate-pulse" style={{ animationDelay: '0ms' }} />
-                  <span className="w-0.5 h-3 bg-neon rounded-full animate-pulse" style={{ animationDelay: '150ms' }} />
-                  <span className="w-0.5 h-1.5 bg-neon rounded-full animate-pulse" style={{ animationDelay: '300ms' }} />
-                  <span className="w-0.5 h-4 bg-neon rounded-full animate-pulse" style={{ animationDelay: '100ms' }} />
-                </div>
-
-                {/* Mute toggle */}
-                <button
-                  onClick={toggleMute}
-                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/20 hover:bg-primary/30 transition-colors"
-                  title={isMuted ? 'Click to unmute' : 'Click to mute'}
-                >
-                  {isMuted ? (
-                    <VolumeX size={14} className="text-foreground/50" />
-                  ) : (
-                    <Volume2 size={14} className="text-neon" />
-                  )}
-                  <span className={`text-[10px] ${isMuted ? 'text-foreground/50' : 'text-neon'}`}>
-                    {isMuted ? 'Unmute' : 'Playing'}
-                  </span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
         {/* Heading */}
         <motion.h1
           variants={itemVariants}
