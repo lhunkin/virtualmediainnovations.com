@@ -32,6 +32,7 @@ const footerColumns = [
       { label: 'Blog', href: '/blog' },
       { label: 'Contact', href: '#contact' },
       { label: 'FAQ', href: '#faq' },
+      { label: 'contact@virtualmediainnovations.com', href: 'mailto:contact@virtualmediainnovations.com' },
     ],
   },
 ];

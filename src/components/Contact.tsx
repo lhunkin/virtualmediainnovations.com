@@ -2,13 +2,13 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Clock, CheckCircle } from 'lucide-react';
+import { Mail, MapPin, Clock, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 
 const infoCards = [
   {
     icon: Mail,
     label: 'Email',
-    value: 'hello@virtualmediainnovations.com',
+    value: 'contact@virtualmediainnovations.com',
   },
   {
     icon: MapPin,
@@ -29,7 +29,7 @@ export default function Contact() {
     projectType: '',
     message: '',
   });
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -38,11 +38,39 @@ export default function Contact() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setFormData({ name: '', email: '', projectType: '', message: '' });
-    setTimeout(() => setSubmitted(false), 3000);
+    setStatus('submitting');
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY || '',
+          from_name: 'VMI Website Contact Form',
+          subject: `New Inquiry: ${formData.projectType || 'General'} - ${formData.name}`,
+          name: formData.name,
+          email: formData.email,
+          project_type: formData.projectType,
+          message: formData.message,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setStatus('success');
+        setFormData({ name: '', email: '', projectType: '', message: '' });
+        setTimeout(() => setStatus('idle'), 5000);
+      } else {
+        setStatus('error');
+        setTimeout(() => setStatus('idle'), 5000);
+      }
+    } catch {
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 5000);
+    }
   };
 
   return (
@@ -139,10 +167,10 @@ export default function Contact() {
               >
                 <option value="">Select a project type...</option>
                 <option value="world-design">Virtual World Design</option>
-                <option value="concept-art">Concept Art & Illustration</option>
+                <option value="concept-art">Concept Art &amp; Illustration</option>
                 <option value="game-assets">Video Game Assets</option>
-                <option value="rpg-design">RPG & Tabletop Design</option>
-                <option value="animation">Animation & Motion</option>
+                <option value="rpg-design">RPG &amp; Tabletop Design</option>
+                <option value="animation">Animation &amp; Motion</option>
                 <option value="creative-direction">Creative Direction</option>
                 <option value="other">Other</option>
               </select>
@@ -158,20 +186,28 @@ export default function Contact() {
                 onChange={handleChange}
                 required
                 rows={5}
-                className="w-full px-4 py-3 bg-surface rounded-lg border border-primary/30 text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors resize-none"
+                className="w-full px-4 py-3 bg-surface rounded-lg border border-primary/30 text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary resize-none focus:outline-none focus:border-primary transition-colors"
                 placeholder="Tell us about your project..."
               />
             </div>
 
             <button
               type="submit"
-              className="w-full px-6 py-3 bg-gradient-to-r from-primary to-neon text-black font-semibold rounded-lg hover:shadow-glow transition-all"
+              disabled={status === 'submitting'}
+              className="w-full px-6 py-3 bg-gradient-to-r from-primary to-neon text-black font-semibold rounded-lg hover:shadow-glow transition-all disabled:opacity-70 flex items-center justify-center gap-2"
             >
-              Send Message
+              {status === 'submitting' ? (
+                <>
+                  <Loader2 className="animate-spin" size={20} />
+                  Sending...
+                </>
+              ) : (
+                'Send Message'
+              )}
             </button>
           </form>
 
-          {submitted && (
+          {status === 'success' && (
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -181,6 +217,20 @@ export default function Contact() {
               <CheckCircle className="text-neon flex-shrink-0" size={24} />
               <p className="text-neon font-medium">
                 Thanks for reaching out! We&apos;ll be in touch soon.
+              </p>
+            </motion.div>
+          )}
+
+          {status === 'error' && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              className="mt-6 p-4 bg-red-500/20 border border-red-500 rounded-lg flex items-center gap-3"
+            >
+              <AlertCircle className="text-red-500 flex-shrink-0" size={24} />
+              <p className="text-red-400 font-medium">
+                Something went wrong. Please email us directly at contact@virtualmediainnovations.com
               </p>
             </motion.div>
           )}
