@@ -32,7 +32,7 @@ export default function SoundscapePlayer() {
       {/* Ambient background effect */}
       <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-neon/5" />
 
-      <div className="max-w-4xl mx-auto relative z-10">
+      <div className="max-w-2xl mx-auto relative z-10">
         <motion.div
           className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
