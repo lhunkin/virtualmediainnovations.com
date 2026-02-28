@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown, Volume2, VolumeX, Music } from 'lucide-react';
 import dynamic from 'next/dynamic';
@@ -11,15 +11,103 @@ const ParticleField = dynamic(() => import('./ParticleField'), {
 
 const PLAYLIST_ID = 'PLW8gSdbXbt_um43KRwmoaiS8qKoERe0NG';
 
+// Extend window for YouTube IFrame API
+declare global {
+  interface Window {
+    YT: any;
+    onYouTubeIframeAPIReady: () => void;
+  }
+}
+
 export default function Hero() {
   const [isMuted, setIsMuted] = useState(false);
-  const [showVideo, setShowVideo] = useState(true);
+  const [isReady, setIsReady] = useState(false);
+  const playerRef = useRef<any>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const toggleMute = () => {
+  // Load YouTube IFrame API and create player
+  useEffect(() => {
+    // Load the API script
+    if (!window.YT) {
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      document.head.appendChild(tag);
+    }
+
+    const initPlayer = () => {
+      if (playerRef.current) return; // already initialized
+
+      playerRef.current = new window.YT.Player('yt-player', {
+        height: '100%',
+        width: '100%',
+        playerVars: {
+          listType: 'playlist',
+          list: PLAYLIST_ID,
+          autoplay: 1,
+          mute: 1, // must start muted for autoplay to work
+          loop: 1,
+          rel: 0,
+          modestbranding: 1,
+          iv_load_policy: 3,
+          controls: 1,
+        },
+        events: {
+          onReady: (event: any) => {
+            setIsReady(true);
+            // Start playing muted (autoplay), then unmute after a brief delay
+            event.target.playVideo();
+            setTimeout(() => {
+              try {
+                event.target.unMute();
+                event.target.setVolume(100);
+              } catch (e) {
+                // Browser may still block unmute
+              }
+            }, 1000);
+          },
+          onStateChange: (event: any) => {
+            // If video starts playing, try to unmute
+            if (event.data === window.YT.PlayerState.PLAYING) {
+              try {
+                if (event.target.isMuted() && !isMuted) {
+                  event.target.unMute();
+                  event.target.setVolume(100);
+                }
+              } catch (e) {}
+            }
+          },
+        },
+      });
+    };
+
+    if (window.YT && window.YT.Player) {
+      initPlayer();
+    } else {
+      window.onYouTubeIframeAPIReady = initPlayer;
+    }
+
+    return () => {
+      // Cleanup
+      if (playerRef.current && playerRef.current.destroy) {
+        try { playerRef.current.destroy(); } catch (e) {}
+        playerRef.current = null;
+      }
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const toggleMute = useCallback(() => {
+    if (playerRef.current) {
+      try {
+        if (isMuted) {
+          playerRef.current.unMute();
+          playerRef.current.setVolume(100);
+        } else {
+          playerRef.current.mute();
+        }
+      } catch (e) {}
+    }
     setIsMuted(!isMuted);
-    setShowVideo(false);
-    setTimeout(() => setShowVideo(true), 50);
-  };
+  }, [isMuted]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -64,16 +152,8 @@ export default function Hero() {
         <div className="relative group isolate">
           <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary/30 via-neon/30 to-primary/30 blur-md opacity-60" />
           <div className="relative rounded-lg overflow-hidden border border-primary/20 shadow-2xl">
-            <div className="aspect-video bg-black">
-              {showVideo && (
-                <iframe
-                  src={`https://www.youtube.com/embed/videoseries?list=${PLAYLIST_ID}&autoplay=1&mute=${isMuted ? 1 : 0}&loop=1&shuffle=0&rel=0&modestbranding=1&iv_load_policy=3`}
-                  title="World of Asphodel - Whispers of Morgath Soundtrack"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full border-0"
-                />
-              )}
+            <div className="aspect-video bg-black" ref={containerRef}>
+              <div id="yt-player" />
             </div>
           </div>
         </div>
@@ -90,12 +170,14 @@ export default function Hero() {
 
           <div className="flex items-center gap-3">
             {/* Equalizer */}
-            <div className="flex items-center gap-0.5">
-              <span className="w-0.5 h-2 bg-neon rounded-full animate-pulse" style={{ animationDelay: '0ms' }} />
-              <span className="w-0.5 h-3 bg-neon rounded-full animate-pulse" style={{ animationDelay: '150ms' }} />
-              <span className="w-0.5 h-1.5 bg-neon rounded-full animate-pulse" style={{ animationDelay: '300ms' }} />
-              <span className="w-0.5 h-4 bg-neon rounded-full animate-pulse" style={{ animationDelay: '100ms' }} />
-            </div>
+            {isReady && (
+              <div className="flex items-center gap-0.5">
+                <span className="w-0.5 h-2 bg-neon rounded-full animate-pulse" style={{ animationDelay: '0ms' }} />
+                <span className="w-0.5 h-3 bg-neon rounded-full animate-pulse" style={{ animationDelay: '150ms' }} />
+                <span className="w-0.5 h-1.5 bg-neon rounded-full animate-pulse" style={{ animationDelay: '300ms' }} />
+                <span className="w-0.5 h-4 bg-neon rounded-full animate-pulse" style={{ animationDelay: '100ms' }} />
+              </div>
+            )}
 
             {/* Mute toggle */}
             <button
