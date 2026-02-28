@@ -7,8 +7,8 @@ import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
 export const metadata = {
-  title: 'Virtual Media Innovations - World of Asphodel & World Builder',
-  description: 'Home of the World of Asphodel D&D 5e campaign setting and the World Builder platform. Immersive worldbuilding, soundscapes, and creative tools.',
+  title: 'Virtual Media Innovations — World of Asphodel & D&D World Builder | Larry Hunkin',
+  description: 'Virtual Media Innovations (VMI) by Larry Hunkin — home of the World of Asphodel D&D 5e campaign setting, ambient soundscapes by Roll & Resonance, and the free World Builder platform for tabletop RPG creators.',
 };
 
 export default function Home() {

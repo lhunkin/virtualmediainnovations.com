@@ -1,0 +1,7 @@
+# Virtual Media Innovations
+# https://www.virtualmediainnovations.com
+
+User-agent: *
+Allow: /
+
+Sitemap: https://www.virtualmediainnovations.com/sitemap.xml

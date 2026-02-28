@@ -1,12 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import { Linkedin, Twitter, Github } from 'lucide-react';
+import { Linkedin, Twitter, Github, Youtube } from 'lucide-react';
 
 const socialLinks = [
+  { icon: Youtube, href: 'https://www.youtube.com/@larryhunkin5207', label: 'YouTube' },
+  { icon: Github, href: 'https://github.com/lhunkin', label: 'GitHub' },
   { icon: Linkedin, href: '#', label: 'LinkedIn' },
   { icon: Twitter, href: '#', label: 'Twitter' },
-  { icon: Github, href: '#', label: 'GitHub' },
 ];
 
 const footerColumns = [
@@ -19,10 +20,10 @@ const footerColumns = [
     ],
   },
   {
-    title: 'Company',
+    title: 'Contact',
     links: [
-      { label: 'About', href: '#about' },
-      { label: 'Contact', href: '#contact' },
+      { label: 'About VMI', href: '#about' },
+      { label: 'Get in Touch', href: '#contact' },
       { label: 'contact@virtualmediainnovations.com', href: 'mailto:contact@virtualmediainnovations.com' },
     ],
   },
@@ -43,8 +44,12 @@ export default function Footer() {
                 Virtual Media Innovations
               </div>
             </Link>
-            <p className="text-foreground/70 text-sm mb-6">
-              Building immersive virtual worlds and creative digital experiences.
+            <p className="text-foreground/70 text-sm mb-2">
+              Created by <span className="text-foreground/90 font-medium">Larry Hunkin</span>
+            </p>
+            <p className="text-foreground/60 text-sm mb-6">
+              Building immersive D&amp;D campaign worlds, ambient soundscapes,
+              and creative tools for tabletop RPG creators.
             </p>
             <div className="flex gap-3">
               {socialLinks.map((social, index) => {
@@ -53,6 +58,8 @@ export default function Footer() {
                   <a
                     key={index}
                     href={social.href}
+                    target={social.href.startsWith('http') ? '_blank' : undefined}
+                    rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                     title={social.label}
                     className="p-2 bg-primary/20 hover:bg-primary/30 text-primary rounded-lg transition-colors"
                   >
@@ -87,12 +94,47 @@ export default function Footer() {
           ))}
         </div>
 
+        {/* Copyright & Legal Notices */}
+        <div className="border-t border-primary/10 pt-6 mb-6">
+          <div className="space-y-3 text-foreground/50 text-xs leading-relaxed">
+            <p>
+              <span className="text-foreground/70 font-medium">World of Asphodel</span> &mdash;
+              All lore, characters, locations, maps, artwork, and narrative content related to the World of Asphodel
+              are &copy; {currentYear} Larry Hunkin / Virtual Media Innovations. All rights reserved.
+              Unauthorized reproduction, distribution, or use of this content is prohibited.
+            </p>
+            <p>
+              <span className="text-foreground/70 font-medium">World Builder Platform</span> &mdash;
+              All templates, design systems, code, layouts, and tools provided through the World Builder platform
+              are &copy; {currentYear} Virtual Media Innovations. Templates may be used to create personal campaign
+              worlds but may not be redistributed, resold, or used for commercial purposes without written permission.
+            </p>
+            <p>
+              <span className="text-foreground/70 font-medium">5e SRD Compatibility</span> &mdash;
+              Game mechanics reference the System Reference Document 5.1 released under the
+              Creative Commons Attribution 4.0 International License (CC BY 4.0) by Wizards of the Coast.
+              &quot;Dungeons &amp; Dragons&quot; and &quot;D&amp;D&quot; are trademarks of Wizards of the Coast LLC.
+              Virtual Media Innovations is not affiliated with or endorsed by Wizards of the Coast.
+            </p>
+            <p>
+              <span className="text-foreground/70 font-medium">Soundscapes</span> &mdash;
+              All ambient audio tracks in the &quot;Whispers of Morgath&quot; collection and the Roll &amp; Resonance
+              channel are &copy; {currentYear} Larry Hunkin. All rights reserved.
+            </p>
+          </div>
+        </div>
+
         {/* Bottom Bar */}
-        <div className="border-t border-primary/20 pt-8 flex flex-col sm:flex-row justify-between items-center">
-          <p className="text-foreground/60 text-sm">
-            &copy; {currentYear} Virtual Media Innovations. All rights reserved.
-          </p>
-          <div className="flex gap-6 mt-4 sm:mt-0">
+        <div className="border-t border-primary/20 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <div className="text-center sm:text-left">
+            <p className="text-foreground/60 text-sm">
+              &copy; {currentYear} Virtual Media Innovations. All rights reserved.
+            </p>
+            <p className="text-foreground/40 text-xs mt-1">
+              Larry Hunkin &bull; contact@virtualmediainnovations.com
+            </p>
+          </div>
+          <div className="flex gap-6">
             <Link
               href="#"
               className="text-foreground/60 hover:text-primary transition-colors text-sm"
