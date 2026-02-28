@@ -59,11 +59,11 @@ export default function WorldBuilder() {
   };
 
   return (
-    <section id="world-builder" className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
+    <section id="world-builder" className="py-10 sm:py-20 px-4 sm:px-6 lg:px-8 bg-background">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-8 sm:mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -83,7 +83,7 @@ export default function WorldBuilder() {
 
         {/* Process Steps */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 sm:mb-16"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"

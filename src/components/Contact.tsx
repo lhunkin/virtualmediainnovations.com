@@ -74,10 +74,10 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
+    <section id="contact" className="py-10 sm:py-20 px-4 sm:px-6 lg:px-8 bg-background">
       <div className="max-w-7xl mx-auto">
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-8 sm:mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -91,7 +91,7 @@ export default function Contact() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12">
           {infoCards.map((card, index) => {
             const Icon = card.icon;
             return (

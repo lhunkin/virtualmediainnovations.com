@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown, Volume2, VolumeX, Music } from 'lucide-react';
 import dynamic from 'next/dynamic';
@@ -40,6 +40,47 @@ export default function Hero() {
     }
     setIsMuted(!isMuted);
   }, [isMuted]);
+
+  // Attempt auto-unmute after video has had time to start playing
+  // Browsers block unmute without user interaction, so we also listen for
+  // any click/tap on the page as a "user gesture" to piggyback the unmute
+  useEffect(() => {
+    const attemptUnmute = () => {
+      if (iframeRef.current?.contentWindow) {
+        iframeRef.current.contentWindow.postMessage(
+          JSON.stringify({ event: 'command', func: 'unMute', args: [] }),
+          '*'
+        );
+        iframeRef.current.contentWindow.postMessage(
+          JSON.stringify({ event: 'command', func: 'setVolume', args: [100] }),
+          '*'
+        );
+        setIsMuted(false);
+      }
+    };
+
+    // Try after a delay (works on some browsers/desktop)
+    const timer = setTimeout(attemptUnmute, 3000);
+
+    // Also unmute on first user interaction anywhere on the page
+    const handleInteraction = () => {
+      attemptUnmute();
+      document.removeEventListener('click', handleInteraction);
+      document.removeEventListener('touchstart', handleInteraction);
+      document.removeEventListener('keydown', handleInteraction);
+    };
+
+    document.addEventListener('click', handleInteraction, { once: true });
+    document.addEventListener('touchstart', handleInteraction, { once: true });
+    document.addEventListener('keydown', handleInteraction, { once: true });
+
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener('click', handleInteraction);
+      document.removeEventListener('touchstart', handleInteraction);
+      document.removeEventListener('keydown', handleInteraction);
+    };
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
