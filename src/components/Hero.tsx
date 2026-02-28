@@ -10,13 +10,14 @@ const ParticleField = dynamic(() => import('./ParticleField'), {
 });
 
 const PLAYLIST_ID = 'PLW8gSdbXbt_um43KRwmoaiS8qKoERe0NG';
+const FIRST_VIDEO_ID = 't4LF3PItOFg'; // "The Black Fleet"
 
 export default function Hero() {
   const [isMuted, setIsMuted] = useState(true);
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  // Build the embed URL — autoplay=1 + mute=1 is the ONLY combo browsers allow without interaction
-  const embedUrl = `https://www.youtube.com/embed/videoseries?list=${PLAYLIST_ID}&autoplay=1&mute=1&loop=1&rel=0&modestbranding=1&iv_load_policy=3&controls=1&playsinline=1&enablejsapi=1`;
+  // Use specific video ID + playlist param — more reliable than videoseries for autoplay
+  const embedUrl = `https://www.youtube.com/embed/${FIRST_VIDEO_ID}?list=${PLAYLIST_ID}&autoplay=1&mute=1&loop=1&rel=0&modestbranding=1&iv_load_policy=3&controls=1&playsinline=1&enablejsapi=1&origin=${typeof window !== 'undefined' ? encodeURIComponent(window.location.origin) : ''}`;
 
   const toggleMute = useCallback(() => {
     if (iframeRef.current?.contentWindow) {
