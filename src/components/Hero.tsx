@@ -20,22 +20,23 @@ declare global {
 }
 
 export default function Hero() {
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true); // Start muted (browser requires it)
   const [isReady, setIsReady] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const playerRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const initAttempted = useRef(false);
+  const unmutedRef = useRef(false);
 
   // Load YouTube IFrame API and create player
   useEffect(() => {
-    // Load the API script
-    if (!window.YT) {
-      const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      document.head.appendChild(tag);
-    }
+    if (initAttempted.current) return;
+    initAttempted.current = true;
 
-    const initPlayer = () => {
-      if (playerRef.current) return; // already initialized
+    const createPlayer = () => {
+      // Make sure the target div exists
+      const targetEl = document.getElementById('yt-player');
+      if (!targetEl || playerRef.current) return;
 
       playerRef.current = new window.YT.Player('yt-player', {
         height: '100%',
@@ -44,56 +45,93 @@ export default function Hero() {
           listType: 'playlist',
           list: PLAYLIST_ID,
           autoplay: 1,
-          mute: 1, // must start muted for autoplay to work
+          mute: 1, // MUST start muted for autoplay to work in all browsers
           loop: 1,
           rel: 0,
           modestbranding: 1,
           iv_load_policy: 3,
           controls: 1,
+          playsinline: 1, // Critical for iOS autoplay
+          enablejsapi: 1,
+          origin: typeof window !== 'undefined' ? window.location.origin : '',
         },
         events: {
           onReady: (event: any) => {
             setIsReady(true);
-            // Start playing muted (autoplay), then unmute after a brief delay
+            // Force play muted first
+            event.target.mute();
             event.target.playVideo();
-            setTimeout(() => {
-              try {
-                event.target.unMute();
-                event.target.setVolume(100);
-              } catch (e) {
-                // Browser may still block unmute
-              }
-            }, 1000);
           },
           onStateChange: (event: any) => {
-            // If video starts playing, try to unmute
             if (event.data === window.YT.PlayerState.PLAYING) {
-              try {
-                if (event.target.isMuted() && !isMuted) {
-                  event.target.unMute();
-                  event.target.setVolume(100);
-                }
-              } catch (e) {}
+              setIsPlaying(true);
+              // Once video is confirmed playing, unmute after a short delay
+              if (!unmutedRef.current) {
+                unmutedRef.current = true;
+                setTimeout(() => {
+                  try {
+                    event.target.unMute();
+                    event.target.setVolume(100);
+                    setIsMuted(false);
+                  } catch (e) {
+                    // Browser blocked unmute — user will need to click
+                  }
+                }, 1500);
+              }
             }
+          },
+          onError: (event: any) => {
+            // On error, retry with next video in playlist
+            console.log('YT player error:', event.data);
+            try {
+              event.target.nextVideo();
+            } catch (e) {}
           },
         },
       });
     };
 
-    if (window.YT && window.YT.Player) {
-      initPlayer();
-    } else {
-      window.onYouTubeIframeAPIReady = initPlayer;
+    const waitForAPI = () => {
+      if (window.YT && window.YT.Player) {
+        createPlayer();
+      } else {
+        // Poll until YT API is ready (more reliable than callback)
+        const interval = setInterval(() => {
+          if (window.YT && window.YT.Player) {
+            clearInterval(interval);
+            createPlayer();
+          }
+        }, 100);
+        // Clear interval after 15 seconds as safety
+        setTimeout(() => clearInterval(interval), 15000);
+      }
+    };
+
+    // Load the API script if not already loaded
+    if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      tag.async = true;
+      document.head.appendChild(tag);
     }
 
+    // Also set the global callback as a fallback
+    const existingCallback = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = () => {
+      if (existingCallback) existingCallback();
+      createPlayer();
+    };
+
+    // Start polling as the primary mechanism
+    waitForAPI();
+
     return () => {
-      // Cleanup
       if (playerRef.current && playerRef.current.destroy) {
         try { playerRef.current.destroy(); } catch (e) {}
         playerRef.current = null;
       }
     };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   const toggleMute = useCallback(() => {
     if (playerRef.current) {
@@ -101,13 +139,17 @@ export default function Hero() {
         if (isMuted) {
           playerRef.current.unMute();
           playerRef.current.setVolume(100);
+          // If not playing yet, try to start
+          if (!isPlaying) {
+            playerRef.current.playVideo();
+          }
         } else {
           playerRef.current.mute();
         }
       } catch (e) {}
     }
     setIsMuted(!isMuted);
-  }, [isMuted]);
+  }, [isMuted, isPlaying]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -182,16 +224,20 @@ export default function Hero() {
             {/* Mute toggle */}
             <button
               onClick={toggleMute}
-              className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/20 hover:bg-primary/30 transition-colors"
+              className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full transition-colors ${
+                isMuted
+                  ? 'bg-neon/20 hover:bg-neon/30 animate-pulse'
+                  : 'bg-primary/20 hover:bg-primary/30'
+              }`}
               title={isMuted ? 'Click to unmute' : 'Click to mute'}
             >
               {isMuted ? (
-                <VolumeX size={14} className="text-foreground/50" />
+                <VolumeX size={14} className="text-neon" />
               ) : (
                 <Volume2 size={14} className="text-neon" />
               )}
-              <span className={`text-[10px] ${isMuted ? 'text-foreground/50' : 'text-neon'}`}>
-                {isMuted ? 'Unmute' : 'Playing'}
+              <span className={`text-[10px] ${isMuted ? 'text-neon font-semibold' : 'text-neon'}`}>
+                {isMuted ? 'Click for Sound' : 'Playing'}
               </span>
             </button>
           </div>
