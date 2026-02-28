@@ -1,7 +1,6 @@
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import FlagshipProject from '@/components/FlagshipProject';
-import SoundscapePlayer from '@/components/SoundscapePlayer';
 import WorldBuilder from '@/components/WorldBuilder';
 import About from '@/components/About';
 import Contact from '@/components/Contact';
@@ -16,7 +15,6 @@ export default function Home() {
   return (
     <main className="bg-background">
       <Navigation />
-      <SoundscapePlayer />
       <Hero />
       <FlagshipProject />
       <WorldBuilder />

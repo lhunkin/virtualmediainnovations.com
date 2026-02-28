@@ -1,14 +1,26 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Volume2, VolumeX, Music } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
 const ParticleField = dynamic(() => import('./ParticleField'), {
   ssr: false,
 });
 
+const PLAYLIST_ID = 'PLW8gSdbXbt_um43KRwmoaiS8qKoERe0NG';
+
 export default function Hero() {
+  const [isMuted, setIsMuted] = useState(true);
+  const [showVideo, setShowVideo] = useState(true);
+
+  const toggleMute = () => {
+    setIsMuted(!isMuted);
+    setShowVideo(false);
+    setTimeout(() => setShowVideo(true), 50);
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -30,7 +42,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-background pt-28">
+    <section className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden bg-background pt-20">
       {/* Particle Field Background */}
       <div className="absolute inset-0">
         <ParticleField />
@@ -47,6 +59,67 @@ export default function Hero() {
         initial="hidden"
         animate="visible"
       >
+        {/* Video Player */}
+        <motion.div variants={itemVariants} className="mb-10">
+          <div className="max-w-md mx-auto">
+            {/* Player frame with glow */}
+            <div className="relative group">
+              <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary/30 via-neon/30 to-primary/30 blur-md opacity-60" />
+              <div className="relative rounded-lg overflow-hidden border border-primary/20">
+                <div className="aspect-video bg-black">
+                  {showVideo && (
+                    <iframe
+                      src={`https://www.youtube.com/embed/videoseries?list=${PLAYLIST_ID}&autoplay=1&mute=${isMuted ? 1 : 0}&loop=1&shuffle=0&rel=0&modestbranding=1&iv_load_policy=3`}
+                      title="World of Asphodel - Whispers of Morgath Soundtrack"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full border-0"
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Player controls bar */}
+            <div className="mt-3 flex items-center justify-between px-1">
+              <div className="flex items-center gap-2">
+                <Music size={14} className="text-primary" />
+                <div>
+                  <p className="text-primary text-xs font-semibold">Whispers of Morgath</p>
+                  <p className="text-foreground/40 text-[10px]">Roll &amp; Resonance</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                {/* Equalizer */}
+                <div className="flex items-center gap-0.5">
+                  <span className="w-0.5 h-2 bg-neon rounded-full animate-pulse" style={{ animationDelay: '0ms' }} />
+                  <span className="w-0.5 h-3 bg-neon rounded-full animate-pulse" style={{ animationDelay: '150ms' }} />
+                  <span className="w-0.5 h-1.5 bg-neon rounded-full animate-pulse" style={{ animationDelay: '300ms' }} />
+                  <span className="w-0.5 h-4 bg-neon rounded-full animate-pulse" style={{ animationDelay: '100ms' }} />
+                </div>
+
+                {/* Mute toggle */}
+                <button
+                  onClick={toggleMute}
+                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/20 hover:bg-primary/30 transition-colors"
+                  title={isMuted ? 'Click to unmute' : 'Click to mute'}
+                >
+                  {isMuted ? (
+                    <VolumeX size={14} className="text-foreground/50" />
+                  ) : (
+                    <Volume2 size={14} className="text-neon" />
+                  )}
+                  <span className={`text-[10px] ${isMuted ? 'text-foreground/50' : 'text-neon'}`}>
+                    {isMuted ? 'Unmute' : 'Playing'}
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Heading */}
         <motion.h1
           variants={itemVariants}
           className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-6 text-gradient-blue-green"
