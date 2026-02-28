@@ -61,7 +61,7 @@ export default function Hero() {
       >
         {/* Video Player */}
         <motion.div variants={itemVariants} className="mb-10">
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-3xl mx-auto">
             {/* Player frame with glow */}
             <div className="relative group">
               <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary/30 via-neon/30 to-primary/30 blur-md opacity-60" />
