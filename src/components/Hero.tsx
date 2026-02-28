@@ -30,7 +30,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-background pt-20">
+    <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-background pt-28">
       {/* Particle Field Background */}
       <div className="absolute inset-0">
         <ParticleField />
