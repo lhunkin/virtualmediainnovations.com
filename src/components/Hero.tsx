@@ -187,20 +187,25 @@ export default function Hero() {
         initial="hidden"
         animate="visible"
       >
-        {/* Heading */}
-        <motion.h1
+        {/* SEO-friendly h1 with brand name (visually hidden) + visual heading */}
+        <h1 className="sr-only">
+          Virtual Media Innovations — World of Asphodel D&amp;D 5e Campaign Setting &amp; World Builder by Larry Hunkin
+        </h1>
+        <motion.p
           variants={itemVariants}
           className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-6 text-gradient-blue-green"
+          role="heading"
+          aria-level={2}
         >
           Enter the World of Asphodel
-        </motion.h1>
+        </motion.p>
 
         <motion.p
           variants={itemVariants}
           className="text-lg sm:text-xl text-foreground/80 mb-8 max-w-2xl mx-auto leading-relaxed"
         >
-          A living D&D 5e campaign setting with deep lore, immersive soundscapes,
-          and a world builder platform to create your own.
+          A living D&amp;D 5e campaign setting with deep lore, immersive soundscapes,
+          and a world builder platform to create your own. Created by Larry Hunkin.
         </motion.p>
 
         <motion.div
