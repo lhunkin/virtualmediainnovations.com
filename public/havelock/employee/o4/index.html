@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0a0603">
+<meta name="theme-color" content="#040705">
 <!-- Not indexed, not linked from anywhere. Reachable only by direct URL. -->
 <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
 <meta name="referrer" content="no-referrer">
@@ -12,7 +12,10 @@
 </head>
 <body>
 
-<!-- ═══════════ INTRUSION SEQUENCE ═══════════ -->
+<!-- packet noise, always running behind everything -->
+<div id="stream" aria-hidden="true"></div>
+
+<!-- ═══════════ INTRUSION ═══════════ -->
 <div class="o4-boot" id="o4Boot">
   <pre id="o4BootLines"></pre>
   <div class="o4-boot-bar"><i></i></div>
@@ -27,30 +30,38 @@
     </div>
     <div class="o4-warn" id="o4Warn"></div>
     <div class="o4-sess">
-      <span>SESSION</span><b id="o4Elapsed">00:00:00</b>
-      <span>CREDENTIAL</span><b class="bad">NONE PRESENTED</b>
+      <span>READ</span><b id="o4Elapsed">00:00:00</b>
+      <span>CRED</span><b class="bad">NONE</b>
     </div>
   </header>
 
   <nav class="o4-nav" id="o4Nav">
-    <button class="on" data-v="session">Session</button>
-    <button data-v="ladder">Authorisation</button>
-    <button data-v="compartments">Compartments</button>
-    <button data-v="transfers">Transfer ledger</button>
-    <button data-v="budget">Disbursement</button>
-    <button data-v="research">Research strands</button>
-    <button data-v="profiles">Containment profiles</button>
-    <button data-v="personnel">Personnel</button>
-    <button data-v="integrity">System integrity</button>
-    <button data-v="anomaly">Anomaly register</button>
-    <button data-v="mail">Correspondence</button>
-    <button data-v="tail">Session note</button>
+    <button class="on" data-v="session"      data-p="&gt;">session_context</button>
+    <button data-v="ladder"       data-p="&gt;">auth_ladder</button>
+    <button data-v="compartments" data-p="&gt;">compartment_tree</button>
+    <hr>
+    <button data-v="incidents"    data-p="&gt;">nema.incident</button>
+    <button data-v="ops"          data-p="&gt;">operation</button>
+    <button data-v="profiles"     data-p="&gt;">containment_profile</button>
+    <button data-v="transfers"    data-p="&gt;">transfer_ledger</button>
+    <hr>
+    <button data-v="research"     data-p="&gt;">programme O4-019</button>
+    <button data-v="avatar"       data-p="!">cross_compartment</button>
+    <button data-v="anomaly"      data-p="&gt;">gw.instrument</button>
+    <button data-v="integrity"    data-p="&gt;">facility_mind</button>
+    <hr>
+    <button data-v="budget"       data-p="&gt;">disbursement</button>
+    <button data-v="personnel"    data-p="&gt;">personnel_index</button>
+    <button data-v="mail"         data-p="&gt;">correspondence</button>
+    <button data-v="intercepts"   data-p="&gt;">relay.capture</button>
+    <hr>
+    <button data-v="tail"         data-p="&gt;">session_note</button>
   </nav>
 
   <main class="o4-body" id="o4View"></main>
 
   <footer class="o4-foot">
-    <span id="o4Foot">READ-ONLY // NO WRITE PATH FROM THIS NODE // EXIT LEAVES NO RECORD, WHICH IS NOT THE SAME AS LEAVING NO TRACE</span>
+    <span>READ-ONLY // NO WRITE PATH FROM THIS NODE // EXIT LEAVES NO RECORD, WHICH IS NOT THE SAME AS LEAVING NO TRACE</span>
   </footer>
 </div>
 

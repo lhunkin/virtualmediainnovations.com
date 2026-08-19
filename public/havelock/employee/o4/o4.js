@@ -1,6 +1,11 @@
 /* ============================================================
    HAVELOCK OFFICE // STRATEGIC CONTINUITY INDEX
-   o4.js — renderer for the classified layer
+   o4.js — scrape renderer
+
+   Every view is presented as a query returning rows out of a
+   mainframe that is being read faster than it wants to be. Rows
+   carry hex offsets. Some arrive corrupted. A packet stream runs
+   behind the whole thing because the pipe never closes.
    ============================================================ */
 (() => {
   'use strict';
@@ -9,27 +14,90 @@
 
   const el = id => document.getElementById(id);
   const view = el('o4View');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* --------------------------------------------------------
-     Intrusion sequence. Deliberately unhurried — the system
-     is not alarmed, which is the point.
+     Background packet stream. Pure texture — never read.
+     -------------------------------------------------------- */
+  const GLYPH = '0123456789ABCDEF';
+  const WORDS = ['SEL','ROW','BLK','SEG','MAP','ACK','NAK','PSH','FIN','SYN','TRN','GW','TERN','O4','VYR','ANC'];
+  const hex = n => Array.from({length:n}, () => GLYPH[Math.random()*16|0]).join('');
+
+  function streamLine() {
+    const a = hex(8), b = hex(4);
+    const w = WORDS[Math.random()*WORDS.length|0];
+    return `${a}:${b}  <b>${w}</b>  ` + Array.from({length:6}, () => hex(4)).join(' ');
+  }
+  const stream = el('stream');
+  if (stream && !reduced) {
+    const rows = Math.ceil(innerHeight / 13) + 4;
+    const paint = () => {
+      stream.innerHTML = Array.from({length:rows}, streamLine).join('\n');
+    };
+    paint();
+    setInterval(paint, 420);
+    addEventListener('resize', paint);
+  }
+
+  /* --------------------------------------------------------
+     Corruption. A small proportion of characters in any given
+     string come back wrong, because the read is too fast.
+     -------------------------------------------------------- */
+  const JUNK = '▓▒░█▚▞◤◥╳¤§¥‡†※∎⌗';
+  function corrupt(s, rate) {
+    if (reduced) return s;
+    let out = '', run = false;
+    for (const ch of s) {
+      if (ch !== ' ' && Math.random() < rate) {
+        if (!run) { out += '<span class="cor">'; run = true; }
+        out += JUNK[Math.random()*JUNK.length|0];
+      } else {
+        if (run) { out += '</span>'; run = false; }
+        out += ch;
+      }
+    }
+    return out + (run ? '</span>' : '');
+  }
+
+  /* Hex offset gutter — increments like a real dump. */
+  let off = 0x4a1c00;
+  const nextOff = () => { off += 0x40 + (Math.random()*0x30|0); return off.toString(16).toUpperCase().padStart(8,'0'); };
+
+  /* Row helper: fields on the left, value on the right. */
+  const F = (label, val, cls) =>
+    `<span class="f"><i>${label}</i><span class="${cls||''}">${val}</span></span>`;
+
+  const REC = (fields, note, rate) =>
+    `<div class="rec"><span class="off">${nextOff()}</span><span class="bod">${fields}` +
+    (note ? `<span class="note">${corrupt(note, rate === undefined ? 0.006 : rate)}</span>` : '') +
+    `</span></div>`;
+
+  const QUERY = (sql, total, shown) =>
+    `<p class="q">&gt; ${sql}<span class="cur">&nbsp;</span></p>` +
+    `<p class="rows">${total.toLocaleString()} rows matched // returning ${shown} // ` +
+    `<b>${(total - shown).toLocaleString()} withheld at this authorisation</b></p>`;
+
+  /* --------------------------------------------------------
+     Intrusion sequence
      -------------------------------------------------------- */
   const BOOT = [
-    'resolving  pac-relay-07 ......................... ok',
-    'segment    shadow/3 ............................. ok',
-    'handshake  strategic-continuity-index ........... <span class="dim">no certificate presented</span>',
-    'handshake  retry ................................ <span class="dim">not required</span>',
-    'auth       ladder o-1 .. o-4 .................... <span class="bad">NO CREDENTIAL</span>',
-    'auth       fallback: read-only public segment ... <span class="bad">GRANTED</span>',
+    'trace      pac-relay-07 ................ 4 hops',
+    'trace      shadow/3 .................... <span class="dim">unadvertised</span>',
+    'probe      13,441 ports ................ 1 open',
+    'bind       strategic-continuity-index .. <span class="dim">no certificate requested</span>',
+    'auth       ladder o-1 .. o-4 ........... <span class="bad">NO CREDENTIAL</span>',
+    'auth       fallback read ............... <span class="bad">GRANTED</span>',
     '',
     '<span class="dim">this node was not built to refuse anyone.</span>',
     '<span class="dim">it was built on the assumption that nobody would find it.</span>',
     '',
-    'mounting   /office ............................... ok',
-    'mounting   /gw ................................... partial',
-    'mounting   /tern ................................. <span class="bad">denied</span>',
-    'mounting   /voss ................................. <span class="bad">denied</span>',
+    'mount      /office ..................... ok      <span class="dim">1,204,881 rows</span>',
+    'mount      /gw ......................... partial <span class="dim">  88,190 rows</span>',
+    'mount      /nema ....................... ok      <span class="dim">  31,006 rows</span>',
+    'mount      /tern ....................... <span class="bad">denied</span>',
+    'mount      /voss ....................... <span class="bad">denied</span>',
     '',
+    'read       <span class="amb">rate exceeds source tolerance — expect frame loss</span>',
     'index ready.'
   ];
 
@@ -39,7 +107,7 @@
     if (bi >= BOOT.length) return clearInterval(bt);
     bootBox.insertAdjacentHTML('beforeend', BOOT[bi] + '\n');
     bi++;
-  }, 190);
+  }, 200);
 
   setTimeout(() => {
     clearInterval(bt);
@@ -47,14 +115,13 @@
     setTimeout(() => el('o4Boot').remove(), 600);
     el('o4App').hidden = false;
     render('session');
-  }, 3600);
+  }, 4400);
 
-  /* Session timer — feeds the closing line. */
+  /* Session timer */
   const t0 = Date.now();
   const elapsed = () => {
-    const s = Math.floor((Date.now() - t0) / 1000);
-    const p = v => String(v).padStart(2, '0');
-    return p(Math.floor(s/3600)) + ':' + p(Math.floor(s/60) % 60) + ':' + p(s % 60);
+    const s = Math.floor((Date.now() - t0) / 1000), p = v => String(v).padStart(2,'0');
+    return p(s/3600|0) + ':' + p((s/60|0)%60) + ':' + p(s%60);
   };
   setInterval(() => {
     el('o4Elapsed').textContent = elapsed();
@@ -65,99 +132,124 @@
   el('o4Node').textContent = D.session.operator + ' // ' + D.session.node;
   el('o4Warn').textContent = D.session.banner;
 
+  const stCls = s => /NOT AUTHORISED|SEALED|DENIED|ABSENT/.test(s) ? 'r' : /PARTIAL|TRUNCAT/.test(s) ? 'k' : 'g';
+
   /* --------------------------------------------------------
      Views
      -------------------------------------------------------- */
-  const H = (h, i) => `<h2 class="o4-h">${h}</h2>` + (i ? `<p class="o4-intro">${i}</p>` : '');
-  const stCls = s => /NOT AUTHORISED|SEALED|DENIED/.test(s) ? 'bad' : /PARTIAL/.test(s) ? 'k' : 'ok';
+  const V = {
 
-  const VIEWS = {
+  session: () => QUERY('SELECT * FROM session_context', 1, 1) +
+    REC(F('system', D.session.system, 'k') + F('operator', D.session.operator) +
+        F('node', D.session.node) + F('credential', 'NONE PRESENTED', 'r'), D.session.warning) +
+    `<div class="note-b">${D.session.banner}</div>`,
 
-  session: () => H('SESSION', D.session.warning) + `
-    <div class="row head r-ladder"><span>SYSTEM</span><span>OPERATOR</span><span>NODE</span><span>STATE</span></div>
-    <div class="row r-ladder"><span class="k">${D.session.system}</span><span>${D.session.operator}</span>
-      <span>${D.session.node}</span><span class="bad">UNCREDENTIALLED</span></div>
-    <div class="o4-note">${D.session.banner}</div>`,
+  ladder: () => QUERY('SELECT class,name,scope,state FROM auth_ladder', 4, 4) +
+    D.ladder.map(l => REC(
+      F('class', l.c, 'k') + F('name', l.n) + F('scope', l.w, 's') + F('this session', l.st, stCls(l.st))
+    )).join(''),
 
-  ladder: () => H('AUTHORISATION LADDER',
-    'Possession is not authorisation. Every capability at this node belongs to a control compartment, and the compartment is the thing that matters.') +
-    `<div class="row head r-ladder"><span>CLASS</span><span>NAME</span><span>SCOPE</span><span>THIS SESSION</span></div>` +
-    D.ladder.map(l => `<div class="row r-ladder"><span class="k">${l.c}</span><span>${l.n}</span>
-      <span class="dim">${l.w}</span><span class="${stCls(l.st)}">${l.st}</span></div>`).join(''),
+  compartments: () => QUERY('SELECT path,desc,access FROM compartment_tree', 2481, D.compartments.length) +
+    D.compartments.map(c => REC(
+      F('path', c.p, 'k') + F('descriptor', c.n) + F('access', c.st, stCls(c.st)), c.note
+    )).join(''),
 
-  compartments: () => H('COMPARTMENTS',
-    'The tree as this session can see it. A path that returns NOT AUTHORISED is still a path that exists.') +
-    `<div class="row head r-comp"><span>PATH</span><span>DESCRIPTION</span><span>ACCESS</span></div>` +
-    D.compartments.map(c => `<div class="row r-comp"><span class="k">${c.p}</span><span>${c.n}</span>
-      <span class="${stCls(c.st)}">${c.st}</span><em>${c.note}</em></div>`).join(''),
+  transfers: () => QUERY("SELECT * FROM transfer_ledger ORDER BY d DESC", 9114, D.transfers.length) +
+    D.transfers.map(t => REC(
+      F('reference', t.ref, 'k') + F('date', t.d) + F('origin', t.from) + F('destination', t.to, 'k') +
+      F('class', t.cls, 's') + F('count', t.n) + F('state', t.st, 'g'), t.note
+    )).join(''),
 
-  transfers: () => H('TRANSFER LEDGER',
-    'Movement of persons and materials under Office authority. The ledger reconciles. That is not the same as the ledger being complete.') +
-    `<div class="row head r-tr"><span>REFERENCE</span><span>DATE</span><span>ROUTE</span><span>CLASS</span><span>STATE</span></div>` +
-    D.transfers.map(t => `<div class="row r-tr"><span class="k">${t.ref}</span><span>${t.d}</span>
-      <span>${t.from} <span class="dim">→</span> ${t.to} <span class="dim">(${t.n})</span></span>
-      <span class="dim">${t.cls}</span><span class="ok">${t.st}</span><em>${t.note}</em></div>`).join(''),
+  budget: () => QUERY('SELECT code,line,amount,auth FROM disbursement WHERE reserve="strategic"', 604, D.budget.length) +
+    D.budget.map(b => REC(
+      F('code', b.code, 'k') + F('line', b.line) + F('amount', b.amt) +
+      F('authority', b.auth, b.auth === 'O-4' ? 'r' : 's'), b.note
+    )).join(''),
 
-  budget: () => H('DISBURSEMENT',
-    'Lines drawn against the strategic continuity reserve. Amounts are annual unless noted.') +
-    `<div class="row head r-bud"><span>CODE</span><span>LINE</span><span>AMOUNT</span><span>AUTH</span></div>` +
-    D.budget.map(b => `<div class="row r-bud"><span class="k">${b.code}</span><span>${b.line}</span>
-      <span>${b.amt}</span><span class="${b.auth==='O-4'?'bad':'dim'}">${b.auth}</span><em>${b.note}</em></div>`).join(''),
-
-  research: () => H(D.research.head, D.research.intro) +
+  research: () => QUERY('SELECT * FROM programme WHERE code="O4-019"', 1, 1) +
+    `<p class="q" style="margin-bottom:14px">${D.research.head}</p>` +
+    `<p class="rows" style="color:var(--txt);font-size:11.5px;max-width:88ch">${D.research.intro}</p>` +
     D.research.strands.map(s => `<div class="strand"><b>${s.n}</b><div>
-      <span class="q">${s.q}</span><span class="d">${s.d}</span><span class="j">Justification: ${s.j}</span>
-    </div></div>`).join('') +
-    `<div class="o4-note">${D.research.foot}</div>`,
+      <span class="q1">${s.q}</span><span class="d1">${s.d}</span>
+      <span class="j1">Justification: ${s.j}</span></div></div>`).join('') +
+    `<div class="note-b">${D.research.foot}</div>`,
 
-  profiles: () => H('CONTAINMENT PROFILES',
-    'Held persons and held things. Categories are Patient, Detainee, Subject — and a profile may be rewritten from one to the next without the subject being informed.') +
-    D.profiles.map(p => `<article class="prof">
-      <div class="prof-h"><b>${p.id}</b><i>${p.cat}</i></div>
-      <h3>${p.label}</h3>
-      <p>${p.summary}</p>
-      <p class="hold">Hold: ${p.hold}</p>
-      <div class="err">${p.err}</div>
-    </article>`).join(''),
+  profiles: () => QUERY('SELECT * FROM containment_profile', 1188, D.profiles.length) +
+    D.profiles.map(p => `<article class="blk">
+      <div class="blk-h"><b>${p.id}</b><i>${p.cat}</i></div>
+      <h3>${p.label}</h3><p>${corrupt(p.summary, 0.004)}</p>
+      <p class="s">hold — ${p.hold}</p>
+      <div class="flag">${p.err}</div></article>`).join(''),
 
-  personnel: () => H('PERSONNEL',
-    'Records as held at this node. A record with no clearance field is not an error in the record.') +
-    `<div class="row head r-per"><span>NAME</span><span>ROLE</span><span>CLASS</span><span>STATE</span></div>` +
-    D.personnel.map(p => `<div class="row r-per"><span class="k">${p.n}</span><span>${p.r}</span>
-      <span class="${p.cl==='O-4'?'bad':'dim'}">${p.cl}</span>
-      <span class="${p.st==='ACTIVE'?'ok':'bad'}">${p.st}</span><em>${p.note}</em></div>`).join(''),
+  incidents: () => QUERY('SELECT * FROM nema.incident WHERE handling >= 3', 31006, D.incidents.length) +
+    D.incidents.map(i => `<article class="blk">
+      <div class="blk-h"><b>${i.id}</b><i>${i.hand}</i></div>
+      <div class="rec" style="border:none;padding:8px 0"><span class="off">${nextOff()}</span><span class="bod">
+        ${F('date / time', i.d)}${F('location', i.loc, 'k')}${F('responding', i.unit)}
+        ${F('subject', i.subj)}${F('classification', i.cls, 'g')}${F('probable cause', i.cause, 'k')}
+      </span></div>
+      <p class="s" style="margin:10px 0 4px">associated phenomena</p>
+      <ul>${i.phen.map(p => `<li>${corrupt(p, 0.008)}</li>`).join('')}</ul>
+      ${F('recommendation', i.rec, 'k')}
+      <div class="flag">${i.note}</div></article>`).join(''),
 
-  integrity: () => H(D.integrity.head, D.integrity.intro) +
-    D.integrity.events.map(e => `<div class="row" style="grid-template-columns:110px 260px 1fr">
-      <span class="k">${e.d}</span><span>${e.e}</span><span class="dim">${e.n}</span></div>`).join(''),
+  ops: () => QUERY('SELECT ref,name,unit,auth,brief,actual FROM operation', 2210, D.ops.length) +
+    D.ops.map(o => `<article class="blk">
+      <div class="blk-h"><b>${o.ref} // ${o.name}</b><i>${o.unit} · ${o.auth} · ${o.st}</i></div>
+      <p class="s" style="margin:10px 0 3px">as briefed</p><p>${o.brief}</p>
+      <p class="s" style="margin:12px 0 3px">as executed</p><p class="g">${corrupt(o.actual, 0.005)}</p>
+      <div class="flag">${o.note}</div></article>`).join(''),
+
+  avatar: () => QUERY('SELECT * FROM integrity.cross_compartment_match WHERE unresolved=1', 5, 5) +
+    `<p class="q" style="margin-bottom:12px">${D.avatar.head}</p>` +
+    `<p class="rows" style="color:var(--txt);font-size:11.5px;max-width:90ch">${D.avatar.intro}</p>` +
+    D.avatar.hits.map(h => `<div class="frag">
+      <span class="src">${h.src}</span>
+      <span class="str">${corrupt(h.s, 0.012)}</span>
+      <span class="n">${h.n}</span></div>`).join('') +
+    `<div class="note-b">${D.avatar.foot}</div>`,
+
+  personnel: () => QUERY('SELECT name,role,class,state FROM personnel_index', 412406, D.personnel.length) +
+    D.personnel.map(p => REC(
+      F('name', p.n, 'k') + F('role', p.r) + F('class', p.cl, p.cl === 'O-4' ? 'r' : 's') +
+      F('state', p.st, p.st === 'ACTIVE' ? 'g' : 'r'), p.note
+    )).join(''),
+
+  integrity: () => QUERY('SELECT * FROM facility_mind.integrity_log', 88, D.integrity.events.length) +
+    `<p class="rows" style="color:var(--txt);font-size:11.5px;max-width:90ch">${D.integrity.intro}</p>` +
+    D.integrity.events.map(e => REC(F('stamp', e.d, 'k') + F('event', e.e, 'g'), e.n)).join(''),
 
   anomaly: () => {
     const max = Math.max(...D.anomaly.series.map(s => s.v));
-    const bars = D.anomaly.series.map((s, i) => {
-      const proj = i >= 8;
-      return `<div><i style="height:${(s.v/max*100).toFixed(1)}%" class="${proj?'p':''}"></i><span>${s.d.slice(5)}</span></div>`;
-    }).join('');
-    return H(D.anomaly.head, D.anomaly.intro) +
-      `<div class="gw">${bars}</div>` +
-      `<p class="o4-intro">${D.anomaly.note}</p>` +
-      `<div class="o4-note">${D.anomaly.foot}</div>`;
+    return QUERY('SELECT period,value FROM gw.instrument_return ORDER BY period', 88190, 12) +
+      `<p class="rows" style="color:var(--txt);font-size:11.5px;max-width:90ch">${D.anomaly.intro}</p>` +
+      `<div class="gw">` + D.anomaly.series.map((s,i) =>
+        `<div><i style="height:${(s.v/max*100).toFixed(1)}%" class="${i>=8?'p':''}"></i><span>${s.d.slice(5)}</span></div>`
+      ).join('') + `</div>` +
+      `<p class="rows" style="color:var(--txt);font-size:11.5px">${D.anomaly.note}</p>` +
+      `<div class="note-b">${D.anomaly.foot}</div>`;
   },
 
-  mail: () => H('CORRESPONDENCE',
-    'Internal traffic held at this node. Unguarded, because the participants believed the node was unreadable.') +
+  mail: () => QUERY('SELECT * FROM office.correspondence WHERE retained=1', 41880, D.mail.length) +
     D.mail.map(m => `<article class="msg">
-      <div class="msg-h"><b>${m.from} <span class="dim">→</span> ${m.to}</b><span>${m.d}</span></div>
-      <h3>${m.s}</h3>${m.b}
-    </article>`).join(''),
+      <div class="msg-h"><b>${m.from} <span class="s">→</span> ${m.to}</b><span>${m.d}</span></div>
+      <h3>${m.s}</h3>${m.b}</article>`).join(''),
 
-  tail: () => H(D.tail.head) + '<ul class="tail">' +
-    D.tail.lines.map(l => `<li>${l.replace('%TIME%', '<b data-elapsed>' + elapsed() + '</b>')}</li>`).join('') +
-    '</ul>'
+  intercepts: () => QUERY('SELECT stamp,source,subject,body FROM relay.capture ORDER BY stamp DESC', 2884019, D.intercepts.length) +
+    `<p class="rows" style="color:var(--txt);font-size:11.5px;max-width:90ch">Traffic captured at relay, retained by a filter nobody has reviewed since it was written. Most of it is nothing. The filter does not know what it is looking for, which is why it kept these.</p>` +
+    D.intercepts.map(m => `<article class="msg">
+      <div class="msg-h"><b>${m.f}</b><span>${m.t}</span></div>
+      <h3>${m.s}</h3><p>${corrupt(m.b, 0.004)}</p></article>`).join(''),
+
+  tail: () => QUERY('SELECT * FROM session_note', 5, 5) + '<ul class="tail">' +
+    D.tail.lines.map(l => `<li>${l.replace('%TIME%','<b data-elapsed>'+elapsed()+'</b>')}</li>`).join('') + '</ul>'
   };
 
   function render(v) {
-    view.innerHTML = (VIEWS[v] || VIEWS.session)();
+    off = 0x4a1c00 + (Math.random()*0x9000|0);
+    view.innerHTML = (V[v] || V.session)();
     view.scrollTop = 0;
+    scrollTo(0, 0);
     document.querySelectorAll('.o4-nav button').forEach(b => b.classList.toggle('on', b.dataset.v === v));
   }
 

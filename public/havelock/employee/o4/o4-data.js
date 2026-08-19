@@ -229,6 +229,181 @@ mail: [
 ],
 
 /* ------------------------------------------------------------
+   ANOMALY CASEFILES — NEMA incident format.
+   Everything is written as a clinical or technical finding.
+   The word "paranormal" never appears.
+   ------------------------------------------------------------ */
+incidents: [
+  {id:'NI-2098-05-17-7781', d:'2098.05.17 / 03:17', loc:'Vancouver Seawall — Coal Harbour', unit:'N.E.R.U. 7',
+   subj:'F / AGE 7 / UNIDENTIFIED', cls:'NEUROLOGICAL INCIDENT', cause:'PROBABLE MEMORY CONTAMINATION (SYSTEM MEMORY ECHO)',
+   phen:['Anomalous field interaction','System memory echo','Unlicensed cognition (potential)','No physical trace / entry unknown'],
+   rec:'REFERRED TO CLINICAL FOLLOW-UP', hand:'LEVEL 3 / PARTITIONED',
+   note:'Subject was not reported missing by anyone. Subject does not appear in the civic register at any age. Subject correctly named two responding officers who had not yet identified themselves.'},
+
+  {id:'NI-2098-04-02-6620', d:'2098.04.02 / 05:40', loc:'Stanley Park — Prospect Point', unit:'N.E.R.U. 3 / survey',
+   subj:'SITE / NO PERSONS', cls:'ENVIRONMENTAL ANOMALY', cause:'UNDETERMINED — SURVEY ONGOING',
+   phen:['Persistent ground fog, circular, 11m diameter','Fog does not disperse in wind','Interior temperature 4°C below ambient, constant','Sensor drift toward true north inside the ring'],
+   rec:'PERIMETER MAINTAINED / PUBLIC ROUTE DIVERTED', hand:'LEVEL 3 / PARTITIONED',
+   note:'Ring has been present 41 days. Ring has not moved. Park staff report the ring has been there "for years" and are unable to say when they first saw it. Two of the four surveyed independently gave the same wrong date.'},
+
+  {id:'NI-2098-03-28-6104', d:'2098.03.28 / 22:05', loc:'Gastown Memory Quarter', unit:'N.E.R.U. 2',
+   subj:'M / 34 / EMPLOYED', cls:'PERCEPTUAL INCIDENT', cause:'ARCHIVE OVERLAY MALFUNCTION (ASSESSED)',
+   phen:['Subject reports a building on a lot that is empty','Archive holds no reconstruction for that lot','Subject describes interior detail','Interior detail matches a structure demolished 2041'],
+   rec:'NO FURTHER ACTION', hand:'LEVEL 2',
+   note:'Assessment of "overlay malfunction" was entered before the archive was queried. The query was run afterward and returned nothing. The assessment was not revised.'},
+
+  {id:'NI-2098-02-19-5588', d:'2098.02.19 / 14:22', loc:'Cambie Medical Axis — rehabilitation floor', unit:'CLINICAL',
+   subj:'F / 61 / PATIENT', cls:'COGNITIVE INCIDENT', cause:'POST-SURGICAL CONFUSION (ASSESSED)',
+   phen:['Subject speaks in a second voice register','Second register uses vocabulary absent from subject history','Subject reports "someone is using the room"','EEG shows two stable patterns, non-alternating'],
+   rec:'TRANSFERRED — EXCEPTIONAL CUSTODY', hand:'LEVEL 4 / PARTITIONED',
+   note:'Two stable patterns is not a recognised finding. The clinical note describing it was amended within nine hours to read "artefact". The original is retained at this node.'},
+
+  {id:'NI-2098-01-31-5012', d:'2098.01.31 / 01:55', loc:'The Underlayer — Legacy, sector unrecorded', unit:'N.E.R.U. 5',
+   subj:'M / 20s / NO CIVIC IDENTITY', cls:'IDENTITY INCIDENT', cause:'UNDETERMINED',
+   phen:['Subject has no register entry','Subject has no Mesh shadow of any kind','Subject presents complete childhood memory of Vancouver','Subject named a street correctly. The street was renamed in 2066.'],
+   rec:'PROTECTIVE CUSTODY', hand:'LEVEL 4 / PARTITIONED',
+   note:'Every person in this city leaves a Mesh shadow from birth. Absence of a shadow is not rare. It is unprecedented.'},
+
+  {id:'NI-2097-11-08-4470', d:'2097.11.08 / 19:30', loc:'Salish corridor — pump station 4', unit:'N.E.R.U. 1',
+   subj:'SITE / 3 PERSONS', cls:'ENVIRONMENTAL ANOMALY', cause:'UNDETERMINED',
+   phen:['Automated pump logs record a shift that did not occur','Three staff report working the shift','Building access logs record no entries','All three describe the same conversation'],
+   rec:'STAFF REASSIGNED / SITE MONITORED', hand:'LEVEL 3',
+   note:'The pumps ran. The water moved. Something operated them.'},
+
+  {id:'NI-2097-09-14-3901', d:'2097.09.14 / 11:11', loc:'Northstar Crown — Suite 19-C, Deck 4', unit:'ORBITAL',
+   subj:'M / 44 / STAFF', cls:'NEUROLOGICAL INCIDENT', cause:'LONG-ROTATION FATIGUE (ASSESSED)',
+   phen:['Subject reports a rhythm audible through the hull','Subject taps the rhythm consistently across 6 weeks','Rhythm has no acoustic source','Rhythm interval: 1.94 s'],
+   rec:'ROTATED DOWNWELL / CLEARED', hand:'LEVEL 3 / PARTITIONED',
+   note:'Interval matches CP-0207 to two decimal places. The two subjects have never met. One is in orbit. One is on an island.'},
+
+  {id:'NI-2097-06-02-2884', d:'2097.06.02 / 04:08', loc:'Muir Point — outer perimeter, seaward', unit:'[REDACTED AT SOURCE]',
+   subj:'—', cls:'[FIELD ABSENT]', cause:'[FIELD ABSENT]',
+   phen:['[record truncated — 4 fields did not transfer]'],
+   rec:'—', hand:'LEVEL 5 / NOT PARTITIONED — NOT INDEXED',
+   note:'This record has no classification field. Not blank. The column does not exist on this row. It is the only row in 31,000 that is shaped differently.'}
+],
+
+/* ------------------------------------------------------------
+   OPERATIONS — what the field units were actually sent to do
+   ------------------------------------------------------------ */
+ops: [
+  {ref:'OP-PAC-2098-014', name:'KO RETRIEVAL', unit:'FMU-3', auth:'O-2', st:'CLOSED',
+   brief:'Locate and recover Dr. Samuel Ko. Capture-first. Subject described as dangerous, possibly unwell, in possession of restricted information.',
+   actual:'Acquisition. Subject routed to clinical intake at PAC-07-B within 6 hours of handover. Reclassified within 40 days.',
+   note:'The after-action report filed by the delivering unit states the subject was taken to a hospital. Nobody has corrected it. Nobody has been instructed not to.'},
+
+  {ref:'OP-PAC-2098-009', name:'SEAWALL WITNESS', unit:'FMU-1', auth:'O-2', st:'CLOSED',
+   brief:'Protective custody, one minor, following a neurological incident at Coal Harbour. Duration: 72 hours pending guardian identification.',
+   actual:'No guardian identified. No guardian sought after hour 9. Duration to date: 94 days.',
+   note:'See NI-2098-05-17-7781. The child is CP-0341.'},
+
+  {ref:'OP-PAC-2098-003', name:'PROSPECT SURVEY', unit:'NEMA joint', auth:'O-1', st:'ONGOING',
+   brief:'Environmental survey, Stanley Park. Public safety perimeter. Routine.',
+   actual:'Instrumented monitoring of a static anomaly. Four sites of this type are under survey. This is the only one inside a city.',
+   note:'Survey equipment is Office property carrying NEMA markings. The joint operation is joint in one direction.'},
+
+  {ref:'OP-ORB-2097-041', name:'DOWNWELL QUIET', unit:'Mobility & Orbital', auth:'O-3', st:'CLOSED',
+   brief:'Medical rotation of one staff member from Suite 19-C. Fatigue protocol.',
+   actual:'Removal of a witness who could hear the anchor synchronisation without instrumentation.',
+   note:'Subject was cleared and returned to work. Subject was not returned to orbit. Subject has not been told why.'},
+
+  {ref:'OP-VAN-2097-088', name:'GASTOWN CORRECTION', unit:'Systems Intelligence', auth:'O-2', st:'CLOSED',
+   brief:'Archive integrity audit following a public complaint regarding overlay accuracy.',
+   actual:'Removal of eleven reconstructions from the public archive. Reason field on all eleven: "licensing".',
+   note:'The eleven structures were on four separate lots. Three of the lots are now empty. One is a Havelock facility.'},
+
+  {ref:'OP-ISL-2096-127', name:'TIDEWORK', unit:'[COMPARTMENT]', auth:'O-4', st:'CLOSED',
+   brief:'[NOT RELEASED]',
+   actual:'[NOT RELEASED]',
+   note:'Only the disbursement survives: ACr 4.1M, marine, single night, 2096.09.02. The date is the day CP-0388 was recorded as deceased.'},
+
+  {ref:'OP-PAC-2098-021', name:'HOUSEKEEPING', unit:'Office — Records', auth:'O-3', st:'ONGOING',
+   brief:'Retention compliance sweep. Clinical records held beyond the Charter window are to be purged.',
+   actual:'411 employee records identified. 411 disclosed publicly. 409 purged.',
+   note:'Two were not purged. Both belong to personnel who have since been transferred to exceptional custody. The disclosure did not mention this and was, in every other respect, entirely honest.'}
+],
+
+/* ------------------------------------------------------------
+   AVATAR — deliberately almost nothing.
+   Fragments from three unconnected systems that should not
+   share a vocabulary.
+   ------------------------------------------------------------ */
+avatar: {
+  head:'[UNRESOLVED] — CROSS-COMPARTMENT STRING MATCH',
+  intro:'This is not a file. It is the output of an integrity tool that looks for the same uncommon string appearing in compartments that do not share data. It was written to find leaks. It found this and has been reporting it, unread, since 2096.',
+  hits: [
+    {src:'/office/labs/  requisition 2097-114', s:'…vessel tolerance at sustained load, per AVATAR schedule…',
+     n:'"Avatar" appears nowhere in the requisition\'s own project index. The schedule referenced does not exist as a document.'},
+    {src:'/gw/  instrument note, unsigned', s:'…anchor cannot carry an occupant until the vessel is complete…',
+     n:'Filed under equipment maintenance. The word "occupant" is not an equipment term.'},
+    {src:'/tern/  [denied — fragment only]', s:'…seven strands converge or it does not hold…',
+     n:'Recovered from a truncated transfer. Origin path denied at this authorisation. Only the sentence survived.'},
+    {src:'Clinical, CP-0491 file margin', s:'…compatible across three. rare. flag to programme…',
+     n:'Handwritten, scanned, unsigned. "Programme" is not capitalised anywhere else in the file.'},
+    {src:'Payroll — consultant expense line', s:'…site visit, vessel review…',
+     n:'The consultant does not hold a clinical qualification. There is no vessel at the site. There is no marine asset on the account.'}
+  ],
+  foot:'Five hits. Five compartments. The compartments are walled from one another by design, and the wall is not the failure — the wall is working. Something is being assembled across it by people who can each see one piece. The tool has no opinion. It counts.'
+},
+
+/* ------------------------------------------------------------
+   INTERCEPTS — short traffic. Setting detail available nowhere
+   else on the site. Mundane voices, one detail each.
+   ------------------------------------------------------------ */
+intercepts: [
+  {t:'2098.06.17 23:41', f:'Depot 4, Kamloops', s:'Bay 1 again',
+   b:'Third time this year someone has requisitioned stock to Bay 1 at Prince Rupert. There is no Bay 1. Whoever keys these is using an old sheet. The old sheet has twelve bays. Ours has eleven.'},
+  {t:'2098.06.16 04:12', f:'Suite 19-C galley', s:'the coffee',
+   b:'Mass allowance is checked on the down-lift because of coffee. It is checked on the UP-lift because of something in 2093 that nobody will put in writing. Ask a lifter about 2093 and watch their face.'},
+  {t:'2098.06.14 17:03', f:'Salish works, section 9', s:'the eleven days',
+   b:'Every system we build gets tested against eleven days. New engineers assume it is the Fraser Delta. It is. But the number was chosen in 2041 and the failure was 2039, and nobody has ever explained the two years.'},
+  {t:'2098.06.11 09:55', f:'Records Custody, Vancouver', s:'annexe retrieval — again',
+   b:'Someone above me has pulled the 2071 Pacific routing tables four times this year. They are the dullest documents in the basement. I have started noting who asks. The list is not long and it is not junior.'},
+  {t:'2098.06.09 12:20', f:'Pacific Spirit warden station', s:'coverage',
+   b:'People assume the Mesh gap in the forest is neglect. It is maintained. There is a budget line for maintaining it. I am not supposed to know that and I only do because it came to the wrong inbox.'},
+  {t:'2098.06.05 21:38', f:'Steveston, marine biotech', s:'the fish',
+   b:'Second season the herring have run four days early. Not a problem. Except the sensors say the water is the same temperature it always is, so nothing has told them to.'},
+  {t:'2098.06.02 06:14', f:'New Westminster Crown, evidence', s:'chain of custody, item 41',
+   b:'An item has been signed in and out of this building nine times. Every signature is valid. Every one of the nine says the item never left. I am required to accept both.'},
+  {t:'2098.05.30 15:47', f:'Anchorage forward station', s:'north of us',
+   b:'Nothing is north of us. Anything on a routing table north of Anchorage is a partner, a relay, or a typo. I have been saying that for six years. This month I was told to stop putting it in writing.'},
+  {t:'2098.05.27 03:03', f:'Burnaby data spine, floor 41', s:'the load',
+   b:'Something on this spine draws power on a 1.94-second cycle. It does not appear in the tenancy schedule. Facilities call it a chiller. There is no chiller on 41.'},
+  {t:'2098.05.24 11:29', f:'Tsawwassen ferry, customs', s:'manifest 88',
+   b:'A vessel cleared our lane last night with a Havelock seal and no operator flag. Customs cannot flag a vessel that does not exist. So we did not.'},
+  {t:'2098.05.21 19:02', f:'Cloverdale seed vault', s:'sampling request',
+   b:'A request came in for soil organisms from a site I cannot find on any map. The grid reference resolves to open water off the south of the Island.'},
+  {t:'2098.05.18 08:41', f:'Oakridge civic stack, shelter ops', s:'capacity revision',
+   b:'Our shelter capacity was revised up 40% in March. No construction. No new beds. Somebody upstairs simply decided we can hold more people than we can hold.'},
+  {t:'2098.05.15 22:16', f:'Lower Lonsdale shipyard', s:'the hull',
+   b:'We are refitting a submersible with no registry, no owner shown, and a pressure rating for depths there is no reason to reach on this coast.'},
+  {t:'2098.05.12 13:33', f:'Clinical, Cambie', s:'consent ledger anomaly',
+   b:'A ledger entry has a countersignature from a patient who was under anaesthetic at the time of signing. The system accepted it. The system should not be able to accept it.'},
+  {t:'2098.05.09 05:50', f:'YVR Crown, cargo', s:'Type 3',
+   b:'Handling class VEYR came onto our sheets in 2094 with no training package and no definition. We handle it the way we handle everything with a pressure differential. Nobody has ever told us what it is.'},
+  {t:'2098.05.06 16:08', f:'Grouse mountain relay', s:'traffic',
+   b:'Relay carries four times the traffic the schedule accounts for. Every packet is addressed correctly. None of them are addressed to anyone I can find.'},
+  {t:'2098.05.03 02:27', f:'Downtown Eastside clinic', s:'the ones who come back',
+   b:'People come back from a hospital stay with a gap. Not confusion — a clean gap, same shape each time, about nine days. Eleven of them now. I have started writing names down.'},
+  {t:'2098.04.29 10:44', f:'Abbotsford NEMA, logistics', s:'staging',
+   b:'We have been quietly staging for a regional event since February. Nobody will say what event. The stores are dated to December.'},
+  {t:'2098.04.26 18:55', f:'Richmond dike control', s:'pump 7',
+   b:'Pump 7 reports itself as running whether or not it is running. Engineering says the sensor. We replaced the sensor. It still does.'},
+  {t:'2098.04.22 07:19', f:'Havelock Centre, atrium', s:'the founding wall',
+   b:'The wall lists everyone who died in the eleven days. Someone has added a name. The stonework is original. I checked twice.'},
+  {t:'2098.04.18 23:58', f:'Port Moody, marine', s:'boat access',
+   b:'A concealed slip below the old works is in use. Not smugglers — the wake pattern is wrong for anything with a propeller.'},
+  {t:'2098.04.14 09:31', f:'Identity Services', s:'unsealing volume',
+   b:'Sixty-one sealings this year. Four restorations. Nobody asks where the other fifty-seven went, because each one is somebody else\'s file.'},
+  {t:'2098.04.10 14:07', f:'Surrey Central, hospital admin', s:'transfer refusals',
+   b:'We have refused four inter-facility transfers this quarter because the receiving facility would not give an address. All four patients were transferred anyway, by someone else, later.'},
+  {t:'2098.04.06 20:22', f:'Muir Point, clinical ward', s:'(no subject)',
+   b:'Eleven names. Every one of them arrived with a record and left with a different one. I am not clever and I am not brave. I am just the person who reads the charts twice.'},
+  {t:'2098.04.01 00:00', f:'[unsigned]', s:'—',
+   b:'If the anchor is a memory, then forgetting is not a symptom of the thing. Forgetting is the thing working.'}
+],
+
+/* ------------------------------------------------------------
    TERMINAL NOTE — what the session reveals last
    ------------------------------------------------------------ */
 tail: {
