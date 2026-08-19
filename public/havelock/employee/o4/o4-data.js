@@ -62,7 +62,7 @@ transfers: [
    n:'2 persons', st:'DELIVERED', note:'Court order attached. Order number does not appear in the Alliance registry.'},
   {ref:'TR-2098-0529', d:'2098.05.29', from:'Boundary Bay', to:'PAC-07-B', cls:'MATERIAL',
    n:'4 vessels, Type 3', st:'DELIVERED', note:'Handling class VEYR. Pressure differential maintained in transit. Do not open under pressure.'},
-  {ref:'TR-2098-0518', d:'2098.05.18', from:'PAC-07-B', to:'Deep Ward', cls:'INTERNAL',
+  {img:'pod-transfer', ref:'TR-2098-0518', d:'2098.05.18', from:'PAC-07-B', to:'Deep Ward', cls:'INTERNAL',
    n:'1 person', st:'COMPLETE', note:'Subject reclassified in transit. Patient → Detainee → Subject. Three reclassifications, one journey, forty minutes.'},
   {ref:'TR-2098-0504', d:'2098.05.04', from:'Muir Point (surface)', to:'Sea access / submersible lock', cls:'EVIDENCE',
    n:'11 containers', st:'DELIVERED', note:'Receiving vessel not flagged to any registry. Manifest signed by an officer whose personnel record was closed in 2096.'},
@@ -113,7 +113,7 @@ profiles: [
    hold:'Indefinite. No legal instrument covers this case.',
    err:'Profile lists "no dependants". Two minors are named in the visitation log.'},
 
-  {id:'CP-0207', cat:'PATIENT', label:'Anchor listener',
+  {img:'ward-corridor', id:'CP-0207', cat:'PATIENT', label:'Anchor listener',
    summary:'Reports a repeating rhythm. Describes it as counting. Clinical assessment: perseverative auditory hallucination, treatment-resistant.',
    hold:'Voluntary, renewed 14 times.',
    err:'The rhythm the subject taps has been recorded and compared against instrument returns from /gw/. Correlation 0.94. This comparison is filed under Clinical, not Research, and no clinician has been told.'},
@@ -128,7 +128,7 @@ profiles: [
    hold:'Continuity hold. Renewed by an officer who does not appear in the personnel index.',
    err:'Subject is recorded as deceased 2096.09.02. Subject continues to consume a food allocation.'},
 
-  {id:'CP-0402', cat:'DETAINEE', label:'Digital person',
+  {img:'stillcreek', id:'CP-0402', cat:'DETAINEE', label:'Digital person',
    summary:'Copied human consciousness. Legal owner asserts the instance is property. Courts have not resolved the question and show no sign of doing so.',
    hold:'Contained pending determination. Duration to date: 4 years, 7 months.',
    err:'The instance has requested legal counsel 219 times. The Charter guarantees counsel to employees. It is silent on this.'},
@@ -234,13 +234,13 @@ mail: [
    The word "paranormal" never appears.
    ------------------------------------------------------------ */
 incidents: [
-  {id:'NI-2098-05-17-7781', d:'2098.05.17 / 03:17', loc:'Vancouver Seawall — Coal Harbour', unit:'N.E.R.U. 7',
+  {img:'seawall-child', id:'NI-2098-05-17-7781', d:'2098.05.17 / 03:17', loc:'Vancouver Seawall — Coal Harbour', unit:'N.E.R.U. 7',
    subj:'F / AGE 7 / UNIDENTIFIED', cls:'NEUROLOGICAL INCIDENT', cause:'PROBABLE MEMORY CONTAMINATION (SYSTEM MEMORY ECHO)',
    phen:['Anomalous field interaction','System memory echo','Unlicensed cognition (potential)','No physical trace / entry unknown'],
    rec:'REFERRED TO CLINICAL FOLLOW-UP', hand:'LEVEL 3 / PARTITIONED',
    note:'Subject was not reported missing by anyone. Subject does not appear in the civic register at any age. Subject correctly named two responding officers who had not yet identified themselves.'},
 
-  {id:'NI-2098-04-02-6620', d:'2098.04.02 / 05:40', loc:'Stanley Park — Prospect Point', unit:'N.E.R.U. 3 / survey',
+  {img:'prospect-survey', id:'NI-2098-04-02-6620', d:'2098.04.02 / 05:40', loc:'Stanley Park — Prospect Point', unit:'N.E.R.U. 3 / survey',
    subj:'SITE / NO PERSONS', cls:'ENVIRONMENTAL ANOMALY', cause:'UNDETERMINED — SURVEY ONGOING',
    phen:['Persistent ground fog, circular, 11m diameter','Fog does not disperse in wind','Interior temperature 4°C below ambient, constant','Sensor drift toward true north inside the ring'],
    rec:'PERIMETER MAINTAINED / PUBLIC ROUTE DIVERTED', hand:'LEVEL 3 / PARTITIONED',
@@ -264,13 +264,31 @@ incidents: [
    rec:'PROTECTIVE CUSTODY', hand:'LEVEL 4 / PARTITIONED',
    note:'Every person in this city leaves a Mesh shadow from birth. Absence of a shadow is not rare. It is unprecedented.'},
 
-  {id:'NI-2097-11-08-4470', d:'2097.11.08 / 19:30', loc:'Salish corridor — pump station 4', unit:'N.E.R.U. 1',
+  {img:'gilmore-event', id:'NI-2098-04-13-6841', d:'2098.04.13 / 20:44', loc:'Millennium Line — Gilmore, Burnaby', unit:'N.E.R.U. 2 / late',
+   subj:'2 PERSONS / UNIDENTIFIED / UNLICENSED', cls:'ENHANCED PERSON INCIDENT', cause:'UNDETERMINED — HOSTILE ENGAGEMENT ASSESSED',
+   phen:['Directed electrical discharge, sustained','Second party airborne without visible propulsion','Guideway power isolated automatically 3 times','Neither party present in the licensed register'],
+   rec:'NO ARREST / NO PURSUIT AUTHORISED', hand:'LEVEL 4 / PARTITIONED',
+   note:'Public statement issued 21:30 described an electrical fault. Ridership that evening: 41,000. Every one of them was told the same thing, and most of them believed it, because most of the time it is true.'},
+
+  {img:'lab-entry', id:'NI-2098-03-01-5720', d:'2098.03.01 / 02:26', loc:'East Van Fabrication Belt — unlicensed premises', unit:'FMU-1 / entry',
+   subj:'1 PERSON RECOVERED / 1 SYNTHETIC DISABLED', cls:'RESTRICTED TECHNOLOGY', cause:'UNLICENSED MEDICAL RESEARCH',
+   phen:['Suspension apparatus, occupied, 4 units','Subject dermal presentation outside human range','Autonomous unit engaged responders','Equipment carrying expired corporate asset tags'],
+   rec:'MATERIALS RECOVERED / SITE SANITISED', hand:'LEVEL 4 / PARTITIONED',
+   note:'Three units carry Havelock asset tags issued 2094 and written off as destroyed 2095. Somebody sold this equipment. The write-off was signed at O-3.'},
+
+  {img:'stillcreek', id:'NI-2098-04-29-6702', d:'2098.04.29 / 13:35', loc:'Still Creek Continuity Cooperative, Burnaby', unit:'CIVIL / joint',
+   subj:'M / 24 / RESIDENT — CONTINUITY COOPERATIVE', cls:'CUSTODY — CONTESTED PERSONHOOD', cause:'N/A — LEGAL',
+   phen:['Subject carries integrated neural interface','Ownership asserted by a third party','Legal advocates present','Media accredited and admitted'],
+   rec:'ATTENDANCE RECORDED AS VOLUNTARY', hand:'LEVEL 2 / PUBLIC',
+   note:'Every document uses the word voluntary. The transport doors were open before he reached them. This is the case the public is allowed to argue about, which is why it is the one that happens in daylight.'},
+
+  {img:'floodgate', id:'NI-2097-11-08-4470', d:'2097.11.08 / 19:30', loc:'Salish corridor — pump station 4', unit:'N.E.R.U. 1',
    subj:'SITE / 3 PERSONS', cls:'ENVIRONMENTAL ANOMALY', cause:'UNDETERMINED',
    phen:['Automated pump logs record a shift that did not occur','Three staff report working the shift','Building access logs record no entries','All three describe the same conversation'],
    rec:'STAFF REASSIGNED / SITE MONITORED', hand:'LEVEL 3',
    note:'The pumps ran. The water moved. Something operated them.'},
 
-  {id:'NI-2097-09-14-3901', d:'2097.09.14 / 11:11', loc:'Northstar Crown — Suite 19-C, Deck 4', unit:'ORBITAL',
+  {img:'orbital-bay', id:'NI-2097-09-14-3901', d:'2097.09.14 / 11:11', loc:'Northstar Crown — Suite 19-C, Deck 4', unit:'ORBITAL',
    subj:'M / 44 / STAFF', cls:'NEUROLOGICAL INCIDENT', cause:'LONG-ROTATION FATIGUE (ASSESSED)',
    phen:['Subject reports a rhythm audible through the hull','Subject taps the rhythm consistently across 6 weeks','Rhythm has no acoustic source','Rhythm interval: 1.94 s'],
    rec:'ROTATED DOWNWELL / CLEARED', hand:'LEVEL 3 / PARTITIONED',
@@ -287,7 +305,22 @@ incidents: [
    OPERATIONS — what the field units were actually sent to do
    ------------------------------------------------------------ */
 ops: [
-  {ref:'OP-PAC-2098-014', name:'KO RETRIEVAL', unit:'FMU-3', auth:'O-2', st:'CLOSED',
+  {img:'port-action', ref:'OP-PAC-2098-002', name:'BONDED RECOVERY', unit:'FMU-2', auth:'O-2', st:'CLOSED',
+   brief:'Recover four consignments diverted from the bonded chain at Hastings. Site cleared of civilians prior to entry.',
+   actual:'Site was not cleared. Longshore crews present throughout. Two aerial platforms lost to defensive fire the brief did not anticipate.',
+   note:'The consignments were Havelock property being moved without a Havelock manifest. The operation recovered company goods from company people, and the report does not say so.'},
+
+  {img:'lab-entry', ref:'OP-PAC-2098-006', name:'SANITARY', unit:'FMU-1', auth:'O-3', st:'CLOSED',
+   brief:'Entry, unlicensed medical premises. Recover restricted apparatus. Persons present to be referred to civil authority.',
+   actual:'Apparatus recovered. One occupant extracted and not referred. Site burned to the slab within 4 hours of exit.',
+   note:'Sanitation of a scene is a containment measure. It is also how evidence stops existing. Both statements are true and the report only makes one of them.'},
+
+  {img:'overwatch', ref:'OP-VAN-2098-017', name:'LONG LOOK', unit:'[COMPARTMENT]', auth:'O-3', st:'CLOSED',
+   brief:'[NOT RELEASED]',
+   actual:'Nine days of static observation on a residential address, Mount Pleasant. No entry. No contact. No arrest.',
+   note:'The tasking authority is named in the record. The name resolves against nothing. Somebody who does not exist watched a family for nine days and then stopped, and no document says why either happened.'},
+
+  {img:'muir-intake', ref:'OP-PAC-2098-014', name:'KO RETRIEVAL', unit:'FMU-3', auth:'O-2', st:'CLOSED',
    brief:'Locate and recover Dr. Samuel Ko. Capture-first. Subject described as dangerous, possibly unwell, in possession of restricted information.',
    actual:'Acquisition. Subject routed to clinical intake at PAC-07-B within 6 hours of handover. Reclassified within 40 days.',
    note:'The after-action report filed by the delivering unit states the subject was taken to a hospital. Nobody has corrected it. Nobody has been instructed not to.'},
@@ -297,12 +330,12 @@ ops: [
    actual:'No guardian identified. No guardian sought after hour 9. Duration to date: 94 days.',
    note:'See NI-2098-05-17-7781. The child is CP-0341.'},
 
-  {ref:'OP-PAC-2098-003', name:'PROSPECT SURVEY', unit:'NEMA joint', auth:'O-1', st:'ONGOING',
+  {img:'prospect-survey', ref:'OP-PAC-2098-003', name:'PROSPECT SURVEY', unit:'NEMA joint', auth:'O-1', st:'ONGOING',
    brief:'Environmental survey, Stanley Park. Public safety perimeter. Routine.',
    actual:'Instrumented monitoring of a static anomaly. Four sites of this type are under survey. This is the only one inside a city.',
    note:'Survey equipment is Office property carrying NEMA markings. The joint operation is joint in one direction.'},
 
-  {ref:'OP-ORB-2097-041', name:'DOWNWELL QUIET', unit:'Mobility & Orbital', auth:'O-3', st:'CLOSED',
+  {img:'orbital-bay', ref:'OP-ORB-2097-041', name:'DOWNWELL QUIET', unit:'Mobility & Orbital', auth:'O-3', st:'CLOSED',
    brief:'Medical rotation of one staff member from Suite 19-C. Fatigue protocol.',
    actual:'Removal of a witness who could hear the anchor synchronisation without instrumentation.',
    note:'Subject was cleared and returned to work. Subject was not returned to orbit. Subject has not been told why.'},
@@ -401,6 +434,84 @@ intercepts: [
    b:'Eleven names. Every one of them arrived with a record and left with a different one. I am not clever and I am not brave. I am just the person who reads the charts twice.'},
   {t:'2098.04.01 00:00', f:'[unsigned]', s:'—',
    b:'If the anchor is a memory, then forgetting is not a symptom of the thing. Forgetting is the thing working.'}
+],
+
+/* ------------------------------------------------------------
+   EVIDENCE CACHE — recovered frames.
+   Rule: the caption always says less than the image shows.
+   The system describes what it is required to describe and
+   nothing more, and that gap is where the horror sits.
+   ------------------------------------------------------------ */
+evidence: [
+  {f:'seawall-child', id:'FR-7781-04', src:'N.E.R.U. 7 helmet capture', d:'2098.05.17 / 03:19',
+   cap:'Subject interview, Coal Harbour seawall. Two responders present. Incident board rendered for the record.',
+   ret:'RETAINED — LEVEL 3 / PARTITIONED', link:'NI-2098-05-17-7781',
+   note:'Frame is timestamped 03:19. The incident board behind the responders already displays the completed classification, probable cause and recommendation. The assessment was filed at 06:40.'},
+
+  {f:'prospect-survey', id:'FR-6620-11', src:'Survey mast 3, Prospect Point', d:'2098.04.02 / 05:58',
+   cap:'Instrumented survey of a static environmental anomaly. Perimeter markers, ground unit, quadruped platform in support.',
+   ret:'RETAINED — LEVEL 3', link:'NI-2098-04-02-6620',
+   note:'The ring is 11m. Every marker is placed outside it. The placement pattern is identical in all 41 days of capture, including the days before the placement procedure was written.'},
+
+  {f:'prospect-entity', id:'FR-6620-A1', src:'[SOURCE FIELD EMPTY]', d:'2098.04.02 / [NO STAMP]',
+   cap:'—',
+   ret:'NOT INDEXED — PRESENT IN CACHE, ABSENT FROM MANIFEST', link:'NI-2098-04-02-6620',
+   note:'This frame is in the same directory as the survey capture and shares its file numbering. It has no source, no stamp and no caption. Nothing in the incident record references it. It is 1.4MB. The survey frames are 1.4MB.'},
+
+  {f:'gilmore-event', id:'FR-2098-0413-G', src:'Transit platform capture, Gilmore', d:'2098.04.13 / 20:44',
+   cap:'Two individuals of interest, elevated guideway. Service suspended 41 minutes. No civilian injuries recorded.',
+   ret:'RETAINED — LEVEL 4 / PARTITIONED', link:'—',
+   note:'Neither individual appears in the licensed register. The public incident summary describes an "electrical fault affecting the Millennium Line". Forty-one minutes of a city watching this, and the city was told it was a fault.'},
+
+  {f:'port-action', id:'FR-2098-0208-P', src:'Crane mast 4, Hastings Port Arc', d:'2098.02.08 / 23:12',
+   cap:'Recovery operation, bonded warehouse district. Contested. Two aerial platforms lost.',
+   ret:'RETAINED — LEVEL 4', link:'OP-PAC-2098-002',
+   note:'Longshore workers are visible in the frame throughout. The operation was logged as occurring on a cleared site. It was not cleared. Nobody asked them to leave because asking would have created a record of the request.'},
+
+  {f:'floodgate', id:'FR-2097-1108-S', src:'Pump station 4, dorsal', d:'2097.11.08 / 19:41',
+   cap:'Infrastructure incident, Salish corridor. Armed response. One civil worker recovered.',
+   ret:'RETAINED — LEVEL 3', link:'NI-2097-11-08-4470',
+   note:'The incident record describes an automation fault. Automation faults do not require weapons. The worker recovered in this frame is one of the three who reported working a shift that the building has no record of.'},
+
+  {f:'overwatch', id:'FR-2098-0505-O', src:'Rooftop position, sensor package', d:'2098.05.05 / 06:02',
+   cap:'Static observation, Mount Pleasant approach. Duration 9 days. Subject: premises.',
+   ret:'RETAINED — LEVEL 3', link:'—',
+   note:'Nine days of continuous observation on a residential building. The tasking authority field is populated. The name in it does not resolve against the personnel index.'},
+
+  {f:'lab-entry', id:'FR-2098-0301-L', src:'Entry team, breach capture', d:'2098.03.01 / 02:26',
+   cap:'Entry, unlicensed medical premises, East Van Fabrication Belt. Materials recovered. One casualty extracted.',
+   ret:'RETAINED — LEVEL 4 / PARTITIONED', link:'OP-PAC-2098-006',
+   note:'The premises were unlicensed. The equipment in them was not black-market — three units carry Havelock asset tags issued in 2094 and reported destroyed in 2095. The person carried out is not listed on the recovery manifest.'},
+
+  {f:'muir-intake', id:'FR-2098-0518-M', src:'Landing apron, seaward approach', d:'2098.05.18 / 04:55',
+   cap:'Transfer receipt. One person. Receiving clinician present. Weather hold cleared.',
+   ret:'RETAINED — LEVEL 4 / PARTITIONED', link:'TR-2098-0518',
+   note:'The subject is in soft restraint and is not resisting. The clinician is reading a tablet, not the subject. This is the transfer during which a person was reclassified twice in forty minutes.'},
+
+  {f:'pod-transfer', id:'FR-2098-0518-D', src:'Internal corridor, level unmarked', d:'2098.05.18 / 05:37',
+   cap:'Internal movement. Sealed unit. Escort four. Destination compartment not recorded at this authorisation.',
+   ret:'RETAINED — LEVEL 5', link:'TR-2098-0518',
+   note:'Forty-two minutes after the apron frame. The corridor has no floor marking and no signage. The only person not armoured is standing at the far end, waiting, and has been in that position in every frame of this sequence.'},
+
+  {f:'ward-corridor', id:'FR-CLIN-0207-3', src:'Ward corridor, fixed', d:'2098.06.02 / 11:20',
+   cap:'Routine ward transit. Clinical wing. Occupancy nominal.',
+   ret:'RETAINED — LEVEL 4', link:'CP-0207',
+   note:'The occupant on the left is instrumented and seated. The room beyond her, through the same glass, contains a bed, a lamp, a sofa and a window view. Both are cells. One of them is furnished to be endured for a long time.'},
+
+  {f:'holding-corridor', id:'FR-CLIN-0402-1', src:'Holding corridor, fixed', d:'2098.05.28 / 09:04',
+   cap:'Routine holding transit. Occupancy nominal.',
+   ret:'RETAINED — LEVEL 4', link:'CP-0402',
+   note:'Left: restraint chair, hard surfaces, overhead armature. Right, four metres away, through the same wall: a made bed and a reading lamp. The facility does not distinguish between these in any document. Both are "accommodation".'},
+
+  {f:'stillcreek', id:'FR-2098-0429-C', src:'Public capture, Still Creek', d:'2098.04.29 / 13:35',
+   cap:'Voluntary attendance. Continuity Cooperative, Burnaby. Media present. Public order maintained.',
+   ret:'RETAINED — LEVEL 2 — PUBLIC EVENT', link:'CP-0402',
+   note:'The word used in every document is "voluntary". The subject is escorted, flanked, and walking toward a transport with the doors already open. The placards in frame read PERSONHOOD IS NOT PROPERTY. This is the only Level 2 frame in the cache and the only one anybody was meant to see.'},
+
+  {f:'orbital-bay', id:'FR-ORB-1994-A5', src:'Suite 19-C, Bay A5, MOD-07', d:'2097.09.14 / [STAMP MALFORMED]',
+   cap:'Maintenance transit, orbital bay. Autonomous platform, routine.',
+   ret:'RETAINED — LEVEL 4 / PARTITIONED', link:'NI-2097-09-14-3901',
+   note:'The frame ID reads 1994. There is no 1994 series. The stamp field contains a date that has not occurred. Recovered from the same directory as the incident in which a man heard a rhythm through the hull at 1.94-second intervals.'}
 ],
 
 /* ------------------------------------------------------------
