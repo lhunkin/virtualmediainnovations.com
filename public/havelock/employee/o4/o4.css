@@ -113,13 +113,13 @@ body{
   border-bottom:1px solid rgba(125,242,164,.09)}
 .rec>.off{color:var(--grn-d); font-size:9px; opacity:.7; padding-top:2px}
 .rec>.bod{min-width:0}
-.rec .f{display:block; margin-bottom:3px; word-break:break-word}
-.rec .f>i{font-style:normal; display:inline-block; min-width:112px; color:var(--soft);
-  font-size:9px; letter-spacing:.1em}
+.f{display:block; margin-bottom:3px; word-break:break-word}
+.f>i{font-style:normal; display:inline-block; min-width:112px; color:var(--soft);
+  font-size:9px; letter-spacing:.1em; vertical-align:top}
 .k{color:var(--amb)} .g{color:var(--grn)} .r{color:var(--red)} .s{color:var(--soft)}
 .rec .note{display:block; margin-top:7px; padding-left:112px; color:var(--txt); opacity:.9}
 @media(max-width:760px){ .rec{grid-template-columns:1fr} .rec>.off{display:none}
-  .rec .f>i{display:block; min-width:0} .rec .note{padding-left:0} }
+  .f>i{display:block; min-width:0; margin-bottom:2px} .rec .note{padding-left:0} }
 
 /* corrupted fragments inside otherwise clean records */
 .cor{color:var(--red); opacity:.85; letter-spacing:.04em}
