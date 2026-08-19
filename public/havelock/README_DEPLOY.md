@@ -191,6 +191,45 @@ The H3 login is a **prop**. The passphrase lives in front-end JavaScript and any
 with View Source. It exists to make players feel like they're logging in. Never put real
 credentials or private data behind it.
 
+## The hidden O-4 layer
+
+`employee/o4/` is not linked from anywhere and carries `noindex,nofollow`. Hand a player the
+direct URL when they hack in:
+
+```
+https://www.virtualmediainnovations.com/havelock/employee/o4/index.html
+```
+
+Eighteen views. Content lives in two files:
+
+- `o4-data.js` — incidents, operations, containment profiles, evidence frames, transfers,
+  research strands, budget, personnel, intercepts, the Avatar string-match, the anomaly series.
+- `o4-private.js` — **the retention exception spool**. Every account on the public directory has
+  a recovered private mailbox: 13 mailboxes, 79 messages.
+
+### The spool
+
+The conceit: deletion at Havelock is a flag, not an erasure. Deleted mail goes to an exception
+queue with a reviewer field, and that field has been empty since 2091. So this is mail thirteen
+senior people believe is gone.
+
+The last mailbox — `unindexed`, the only one with `RETENTION: PERMANENT` — is the reveal.
+Nobody collected any of this. It accumulated. And the O-4 officer who noticed has three items in
+the spool, the oldest of which is the decision to never appoint a reviewer, *because an empty
+field cannot be deposed*.
+
+Owner chips at the top re-run the query rather than filtering the page, so the SQL line and the
+row counts change as a player narrows in. Leaving the view and coming back resets to all owners.
+
+**To add a mailbox or a message**, copy a block in `o4-private.js` — the field list is documented
+at the top of the file. `tag` is the deletion state (`DELETED BY SENDER`, `COMPOSED, NEVER SENT,
+DELETED`, `RETAINED`); any tag starting with `INBOUND` flips the header arrow and tints the panel
+red, marking it as a reply the owner received and then deleted.
+
+Threads cross between mailboxes — Dagenais and Aulakh, Fenwick and Equipment Control, Okonjo-Bell
+and People Services, Vasquez-Lindqvist and the Advocate. Reading one side is a fact; reading both
+is a case.
+
 ## Next phase (not built yet)
 
 A `/havelock/control/` GM panel that pushes live state to player terminals — new mission file,
