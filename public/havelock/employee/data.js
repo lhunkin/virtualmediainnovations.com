@@ -20,6 +20,31 @@ const HAVELOCK_DATA = {
    ------------------------------------------------------------ */
 mail: [
 
+/* ══════════════════════════════════════════════════════════════════
+   NEW MESSAGES GO HERE — newest at the top of this list.
+
+   Copy this block, fill it in, and it appears in the inbox on the
+   next deploy. Nothing else needs changing.
+
+   {id:'unique-id-no-spaces', from:'Sender Name', role:'Their title, division',
+    cat:'ops', date:'2098.09.14', time:'11:20', tag:'H3 INTERNAL', pri:true,
+    subject:'Subject line',
+    preview:'One sentence shown in the list.',
+    body:`<p>First paragraph.</p>
+    <h4>A section heading</h4>
+    <p>More text. Use <b>bold</b> for emphasis.</p>
+    <ul><li>Bulleted point</li></ul>
+    <p class="signature">— Name<br>Title</p>`},
+
+   cat  must be one of: exec security people facility clinical ops mesh finance culture
+   pri  true adds a gold PRIORITY flag. Omit it otherwise.
+   date use the in-game date. The clock is around 2.5 days ahead per real
+        day, so check the top-right readout for where the campaign is.
+
+   Reading every message unlocks the sealed archive item, so each one you
+   add raises the bar for that reward. That is intentional.
+   ══════════════════════════════════════════════════════════════════ */
+
 {id:'dagenais-welcome', from:'Mireille Dagenais', role:'Director, Pacific Special Measures',
  cat:'exec', date:'2098.06.18', time:'07:03', tag:'H3 INTERNAL', pri:true,
  subject:'Welcome to Field Measures Unit Three',

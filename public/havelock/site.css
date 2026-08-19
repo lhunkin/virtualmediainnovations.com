@@ -168,7 +168,7 @@
    LIVE STRIP
    ------------------------------------------------------------ */
 .strip{
-  display:grid; grid-template-columns:repeat(5,1fr); gap:1px;
+  display:grid; grid-template-columns:repeat(6,1fr); gap:1px;
   background:var(--line);
   border-top:1px solid var(--line); border-bottom:1px solid var(--line);
 }
@@ -836,7 +836,7 @@ main > section[id]::before{
   .hero{grid-template-columns:1fr; min-height:0}
   .globe-rig{width:min(420px,78vw); margin-top:50px}
   .slab{grid-template-columns:1fr}
-  .strip{grid-template-columns:repeat(2,1fr)}
+  .strip{grid-template-columns:repeat(3,1fr)}
   .station-read{grid-template-columns:1fr 1fr}
   .rail-status,.rail-clock{display:none}
 }

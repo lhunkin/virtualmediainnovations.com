@@ -233,22 +233,65 @@
   }
 
   /* --------------------------------------------------------
-     7. Shared clock — in-game campaign date
-        Change IN_GAME_DATE to move the campaign forward.
-     -------------------------------------------------------- */
-  const IN_GAME_DATE = '2098.06.18';
-  window.HAVELOCK_DATE = IN_GAME_DATE;
+     7. CAMPAIGN CLOCK
+     The in-game date drifts on its own. It is interpolated
+     between two anchors, so the site stays in step with the
+     campaign without anyone touching it.
 
-  const dateEls = document.querySelectorAll('[data-holo-date]');
-  const timeEls = document.querySelectorAll('[data-holo-time]');
-  if (dateEls.length || timeEls.length) {
-    const tick = () => {
-      const n = new Date();
-      const p = v => String(v).padStart(2, '0');
-      dateEls.forEach(el => el.textContent = IN_GAME_DATE);
-      timeEls.forEach(el => el.textContent = p(n.getHours()) + ':' + p(n.getMinutes()) + ':' + p(n.getSeconds()));
-    };
-    tick();
-    setInterval(tick, 1000);
+     To re-anchor for a new arc, change these four values only.
+     -------------------------------------------------------- */
+  const CAMPAIGN = {
+    realStart: '2026-08-19',   // the day the drift begins
+    gameStart: '2098-06-18',   // in-game date on that day
+    realEnd:   '2026-11-02',   // the day it should reach gameEnd
+    gameEnd:   '2098-12-21'    // solstice
+  };
+
+  const DAY = 86400000;
+  const utc = iso => { const [y,m,d] = iso.split('-').map(Number); return Date.UTC(y, m-1, d); };
+
+  /* Linear drift: ~2.5 in-game days per real day. Held at the start
+     date before the campaign opens; allowed to run on past the end so
+     the clock keeps moving into whatever comes after the solstice. */
+  function campaignDate(now) {
+    const rs = utc(CAMPAIGN.realStart), re = utc(CAMPAIGN.realEnd);
+    const gs = utc(CAMPAIGN.gameStart), ge = utc(CAMPAIGN.gameEnd);
+    const today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+    const frac = (today - rs) / (re - rs);
+    const gameMs = gs + Math.max(0, frac) * (ge - gs);
+    return new Date(Math.round(gameMs / DAY) * DAY);
   }
+
+  const pad = v => String(v).padStart(2, '0');
+  const fmtDate  = d => d.getUTCFullYear() + '.' + pad(d.getUTCMonth()+1) + '.' + pad(d.getUTCDate());
+  const MON = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  const fmtLong  = d => d.getUTCDate() + ' ' + MON[d.getUTCMonth()] + ' ' + d.getUTCFullYear();
+
+  const dateEls  = document.querySelectorAll('[data-holo-date]');
+  const timeEls  = document.querySelectorAll('[data-holo-time]');
+  const longEls  = document.querySelectorAll('[data-holo-datelong]');
+  const cdEls    = document.querySelectorAll('[data-holo-countdown]');
+
+  function tick() {
+    const now = new Date();
+    const game = campaignDate(now);
+
+    window.HAVELOCK_DATE = fmtDate(game);
+    window.HAVELOCK_GAME_DATE = game;
+
+    dateEls.forEach(el => el.textContent = fmtDate(game));
+    longEls.forEach(el => el.textContent = fmtLong(game));
+    timeEls.forEach(el => el.textContent =
+      pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds()));
+
+    // Days remaining until the scheduled anchor rotation. Reads as routine
+    // maintenance scheduling; happens to be the solstice.
+    if (cdEls.length) {
+      const left = Math.round((utc(CAMPAIGN.gameEnd) - game.getTime()) / DAY);
+      cdEls.forEach(el => el.textContent = left > 0 ? 'T-' + left + ' D' : 'DUE');
+    }
+  }
+
+  tick();
+  setInterval(tick, 1000);
 })();
