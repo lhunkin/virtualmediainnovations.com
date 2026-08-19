@@ -285,12 +285,12 @@
     ['Facilities & presence',  'Northstar Crown reception, checkpoints, quarters, executive ops',  '#presence'],
     ['Company Overview PDF',   'New-hire guide // public orientation download',                    '#resources'],
     ['FMU-3 Employment Agreement','Standard field agreement // HCRS-PAC-FMU3-2098-14',             '#resources'],
-    ['Vancouver 2098',         'City region, district atlas, operations and visitor guide',        'vancouver.html'],
-    ['The Golden Age',         'What works, what it costs, and what is not discussed',             'vancouver.html#goldenage'],
-    ['District atlas',         'Burrard Core, Surrey Metroplex, the Underlayer, Orbital Vancouver','vancouver.html#atlas'],
-    ['Places to visit',        'Stanley Park, Gastown Memory Quarter, Steveston, Blue June',       'vancouver.html#visit'],
-    ['City operations',        'Common Mesh, fusion grid, watersheds, flood defence, NEMA',        'vancouver.html#operations'],
-    ['Employee access',        'Authenticated Common Mesh terminal for Havelock personnel',        'employee/index.html']
+    ['Vancouver 2098',         'City region, district atlas, operations and visitor guide',        '/havelock/vancouver.html'],
+    ['The Golden Age',         'What works, what it costs, and what is not discussed',             '/havelock/vancouver.html#goldenage'],
+    ['District atlas',         'Burrard Core, Surrey Metroplex, the Underlayer, Orbital Vancouver','/havelock/vancouver.html#atlas'],
+    ['Places to visit',        'Stanley Park, Gastown Memory Quarter, Steveston, Blue June',       '/havelock/vancouver.html#visit'],
+    ['City operations',        'Common Mesh, fusion grid, watersheds, flood defence, NEMA',        '/havelock/vancouver.html#operations'],
+    ['Employee access',        'Authenticated Common Mesh terminal for Havelock personnel',        '/havelock/employee/index.html']
   ];
 
   const overlay = $('#searchOverlay');
@@ -314,7 +314,7 @@
       const target = document.querySelector(href);
       // Anchors that do not exist on this page belong to the main terminal.
       if (target) target.scrollIntoView({ behavior: 'smooth' });
-      else window.location.href = 'index.html' + href;
+      else window.location.href = '/havelock/index.html' + href;
     }));
   }
 

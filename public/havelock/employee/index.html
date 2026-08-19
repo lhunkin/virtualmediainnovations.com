@@ -4,14 +4,14 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#07131c">
 <title>Havelock Employee Mesh // H3 Operational</title>
-<link rel="stylesheet" href="../holo.css">
-<link rel="stylesheet" href="employee.css">
-<link rel="stylesheet" href="holo-employee.css">
-<link rel="stylesheet" href="employee-views.css">
+<link rel="stylesheet" href="/havelock/holo.css">
+<link rel="stylesheet" href="/havelock/employee/employee.css">
+<link rel="stylesheet" href="/havelock/employee/holo-employee.css">
+<link rel="stylesheet" href="/havelock/employee/employee-views.css">
 </head>
 <body data-holo-boot="off">
 <div id="boot" class="boot">
-  <div class="boot-logo"><img src="../assets/havelock_logo_light.png" alt="Havelock Industries"></div>
+  <div class="boot-logo"><img src="/havelock/assets/havelock_logo_light.png" alt="Havelock Industries"></div>
   <div class="boot-lines" id="bootLines"></div>
   <div class="boot-progress"><i></i></div>
 </div>
@@ -22,7 +22,7 @@
 <div id="login" class="login hidden">
   <section class="login-card" data-depth="0.45" data-tilt>
     <div class="login-status"><span class="live"></span> HAVELOCK COMMON MESH // NORTHSTAR CROWN RELAY</div>
-    <img src="../assets/havelock_logo_light.png" alt="Havelock Industries">
+    <img src="/havelock/assets/havelock_logo_light.png" alt="Havelock Industries">
     <h1>Employee Access</h1>
     <p>Paired identity authentication for Havelock Continuity &amp; Recovery Services.</p>
     <form id="loginForm">
@@ -38,7 +38,7 @@
 
 <div id="app" class="app hidden">
   <header class="topbar">
-    <a href="../" class="corp"><img src="../assets/havelock_logo_light.png" alt=""></a>
+    <a href="/havelock/index.html" class="corp"><img src="/havelock/assets/havelock_logo_light.png" alt=""></a>
     <div class="relay"><span class="live"></span><b>COMMON MESH</b><small>PACIFIC RELAY 07 // VERIFIED</small></div>
     <div class="top-actions">
       <button id="soundToggle">SOUND ON</button>
@@ -79,7 +79,7 @@
 
     <section id="view-home" class="view active">
       <div class="unit-banner-img">
-        <img src="../assets/img/fmu3-briefing.jpg" alt="FMU-3 briefing table, Continuity Suite 19-C">
+        <img src="/havelock/assets/img/fmu3-briefing.jpg" alt="FMU-3 briefing table, Continuity Suite 19-C">
         <div class="unit-banner-copy">
           <span>FIELD MEASURES UNIT THREE // CONTINUITY SUITE 19-C</span>
           <b>Unit activation briefing</b>
@@ -141,10 +141,10 @@
         <button class="doc" data-doc="identity"><span>IDENTITY</span><b>Protected Identity Notice</b><small>Alias, sealed record and recovery-key policy</small></button>
         <button class="doc" data-doc="equipment"><span>ASSET CONTROL</span><b>Equipment Responsibility Schedule</b><small>Armor, weapons, drones, vehicles and specialist systems</small></button>
         <button class="doc" data-doc="reporting"><span>COMPLIANCE</span><b>Confidential Reporting Procedure</b><small>Independent reporting and advocate access</small></button>
-        <a class="doc" href="../downloads/GOLDENAGE_2098_Master_Character_Dossier_Fillable.pdf" download><span>PERSONNEL FILE</span><b>Personnel Dossier — Fillable</b><small>Complete on screen // 12 pages // DOWNLOAD ↓</small></a>
-        <a class="doc" href="../downloads/GOLDENAGE_2098_Master_Character_Dossier_Print.pdf" download><span>PERSONNEL FILE</span><b>Personnel Dossier — Print</b><small>Print and complete by hand // 12 pages // DOWNLOAD ↓</small></a>
-        <a class="doc" href="../downloads/Havelock_FMU3_Employment_Agreement.pdf" download><span>CONTROLLED COPY</span><b>Employment Agreement — Full Text</b><small>HCRS-PAC-FMU3-2098-14 // DOWNLOAD ↓</small></a>
-        <a class="doc" href="../downloads/Havelock_Company_Overview_Player_Handout.pdf" download><span>ORIENTATION</span><b>Company Overview &amp; New-Hire Guide</b><small>Issued at onboarding // DOWNLOAD ↓</small></a>
+        <a class="doc" href="/havelock/downloads/GOLDENAGE_2098_Master_Character_Dossier_Fillable.pdf" download><span>PERSONNEL FILE</span><b>Personnel Dossier — Fillable</b><small>Complete on screen // 12 pages // DOWNLOAD ↓</small></a>
+        <a class="doc" href="/havelock/downloads/GOLDENAGE_2098_Master_Character_Dossier_Print.pdf" download><span>PERSONNEL FILE</span><b>Personnel Dossier — Print</b><small>Print and complete by hand // 12 pages // DOWNLOAD ↓</small></a>
+        <a class="doc" href="/havelock/downloads/Havelock_FMU3_Employment_Agreement.pdf" download><span>CONTROLLED COPY</span><b>Employment Agreement — Full Text</b><small>HCRS-PAC-FMU3-2098-14 // DOWNLOAD ↓</small></a>
+        <a class="doc" href="/havelock/downloads/Havelock_Company_Overview_Player_Handout.pdf" download><span>ORIENTATION</span><b>Company Overview &amp; New-Hire Guide</b><small>Issued at onboarding // DOWNLOAD ↓</small></a>
       </div>
     </section>
 
@@ -167,12 +167,12 @@
 
 <div id="modal" class="modal-backdrop hidden"><section class="modal-card"><button id="modalClose" class="modal-close">×</button><div id="modalKicker" class="modal-kicker"></div><h2 id="modalTitle"></h2><div id="modalBody"></div></section></div>
 
-<audio id="ambient" src="../assets/audio/ambient-terminal.wav" loop></audio>
-<audio id="clickSound" src="../assets/audio/ui-click.wav"></audio>
-<audio id="grantSound" src="../assets/audio/access-granted.wav"></audio>
-<audio id="alertSound" src="../assets/audio/priority-alert.wav"></audio>
-<script src="../holo.js"></script>
-<script src="data.js"></script>
-<script src="employee.js"></script>
-<script src="views.js"></script>
+<audio id="ambient" src="/havelock/assets/audio/ambient-terminal.wav" loop></audio>
+<audio id="clickSound" src="/havelock/assets/audio/ui-click.wav"></audio>
+<audio id="grantSound" src="/havelock/assets/audio/access-granted.wav"></audio>
+<audio id="alertSound" src="/havelock/assets/audio/priority-alert.wav"></audio>
+<script src="/havelock/holo.js"></script>
+<script src="/havelock/employee/data.js"></script>
+<script src="/havelock/employee/employee.js"></script>
+<script src="/havelock/employee/views.js"></script>
 </body></html>

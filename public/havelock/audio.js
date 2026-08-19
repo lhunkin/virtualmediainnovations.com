@@ -14,7 +14,7 @@
 (() => {
   'use strict';
 
-  const SRC   = 'assets/audio/watcher-wears-our-face.mp3';
+  const SRC   = '/havelock/assets/audio/watcher-wears-our-face.mp3';
   const TITLE = 'The Watcher Wears Our Face';
   const KEY   = 'havelockMusic';
   const VOL   = 0.34;          // background level — the site is to be read over
