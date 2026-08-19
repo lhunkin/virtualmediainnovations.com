@@ -300,8 +300,10 @@
         </div>
         <p class="mbx-st ${/PERMANENT/.test(b.st)?'r':''}">${b.st}</p>
         <p class="mbx-n">${corrupt(b.note, 0.004)}</p>
-        ${b.msgs.map(m => `<article class="msg pv">
-          <div class="msg-h"><b>${b.n} <span class="s">→</span> ${m.to}</b><span>${m.d}</span></div>
+        ${b.msgs.map(m => `<article class="msg pv${/^INBOUND/.test(m.tag) ? ' in' : ''}">
+          <div class="msg-h"><b>${/^INBOUND/.test(m.tag)
+            ? `${m.to} <span class="s">→</span> ${b.n}`
+            : `${b.n} <span class="s">→</span> ${m.to}`}</b><span>${m.d}</span></div>
           <h3>${m.s}</h3>${m.b}
           <p class="msg-t">${m.tag}</p>
         </article>`).join('')}

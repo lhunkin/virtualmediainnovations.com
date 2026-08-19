@@ -164,7 +164,7 @@ b:`<p>Elaine.</p>
 <p>You do not work here. You have no contract, no employment record and no security file, and you approve your own invoices against a reserve I cannot audit. And you can read it and I cannot.</p>
 <p>Tell me plainly whether I am the Chair of this company or the front of it. I will accept either answer. I will not accept a fifth deferral.</p>`},
 
-{d:'2098.06.15 23:30', to:'Voss, E. // received, retained in spool', s:'Re: I am asking a fifth time', tag:'INBOUND — DELETED BY RECIPIENT',
+{d:'2098.06.15 23:30', to:'Voss, E.', s:'Re: I am asking a fifth time', tag:'INBOUND — DELETED BY RECIPIENT',
 b:`<p>Adaeze.</p>
 <p>You are the Chair. You are also the person who will be asked, under oath, in some room, in some year, what she knew. Every hour you spend not knowing is an hour of that testimony that will be true.</p>
 <p>I did not build that protection for my comfort. I built it for yours, and for the company's, and if you dismantle it you will not gain the compartment — you will only lose the answer.</p>
@@ -245,7 +245,7 @@ b:`<p>I will not run protocol 9.</p>
 <p>Not "I have concerns." Not "I would like this reviewed." I will not run it, I will not sign for anyone else running it, and if it is run I will record that I refused, in the notes, in a place that is very difficult to remove.</p>
 <p>Protocol 9 requires the subject to be conscious. There is no clinical reason for the subject to be conscious. Somebody wants to know what it is like from the inside and has written a protocol to find out, and has put a physician's signature block at the bottom of it, and it is not going to be mine.</p>`},
 
-{d:'2098.03.29 09:15', to:'Okonjo-Bell, S. // received, retained in spool', s:'Re: refusal — Deep Ward protocol 9', tag:'INBOUND — DELETED BY RECIPIENT',
+{d:'2098.03.29 09:15', to:'People Services // Personnel Trust', s:'Re: refusal — Deep Ward protocol 9', tag:'INBOUND — DELETED BY RECIPIENT',
 b:`<p>Doctor,</p>
 <p>Your refusal is noted and accepted. Protocol 9 will be reassigned. No further action is required of you.</p>
 <p>Separately, and unconnectedly, Personnel Trust has completed the periodic verification of clinical credentials. Your registration is confirmed current in this jurisdiction. The verification did not extend to prior jurisdictions, as it never does.</p>
@@ -444,7 +444,7 @@ b:`<p>Answering your question directly because I would like the answer to exist 
 <p>No, there is no downstream check. A revocation that verifies at the relay is a revocation. The receiving system does not ask whether the revoking authority intended it, because in the entire design of the Common Mesh there is no place for that question to be asked.</p>
 <p>I am going to ask, once, and then I am going to build whatever you tell me to build: <i>whose</i> authority are we revoking, and does that person know they are about to stop having it?</p>`},
 
-{d:'2098.05.22 09:16', to:'Trust Office // received, retained in spool', s:'Re: query — revocation', tag:'INBOUND — DELETED BY RECIPIENT',
+{d:'2098.05.22 09:16', to:'Systems Intelligence // requesting officer', s:'Re: query — revocation', tag:'INBOUND — DELETED BY RECIPIENT',
 b:`<p>Build it.</p>
 <p>Your second question is outside the scope of the tasking and will not be answered. Your having asked it has been noted, which is the appropriate handling of a question asked in good faith by a competent officer.</p>
 <p>Delivery by the 29th.</p>`},
@@ -478,7 +478,7 @@ b:`<p>Confirming receipt of the Q2 disbursement in full and on schedule. As alwa
 <p>For the annual return I will need the standard wording on the Foundation's own funding sources. Last year's formulation — "diversified philanthropic endowment, no single donor exceeding fifteen per cent" — was accepted by the Alliance panel without query.</p>
 <p>I would ask, gently and for the fourth year, whether that formulation remains accurate. I am not asking you to tell me it isn't. I am asking you to tell me it is, so that when I sign the return I am repeating something rather than deciding something.</p>`},
 
-{d:'2098.06.13 18:44', to:'Advocate // received, retained in spool', s:'Re: Q2 disbursement — confirm', tag:'INBOUND — DELETED BY RECIPIENT',
+{d:'2098.06.13 18:44', to:'Rongomai Foundation // secretariat', s:'Re: Q2 disbursement — confirm', tag:'INBOUND — DELETED BY RECIPIENT',
 b:`<p>The formulation remains accurate.</p>
 <p>We note your reference to a fourth year. We would observe, in a spirit of partnership, that the Foundation has never once sought to influence a determination of your panel, and that the panel's independence is precisely what makes it worth funding.</p>
 <p>We would hate for a question of accuracy to become a question of continuation.</p>`},
@@ -633,7 +633,7 @@ b:`<p>Candidate 9 has failed the containment-response assessment twice. The fail
 <p>I am declining to certify. That is my determination and it is the whole of my job.</p>
 <p>I understand the assignment schedule. I understand candidate 9 is one of three with a zero return on the family profile. I do not understand why either of those facts has been mentioned to me in connection with a certification decision, and I would like it to stop.</p>`},
 
-{d:'2098.04.12 07:19', to:'Training Office // received, retained in spool', s:'Re: refusal to certify — candidate 9', tag:'INBOUND — DELETED BY RECIPIENT',
+{d:'2098.04.12 07:19', to:'Pacific Special Measures // sponsor', s:'Re: refusal to certify — candidate 9', tag:'INBOUND — DELETED BY RECIPIENT',
 b:`<p>Your determination is noted and stands. Candidate 9 will not be certified for containment response.</p>
 <p>Candidate 9 has been reassigned to an assignment that does not require containment-response certification. No certification decision by your office is required or implied.</p>
 <p>You may consider the matter closed. We consider it a good example of the certification process functioning exactly as designed.</p>`}
