@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#01060a">
+<meta name="description" content="Havelock Civic Index — Vancouver 2098. District atlas, city operations, and a visitor guide to the Lower Mainland at the height of the Golden Age.">
+<title>Vancouver 2098 // Havelock Civic Index</title>
+<link rel="icon" href="assets/havelock_logo_light.png">
+<link rel="stylesheet" href="holo.css">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="vancouver.css">
+</head>
+<body>
+
+<!-- ============ TOP RAIL ============ -->
+<header class="rail">
+  <a class="rail-mark" href="index.html"><img src="assets/havelock_logo_light.png" alt="Havelock Industries"></a>
+
+  <nav class="rail-nav">
+    <a href="index.html" class="rail-city rail-back"><i>↖</i> Havelock Industries</a>
+    <a href="#goldenage">Golden Age</a>
+    <a href="#atlas">District Atlas</a>
+    <a href="#operations">City Operations</a>
+    <a href="#visit">Places to Visit</a>
+  </nav>
+
+  <div class="rail-status">
+    <span class="pip"></span>
+    <div class="rail-relay">
+      <b>CIVIC INDEX</b>
+      <small>VANCOUVER // LOWER MAINLAND</small>
+    </div>
+  </div>
+
+  <button class="rail-search" id="searchButton" aria-label="Search public mesh"><span>⌕</span> SEARCH MESH</button>
+
+  <div class="rail-clock">
+    <b data-holo-date>2098.06.18</b>
+    <small data-holo-time>07:14:28</small>
+  </div>
+
+  <a class="rail-access" href="employee/index.html">EMPLOYEE ACCESS</a>
+
+  <button class="rail-menu" id="menuButton" aria-label="Open navigation" aria-expanded="false" aria-controls="navOverlay">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- ============ MOBILE NAVIGATION ============ -->
+<div class="navsheet" id="navOverlay" hidden>
+  <div class="navsheet-head">
+    <span class="holo-data">HAVELOCK CIVIC INDEX // NAVIGATION</span>
+    <button id="menuClose" aria-label="Close navigation">✕</button>
+  </div>
+  <nav class="navsheet-links">
+    <a href="#goldenage"><i>01</i>The Golden Age</a>
+    <a href="#glance"><i>02</i>City at a Glance</a>
+    <a href="#atlas"><i>03</i>District Atlas</a>
+    <a href="#operations"><i>04</i>City Operations</a>
+    <a href="#visit"><i>05</i>Places to Visit</a>
+    <a href="#moving"><i>06</i>Getting Around</a>
+    <a href="index.html" class="sheet-city"><i>↖</i>Havelock Industries<em>Corporate terminal</em></a>
+  </nav>
+  <div class="navsheet-foot">
+    <button class="holo-btn" id="menuSearch">⌕ Search mesh</button>
+    <a class="holo-btn holo-btn--gold" href="employee/index.html">Employee access</a>
+  </div>
+  <div class="navsheet-status">
+    <span class="pip"></span>
+    <div><b>PACIFIC RELAY 07</b><small data-holo-date>2098.06.18</small></div>
+  </div>
+</div>
+
+<main class="holo-world" id="top">
+
+<!-- ============ HERO ============ -->
+<section class="city-hero">
+  <div class="hero-plate" aria-hidden="true">
+    <img src="assets/img/northstar-reception.jpg" alt="">
+  </div>
+  <div class="hero-copy" data-depth="0.3">
+    <div class="holo-kicker">Havelock Civic Index // Public Service Publication</div>
+    <h1 class="holo-title">Vancouver,<br><em>2098.</em></h1>
+    <p class="holo-body">
+      The rain-soaked Pacific gateway of humanity's last great age. Not an endless neon
+      metropolis — a network of distinct urban centres around Burrard Inlet, the Fraser River,
+      the Salish Sea and the mountains of the North Shore, joined by rapid transit, autonomous
+      roads, marine routes, aerial corridors and buried infrastructure.
+    </p>
+    <p class="holo-body">
+      Wet concrete, cedar, old brick, moss, mountain cloud, restrained augmented reality, and
+      warm human light behind rain-streaked glass.
+    </p>
+    <div class="hero-actions">
+      <a class="holo-btn holo-btn--gold" href="#atlas">Open the district atlas</a>
+      <a class="holo-btn" href="#visit">Places to visit →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LIVE STRIP ============ -->
+<section class="strip beam">
+  <div><span class="holo-data">METRO POPULATION</span><b>7.35M</b></div>
+  <div><span class="holo-data">CITY OF VANCOUVER</span><b>1.18M</b></div>
+  <div><span class="holo-data">SURREY</span><b>1.46M</b></div>
+  <div><span class="holo-data">DISTRICTS INDEXED</span><b>24</b></div>
+  <div><span class="holo-data">CIVIC STATUS</span><b class="good">NOMINAL</b></div>
+</section>
+
+<!-- ============ THE GOLDEN AGE ============ -->
+<section id="goldenage" class="section">
+  <div class="section-head beam">
+    <div class="holo-kicker">01 // The Golden Age</div>
+    <h2 class="holo-title t2">Yesterday's miracles are<br><em>ordinary infrastructure.</em></h2>
+    <p class="holo-body">
+      Fusion grids keep the lights on. Robots and artificial minds perform much of society's
+      routine labour. The Common Mesh connects identity, commerce, transport, medicine, public
+      services and almost every machine in the city. Gene repair, cloned organs, neural
+      rehabilitation, advanced prosthetics, autonomous vehicles, power armour, orbital industry
+      and publicly licensed heroes are accepted parts of life.
+    </p>
+  </div>
+
+  <div class="ga-grid">
+    <article class="ga holo-panel beam" data-depth="0.12">
+      <span class="ga-n">A</span>
+      <b>What works</b>
+      <p>A heart can be replaced. A continent can be coordinated. Homes exist in orbit. Every citizen is surrounded by information, and armoured responders go into disasters ordinary people could not survive. This is not a facade. It saves lives every day, and it does so at a scale no previous century managed.</p>
+    </article>
+    <article class="ga holo-panel beam" data-depth="0.12">
+      <span class="ga-n">B</span>
+      <b>What it costs</b>
+      <p>Prosperity comes with ownership. Medical subscriptions can bind a person to an employer. Cybernetic limbs can be leased rather than owned. Identity, insurance, employment and contract status determine who receives the miracle and who is told to wait. The society is unequal. It is controlled. It is compromised.</p>
+    </article>
+    <article class="ga holo-panel beam" data-depth="0.12">
+      <span class="ga-n">C</span>
+      <b>What is not discussed</b>
+      <p>Beneath the confident public world lies another Vancouver known only in fragments. Advanced civilisation has produced a plausible explanation for almost everything it cannot account for: sensor error, exotic physics, neurotechnology, engineered mutation, fraudulent media, classified corporate research. Most residents remain certain that any mystery yields to better data.</p>
+    </article>
+  </div>
+
+  <div class="ga-quote holo-panel holo-bracket beam" data-depth="0.16">
+    <p>“Vancouver is not a false paradise waiting to be exposed. It is a sophisticated, unequal, heavily controlled civilisation that genuinely works — and is therefore worth mourning.”</p>
+    <span class="holo-data">CIVIC INDEX // EDITORIAL NOTE</span>
+  </div>
+</section>
+
+<!-- ============ AT A GLANCE ============ -->
+<section id="glance" class="section">
+  <div class="section-head beam">
+    <div class="holo-kicker">02 // The City at a Glance</div>
+    <h2 class="holo-title t2">One region. <em>Many centres.</em></h2>
+    <p class="holo-body">
+      In civic usage, "Vancouver" means the whole Metro region rather than only the municipal
+      City of Vancouver. The legal municipalities still exist, maintain their own services and
+      political identities, and frequently disagree over jurisdiction. The region no longer
+      revolves around one downtown.
+    </p>
+  </div>
+
+  <div class="glance-grid">
+    <div class="gl holo-panel beam" data-depth="0.1"><b>7,350,000</b><span>Metro Vancouver population</span></div>
+    <div class="gl holo-panel beam" data-depth="0.1"><b>1,460,000</b><span>Surrey — largest municipality</span></div>
+    <div class="gl holo-panel beam" data-depth="0.1"><b>1,180,000</b><span>City of Vancouver</span></div>
+    <div class="gl holo-panel beam" data-depth="0.1"><b>486,000</b><span>Abbotsford — eastern anchor</span></div>
+  </div>
+
+  <div class="glance-note beam">
+    <div class="holo-panel" data-depth="0.08">
+      <span class="holo-data">HOW A DISTRICT IS DEFINED</span>
+      <p>A district is an operational and cultural zone, not necessarily a legal municipality. Residents use neighbourhood names. Municipal systems use service zones. Corporations use property and contract boundaries. Emergency management uses response sectors that may ignore all three.</p>
+    </div>
+    <div class="holo-panel" data-depth="0.08">
+      <span class="holo-data">HOST NATIONS AND TERRITORIES</span>
+      <p>Indigenous territories and authorities cross several districts. They are governments, communities, land and water authorities, emergency partners, cultural institutions and political powers — not heritage decoration. Tsawwassen First Nation is a distinct government and a major regional partner in land, trade, transport and coastal stewardship.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DISTRICT ATLAS ============ -->
+<section id="atlas" class="section">
+  <div class="section-head beam">
+    <div class="holo-kicker">03 // District Atlas</div>
+    <h2 class="holo-title t2">Twenty-four entries.</h2>
+    <p class="holo-body">Ten districts inside the City of Vancouver, ten across the inner metropolitan region, one beneath all of them, and three connected annexes that are not on the city map but are inseparable from its economy.</p>
+  </div>
+
+  <div class="atlas-controls beam">
+    <div class="zone-filters">
+      <button class="zf on" data-zone-filter="all">All districts</button>
+      <button class="zf" data-zone-filter="core">City of Vancouver</button>
+      <button class="zf" data-zone-filter="inner">Inner Metropolitan</button>
+      <button class="zf" data-zone-filter="beneath">Beneath the City</button>
+      <button class="zf" data-zone-filter="annex">Connected Annexes</button>
+    </div>
+    <div class="atlas-search">
+      <input id="districtSearch" placeholder="Search the atlas — try &ldquo;ferry&rdquo;, &ldquo;hospital&rdquo;, &ldquo;seed vault&rdquo;…" autocomplete="off">
+      <span class="holo-data" id="districtCount">24 districts</span>
+    </div>
+  </div>
+
+  <div class="district-grid" id="districtGrid"></div>
+</section>
+
+<!-- ============ CITY OPERATIONS ============ -->
+<section id="operations" class="section">
+  <div class="section-head beam">
+    <div class="holo-kicker">04 // City Operations</div>
+    <h2 class="holo-title t2">The machinery that has to<br><em>stay boring.</em></h2>
+    <p class="holo-body">Public confidence in 2098 depends on infrastructure remaining ordinary and nearly invisible. These are the systems the region cannot survive a week without, and the authorities that run them.</p>
+  </div>
+
+  <div class="ops-grid-v">
+    <article class="opc holo-panel beam" data-depth="0.1">
+      <span class="holo-data">SYS-01</span><b>The Common Mesh</b>
+      <p>Identity, commerce, transit, medicine, public services and almost every machine in the city. Coverage is deliberately uneven in some facilities — total integration would exclude or endanger the people they serve. Every essential service is required to hold a degraded mode that works without it.</p>
+    </article>
+    <article class="opc holo-panel beam" data-depth="0.1">
+      <span class="holo-data">SYS-02</span><b>Power and fusion grid</b>
+      <p>Fusion generation with hydroelectric backbone from the North Shore watersheds and Tri-Cities corridor. Islanding capability is tested annually: a district must be able to run disconnected from everything else for eleven days.</p>
+    </article>
+    <article class="opc holo-panel beam" data-depth="0.1">
+      <span class="holo-data">SYS-03</span><b>Water and watershed</b>
+      <p>Capilano, Seymour and Coquitlam watersheds under restricted-land protection, with treatment, reservoirs and desalination support through the Richmond delta. Water authorities and environmental wardens hold field authority that downtown operators routinely underestimate.</p>
+    </article>
+    <article class="opc holo-panel beam" data-depth="0.1">
+      <span class="holo-data">SYS-04</span><b>Flood defence</b>
+      <p>Intelligent barriers, dikes, pumps and utility galleries across Richmond, Delta, Queensborough, Annacis and the Fraser shore. Managed retreat along the Salish corridor is in its third phase and under public review.</p>
+    </article>
+    <article class="opc holo-panel beam" data-depth="0.1">
+      <span class="holo-data">SYS-05</span><b>Emergency management</b>
+      <p>NEMA holds regional command with staging at the Abbotsford campus. Municipal fire, medicine and police operate beneath it; corporate continuity contractors operate beside it. Response sectors ignore municipal boundaries by design, which is a recurring source of jurisdictional argument.</p>
+    </article>
+    <article class="opc holo-panel beam" data-depth="0.1">
+      <span class="holo-data">SYS-06</span><b>Health system</b>
+      <p>The Cambie Medical Axis anchors one of the greatest concentrations of healthcare in the NAA Pacific region, with major capacity at Sapperton, Surrey and the North Shore. Access is governed by identity status, insurance and contract as much as by clinical need.</p>
+    </article>
+  </div>
+
+  <div class="ops-note beam">
+    <div class="holo-panel holo-bracket" data-depth="0.1">
+      <span class="holo-data">HAVELOCK IN THE REGION</span>
+      <p class="holo-body">Havelock Centre in the Burrard Core is the corporate seat and clinical flagship. The company holds the Salish corridor continuity build and its twenty-year maintenance obligation, operates seventeen Pacific Commons hubs, and reaches orbit through Continuity Suite 19-C aboard Northstar Crown. Havelock was incorporated in Vancouver in 2039, during the eleven-day failure of the Fraser Delta dike system, and has never marked that anniversary as a founding.</p>
+      <a class="holo-btn" href="index.html#presence">Havelock facilities →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PLACES TO VISIT ============ -->
+<section id="visit" class="section">
+  <div class="section-head beam">
+    <div class="holo-kicker">05 // Places to Visit</div>
+    <h2 class="holo-title t2">What a visitor should<br><em>actually see.</em></h2>
+    <p class="holo-body">A civic guide for residents, visiting personnel and anyone rotating into the region. Everything below is publicly accessible; where a credential or booking is required, it is noted.</p>
+  </div>
+
+  <div class="visit-grid">
+    <article class="vis holo-panel beam" data-depth="0.1">
+      <div class="vis-head"><span>V-01</span><em>WEST END // FREE</em></div>
+      <b>Stanley Park and the Seawall</b>
+      <p>Still green, still wet, still immediately recognisable. Immense cedars, forest paths, beaches and the full seawall circuit, under Host-Nation stewardship and continuous ecological monitoring. Utility and emergency installations are present and carefully concealed; the park reads as forest because keeping it that way is a maintained decision.</p>
+      <span class="vis-note">Best in rain. Most residents will tell you this and they are right.</span>
+    </article>
+
+    <article class="vis holo-panel beam" data-depth="0.1">
+      <div class="vis-head"><span>V-02</span><em>GASTOWN // AR OVERLAY</em></div>
+      <b>The Gastown Memory Quarter</b>
+      <p>Old brick, narrow alleys, rail history, steam infrastructure and licensed augmented reconstructions of a vanished Vancouver. Stand on a corner and watch a building that burned in 1886 resolve around you. Authenticity here is both civic culture and commercial product — the archive can rebuild a lost street, but somebody still decides which version becomes the official one.</p>
+      <span class="vis-note">Overlay access is free. The unlicensed community reconstructions are more interesting.</span>
+    </article>
+
+    <article class="vis holo-panel beam" data-depth="0.1">
+      <div class="vis-head"><span>V-03</span><em>OLYMPIC BASIN // TICKETED</em></div>
+      <b>Pacific Crown Arena</b>
+      <p>The region's mass-event and licensed-hero showcase venue: regulated professional sport, enhanced leagues, hero exhibitions, concerts, public ceremonies and emergency recruitment events. The Canucks' 2061 championship — remembered regionally as <b>Blue June</b> — remains embedded in the public projections and the seawall memorials outside.</p>
+      <span class="vis-note">Blue June displays run continuously outside the arena, no ticket required.</span>
+    </article>
+
+    <article class="vis holo-panel beam" data-depth="0.1">
+      <div class="vis-head"><span>V-04</span><em>RICHMOND // FREE</em></div>
+      <b>Steveston</b>
+      <p>A working maritime village that never surrendered its identity to the delta grid around it. Boatyards, fisheries research, marine biotechnology and a public waterfront where the fleet still lands. The best place in the region to watch heavy marine automation and small independent operators share a dock without either pretending the other does not exist.</p>
+      <span class="vis-note">Reachable by marine transit from False Creek in about forty minutes.</span>
+    </article>
+
+    <article class="vis holo-panel beam" data-depth="0.1">
+      <div class="vis-head"><span>V-05</span><em>MOUNTAIN EDGE // SEASONAL</em></div>
+      <b>Grouse, Cypress and the Sea-to-Sky</b>
+      <p>Cable systems, mountain roads, forest preserve and weather that can isolate a party within minutes. The view across the inlet at dusk is the single best argument for the city that anyone has ever made. Search-and-rescue bases operate year-round, and their advice about conditions is not advisory.</p>
+      <span class="vis-note">Check the mountain weather plan before departure. Every year somebody does not.</span>
+    </article>
+
+    <article class="vis holo-panel beam" data-depth="0.1">
+      <div class="vis-head"><span>V-06</span><em>NORTH SHORE // FREE</em></div>
+      <b>Lower Lonsdale Shipyards</b>
+      <p>Public waterfront built directly into a live marine-industrial site: ferry traffic, shipyards, marine robotics and covered markets, with the cranes working overhead. One of the few places where 2098 lets the public stand inside heavy industry rather than behind a viewing wall.</p>
+      <span class="vis-note">SeaBus from Harbour Crown, twelve minutes, runs continuously.</span>
+    </article>
+
+    <article class="vis holo-panel beam" data-depth="0.1">
+      <div class="vis-head"><span>V-07</span><em>WESTERN PENINSULA // FREE</em></div>
+      <b>Pacific Spirit and Jericho</b>
+      <p>Protected forest, ecological laboratory, watershed buffer and public refuge on the western peninsula, with the Jericho coastal-research commons alongside. Jointly managed by public institutions, Host-Nation authorities, universities and emergency agencies — an unusually functional example of shared authority.</p>
+      <span class="vis-note">Mesh coverage inside the forest is patchy. This is not an accident and not a fault.</span>
+    </article>
+
+    <article class="vis holo-panel beam" data-depth="0.1">
+      <div class="vis-head"><span>V-08</span><em>CLOVERDALE // SEASONAL</em></div>
+      <b>Cloverdale Fairgrounds</b>
+      <p>Fair, rodeo, equestrian grounds and agricultural show, in the middle of the western centre of a continental food-security system. Seed vaults and livestock genetics laboratories sit within sight of the midway. Both are the same civic project, which is the point.</p>
+      <span class="vis-note">Public research tours run through the summer. Book ahead; they fill.</span>
+    </article>
+
+    <article class="vis holo-panel beam" data-depth="0.1">
+      <div class="vis-head"><span>V-09</span><em>SOUTH VANCOUVER // FREE</em></div>
+      <b>Fraser Delta Memorial Gardens</b>
+      <p>Eleven gardens for the eleven days the dike system failed in 2039. Names are read across eleven days each August. Free entry, always, for Havelock personnel and their families — a standing commitment the company has never once described as a benefit.</p>
+      <span class="vis-note">Quiet on any ordinary day. Bring nothing; leave nothing.</span>
+    </article>
+
+    <article class="vis holo-panel beam" data-depth="0.1">
+      <div class="vis-head"><span>V-10</span><em>RICHMOND // OBSERVATION DECK</em></div>
+      <b>YVR Crown and the Northstar Corridor</b>
+      <p>The public observation levels at YVR Crown look directly onto spaceplane operations and the Northstar aerospace corridor. For most residents this is as close as orbit gets: watching other people's cargo and other people's medical transfers leave the atmosphere on schedule.</p>
+      <span class="vis-note">Departure windows are published on the civic mesh. Weather holds are common.</span>
+    </article>
+  </div>
+</section>
+
+<!-- ============ GETTING AROUND ============ -->
+<section id="moving" class="section">
+  <div class="section-head beam">
+    <div class="holo-kicker">06 // Getting Around</div>
+    <h2 class="holo-title t2">Four networks, <em>one credential.</em></h2>
+  </div>
+
+  <div class="move-grid">
+    <div class="mv holo-panel beam" data-depth="0.1"><b>Rapid transit</b><p>The spine of the region, linking Vancouver to Burnaby, New Westminster, Surrey and the Tri-Cities. Transit exchanges are civic buildings in their own right — Surrey Central, Metrotown, Lougheed and Oakridge each function as a shelter and services complex as much as a station.</p></div>
+    <div class="mv holo-panel beam" data-depth="0.1"><b>Marine routes</b><p>SeaBus across the inlet, False Creek ferries, marine taxis, and scheduled service to Steveston and the coastal gate. Water makes several districts unusually permeable, and unusually easy to isolate when a crossing fails.</p></div>
+    <div class="mv holo-panel beam" data-depth="0.1"><b>Aerial corridors</b><p>Autonomous vehicle lanes and rooftop pads, tightly controlled over the Core and Harbour Crown. Mountain approaches contend with downdrafts, rotor wash and cloud layers that change faster than automated routing expects.</p></div>
+    <div class="mv holo-panel beam" data-depth="0.1"><b>Autonomous roads</b><p>Regional road network under coordinated routing, with bridges as the recurring constraint. A single damaged crossing on the North Shore, the Fraser or the Eastern Gate can isolate large populations within the hour.</p></div>
+  </div>
+
+  <div class="underlayer-note holo-panel holo-bracket beam" data-depth="0.12">
+    <span class="holo-data">A NOTE ON THE UNDERLAYER</span>
+    <p class="holo-body">Beneath all four networks lies the accumulated hidden geography of a century of rebuilding: live service corridors, legacy infrastructure, drowned pre-seawall streets, and spaces that were removed from the record deliberately. Power authorities know their galleries. Transit knows its bores. Port security knows its freight routes. No complete map exists, because such a map would bypass too many security and property systems at once.</p>
+    <p class="holo-body">The Underlayer is not a tourist destination. It contains automatic flood cycles, bad air, live power, unstable concrete and doors that may be opened remotely by systems several kilometres away.</p>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOT RAIL ============ -->
+<footer class="foot">
+  <div class="foot-left">
+    <img src="assets/havelock_logo_light.png" alt="">
+    <span class="holo-data">HAVELOCK CIVIC INDEX // VANCOUVER 2098 // PUBLIC SERVICE PUBLICATION</span>
+  </div>
+  <nav class="foot-nav">
+    <a href="index.html">Havelock Industries</a>
+    <a href="index.html#presence">Facilities</a>
+    <a href="index.html#resources">Resources</a>
+    <a href="employee/index.html">Employee Access →</a>
+  </nav>
+</footer>
+
+<!-- ============ SEARCH OVERLAY ============ -->
+<div class="overlay" id="searchOverlay" hidden>
+  <div class="overlay-card holo-panel holo-bracket">
+    <div class="overlay-head">
+      <span class="holo-data">PUBLIC MESH SEARCH // UNAUTHENTICATED</span>
+      <button id="searchClose" aria-label="Close">✕</button>
+    </div>
+    <input id="meshSearch" placeholder="Query the public record…" autocomplete="off">
+    <div id="searchResults" class="overlay-results"></div>
+    <span class="holo-data">PROTECTED MEDICAL, PERSONNEL AND OPERATIONAL RECORDS REQUIRE AN AUTHENTICATED TRUST CHANNEL.</span>
+  </div>
+</div>
+
+<script src="holo.js"></script>
+<script src="site.js"></script>
+<script src="vancouver.js"></script>
+<script src="audio.js"></script>
+</body>
+</html>

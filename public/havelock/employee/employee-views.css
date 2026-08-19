@@ -1,0 +1,501 @@
+/* ============================================================
+   HAVELOCK COMMON MESH // EMPLOYEE TERMINAL
+   employee-views.css — mail client, market terminal, and the
+   rebuilt record views. Loads last.
+   ============================================================ */
+
+/* Shared state colours ------------------------------------- */
+.ok,.good-t{color:var(--green)}
+.bad{color:var(--red)}
+.pend{color:var(--cyan)}
+.warn-s,.warn{color:var(--gold)}
+.two-up{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px}
+.soft{font-size:11px; line-height:1.8; color:var(--muted)}
+
+.gold-btn{
+  border-color:rgba(229,178,67,.5) !important; color:var(--gold2) !important;
+}
+.gold-btn:hover{
+  background:linear-gradient(180deg,#f2c661,#c9962c) !important;
+  color:#1a1204 !important; border-color:#f2c661 !important;
+}
+button[disabled]{opacity:.4; cursor:not-allowed}
+
+/* ============================================================
+   1. MAIL CLIENT
+   ============================================================ */
+.mail{
+  display:grid; grid-template-columns:212px 330px 1fr; gap:12px;
+  height:calc(100vh - 215px); min-height:520px;
+}
+
+/* --- rail --- */
+.mail-rail{display:flex; flex-direction:column; gap:12px; min-height:0}
+.mail-progress{
+  padding:16px; border:1px solid var(--line);
+  background:linear-gradient(160deg, rgba(13,48,62,.44), rgba(3,15,21,.66));
+}
+.mp-head{display:flex; justify-content:space-between; align-items:baseline}
+.mp-head span{font-family:var(--mono); font-size:7px; letter-spacing:.18em; color:var(--cyan)}
+.mp-head b{font-family:var(--mono); font-size:14px; color:var(--gold); text-shadow:0 0 14px rgba(229,178,67,.5)}
+.mp-bar{height:2px; background:rgba(111,227,242,.15); margin:12px 0 10px; overflow:hidden}
+.mp-bar i{
+  display:block; height:100%; background:var(--gold);
+  box-shadow:0 0 12px var(--gold); transition:width .6s cubic-bezier(.16,1,.3,1);
+}
+.mail-progress small{font-family:var(--mono); font-size:6.5px; letter-spacing:.14em; color:var(--muted)}
+
+.mail-cats{display:flex; flex-direction:column; gap:1px; background:var(--line); overflow:auto; min-height:0; flex:1}
+.mc{
+  display:flex; justify-content:space-between; align-items:center; gap:8px;
+  padding:11px 13px; background:rgba(4,20,28,.8); border:none; cursor:pointer;
+  font-family:var(--mono); font-size:8px; letter-spacing:.12em; color:var(--muted);
+  text-align:left; border-left:2px solid transparent; transition:.2s;
+}
+.mc:hover{color:var(--cyan); background:rgba(14,50,64,.7)}
+.mc.on{color:#eafaff; border-left-color:var(--cyan); background:rgba(20,72,88,.65)}
+.mc em{font-style:normal; font-size:7px; color:var(--gold); flex:none}
+.mc.locked{opacity:.45; cursor:not-allowed}
+.mc.locked em{color:var(--muted)}
+.mail-markall{width:100%; text-align:center}
+
+/* --- list --- */
+.mail-list{display:flex; flex-direction:column; border:1px solid var(--line); min-height:0}
+.mail-search{padding:10px; border-bottom:1px solid var(--line); background:rgba(3,16,23,.7)}
+.mail-search input{
+  width:100%; padding:10px 12px; font-family:var(--mono); font-size:10px; letter-spacing:.06em;
+  color:#eafaff; background:rgba(2,14,20,.8); border:1px solid var(--line); outline:none;
+}
+.mail-search input:focus{border-color:rgba(111,227,242,.55); box-shadow:0 0 22px -10px rgba(111,227,242,.9)}
+.mail-items{overflow:auto; flex:1; display:flex; flex-direction:column; gap:1px; background:var(--line)}
+.mail-empty{padding:24px; font-family:var(--mono); font-size:8px; letter-spacing:.14em; color:var(--muted); background:rgba(4,20,28,.8)}
+
+.mi{
+  display:block; width:100%; text-align:left; cursor:pointer; border:none;
+  padding:14px 15px; background:rgba(4,20,28,.82);
+  border-left:2px solid transparent; transition:.2s;
+}
+.mi:hover{background:rgba(14,50,64,.7)}
+.mi.on{background:rgba(20,72,88,.72); border-left-color:var(--cyan)}
+.mi-top{display:flex; justify-content:space-between; align-items:baseline; gap:10px}
+.mi-top b{font-size:11.5px; color:var(--muted); font-weight:400}
+.mi-top time{font-family:var(--mono); font-size:7px; letter-spacing:.1em; color:var(--muted); flex:none}
+.mi-sub{margin:6px 0 5px; font-size:12px; line-height:1.4; color:#b9d6de}
+.mi-pre{font-size:10px; line-height:1.55; color:var(--muted); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden}
+.mi-tag{display:flex; gap:8px; align-items:center; margin-top:9px}
+.mi-tag em{font-style:normal; font-family:var(--mono); font-size:6px; letter-spacing:.14em; color:#5d7e89}
+.mi-tag .pri{
+  font-style:normal; font-family:var(--mono); font-size:6px; letter-spacing:.14em;
+  color:var(--gold); border:1px solid rgba(229,178,67,.4); padding:2px 5px;
+}
+/* Unread: brighter type and a lit spine */
+.mi.unread{border-left-color:rgba(229,178,67,.75)}
+.mi.unread .mi-top b{color:#eafaff; font-weight:600}
+.mi.unread .mi-sub{color:#eafaff; font-weight:500}
+.mi.reward{background:linear-gradient(90deg, rgba(52,38,10,.5), rgba(4,20,28,.85))}
+.mi.reward .mi-top b{color:var(--gold2)}
+
+/* --- reading pane --- */
+.mail-read{
+  overflow:auto; padding:30px 34px; min-height:0;
+  border:1px solid var(--line);
+  background:linear-gradient(160deg, rgba(13,48,62,.4), rgba(3,15,21,.62));
+}
+.mr-head{display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; padding-bottom:16px; border-bottom:1px solid var(--line)}
+.mr-trust{
+  display:flex; align-items:center; gap:7px;
+  font-family:var(--mono); font-size:7px; letter-spacing:.14em; color:var(--green);
+  padding:5px 9px; border:1px solid rgba(111,224,182,.32); background:rgba(10,42,36,.4);
+}
+.trust-mark{font-size:9px; text-shadow:0 0 10px var(--green)}
+.mr-meta{font-family:var(--mono); font-size:7px; letter-spacing:.14em; color:var(--muted)}
+.mail-read h2{
+  margin:22px 0 16px; font-size:23px; line-height:1.3; color:#eafaff; letter-spacing:-.01em;
+  text-shadow:0 0 24px rgba(111,227,242,.35);
+}
+.mr-from{display:flex; flex-direction:column; gap:4px; padding-bottom:22px; border-bottom:1px solid var(--line)}
+.mr-from b{font-size:13px; color:var(--gold)}
+.mr-from span{font-family:var(--mono); font-size:7.5px; letter-spacing:.12em; color:var(--muted)}
+.mr-body{padding-top:22px; max-width:74ch}
+.mr-body p{margin:0 0 16px; font-size:13px; line-height:1.9; color:#b8d5dd}
+.mr-body h4{
+  margin:26px 0 12px; font-family:var(--mono); font-size:9px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--cyan); text-shadow:0 0 12px rgba(111,227,242,.5);
+}
+.mr-body ul{margin:0 0 16px; padding-left:18px}
+.mr-body li{margin-bottom:10px; font-size:13px; line-height:1.8; color:#b8d5dd}
+.mr-body b{color:#eafaff}
+.mr-body i{color:var(--muted)}
+.mr-body .signature{
+  margin-top:26px; padding-top:18px; border-top:1px solid var(--line);
+  font-size:12px; line-height:1.8; color:var(--gold);
+}
+
+/* ============================================================
+   2. MARKET TERMINAL
+   ============================================================ */
+.mkt-top{display:grid; grid-template-columns:1fr 300px; gap:12px; margin-bottom:12px}
+.mkt-quote{min-height:0}
+.mkt-price{display:flex; align-items:baseline; gap:10px; margin:18px 0 6px}
+.mkt-price b{
+  font-family:var(--mono); font-size:44px; letter-spacing:-.02em; color:#eafaff;
+  text-shadow:0 0 30px rgba(111,227,242,.45);
+}
+.mkt-price.small b{font-size:30px}
+.mkt-unit{font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--muted)}
+.mkt-chg{font-family:var(--mono); font-size:13px; letter-spacing:.06em}
+.mkt-chg.up{color:var(--green); text-shadow:0 0 14px rgba(111,224,182,.5)}
+.mkt-chg.down{color:var(--red); text-shadow:0 0 14px rgba(255,122,99,.45)}
+.mkt-chart{margin:14px 0 18px; border:1px solid var(--line); background:rgba(2,14,20,.5)}
+.spark{display:block; width:100%; height:150px}
+.mkt-stats{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line)}
+.mkt-stats > div{background:rgba(3,16,23,.85); padding:12px 13px}
+.mkt-stats span{display:block; font-family:var(--mono); font-size:6.5px; letter-spacing:.16em; color:var(--muted)}
+.mkt-stats b{display:block; margin-top:5px; font-family:var(--mono); font-size:11px; color:var(--cyan)}
+.mkt-note{
+  margin-top:14px; padding:12px 14px; border-left:2px solid var(--gold);
+  background:linear-gradient(90deg, rgba(52,38,10,.35), transparent);
+  font-size:10.5px; line-height:1.7; color:var(--gold2);
+}
+.mkt-idx-name{display:block; margin-top:16px; font-size:14px; color:#eafaff}
+.mkt-index .micro-list{margin-top:16px}
+
+.mkt-table{display:flex; flex-direction:column; gap:1px; background:var(--line); margin-bottom:12px}
+.mkt-row{
+  display:grid; grid-template-columns:64px 1.5fr 1.4fr 92px 74px 66px;
+  gap:14px; align-items:center; padding:13px 16px;
+  background:rgba(3,16,23,.85); transition:.2s;
+}
+.mkt-row.head{background:rgba(6,26,35,.9)}
+.mkt-row.head span{font-family:var(--mono); font-size:6.5px; letter-spacing:.18em; color:var(--muted)}
+.mkt-row:not(.head):hover{background:rgba(14,50,64,.6)}
+.mkt-row.self{background:linear-gradient(90deg, rgba(52,38,10,.4), rgba(3,16,23,.85))}
+.mkt-row .sym{font-family:var(--mono); font-size:11px; color:var(--gold); letter-spacing:.08em}
+.mkt-row .nm{font-size:12px; color:#dceaee}
+.mkt-row .sec{font-family:var(--mono); font-size:7px; letter-spacing:.1em; color:var(--muted)}
+.mkt-row .last{font-family:var(--mono); font-size:11px; color:#eafaff; text-align:right}
+.mkt-row .chg{font-family:var(--mono); font-size:10px; text-align:right}
+.mkt-row .wt{font-family:var(--mono); font-size:9px; color:var(--muted); text-align:right}
+.mkt-row .chg.up{color:var(--green)}
+.mkt-row .chg.down{color:var(--red)}
+
+.mkt-notes{display:grid; grid-template-columns:repeat(4,1fr); gap:12px}
+.mkt-notes .widget{min-height:0; padding:16px}
+.mkt-asof{
+  margin-top:14px; text-align:right;
+  font-family:var(--mono); font-size:6.5px; letter-spacing:.16em; color:var(--muted);
+}
+
+/* ============================================================
+   3. OPERATIONS
+   ============================================================ */
+.ops-orders,.ops-history{
+  border:1px solid var(--line); padding:18px; margin-top:12px;
+  background:linear-gradient(160deg, rgba(13,48,62,.4), rgba(3,15,21,.6));
+}
+.so{display:grid; grid-template-columns:64px 220px 1fr; gap:16px; align-items:baseline; padding:14px 0; border-bottom:1px solid rgba(111,227,242,.1)}
+.so:last-child{border-bottom:none}
+.so i{font-style:normal; font-family:var(--mono); font-size:9px; letter-spacing:.1em; color:var(--gold)}
+.so b{font-size:13px; color:#eafaff}
+.so span{font-size:11px; line-height:1.75; color:var(--muted)}
+
+.ah{
+  display:grid; grid-template-columns:150px 100px 78px 1fr 90px; gap:14px; align-items:center;
+  padding:13px 0; border-bottom:1px solid rgba(111,227,242,.1); font-size:11px; color:#cfe3e9;
+}
+.ah:last-child{border-bottom:none}
+.ah.head span{font-family:var(--mono); font-size:6.5px; letter-spacing:.16em; color:var(--muted)}
+.ah .ref{font-family:var(--mono); font-size:10px; color:var(--cyan)}
+.ah .tier-t{font-family:var(--mono); font-size:8px; letter-spacing:.1em; color:var(--gold)}
+.ah .out{font-family:var(--mono); font-size:8px; letter-spacing:.12em; color:var(--green); text-align:right}
+.ah em{grid-column:1/-1; font-style:normal; font-size:10px; color:var(--muted); margin-top:-4px}
+.ah.head em{display:none}
+.token .warn{color:var(--gold)}
+
+/* ============================================================
+   4. MEDICAL & CONSENT
+   ============================================================ */
+.vitals{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); margin-top:16px}
+.vitals > div{background:rgba(3,16,23,.85); padding:11px 13px}
+.vitals span{display:block; font-family:var(--mono); font-size:6.5px; letter-spacing:.14em; color:var(--muted)}
+.vitals b{display:block; margin-top:4px; font-family:var(--mono); font-size:9px; color:var(--green)}
+
+.consent-pending,.ledger{
+  border:1px solid var(--line); padding:18px; margin-top:12px;
+  background:linear-gradient(160deg, rgba(13,48,62,.4), rgba(3,15,21,.6));
+}
+.cp{padding:18px 0; border-bottom:1px solid rgba(111,227,242,.1)}
+.cp:last-child{border-bottom:none}
+.cp b{display:block; font-size:15px; color:#eafaff; margin-bottom:10px}
+.cp p{margin:0 0 10px; font-size:12px; line-height:1.8; color:#b0cdd6}
+.cp-note{display:block; font-size:10.5px; line-height:1.7; color:var(--muted); font-style:italic}
+.cp-actions{display:flex; align-items:center; gap:10px; margin-top:14px}
+.cp-state{font-style:normal; font-family:var(--mono); font-size:7px; letter-spacing:.14em; color:var(--muted)}
+.cp-state.ok{color:var(--green)}
+.cp-state.no{color:var(--gold)}
+.cp.decided{opacity:.75}
+
+.lg{display:grid; grid-template-columns:110px 1fr 200px 190px; gap:14px; padding:12px 0; border-bottom:1px solid rgba(111,227,242,.1); font-size:11px; color:#cfe3e9}
+.lg:last-child{border-bottom:none}
+.lg.head span{font-family:var(--mono); font-size:6.5px; letter-spacing:.16em; color:var(--muted)}
+.lg .lg-c{font-family:var(--mono); font-size:8px; letter-spacing:.1em; color:var(--green)}
+
+/* ============================================================
+   5. EQUIPMENT
+   ============================================================ */
+.eq{display:grid; grid-template-columns:1fr 150px 110px 120px; gap:14px; align-items:center; padding:13px 0; border-bottom:1px solid rgba(111,227,242,.1)}
+.eq:last-child{border-bottom:none}
+.eq.head span{font-family:var(--mono); font-size:6.5px; letter-spacing:.16em; color:var(--muted)}
+.eq-n{font-size:12.5px; color:#eafaff}
+.eq-c{font-family:var(--mono); font-size:9px; color:var(--cyan)}
+.eq-cl{font-family:var(--mono); font-size:7.5px; letter-spacing:.12em; color:var(--muted)}
+.eq-s{font-family:var(--mono); font-size:8px; letter-spacing:.1em; text-align:right}
+.eq em{grid-column:1/-1; font-style:normal; font-size:10px; color:var(--muted); margin-top:-3px}
+.eq.head em{display:none}
+
+.protected-person{margin-top:12px; border-color:rgba(111,224,182,.28) !important}
+.pp-list{list-style:none; margin:16px 0; padding:0; display:grid; grid-template-columns:repeat(2,1fr); gap:9px}
+.pp-list li{position:relative; padding-left:18px; font-size:12px; color:#cfe3e9}
+.pp-list li::before{content:""; position:absolute; left:0; top:8px; width:7px; height:1px; background:var(--green); box-shadow:0 0 7px var(--green)}
+
+/* ============================================================
+   6. PAY & BENEFITS
+   ============================================================ */
+.pay{display:grid; grid-template-columns:1fr 130px; gap:6px 14px; padding:13px 0; border-bottom:1px solid rgba(111,227,242,.1)}
+.pay:last-of-type{border-bottom:none}
+.pay b{font-size:12.5px; color:#eafaff; font-weight:400}
+.pay i{font-style:normal; font-family:var(--mono); font-size:12px; color:var(--gold); text-align:right}
+.pay span{grid-column:1/-1; font-family:var(--mono); font-size:7px; letter-spacing:.12em; color:var(--muted)}
+
+.fund-bal{margin:18px 0}
+.fund-bal span{display:block; font-family:var(--mono); font-size:7px; letter-spacing:.16em; color:var(--muted)}
+.fund-bal b{display:block; margin-top:8px; font-family:var(--mono); font-size:30px; color:var(--gold); text-shadow:0 0 22px rgba(229,178,67,.45)}
+
+.cov{display:grid; grid-template-columns:200px 150px 1fr; gap:14px; padding:12px 0; border-bottom:1px solid rgba(111,227,242,.1); font-size:12px; color:#cfe3e9}
+.cov:last-of-type{border-bottom:none}
+.cov.head span{font-family:var(--mono); font-size:6.5px; letter-spacing:.16em; color:var(--muted)}
+.cov .cov-l{font-family:var(--mono); font-size:9px; letter-spacing:.1em; color:var(--green)}
+.cov .cov-t{font-size:11px; color:var(--muted)}
+
+/* ============================================================
+   7. TRAINING
+   ============================================================ */
+.tr{display:grid; grid-template-columns:1fr 120px 110px 100px; gap:14px; align-items:center; padding:13px 0; border-bottom:1px solid rgba(111,227,242,.1)}
+.tr:last-child{border-bottom:none}
+.tr.head span{font-family:var(--mono); font-size:6.5px; letter-spacing:.16em; color:var(--muted)}
+.tr-n{font-size:12.5px; color:#eafaff}
+.tr-s{font-family:var(--mono); font-size:8px; letter-spacing:.1em}
+.tr-e{font-family:var(--mono); font-size:9px; color:var(--muted)}
+.tr-r{font-family:var(--mono); font-size:7px; letter-spacing:.12em; color:var(--muted); text-align:right}
+.tr em{grid-column:1/-1; font-style:normal; font-size:10px; color:var(--muted); margin-top:-3px}
+.tr.head em{display:none}
+
+/* ============================================================
+   8. DIRECTORY
+   ============================================================ */
+.dir-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+.dir{
+  padding:20px; border:1px solid var(--line);
+  background:linear-gradient(160deg, rgba(13,48,62,.42), rgba(3,15,21,.62));
+  transition:.25s;
+}
+.dir:hover{border-color:rgba(111,227,242,.44); box-shadow:0 0 46px -20px rgba(111,227,242,.8)}
+.dir-top{display:flex; gap:14px; align-items:center}
+.dir-av{
+  width:42px; height:42px; flex:none; display:grid; place-items:center;
+  border:1px solid rgba(111,227,242,.4); border-radius:50%;
+  font-family:var(--mono); font-size:11px; color:var(--cyan);
+  box-shadow:0 0 22px -8px rgba(111,227,242,.9), inset 0 0 16px rgba(111,227,242,.12);
+}
+.dir-top b{display:block; font-size:13.5px; color:#eafaff}
+.dir-top span{display:block; margin-top:4px; font-size:10.5px; color:var(--muted)}
+.dir-meta{display:flex; justify-content:space-between; align-items:center; gap:10px; margin:16px 0 12px; padding-top:12px; border-top:1px solid rgba(111,227,242,.1)}
+.dir-meta i{font-style:normal; font-family:var(--mono); font-size:7.5px; letter-spacing:.12em; color:var(--cyan)}
+.dir-meta em{font-style:normal; font-family:var(--mono); font-size:6.5px; letter-spacing:.14em; padding:3px 6px; border:1px solid var(--line); color:var(--muted)}
+.dir-meta .cl-h3{color:var(--gold); border-color:rgba(229,178,67,.4)}
+.dir-meta .cl-protected{color:var(--green); border-color:rgba(111,224,182,.4)}
+.dir p{margin:0; font-size:11px; line-height:1.75; color:var(--muted)}
+
+/* ============================================================
+   9. H3 SECURE
+   ============================================================ */
+.cmp{display:grid; grid-template-columns:1fr 190px; gap:6px 14px; padding:14px 0; border-bottom:1px solid rgba(111,227,242,.1)}
+.cmp:last-of-type{border-bottom:none}
+.cmp b{font-size:13px; color:#eafaff; font-weight:400}
+.cmp-s{font-family:var(--mono); font-size:8px; letter-spacing:.1em; text-align:right}
+.cmp em{grid-column:1/-1; font-style:normal; font-size:10.5px; color:var(--muted)}
+
+.aud{display:grid; grid-template-columns:170px 240px 1fr; gap:14px; padding:11px 0; border-bottom:1px solid rgba(111,227,242,.1); align-items:baseline}
+.aud:last-child{border-bottom:none}
+.aud time{font-family:var(--mono); font-size:9px; color:var(--cyan)}
+.aud b{font-size:12px; color:#eafaff; font-weight:400}
+.aud span{font-size:11px; color:var(--muted)}
+
+/* ============================================================
+   10. RESPONSIVE
+   ============================================================ */
+@media(max-width:1400px){
+  .mail{grid-template-columns:190px 300px 1fr}
+  .mkt-notes{grid-template-columns:1fr 1fr}
+}
+@media(max-width:1180px){
+  .mail{grid-template-columns:1fr 1.3fr; height:auto; min-height:0}
+  .mail-rail{grid-column:1/-1; flex-direction:row; flex-wrap:wrap; align-items:flex-start}
+  /* min-width:0 lets a flex child shrink below its content width */
+  .mail-progress{flex:1 1 240px; min-width:0}
+  .mail-cats{flex:2 1 340px; min-width:0; flex-direction:row; flex-wrap:wrap; overflow:visible}
+  .mc{flex:1 1 120px}
+  .mail-markall{flex:1 1 100%}
+  .mail-items{max-height:560px}
+  .mail-read{max-height:720px}
+  .mkt-top{grid-template-columns:1fr}
+  .two-up{grid-template-columns:1fr}
+  .dir-grid{grid-template-columns:1fr 1fr}
+  .mkt-row{grid-template-columns:58px 1fr 80px 66px; gap:10px}
+  .mkt-row .sec,.mkt-row .wt{display:none}
+  .so{grid-template-columns:56px 1fr}
+  .so span{grid-column:1/-1}
+  .lg{grid-template-columns:100px 1fr 160px}
+  .lg .lg-c{grid-column:2/-1}
+  .ah{grid-template-columns:1fr 1fr}
+}
+@media(max-width:760px){
+  .mail{grid-template-columns:1fr}
+  .mail-items{max-height:none}
+  .mail-read{padding:20px}
+  .mkt-price b{font-size:32px}
+  .mkt-stats{grid-template-columns:1fr 1fr}
+  .mkt-notes,.dir-grid,.pp-list,.vitals{grid-template-columns:1fr}
+  .eq,.tr,.cov,.lg,.ah,.cmp,.aud,.pay{grid-template-columns:1fr; gap:5px}
+  .eq-s,.tr-r,.cmp-s,.pay i,.ah .out{text-align:left}
+}
+
+/* ============================================================
+   11. TOUCH ERGONOMICS
+   ============================================================ */
+@media (hover:none){
+  /* Comfortable targets. 31px rows are a coin-flip with a thumb. */
+  .mc{min-height:46px; font-size:9.5px; padding:12px 14px}
+  .mc em{font-size:8.5px}
+  .mi{padding:16px 15px; min-height:76px}
+  .mi-top b{font-size:13px}
+  .mi-sub{font-size:13.5px}
+  .mi-pre{font-size:11.5px}
+  .mi-tag em,.mi-tag .pri{font-size:8px}
+  .mail-markall{min-height:48px}
+  .small-button,.doc,.dir,.cp-actions button{min-height:46px}
+  .mkt-row{padding:15px 16px}
+
+  /* Hover glow never fires on touch, so bake in the lit state */
+  .widget:hover,.doc:hover,.dir:hover,.message-list button:hover{box-shadow:none}
+  .mi:hover{background:rgba(4,20,28,.82)}
+  .mi.on{background:rgba(20,72,88,.72)}
+
+  /* Body copy at reading size rather than terminal size */
+  .mr-body p,.mr-body li{font-size:14.5px; line-height:1.85}
+  .mail-read h2{font-size:21px}
+  .soft{font-size:12.5px}
+}
+
+/* Inputs under 16px make iOS Safari zoom the page on focus. Keyed off
+   pointer type as well as width — an iPad Pro is 1024px and still touch. */
+@media (max-width:900px),(hover:none){
+  .mail-search input,
+  .login-card input{font-size:16px !important}
+  .login-card input{padding:14px 12px}
+  .login-row .check{min-height:44px; display:flex; align-items:center}
+  /* Terminal controls need thumb-sized targets on any touch screen */
+  .top-actions > button{min-height:44px; padding:0 12px}
+  .sidebar nav button{min-height:44px}
+}
+
+/* 100vh includes the collapsing browser chrome on iOS; dvh does not */
+@supports (height:100dvh){
+  @media (min-width:1181px){ .mail{height:calc(100dvh - 215px)} }
+}
+
+/* ============================================================
+   12. PHONE BOTTOM NAVIGATION
+   The base stylesheet collapses the sidebar to a 48px icon strip
+   with every label hidden — eleven unlabelled glyphs. Restore the
+   labels, make the strip obviously scrollable, and respect the
+   iOS home indicator.
+   ============================================================ */
+@media(max-width:760px){
+  .sidebar{
+    height:auto !important;
+    padding-bottom:env(safe-area-inset-bottom);
+    background:linear-gradient(180deg, rgba(4,20,28,.96), rgba(1,8,12,.99)) !important;
+    backdrop-filter:blur(14px);
+    box-shadow:0 -14px 40px -28px rgba(111,227,242,.9);
+  }
+  /* Fade the right edge so it reads as "there is more over here" */
+  .sidebar::after{
+    content:""; position:absolute; right:0; top:0; bottom:0; width:34px;
+    pointer-events:none;
+    background:linear-gradient(90deg, transparent, rgba(1,8,12,.95));
+  }
+  .sidebar nav{
+    height:auto !important; padding:6px 8px !important;
+    gap:2px;
+    scroll-snap-type:x proximity;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .sidebar nav::-webkit-scrollbar{display:none}
+  .sidebar nav button{
+    min-width:70px !important; height:auto !important;
+    display:flex !important; flex-direction:column; align-items:center; justify-content:center;
+    gap:4px; padding:9px 6px !important;
+    scroll-snap-align:center; position:relative;
+  }
+  /* Labels come back — an icon-only bar is a guessing game */
+  .sidebar nav button span{
+    display:block !important;
+    font-family:var(--mono); font-size:7px; letter-spacing:.06em;
+    white-space:nowrap; line-height:1;
+  }
+  .sidebar nav i{font-size:15px !important; line-height:1}
+  /* Unread counts become a dot; the number will not fit */
+  .sidebar nav em{
+    display:block !important; position:absolute; top:6px; right:12px;
+    width:6px; height:6px; border-radius:50%; padding:0; font-size:0;
+    background:var(--gold); box-shadow:0 0 8px var(--gold);
+  }
+  .sidebar nav button.active{background:linear-gradient(180deg, rgba(20,72,88,.7), transparent) !important}
+
+  .app{padding-bottom:calc(74px + env(safe-area-inset-bottom)) !important}
+  .ticker{bottom:calc(74px + env(safe-area-inset-bottom)) !important}
+  .holo-fx{bottom:calc(86px + env(safe-area-inset-bottom))}
+
+  /* Sound and lock matter at the table; the base sheet hides them */
+  .top-actions > button{
+    display:inline-flex !important; align-items:center;
+    font-size:7px; padding:9px 10px; min-height:40px;
+  }
+  .topbar{padding:0 12px; gap:8px}
+  .corp img{width:150px}
+  .top-actions{margin-left:auto; gap:6px}
+}
+
+/* Below 430px the clock cannot share the bar with sound and lock */
+@media(max-width:430px){
+  .clock{display:none !important}
+  .corp img{width:132px}
+  .top-actions > button{font-size:6.5px; padding:9px 8px}
+}
+
+/* Very narrow phones: drop the label row rather than wrap it */
+@media(max-width:380px){
+  .sidebar nav button{min-width:60px !important}
+  .sidebar nav button span{font-size:6.5px}
+  .top-actions > button{padding:9px 8px}
+}
+
+/* The market header is its own 2-column grid; the sidebar's span-2 `wide`
+   rule must not apply inside it. */
+.mkt-top .widget{grid-column:auto}
+.mkt-idx-facts{display:grid; grid-template-columns:1fr; gap:1px; background:var(--line); margin-top:18px}
+.mkt-idx-facts > div{display:flex; justify-content:space-between; align-items:baseline; padding:11px 13px; background:rgba(3,16,23,.85)}
+.mkt-idx-facts span{font-family:var(--mono); font-size:6.5px; letter-spacing:.16em; color:var(--muted)}
+.mkt-idx-facts b{font-family:var(--mono); font-size:11px; color:var(--cyan)}

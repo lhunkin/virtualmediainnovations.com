@@ -1,0 +1,10 @@
+{
+  "campaignDate": "2098-06-18",
+  "location": "Northstar Crown / Pacific Commons",
+  "unit": "FMU-3",
+  "clearance": "H3 Operational",
+  "missionState": "STANDBY",
+  "activeAssignment": null,
+  "emergencyLevel": "GREEN",
+  "gmNote": "Static prototype. Replace with serverless/API state for synchronized live play."
+}

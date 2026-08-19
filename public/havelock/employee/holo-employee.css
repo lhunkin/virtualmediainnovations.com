@@ -1,0 +1,317 @@
+/* ============================================================
+   HAVELOCK COMMON MESH // EMPLOYEE TERMINAL
+   holo-employee.css — projection re-skin
+   Loads AFTER employee.css. Re-states the palette in projection
+   terms and lifts every surface off the backplate so the terminal
+   reads as light standing in air, not a window on a monitor.
+   ============================================================ */
+
+:root{
+  --bg:      #01060a;
+  --panel:   rgba(9,34,45,.46);
+  --panel2:  rgba(13,46,60,.55);
+  --line:    rgba(111,227,242,.20);
+  --text:    #d8f2f7;
+  --muted:   #7fa4b0;
+  --cyan:    #6fe3f2;
+  --gold:    #e5b243;
+  --gold2:   #ffd97e;
+  --green:   #6fe0b6;
+  --red:     #ff7a63;
+}
+
+/* The projection field is bright in the middle; ease the falloff so
+   dense UI in the corners stays readable. */
+.holo-falloff{
+  background:radial-gradient(ellipse 88% 84% at 50% 44%,
+    transparent 0%, rgba(1,6,10,.16) 66%, rgba(1,6,10,.52) 100%) !important;
+}
+.holo-scan{opacity:calc(.38 * var(--flicker)) !important}
+.holo-cone{opacity:calc(.5 * var(--flicker))}
+
+body{
+  background:
+    radial-gradient(120% 80% at 50% 118%, rgba(31,120,140,.18) 0%, transparent 58%),
+    radial-gradient(90% 60% at 74% -8%, rgba(23,74,92,.26) 0%, transparent 52%),
+    linear-gradient(180deg,#02090e 0%, #01060a 48%, #000305 100%) !important;
+  font-family:var(--sans);
+}
+
+.ambient-grid{opacity:.05 !important}
+#mesh{opacity:.22 !important}
+
+/* ------------------------------------------------------------
+   WARM-UP + AUTHENTICATION PLATE
+   ------------------------------------------------------------ */
+.boot{background:#000305 !important}
+.boot-logo img{filter:drop-shadow(0 0 22px rgba(111,227,242,.5))}
+.boot-lines{
+  font-family:var(--mono); letter-spacing:.2em; color:var(--cyan);
+  text-shadow:0 0 12px rgba(111,227,242,.6);
+}
+.boot-progress i{box-shadow:0 0 14px var(--cyan)}
+
+.login-card{
+  background:linear-gradient(160deg, rgba(13,48,62,.52) 0%, rgba(5,22,30,.64) 55%, rgba(3,15,21,.74) 100%) !important;
+  border:1px solid var(--line) !important;
+  backdrop-filter:blur(6px) saturate(1.2);
+  box-shadow:
+    0 0 0 1px rgba(2,12,18,.7),
+    0 40px 90px -34px rgba(0,0,0,.95),
+    inset 0 1px 0 rgba(150,240,255,.12),
+    0 0 70px -22px rgba(111,227,242,.7) !important;
+  transition:transform .55s cubic-bezier(.16,1,.3,1);
+}
+.login-card::after{
+  /* corner brackets */
+  content:""; position:absolute; inset:8px; pointer-events:none; opacity:.4;
+  background:
+    linear-gradient(var(--cyan),var(--cyan)) left top/14px 1px no-repeat,
+    linear-gradient(var(--cyan),var(--cyan)) left top/1px 14px no-repeat,
+    linear-gradient(var(--cyan),var(--cyan)) right top/14px 1px no-repeat,
+    linear-gradient(var(--cyan),var(--cyan)) right top/1px 14px no-repeat,
+    linear-gradient(var(--cyan),var(--cyan)) left bottom/14px 1px no-repeat,
+    linear-gradient(var(--cyan),var(--cyan)) left bottom/1px 14px no-repeat,
+    linear-gradient(var(--cyan),var(--cyan)) right bottom/14px 1px no-repeat,
+    linear-gradient(var(--cyan),var(--cyan)) right bottom/1px 14px no-repeat;
+}
+.login-card h1{
+  text-shadow:-1px 0 0 rgba(255,90,110,.20), 1px 0 0 rgba(90,190,255,.20), 0 0 26px rgba(111,227,242,.45);
+}
+.login-card > img{filter:drop-shadow(0 0 16px rgba(111,227,242,.45))}
+.login-card input{
+  background:rgba(2,14,20,.75) !important;
+  border:1px solid var(--line) !important;
+  font-family:var(--mono); letter-spacing:.06em;
+  box-shadow:inset 0 0 20px rgba(111,227,242,.06);
+}
+.login-card input:focus{
+  border-color:rgba(111,227,242,.6) !important;
+  box-shadow:inset 0 0 20px rgba(111,227,242,.14), 0 0 28px -10px rgba(111,227,242,.9) !important;
+}
+.login-message{font-family:var(--mono); letter-spacing:.14em; text-shadow:0 0 12px rgba(111,227,242,.5)}
+
+.primary{
+  background:linear-gradient(180deg,#f2c661,#c9962c) !important;
+  border-color:#f2c661 !important; color:#1a1204 !important;
+  box-shadow:0 0 36px -10px rgba(229,178,67,.9);
+  transition:.25s;
+}
+.primary:hover{
+  background:linear-gradient(180deg,#ffd97e,#e0aa3a) !important;
+  box-shadow:0 0 50px -8px rgba(229,178,67,1);
+}
+
+/* ------------------------------------------------------------
+   TERMINAL CHROME
+   ------------------------------------------------------------ */
+.topbar{
+  background:linear-gradient(180deg, rgba(2,12,18,.92), rgba(2,12,18,.66)) !important;
+  backdrop-filter:blur(18px) saturate(1.2) !important;
+  box-shadow:0 14px 40px -30px rgba(111,227,242,.8);
+}
+.topbar::after{
+  content:""; position:absolute; left:0; right:0; bottom:-1px; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(111,227,242,.5) 28%,rgba(229,178,67,.4) 72%,transparent);
+}
+.corp img{filter:drop-shadow(0 0 12px rgba(111,227,242,.45))}
+.relay b{color:var(--cyan); text-shadow:0 0 12px rgba(111,227,242,.6); font-family:var(--mono)}
+.relay small{font-family:var(--mono)}
+.clock b{color:var(--gold); text-shadow:0 0 14px rgba(229,178,67,.55); font-family:var(--mono)}
+.clock span{font-family:var(--mono)}
+.live{box-shadow:0 0 14px currentColor}
+
+.top-actions > button{
+  font-family:var(--mono); letter-spacing:.16em;
+  background:rgba(6,26,35,.6) !important; border:1px solid var(--line) !important;
+  transition:.25s;
+}
+.top-actions > button:hover{
+  color:var(--cyan) !important; border-color:rgba(111,227,242,.5) !important;
+  box-shadow:0 0 22px -8px rgba(111,227,242,.9);
+}
+
+.sidebar{
+  background:linear-gradient(180deg, rgba(4,20,28,.72), rgba(2,11,16,.82)) !important;
+  backdrop-filter:blur(14px) saturate(1.15);
+}
+.sidebar nav button{font-family:var(--mono); letter-spacing:.13em; transition:.22s}
+.sidebar nav button:hover{color:var(--cyan); text-shadow:0 0 12px rgba(111,227,242,.6)}
+.sidebar nav button.active{
+  color:#eafaff;
+  background:linear-gradient(90deg, rgba(20,72,88,.6), transparent) !important;
+  text-shadow:0 0 14px rgba(111,227,242,.7);
+}
+.sidebar nav button.active::before{box-shadow:0 0 12px var(--cyan)}
+.sidebar nav i{text-shadow:0 0 10px rgba(111,227,242,.5)}
+.avatar{
+  border-color:rgba(111,227,242,.45) !important;
+  box-shadow:0 0 26px -8px rgba(111,227,242,.9), inset 0 0 18px rgba(111,227,242,.14);
+}
+.avatar span{text-shadow:0 0 12px rgba(111,227,242,.7)}
+
+/* ------------------------------------------------------------
+   WORKSPACE SURFACES
+   ------------------------------------------------------------ */
+.page-head h1{
+  text-shadow:-1px 0 0 rgba(255,90,110,.18), 1px 0 0 rgba(90,190,255,.18), 0 0 28px rgba(111,227,242,.4);
+}
+.page-head #crumb{font-family:var(--mono); letter-spacing:.2em; color:var(--cyan); opacity:.8}
+.clearance b{color:var(--gold); text-shadow:0 0 14px rgba(229,178,67,.55)}
+
+.widget,
+.doc,
+.mission-card,
+.directory-grid article,
+.benefits-grid article,
+.training-list article,
+.reader,
+.secure-shell,
+.message-list button{
+  background:linear-gradient(160deg, rgba(13,48,62,.44) 0%, rgba(5,22,30,.58) 55%, rgba(3,15,21,.68) 100%) !important;
+  border:1px solid var(--line) !important;
+  backdrop-filter:blur(3px) saturate(1.12);
+  box-shadow:
+    0 0 0 1px rgba(2,12,18,.55),
+    0 26px 60px -34px rgba(0,0,0,.9),
+    inset 0 1px 0 rgba(150,240,255,.09),
+    0 0 40px -22px rgba(111,227,242,.5);
+  transition:border-color .3s, box-shadow .3s, transform .3s;
+}
+.widget::after,
+.mission-card::after{
+  /* top edge light-line */
+  content:""; position:absolute; left:0; right:0; top:0; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(150,240,255,.62) 20%,rgba(150,240,255,.62) 80%,transparent);
+  opacity:.5; pointer-events:none;
+}
+.widget:hover,
+.doc:hover,
+.directory-grid article:hover,
+.message-list button:hover{
+  border-color:rgba(111,227,242,.44) !important;
+  box-shadow:
+    0 0 0 1px rgba(2,12,18,.55),
+    0 30px 66px -32px rgba(0,0,0,.92),
+    inset 0 1px 0 rgba(150,240,255,.16),
+    0 0 58px -18px rgba(111,227,242,.8);
+}
+.widget-head span{font-family:var(--mono); letter-spacing:.18em; color:var(--cyan); opacity:.85}
+.widget-head em{font-family:var(--mono); letter-spacing:.14em; color:var(--gold)}
+
+.unit-status b,
+.micro-list b,
+.asset-table b,
+.coverage-grid b{text-shadow:0 0 10px rgba(111,227,242,.35)}
+.warn{color:var(--gold) !important; text-shadow:0 0 12px rgba(229,178,67,.5)}
+.clean,.micro-list b{color:var(--green)}
+
+.alert.priority{
+  border-color:rgba(229,178,67,.42) !important;
+  background:linear-gradient(90deg, rgba(52,38,10,.42), rgba(8,30,39,.5)) !important;
+  box-shadow:0 0 46px -20px rgba(229,178,67,.9);
+}
+.alert-icon{
+  box-shadow:0 0 24px -6px rgba(229,178,67,.9);
+  animation:alertPulse 2.6s ease-in-out infinite;
+}
+@keyframes alertPulse{0%,100%{opacity:1}50%{opacity:.55}}
+
+.radial{filter:drop-shadow(0 0 18px rgba(111,227,242,.45))}
+.radial-inner b{text-shadow:0 0 18px rgba(111,227,242,.7)}
+.station-core{box-shadow:0 0 42px -8px rgba(229,178,67,.85)}
+.orbit{border-color:rgba(111,227,242,.28) !important}
+
+.doctrine b{color:var(--gold); text-shadow:0 0 14px rgba(229,178,67,.5)}
+
+.ticker{
+  background:rgba(1,8,12,.9) !important;
+  border-top:1px solid var(--line) !important;
+  font-family:var(--mono); letter-spacing:.16em;
+}
+.ticker b{color:var(--cyan); text-shadow:0 0 12px rgba(111,227,242,.6)}
+
+.small-button,
+.directory-grid button,
+.alert button,
+.mission-card button,
+.modal-card .choice button{
+  font-family:var(--mono); letter-spacing:.16em;
+  border-color:rgba(111,227,242,.32) !important;
+  transition:.24s;
+}
+.small-button:hover,
+.directory-grid button:hover,
+.alert button:hover,
+.mission-card button:hover{
+  color:#eafaff !important; border-color:rgba(111,227,242,.7) !important;
+  box-shadow:0 0 26px -8px rgba(111,227,242,.9);
+}
+
+/* Modal reads as a plate pushed forward out of the projection */
+.modal-backdrop{backdrop-filter:blur(8px); background:rgba(0,4,7,.86) !important}
+.modal-card{
+  background:linear-gradient(160deg, rgba(13,48,62,.6) 0%, rgba(5,22,30,.72) 55%, rgba(3,15,21,.8) 100%) !important;
+  border:1px solid rgba(111,227,242,.32) !important;
+  backdrop-filter:blur(10px) saturate(1.2);
+  box-shadow:0 50px 110px -40px rgba(0,0,0,.96), 0 0 90px -30px rgba(111,227,242,.8) !important;
+}
+.modal-kicker{font-family:var(--mono); letter-spacing:.2em; color:var(--cyan)}
+.modal-card h2{text-shadow:0 0 24px rgba(111,227,242,.4)}
+
+/* Views resolve rather than slide */
+.view.active{animation:beamIn .7s cubic-bezier(.16,1,.3,1) both}
+
+/* ------------------------------------------------------------
+   SITUATIONAL BANNER
+   A live plate from the briefing deck, colour-graded into the
+   projection so it reads as mesh imagery rather than a photo.
+   ------------------------------------------------------------ */
+.unit-banner-img{
+  position:relative; margin-bottom:16px; overflow:hidden;
+  border:1px solid var(--line); aspect-ratio:3.4;
+  box-shadow:0 26px 60px -34px rgba(0,0,0,.9), 0 0 46px -24px rgba(111,227,242,.6);
+}
+.unit-banner-img img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  filter:saturate(.72) contrast(1.06) brightness(.72) hue-rotate(-6deg);
+}
+.unit-banner-img::before{
+  content:""; position:absolute; inset:0; z-index:1;
+  background:
+    linear-gradient(90deg, rgba(2,12,18,.94) 0%, rgba(2,12,18,.42) 45%, rgba(2,12,18,.15) 100%),
+    repeating-linear-gradient(to bottom, transparent 0 2px, rgba(2,14,20,.30) 2px 3px);
+}
+.unit-banner-img::after{
+  content:""; position:absolute; left:0; right:0; top:0; height:1px; z-index:2;
+  background:linear-gradient(90deg,transparent,rgba(150,240,255,.7) 22%,rgba(150,240,255,.7) 78%,transparent);
+}
+.unit-banner-copy{position:absolute; left:24px; bottom:20px; z-index:3}
+.unit-banner-copy span{
+  display:block; font-family:var(--mono); font-size:7.5px; letter-spacing:.2em;
+  color:var(--cyan); text-shadow:0 0 12px rgba(111,227,242,.7);
+}
+.unit-banner-copy b{
+  display:block; margin-top:8px; font-size:20px; letter-spacing:-.01em; color:#eafaff;
+  text-shadow:0 0 26px rgba(111,227,242,.5);
+}
+@media(max-width:760px){
+  .unit-banner-img{aspect-ratio:2.1}
+  .unit-banner-copy b{font-size:15px}
+}
+
+/* ------------------------------------------------------------
+   CONTROLLED DOCUMENTS
+   Some entries are readers (button), some are file releases (a).
+   Normalise both so the grid stays even.
+   ------------------------------------------------------------ */
+.doc{display:flex; flex-direction:column; text-decoration:none}
+.doc b{display:block; margin:34px 0 14px}
+.doc small{margin-top:auto}
+a.doc small{color:var(--gold); letter-spacing:.15em}
+a.doc:hover small{text-shadow:0 0 12px rgba(229,178,67,.8)}
+
+/* Keep the FX toggle clear of the mobile tab bar */
+@media(max-width:760px){
+  .holo-fx{bottom:60px}
+}

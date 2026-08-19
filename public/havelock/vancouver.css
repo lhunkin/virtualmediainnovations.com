@@ -1,0 +1,167 @@
+/* ============================================================
+   HAVELOCK CIVIC INDEX // VANCOUVER 2098
+   vancouver.css — city page components.
+   Depends on holo.css and site.css.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   HERO — single column, the atlas is the real content
+   ------------------------------------------------------------ */
+.city-hero{
+  position:relative;
+  display:flex; align-items:center;
+  min-height:min(72vh,620px);
+  padding:clamp(56px,8vh,100px) clamp(20px,6vw,80px) clamp(48px,7vh,84px);
+}
+.city-hero .hero-copy{max-width:min(820px,100%)}
+.city-hero .holo-title{font-size:clamp(44px,7vw,104px)}
+.city-hero .holo-body{margin-bottom:18px}
+
+/* ------------------------------------------------------------
+   GOLDEN AGE
+   ------------------------------------------------------------ */
+.ga-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:44px}
+.ga{padding:30px 28px}
+.ga-n{
+  display:grid; place-items:center; width:34px; height:34px; margin-bottom:22px;
+  font-family:var(--mono); font-size:12px; color:var(--gold);
+  border:1px solid rgba(229,178,67,.4); box-shadow:0 0 22px -8px rgba(229,178,67,.9);
+}
+.ga b{display:block; font-size:17px; color:#eafaff; margin-bottom:14px; text-shadow:0 0 18px rgba(111,227,242,.35)}
+.ga p{margin:0; font-size:13px; line-height:1.8; color:var(--text-soft)}
+
+.ga-quote{padding:34px 36px; margin-top:16px}
+.ga-quote p{margin:0 0 16px; font-size:clamp(16px,1.9vw,21px); line-height:1.7; color:#cfeaf1; font-style:italic}
+
+/* ------------------------------------------------------------
+   AT A GLANCE
+   ------------------------------------------------------------ */
+.glance-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:44px}
+.gl{padding:28px 24px}
+.gl b{
+  display:block; font-family:var(--mono); font-size:clamp(22px,2.4vw,32px);
+  letter-spacing:-.02em; color:var(--gold); text-shadow:0 0 26px rgba(229,178,67,.5);
+}
+.gl span{display:block; margin-top:12px; font-size:12px; line-height:1.6; color:var(--text-soft)}
+
+.glance-note{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px}
+.glance-note > div{padding:26px 24px}
+.glance-note p{margin:14px 0 0; font-size:12.5px; line-height:1.8; color:var(--text-soft)}
+
+/* ------------------------------------------------------------
+   DISTRICT ATLAS
+   ------------------------------------------------------------ */
+.atlas-controls{
+  display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap;
+  margin-top:40px; padding-bottom:20px; border-bottom:1px solid var(--line);
+}
+.zone-filters{display:flex; gap:8px; flex-wrap:wrap}
+.zf{
+  padding:11px 15px; cursor:pointer;
+  font-family:var(--mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--text-soft); background:rgba(6,26,35,.6); border:1px solid var(--line);
+  transition:.24s;
+}
+.zf:hover{color:var(--proj); border-color:var(--line-hot)}
+.zf.on{
+  color:#04141c; background:linear-gradient(180deg,#f2c661,#c9962c);
+  border-color:#f2c661; font-weight:700;
+  box-shadow:0 0 30px -10px rgba(229,178,67,.9);
+}
+.atlas-search{display:flex; flex-direction:column; gap:9px; align-items:flex-end; flex:1 1 300px; min-width:0}
+.atlas-search input{
+  width:100%; max-width:420px; padding:13px 16px;
+  font-family:var(--mono); font-size:12px; letter-spacing:.04em;
+  color:#eafaff; background:rgba(2,14,20,.8); border:1px solid var(--line); outline:none;
+}
+.atlas-search input:focus{border-color:var(--line-hot); box-shadow:0 0 28px -12px rgba(111,227,242,.9)}
+
+.district-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:24px}
+.dist{padding:26px 24px; display:flex; flex-direction:column}
+.dist-head{display:flex; justify-content:space-between; align-items:baseline; gap:12px}
+.dist-n{
+  font-family:var(--mono); font-size:22px; letter-spacing:-.02em; color:var(--gold);
+  text-shadow:0 0 20px rgba(229,178,67,.5);
+}
+.dist-head em{
+  font-style:normal; text-align:right;
+  font-family:var(--mono); font-size:6.5px; letter-spacing:.16em; color:var(--proj); opacity:.85;
+}
+.dist h3{margin:16px 0 14px; font-size:17px; line-height:1.3; color:#eafaff; letter-spacing:-.01em}
+.dist-txt{margin:0 0 18px; font-size:12.5px; line-height:1.8; color:var(--text-soft)}
+.dist-inc{margin-top:auto; padding-top:16px; border-top:1px solid rgba(111,227,242,.12)}
+.dist-inc span{
+  display:block; margin-bottom:8px;
+  font-family:var(--mono); font-size:6.5px; letter-spacing:.18em; color:var(--gold);
+}
+.dist-inc p{margin:0; font-size:11px; line-height:1.7; color:var(--text-faint)}
+.dist-empty{
+  grid-column:1/-1; padding:40px; text-align:center;
+  font-family:var(--mono); font-size:10px; letter-spacing:.16em; color:var(--text-faint);
+  border:1px solid var(--line);
+}
+
+/* ------------------------------------------------------------
+   CITY OPERATIONS
+   ------------------------------------------------------------ */
+.ops-grid-v{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:44px}
+.opc{padding:28px 26px}
+.opc b{display:block; margin:16px 0 12px; font-size:16px; color:#eafaff; text-shadow:0 0 18px rgba(111,227,242,.35)}
+.opc p{margin:0; font-size:12.5px; line-height:1.8; color:var(--text-soft)}
+
+.ops-note{margin-top:16px}
+.ops-note > div{padding:32px 34px}
+.ops-note .holo-body{margin:16px 0 24px; max-width:88ch}
+
+/* ------------------------------------------------------------
+   PLACES TO VISIT
+   ------------------------------------------------------------ */
+.visit-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:44px}
+.vis{padding:28px 30px; display:flex; flex-direction:column}
+.vis-head{display:flex; justify-content:space-between; align-items:baseline; gap:14px}
+.vis-head span{font-family:var(--mono); font-size:9px; letter-spacing:.14em; color:var(--gold)}
+.vis-head em{font-style:normal; font-family:var(--mono); font-size:6.5px; letter-spacing:.16em; color:var(--proj); text-align:right}
+.vis b{display:block; margin:16px 0 14px; font-size:20px; letter-spacing:-.01em; color:#eafaff; text-shadow:0 0 20px rgba(111,227,242,.35)}
+.vis p{margin:0 0 18px; font-size:13px; line-height:1.85; color:var(--text-soft)}
+.vis p b{display:inline; font-size:inherit; color:var(--gold); text-shadow:none}
+.vis-note{
+  margin-top:auto; padding-top:16px; border-top:1px solid rgba(111,227,242,.12);
+  font-size:11.5px; line-height:1.7; color:var(--text-faint); font-style:italic;
+}
+
+/* ------------------------------------------------------------
+   GETTING AROUND
+   ------------------------------------------------------------ */
+.move-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:44px}
+.mv{padding:26px 24px}
+.mv b{display:block; margin-bottom:14px; font-size:16px; color:#eafaff}
+.mv p{margin:0; font-size:12px; line-height:1.8; color:var(--text-soft)}
+
+.underlayer-note{margin-top:16px; padding:32px 34px}
+.underlayer-note .holo-body{margin:16px 0 0; max-width:88ch}
+
+/* ------------------------------------------------------------
+   RESPONSIVE
+   ------------------------------------------------------------ */
+@media (max-width:1180px){
+  .district-grid,.ops-grid-v,.ga-grid{grid-template-columns:1fr 1fr}
+  .glance-grid,.move-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:900px){
+  .visit-grid,.glance-note{grid-template-columns:1fr}
+  .atlas-controls{align-items:stretch}
+  .atlas-search{align-items:stretch}
+  .atlas-search input{max-width:none}
+}
+@media (max-width:660px){
+  .city-hero{min-height:0; padding-top:44px}
+  .district-grid,.ops-grid-v,.ga-grid,.glance-grid,.move-grid{grid-template-columns:1fr}
+  .vis,.ga-quote,.ops-note > div,.underlayer-note{padding:24px 22px}
+  .zf{flex:1 1 calc(50% - 4px); text-align:center}
+}
+
+/* Touch: the atlas search must not trigger iOS zoom-on-focus */
+@media (max-width:900px),(hover:none){
+  .atlas-search input{font-size:16px}
+  .zf{min-height:44px}
+}

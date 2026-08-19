@@ -1,0 +1,474 @@
+/* ============================================================
+   HAVELOCK INDUSTRIES // COMMON MESH
+   holo.css — shared volumetric projection shell
+   Applied to every Havelock surface. Renders the page as light
+   thrown into air by a desk emitter, not ink on a screen.
+   ============================================================ */
+
+:root{
+  /* Projection light */
+  --proj:        #6fe3f2;   /* primary emitted light */
+  --proj-dim:    #3d8f9e;
+  --proj-deep:   #14424f;
+  --gold:        #e5b243;   /* Havelock authority accent */
+  --gold-dim:    #8a6a26;
+  --alert:       #ff7a63;
+  --good:        #6fe0b6;
+
+  /* Void behind the projection */
+  --void:        #01060a;
+  --void-2:      #04121a;
+
+  --text:        #d8f2f7;
+  --text-soft:   #7fa4b0;
+  --text-faint:  #6b8e9a;
+
+  --line:        rgba(111,227,242,.20);
+  --line-hot:    rgba(111,227,242,.46);
+  --fill:        rgba(10,38,49,.42);
+  --fill-2:      rgba(6,26,35,.66);
+
+  --mono: ui-monospace,"Cascadia Mono","SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --sans: "Inter","Segoe UI",system-ui,-apple-system,Arial,sans-serif;
+
+  --flicker: 1;      /* driven by .holo-off */
+  --depth: 1;
+}
+
+*{box-sizing:border-box}
+
+html{
+  scroll-behavior:smooth;
+  background:var(--void);
+  /* keeps the projection from washing out on OLED/HDR displays */
+  color-scheme:dark;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--text);
+  font-family:var(--sans);
+  background:
+    radial-gradient(120% 80% at 50% 120%, rgba(31,120,140,.20) 0%, transparent 60%),
+    radial-gradient(90% 60% at 78% -10%, rgba(23,74,92,.28) 0%, transparent 55%),
+    linear-gradient(180deg,#02090e 0%, #01060a 45%, #000305 100%);
+  overflow-x:clip;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ------------------------------------------------------------
+   1. PROJECTOR CHROME  (injected by holo.js, pointer-events:none)
+   ------------------------------------------------------------ */
+
+.holo-chrome{
+  position:fixed; inset:0; z-index:9000;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+/* 1a. Volumetric cone — light fanning up from the emitter */
+.holo-cone{
+  position:absolute; left:50%; bottom:-6vh;
+  width:190vw; height:150vh;
+  transform:translateX(-50%);
+  background:
+    conic-gradient(from 180deg at 50% 100%,
+      transparent 0deg,
+      rgba(111,227,242,.00) 58deg,
+      rgba(111,227,242,.055) 76deg,
+      rgba(150,240,255,.085) 90deg,
+      rgba(111,227,242,.055) 104deg,
+      rgba(111,227,242,.00) 122deg,
+      transparent 360deg);
+  filter:blur(14px);
+  opacity:calc(.85 * var(--flicker));
+  animation:coneBreathe 9s ease-in-out infinite;
+}
+@keyframes coneBreathe{
+  0%,100%{opacity:calc(.72 * var(--flicker)); transform:translateX(-50%) scaleX(1)}
+  50%    {opacity:calc(.95 * var(--flicker)); transform:translateX(-50%) scaleX(1.03)}
+}
+
+/* 1b. Emitter glow at the base of the cone */
+.holo-emitter{
+  position:absolute; left:50%; bottom:-70px;
+  width:520px; height:140px;
+  transform:translateX(-50%);
+  background:radial-gradient(ellipse at 50% 100%,
+    rgba(160,245,255,.34) 0%,
+    rgba(111,227,242,.16) 34%,
+    transparent 68%);
+  filter:blur(10px);
+  opacity:var(--flicker);
+  animation:emitterPulse 4.2s ease-in-out infinite;
+}
+@keyframes emitterPulse{0%,100%{opacity:calc(.8*var(--flicker))}50%{opacity:calc(1*var(--flicker))}}
+
+/* 1c. Scanlines — the raster of the projected image */
+.holo-scan{
+  position:absolute; inset:-2px;
+  background:repeating-linear-gradient(
+    to bottom,
+    rgba(0,0,0,.00) 0px,
+    rgba(0,0,0,.00) 1px,
+    rgba(2,14,20,.34) 2px,
+    rgba(2,14,20,.34) 3px);
+  opacity:calc(.55 * var(--flicker));
+  mix-blend-mode:multiply;
+}
+
+/* 1d. Refresh bar — slow rolling sync band */
+.holo-refresh{
+  position:absolute; left:0; right:0; height:42vh;
+  background:linear-gradient(to bottom,
+    transparent 0%,
+    rgba(140,238,252,.030) 40%,
+    rgba(180,248,255,.055) 50%,
+    rgba(140,238,252,.030) 60%,
+    transparent 100%);
+  animation:refreshRoll 7.5s linear infinite;
+  opacity:var(--flicker);
+}
+@keyframes refreshRoll{from{top:-45vh}to{top:105vh}}
+
+/* 1e. Interference — occasional horizontal tear */
+.holo-tear{
+  position:absolute; left:0; right:0; height:2px;
+  background:linear-gradient(90deg,transparent,rgba(190,250,255,.55),rgba(255,120,110,.30),transparent);
+  opacity:0;
+  animation:tearSweep 13s cubic-bezier(.2,.8,.3,1) infinite;
+}
+@keyframes tearSweep{
+  0%,88%{opacity:0; top:30%}
+  89%{opacity:.9; top:22%}
+  92%{opacity:.55; top:61%}
+  94%{opacity:.85; top:44%}
+  96%,100%{opacity:0; top:70%}
+}
+
+/* 1f. Chromatic edge — RGB split at the frame boundary */
+.holo-fringe{
+  position:absolute; inset:0;
+  box-shadow:
+    inset 0 0 0 1px rgba(111,227,242,.10),
+    inset 2px 0 22px rgba(90,180,255,.055),
+    inset -2px 0 22px rgba(255,110,120,.045),
+    inset 0 0 190px rgba(2,10,16,.85);
+}
+
+/* 1g. Vignette / falloff — projection dims at the edges of its field */
+.holo-falloff{
+  position:absolute; inset:0;
+  background:radial-gradient(ellipse 78% 72% at 50% 46%,
+    transparent 0%,
+    rgba(1,6,10,.20) 62%,
+    rgba(1,6,10,.58) 100%);
+}
+
+/* 1h. Airborne dust lit by the beam */
+.holo-motes{position:absolute; inset:0; opacity:calc(.7 * var(--flicker))}
+
+/* 1i. Whole-projection instability */
+.holo-chrome, .holo-world{animation:holoFlicker 6.1s steps(1,end) infinite}
+@keyframes holoFlicker{
+  0%,100%{filter:none}
+  47%{filter:brightness(1.05)}
+  47.6%{filter:brightness(.93)}
+  48.2%{filter:brightness(1.02)}
+  73%{filter:brightness(.96) saturate(1.1)}
+  73.5%{filter:none}
+}
+
+/* ------------------------------------------------------------
+   2. HOLO PANEL SYSTEM — floating projected surfaces
+   ------------------------------------------------------------ */
+
+.holo-world{
+  position:relative; z-index:1;
+  perspective:1800px;
+  transform-style:preserve-3d;
+}
+
+.holo-panel{
+  position:relative;
+  background:
+    linear-gradient(160deg, rgba(13,48,62,.50) 0%, rgba(5,22,30,.62) 55%, rgba(3,15,21,.72) 100%);
+  border:1px solid var(--line);
+  backdrop-filter:blur(3px) saturate(1.15);
+  box-shadow:
+    0 0 0 1px rgba(2,12,18,.7),
+    0 30px 70px -30px rgba(0,0,0,.9),
+    inset 0 1px 0 rgba(150,240,255,.10),
+    0 0 46px -20px rgba(111,227,242,.45);
+  transition:border-color .35s, box-shadow .35s, transform .35s;
+}
+.holo-panel::before{
+  /* top edge light-line: where the projection is brightest */
+  content:""; position:absolute; left:0; right:0; top:-1px; height:1px;
+  background:linear-gradient(90deg,transparent, rgba(150,240,255,.7) 18%, rgba(150,240,255,.7) 82%, transparent);
+  opacity:.55;
+}
+.holo-panel:hover{
+  border-color:var(--line-hot);
+  box-shadow:
+    0 0 0 1px rgba(2,12,18,.7),
+    0 34px 76px -30px rgba(0,0,0,.92),
+    inset 0 1px 0 rgba(150,240,255,.18),
+    0 0 66px -18px rgba(111,227,242,.7);
+}
+
+/* Corner brackets — targeting-reticle framing */
+.holo-bracket{position:relative}
+.holo-bracket::after{
+  content:""; position:absolute; inset:6px; pointer-events:none;
+  background:
+    linear-gradient(var(--proj),var(--proj)) left top/12px 1px no-repeat,
+    linear-gradient(var(--proj),var(--proj)) left top/1px 12px no-repeat,
+    linear-gradient(var(--proj),var(--proj)) right top/12px 1px no-repeat,
+    linear-gradient(var(--proj),var(--proj)) right top/1px 12px no-repeat,
+    linear-gradient(var(--proj),var(--proj)) left bottom/12px 1px no-repeat,
+    linear-gradient(var(--proj),var(--proj)) left bottom/1px 12px no-repeat,
+    linear-gradient(var(--proj),var(--proj)) right bottom/12px 1px no-repeat,
+    linear-gradient(var(--proj),var(--proj)) right bottom/1px 12px no-repeat;
+  opacity:.42;
+}
+
+/* Idle drift — nothing projected in air is perfectly still */
+.holo-float{animation:holoDrift 11s ease-in-out infinite}
+.holo-float:nth-of-type(2n){animation-duration:13.5s; animation-delay:-3s}
+.holo-float:nth-of-type(3n){animation-duration:9.5s;  animation-delay:-6s}
+@keyframes holoDrift{
+  0%,100%{transform:translate3d(0,0,0)}
+  50%    {transform:translate3d(0,-5px,0)}
+}
+
+/* Depth layers — moved by pointer parallax in holo.js */
+[data-depth]{transition:transform .55s cubic-bezier(.16,1,.3,1); will-change:transform}
+
+/* ------------------------------------------------------------
+   3. EMITTED TYPE
+   ------------------------------------------------------------ */
+
+.holo-title{
+  font-size:clamp(40px,6.2vw,96px);
+  line-height:.92;
+  letter-spacing:-.045em;
+  margin:0 0 26px;
+  font-weight:600;
+  color:#eafaff;
+  text-shadow:
+    -1px 0 0 rgba(255,90,110,.22),
+     1px 0 0 rgba(90,190,255,.22),
+     0 0 26px rgba(111,227,242,.42),
+     0 0 70px rgba(111,227,242,.18);
+}
+.holo-title em{font-style:normal; color:var(--gold);
+  text-shadow:-1px 0 0 rgba(255,90,110,.20),1px 0 0 rgba(255,220,120,.20),0 0 30px rgba(229,178,67,.55)}
+
+.holo-kicker{
+  font-family:var(--mono);
+  font-size:10px; letter-spacing:.26em; text-transform:uppercase;
+  color:var(--proj); opacity:.82;
+  text-shadow:0 0 12px rgba(111,227,242,.55);
+  display:flex; align-items:center; gap:10px;
+}
+.holo-kicker::before{
+  content:""; width:26px; height:1px; background:var(--proj);
+  box-shadow:0 0 8px var(--proj); flex:none;
+}
+
+.holo-body{color:var(--text-soft); font-size:15px; line-height:1.85; max-width:70ch}
+
+.holo-data{font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--text-faint)}
+
+.holo-glow{text-shadow:0 0 14px rgba(111,227,242,.6)}
+
+/* ------------------------------------------------------------
+   4. CONTROLS
+   ------------------------------------------------------------ */
+
+.holo-btn{
+  display:inline-flex; align-items:center; gap:10px;
+  padding:14px 20px;
+  font-family:var(--mono); font-size:10px; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--proj); text-decoration:none;
+  background:linear-gradient(180deg, rgba(20,66,79,.45), rgba(8,30,39,.55));
+  border:1px solid var(--line-hot);
+  cursor:pointer;
+  position:relative;
+  transition:.28s;
+  text-shadow:0 0 10px rgba(111,227,242,.5);
+}
+.holo-btn:hover{
+  color:#eafaff;
+  border-color:var(--proj);
+  background:linear-gradient(180deg, rgba(34,102,120,.6), rgba(12,44,56,.7));
+  box-shadow:0 0 30px -6px rgba(111,227,242,.75), inset 0 0 20px rgba(111,227,242,.15);
+}
+.holo-btn:active{transform:translateY(1px)}
+.holo-btn--gold{
+  color:#1a1204;
+  background:linear-gradient(180deg,#f2c661,#c9962c);
+  border-color:#f2c661; text-shadow:none; font-weight:700;
+  box-shadow:0 0 34px -8px rgba(229,178,67,.85);
+}
+.holo-btn--gold:hover{
+  color:#120c02;
+  background:linear-gradient(180deg,#ffd97e,#e0aa3a);
+  border-color:#ffd97e;
+  box-shadow:0 0 46px -6px rgba(229,178,67,1);
+}
+
+/* FX intensity toggle, injected bottom-right */
+.holo-fx{
+  position:fixed; right:14px; bottom:14px; z-index:9200;
+  font-family:var(--mono); font-size:8px; letter-spacing:.18em;
+  padding:8px 11px; color:var(--proj-dim);
+  background:rgba(2,12,18,.8); border:1px solid rgba(111,227,242,.22);
+  cursor:pointer; opacity:.45; transition:.3s;
+}
+.holo-fx:hover{opacity:1; color:var(--proj); border-color:var(--line-hot)}
+
+/* ------------------------------------------------------------
+   5. BEAM-IN — panels materialise as the projector resolves them
+   ------------------------------------------------------------ */
+
+.holo-js .beam{opacity:0}
+.beam.lit{animation:beamIn .95s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes beamIn{
+  0%  {opacity:0; transform:translateY(24px) scaleY(.86); filter:blur(12px) brightness(2.4)}
+  40% {opacity:1; filter:blur(4px) brightness(1.6)}
+  62% {transform:translateY(0) scaleY(1.01)}
+  70% {opacity:.72}
+  78% {opacity:1}
+  100%{opacity:1; transform:translateY(0) scaleY(1); filter:blur(0) brightness(1)}
+}
+
+/* Initial projector warm-up curtain */
+.holo-boot{
+  position:fixed; inset:0; z-index:9500;
+  background:#000305;
+  display:grid; place-items:center;
+  transition:opacity .7s ease, visibility .7s;
+}
+.holo-boot.done{opacity:0; visibility:hidden}
+.holo-boot-inner{width:min(560px,84vw); text-align:center}
+.holo-boot-inner img{width:250px; max-height:60px; object-fit:contain; opacity:0; animation:beamIn 1s .25s forwards}
+.holo-boot-lines{
+  font-family:var(--mono); font-size:9px; letter-spacing:.2em; color:var(--proj-dim);
+  margin-top:26px; min-height:86px; text-align:left; line-height:2.1;
+}
+.holo-boot-lines b{color:var(--proj); font-weight:400}
+.holo-boot-bar{height:1px; background:rgba(111,227,242,.16); margin-top:18px; overflow:hidden}
+.holo-boot-bar i{display:block; height:100%; width:0; background:var(--proj); box-shadow:0 0 12px var(--proj); animation:bootFill 2.6s ease-out forwards}
+@keyframes bootFill{to{width:100%}}
+
+/* A single scan line sweeping the screen during warm-up */
+.holo-sweep{
+  position:fixed; left:0; right:0; height:3px; z-index:9400;
+  background:linear-gradient(90deg,transparent,rgba(180,250,255,.9),transparent);
+  box-shadow:0 0 26px rgba(111,227,242,.9);
+  animation:sweepUp 1.5s ease-in-out forwards;
+  pointer-events:none;
+}
+@keyframes sweepUp{
+  0%{top:100%; opacity:0}
+  12%{opacity:1}
+  88%{opacity:1}
+  100%{top:-4px; opacity:0}
+}
+
+/* ------------------------------------------------------------
+   6. REDUCED / ACCESSIBLE MODES
+   ------------------------------------------------------------ */
+
+html.holo-off{--flicker:0}
+html.holo-off .holo-scan,
+html.holo-off .holo-refresh,
+html.holo-off .holo-tear,
+html.holo-off .holo-motes,
+html.holo-off .holo-cone{display:none}
+html.holo-off .holo-chrome,
+html.holo-off .holo-world,
+html.holo-off .holo-float{animation:none}
+html.holo-off .holo-title{text-shadow:0 0 24px rgba(111,227,242,.28)}
+
+@media (prefers-reduced-motion:reduce){
+  .holo-float,.holo-cone,.holo-refresh,.holo-tear,.holo-chrome,.holo-world{animation:none !important}
+  .holo-refresh,.holo-tear{display:none}
+  .beam.lit{animation:none; opacity:1}
+  html{scroll-behavior:auto}
+}
+
+/* Selection reads as a light highlight, not a paper highlight */
+::selection{background:rgba(111,227,242,.28); color:#f0feff}
+
+/* Scrollbar as a projection rail */
+*::-webkit-scrollbar{width:9px; height:9px}
+*::-webkit-scrollbar-track{background:rgba(3,14,20,.6)}
+*::-webkit-scrollbar-thumb{background:rgba(111,227,242,.22); border:2px solid transparent; background-clip:padding-box}
+*::-webkit-scrollbar-thumb:hover{background:rgba(111,227,242,.45); background-clip:padding-box}
+
+/* ------------------------------------------------------------
+   7. SMALL-SCREEN PERFORMANCE
+   backdrop-filter is cheap on a desktop GPU and expensive on a
+   phone. Below tablet width the panels use opaque fills instead,
+   and the heaviest projection layers are eased back so scrolling
+   stays at frame rate.
+   ------------------------------------------------------------ */
+@media (max-width:900px){
+  .holo-panel{
+    backdrop-filter:none;
+    background:linear-gradient(160deg, rgba(11,42,55,.92) 0%, rgba(5,22,30,.94) 55%, rgba(3,15,21,.96) 100%);
+  }
+  .holo-cone{filter:blur(22px); opacity:calc(.55 * var(--flicker))}
+  .holo-refresh{display:none}
+  .holo-fringe{box-shadow:inset 0 0 0 1px rgba(111,227,242,.10), inset 0 0 120px rgba(2,10,16,.7)}
+  .holo-chrome,.holo-world,.holo-float{animation:none}
+  /* Corner brackets read as clutter at phone size */
+  .holo-bracket::after{opacity:.24}
+}
+
+/* Touch devices get the full contrast of the type without hover states */
+@media (hover:none){
+  .holo-btn{min-height:48px}
+  .holo-fx{min-height:44px; padding:0 16px; display:flex; align-items:center; opacity:.75; font-size:9px}
+}
+
+/* ------------------------------------------------------------
+   8. AMBIENT SCORE CONTROL
+   Sits beside the FX toggle. Always visible, never a surprise.
+   ------------------------------------------------------------ */
+.holo-music{
+  position:fixed; right:14px; bottom:52px; z-index:9200;
+  display:flex; align-items:center; gap:9px;
+  min-height:38px; padding:0 14px;
+  font-family:var(--mono); font-size:8px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--proj-dim); background:rgba(2,12,18,.85);
+  border:1px solid rgba(111,227,242,.22);
+  cursor:pointer; opacity:.55; transition:.3s; max-width:min(280px,60vw);
+}
+.holo-music i{font-style:normal; font-size:10px; line-height:1; flex:none}
+.holo-music span{overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.holo-music:hover{opacity:1; color:var(--proj); border-color:var(--line-hot)}
+.holo-music.on{
+  opacity:.9; color:var(--gold); border-color:rgba(229,178,67,.42);
+  box-shadow:0 0 26px -12px rgba(229,178,67,.9);
+}
+.holo-music.on i{animation:musicPulse 2.6s ease-in-out infinite}
+@keyframes musicPulse{0%,100%{opacity:1}50%{opacity:.45}}
+/* Blocked by autoplay policy — invite the gesture that unblocks it */
+.holo-music.armed{
+  opacity:1; color:var(--proj); border-color:var(--line-hot);
+  animation:musicNudge 3.4s ease-in-out infinite;
+}
+@keyframes musicNudge{0%,100%{box-shadow:0 0 0 0 rgba(111,227,242,.5)}50%{box-shadow:0 0 22px -6px rgba(111,227,242,.9)}}
+
+@media (hover:none){
+  .holo-music{min-height:44px; font-size:9px; opacity:.85}
+}
+@media (max-width:660px){
+  .holo-music{left:14px; right:14px; bottom:56px; max-width:none; justify-content:center}
+  .holo-fx{bottom:12px}
+}

@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07131c">
+<title>Havelock Employee Mesh // H3 Operational</title>
+<link rel="stylesheet" href="../holo.css">
+<link rel="stylesheet" href="employee.css">
+<link rel="stylesheet" href="holo-employee.css">
+<link rel="stylesheet" href="employee-views.css">
+</head>
+<body data-holo-boot="off">
+<div id="boot" class="boot">
+  <div class="boot-logo"><img src="../assets/havelock_logo_light.png" alt="Havelock Industries"></div>
+  <div class="boot-lines" id="bootLines"></div>
+  <div class="boot-progress"><i></i></div>
+</div>
+
+<div class="ambient-grid"></div>
+<canvas id="mesh"></canvas>
+
+<div id="login" class="login hidden">
+  <section class="login-card" data-depth="0.45" data-tilt>
+    <div class="login-status"><span class="live"></span> HAVELOCK COMMON MESH // NORTHSTAR CROWN RELAY</div>
+    <img src="../assets/havelock_logo_light.png" alt="Havelock Industries">
+    <h1>Employee Access</h1>
+    <p>Paired identity authentication for Havelock Continuity &amp; Recovery Services.</p>
+    <form id="loginForm">
+      <label>Employee / operational ID<input id="employeeId" autocomplete="username" value="FMU3-PROVISIONAL"></label>
+      <label>H3 access phrase<input id="passcode" type="password" autocomplete="current-password" placeholder="Enter access phrase"></label>
+      <div class="login-row"><label class="check"><input id="remember" type="checkbox" checked><span>Remember this terminal</span></label><button type="button" id="audioLogin">Audio: On</button></div>
+      <button class="primary" type="submit">Begin identity handshake</button>
+      <div id="loginMessage" class="login-message"></div>
+    </form>
+    <div class="legal">Simulated Havelock employee system // H3 compartmented operational access // Unauthorized session activity is logged.</div>
+  </section>
+</div>
+
+<div id="app" class="app hidden">
+  <header class="topbar">
+    <a href="../" class="corp"><img src="../assets/havelock_logo_light.png" alt=""></a>
+    <div class="relay"><span class="live"></span><b>COMMON MESH</b><small>PACIFIC RELAY 07 // VERIFIED</small></div>
+    <div class="top-actions">
+      <button id="soundToggle">SOUND ON</button>
+      <button id="lockButton">LOCK</button>
+      <div class="clock"><span id="date">2098.06.18</span><b id="time">07:14:28</b></div>
+    </div>
+  </header>
+
+  <aside class="sidebar">
+    <div class="identity">
+      <div class="avatar"><span>H3</span></div>
+      <div><strong id="sidebarName">Operational Specialist</strong><span>FMU-3 // H3 OPERATIONAL</span></div>
+    </div>
+    <nav id="nav">
+      <button class="active" data-view="home"><i>⌂</i><span>Home</span><em>3</em></button>
+      <button data-view="messages"><i>◫</i><span>Messages</span><em>2</em></button>
+      <button data-view="operations"><i>△</i><span>Operations</span><em>1</em></button>
+      <button data-view="documents"><i>▤</i><span>Documents</span></button>
+      <button data-view="medical"><i>✚</i><span>Medical &amp; Consent</span></button>
+      <button data-view="equipment"><i>◇</i><span>Equipment</span></button>
+      <button data-view="benefits"><i>¤</i><span>Pay &amp; Benefits</span></button>
+      <button data-view="training"><i>◈</i><span>Training</span></button>
+      <button data-view="directory"><i>◎</i><span>Directory</span></button>
+      <button data-view="market"><i>◵</i><span>Market</span></button>
+      <button data-view="secure"><i>⬡</i><span>H3 Secure</span></button>
+    </nav>
+    <div class="sidebar-foot">
+      <span>STATUS</span><b>PROVISIONAL / DEPLOYABLE</b>
+      <small>Northstar Crown // Pacific Commons</small>
+    </div>
+  </aside>
+
+  <main class="workspace">
+    <div class="page-head">
+      <div><span id="crumb">EMPLOYEE MESH / HOME</span><h1 id="pageTitle">Good morning.</h1></div>
+      <div class="clearance"><span>CLEARANCE</span><b>H3 OPERATIONAL</b><small>Compartmented by assignment</small></div>
+    </div>
+
+    <section id="view-home" class="view active">
+      <div class="unit-banner-img">
+        <img src="../assets/img/fmu3-briefing.jpg" alt="FMU-3 briefing table, Continuity Suite 19-C">
+        <div class="unit-banner-copy">
+          <span>FIELD MEASURES UNIT THREE // CONTINUITY SUITE 19-C</span>
+          <b>Unit activation briefing</b>
+        </div>
+      </div>
+      <div class="alert priority">
+        <div class="alert-icon">!</div>
+        <div><b>ONBOARDING ACTION REQUIRED</b><span>FMU-3 credentials remain provisional until agreement, medical baseline, identity selection, and equipment custody records are complete.</span></div>
+        <button data-open="onboarding">REVIEW</button>
+      </div>
+      <div class="dashboard-grid">
+        <article class="widget wide">
+          <div class="widget-head"><span>FIELD MEASURES UNIT THREE</span><em>LIVE STATUS</em></div>
+          <div class="unit-status">
+            <div><span>UNIT</span><b>FMU-3</b></div><div><span>REGION</span><b>Pacific Special Measures</b></div><div><span>SPONSOR</span><b>Mireille Dagenais</b></div><div><span>COMMAND</span><b>Provisional / No permanent field commander</b></div>
+          </div>
+          <div class="unit-banner"><span>MISSION AUTHORITY</span><b>Mission-specific, temporary, recorded, and limited to issued credentials.</b></div>
+        </article>
+        <article class="widget">
+          <div class="widget-head"><span>DEPLOYMENT READINESS</span><em>84%</em></div>
+          <div class="radial"><div class="radial-inner"><b>84</b><span>READY</span></div></div>
+          <div class="micro-list"><span>Medical baseline <b>COMPLETE</b></span><span>Agreement <b class="warn">REVIEW</b></span><span>Equipment custody <b>COMPLETE</b></span><span>Identity profile <b class="warn">PENDING</b></span></div>
+        </article>
+        <article class="widget">
+          <div class="widget-head"><span>NORTHSTAR CROWN</span><em>STATION</em></div>
+          <div class="station-orbit"><div class="station-core">19-C</div><div class="orbit one"></div><div class="orbit two"></div></div>
+          <div class="micro-list"><span>Pacific Commons <b>NOMINAL</b></span><span>Rotation <b>NOMINAL</b></span><span>Local emergency level <b>GREEN</b></span></div>
+        </article>
+        <article class="widget wide">
+          <div class="widget-head"><span>TODAY</span><em id="todayDate">18 JUN 2098</em></div>
+          <div class="schedule">
+            <div><time>08:20</time><span><b>Corporate orientation</b>Continuity Suite 19-C / Presentation amphitheatre</span><i>CONFIRMED</i></div>
+            <div><time>09:00</time><span><b>Agreement review</b>Personnel Trust Room / HCRS-PAC-FMU3-2098-14</span><i>REQUIRED</i></div>
+            <div><time>09:35</time><span><b>Operational medical baseline</b>Strategic Health Clinic / Deck 4</span><i>REQUIRED</i></div>
+            <div><time>10:20</time><span><b>Private unit activation</b>FMU-3 / H3 compartment</span><i class="gold">H3</i></div>
+          </div>
+        </article>
+        <article class="widget">
+          <div class="widget-head"><span>UNREAD</span><em data-unread-count>2 MESSAGES</em></div>
+          <button class="message-preview" data-open="mireille"><b>Mireille Dagenais</b><span>Welcome aboard. There are two things I want you to understand before we begin…</span><small>07:03 // H3 INTERNAL</small></button>
+          <button class="message-preview" data-open="mina"><b>Mina Aulakh</b><span>Orientation logistics and station access</span><small>06:48 // INTERNAL</small></button>
+        </article>
+        <article class="widget">
+          <div class="widget-head"><span>HAVLOCK DOCTRINE</span><em>FIELD STANDARD</em></div>
+          <div class="doctrine"><b>Life before evidence.</b><b>Capture before termination.</b><b>Containment before disclosure.</b><p>Return together. A dramatic act that leaves the team trapped, exposed, or unable to extract is an operational failure.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="view-messages" class="view"></section>
+
+    <section id="view-operations" class="view"></section>
+
+    <section id="view-documents" class="view">
+      <div class="doc-grid">
+        <button class="doc" data-doc="agreement"><span>CONTROLLED</span><b>Enhanced Field Services Employment and Sponsorship Agreement</b><small>HCRS-PAC-FMU3-2098-14 // 18 pages</small></button>
+        <button class="doc" data-doc="force"><span>FIELD STANDARD</span><b>Field Use-of-Force Standard</b><small>Capture-first operational doctrine</small></button>
+        <button class="doc" data-doc="consent"><span>MEDICAL</span><b>Medical Consent Ledger Summary</b><small>Protected personal record</small></button>
+        <button class="doc" data-doc="identity"><span>IDENTITY</span><b>Protected Identity Notice</b><small>Alias, sealed record and recovery-key policy</small></button>
+        <button class="doc" data-doc="equipment"><span>ASSET CONTROL</span><b>Equipment Responsibility Schedule</b><small>Armor, weapons, drones, vehicles and specialist systems</small></button>
+        <button class="doc" data-doc="reporting"><span>COMPLIANCE</span><b>Confidential Reporting Procedure</b><small>Independent reporting and advocate access</small></button>
+        <a class="doc" href="../downloads/GOLDENAGE_2098_Master_Character_Dossier_Fillable.pdf" download><span>PERSONNEL FILE</span><b>Personnel Dossier — Fillable</b><small>Complete on screen // 12 pages // DOWNLOAD ↓</small></a>
+        <a class="doc" href="../downloads/GOLDENAGE_2098_Master_Character_Dossier_Print.pdf" download><span>PERSONNEL FILE</span><b>Personnel Dossier — Print</b><small>Print and complete by hand // 12 pages // DOWNLOAD ↓</small></a>
+        <a class="doc" href="../downloads/Havelock_FMU3_Employment_Agreement.pdf" download><span>CONTROLLED COPY</span><b>Employment Agreement — Full Text</b><small>HCRS-PAC-FMU3-2098-14 // DOWNLOAD ↓</small></a>
+        <a class="doc" href="../downloads/Havelock_Company_Overview_Player_Handout.pdf" download><span>ORIENTATION</span><b>Company Overview &amp; New-Hire Guide</b><small>Issued at onboarding // DOWNLOAD ↓</small></a>
+      </div>
+    </section>
+
+    <section id="view-medical" class="view"></section>
+
+    <section id="view-equipment" class="view"></section>
+
+    <section id="view-benefits" class="view"></section>
+
+    <section id="view-training" class="view"></section>
+
+    <section id="view-directory" class="view"></section>
+
+    <section id="view-market" class="view"></section>
+    <section id="view-secure" class="view"></section>
+  </main>
+
+  <div class="ticker"><span class="live"></span><b>HAVELOCK CONTINUITY NETWORK</b><i>Northstar Crown station status nominal</i><i>Pacific relay synchronized</i><i>Employee trust channel verified</i><i>No active Continuity Event affecting this station</i></div>
+</div>
+
+<div id="modal" class="modal-backdrop hidden"><section class="modal-card"><button id="modalClose" class="modal-close">×</button><div id="modalKicker" class="modal-kicker"></div><h2 id="modalTitle"></h2><div id="modalBody"></div></section></div>
+
+<audio id="ambient" src="../assets/audio/ambient-terminal.wav" loop></audio>
+<audio id="clickSound" src="../assets/audio/ui-click.wav"></audio>
+<audio id="grantSound" src="../assets/audio/access-granted.wav"></audio>
+<audio id="alertSound" src="../assets/audio/priority-alert.wav"></audio>
+<script src="../holo.js"></script>
+<script src="data.js"></script>
+<script src="employee.js"></script>
+<script src="views.js"></script>
+</body></html>

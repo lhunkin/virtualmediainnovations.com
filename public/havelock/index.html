@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#01060a">
+<meta name="description" content="Havelock Industries — continuity, recovery and human systems across the Pacific Commons and the high frontier. Public mesh terminal.">
+<title>Havelock Industries // Continuity for a Complex World</title>
+<link rel="icon" href="assets/havelock_logo_light.png">
+<link rel="stylesheet" href="holo.css">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<!-- ============ PROJECTOR WARM-UP ============ -->
+<div class="holo-boot" id="bootCurtain">
+  <div class="holo-boot-inner">
+    <img src="assets/havelock_logo_light.png" alt="Havelock Industries">
+    <div class="holo-boot-lines" id="bootLines"></div>
+    <div class="holo-boot-bar"><i></i></div>
+  </div>
+</div>
+
+<!-- ============ TOP RAIL ============ -->
+<header class="rail">
+  <a class="rail-mark" href="#top"><img src="assets/havelock_logo_light.png" alt="Havelock Industries"></a>
+
+  <nav class="rail-nav">
+    <a href="#about">About</a>
+    <a href="#divisions">Divisions</a>
+    <a href="#continuity">Continuity</a>
+    <a href="#frontier">High Frontier</a>
+    <a href="#presence">Presence</a>
+    <a href="#resources">Resources</a>
+    <a href="#record">Record</a>
+    <a href="#charter">Charter</a>
+    <a href="#careers">Careers</a>
+    <a href="vancouver.html" class="rail-city">Vancouver <i>↗</i></a>
+  </nav>
+
+  <div class="rail-status">
+    <span class="pip"></span>
+    <div class="rail-relay">
+      <b>PACIFIC RELAY 07</b>
+      <small>MESH INTEGRITY 99.4%</small>
+    </div>
+  </div>
+
+  <button class="rail-search" id="searchButton" aria-label="Search public mesh">
+    <span>⌕</span> SEARCH MESH
+  </button>
+
+  <div class="rail-clock">
+    <b data-holo-date>2098.06.18</b>
+    <small data-holo-time>07:14:28</small>
+  </div>
+
+  <a class="rail-access" href="employee/index.html">EMPLOYEE ACCESS</a>
+
+  <button class="rail-menu" id="menuButton" aria-label="Open navigation" aria-expanded="false" aria-controls="navOverlay">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- ============ MOBILE NAVIGATION ============ -->
+<div class="navsheet" id="navOverlay" hidden>
+  <div class="navsheet-head">
+    <span class="holo-data">HAVELOCK PUBLIC MESH // NAVIGATION</span>
+    <button id="menuClose" aria-label="Close navigation">✕</button>
+  </div>
+  <nav class="navsheet-links">
+    <a href="#about"><i>01</i>About</a>
+    <a href="#divisions"><i>02</i>Divisions</a>
+    <a href="#continuity"><i>03</i>Doctrine</a>
+    <a href="#frontier"><i>04</i>High Frontier</a>
+    <a href="#presence"><i>05</i>Presence</a>
+    <a href="#resources"><i>06</i>Resources</a>
+    <a href="#record"><i>07</i>Public Record</a>
+    <a href="#charter"><i>08</i>Charter</a>
+    <a href="#careers"><i>09</i>Careers</a>
+    <a href="vancouver.html" class="sheet-city"><i>◈</i>Vancouver 2098<em>Civic Index ↗</em></a>
+  </nav>
+  <div class="navsheet-foot">
+    <button class="holo-btn" id="menuSearch">⌕ Search mesh</button>
+    <a class="holo-btn holo-btn--gold" href="employee/index.html">Employee access</a>
+  </div>
+  <div class="navsheet-status">
+    <span class="pip"></span>
+    <div><b>PACIFIC RELAY 07</b><small data-holo-date>2098.06.18</small></div>
+  </div>
+</div>
+
+<main class="holo-world" id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <!-- Backplate: Northstar Crown reception, graded into the projection -->
+  <div class="hero-plate" aria-hidden="true">
+    <img src="assets/img/northstar-reception.jpg" alt="">
+  </div>
+
+  <div class="hero-copy" data-depth="0.35">
+    <div class="holo-kicker">North American Alliance // Public Mesh Terminal</div>
+    <h1 class="holo-title">Continuity for a<br><em>Complex World.</em></h1>
+    <p class="holo-body">
+      Civilisation is millions of promises kept at once — medicine, power, water, identity,
+      transit, information, and trained people who move when ordinary systems are overwhelmed.
+      Havelock exists for the hour those promises fail.
+    </p>
+    <div class="hero-actions">
+      <a class="holo-btn holo-btn--gold" href="#divisions">Explore Havelock</a>
+      <a class="holo-btn" href="employee/index.html">Employee Access →</a>
+    </div>
+    <div class="hero-meta">
+      <div><b>412,000+</b><span>Employees // 31 countries</span></div>
+      <div><b>2039</b><span>Founded // Vancouver</span></div>
+      <div><b>19-C</b><span>Continuity Suite // Northstar Crown</span></div>
+    </div>
+  </div>
+
+  <!-- Orbital projection -->
+  <div class="globe-rig" data-depth="0.75" data-tilt>
+    <div class="globe-halo"></div>
+    <div class="globe">
+      <div class="globe-core"></div>
+      <div class="meridians">
+        <i style="--a:0deg"></i><i style="--a:30deg"></i><i style="--a:60deg"></i>
+        <i style="--a:90deg"></i><i style="--a:120deg"></i><i style="--a:150deg"></i>
+      </div>
+      <div class="parallels">
+        <i style="--y:-33%;--s:.60"></i>
+        <i style="--y:-17%;--s:.86"></i>
+        <i style="--y:0%;--s:1"></i>
+        <i style="--y:17%;--s:.86"></i>
+        <i style="--y:33%;--s:.60"></i>
+      </div>
+    </div>
+    <div class="orbit-ring o1"><span class="sat"></span></div>
+    <div class="orbit-ring o2"></div>
+    <div class="orbit-ring o3"></div>
+    <div class="reticle"></div>
+
+    <div class="pin pin-crown">
+      <b>NORTHSTAR CROWN</b>
+      <small>MEDIUM EARTH ORBIT // NOMINAL</small>
+    </div>
+    <div class="pin pin-van">
+      <b>VANCOUVER</b>
+      <small>HAVELOCK CENTRE // PRIMARY</small>
+    </div>
+    <div class="pin pin-lift">
+      <b>PACIFIC LIFT CORRIDOR</b>
+      <small>TRAFFIC NORMAL</small>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LIVE STRIP ============ -->
+<section class="strip beam">
+  <div><span class="holo-data">EMERGENCY LEVEL</span><b class="good">GREEN</b></div>
+  <div><span class="holo-data">PACIFIC COMMONS</span><b>NOMINAL</b></div>
+  <div><span class="holo-data">ORBITAL LIFT</span><b>OPEN</b></div>
+  <div><span class="holo-data">TRUST ANCHOR</span><b>VERIFIED</b></div>
+  <div><span class="holo-data">PUBLIC RECORD</span><b>SYNCHRONISED</b></div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="section">
+  <div class="section-head beam">
+    <div class="holo-kicker">01 // About</div>
+    <h2 class="holo-title t2">A public company with a<br><em>private responsibility.</em></h2>
+    <p class="holo-body">
+      Havelock connects medicine, augmentation, infrastructure, emergency management, artificial
+      intelligence, insurance, logistics, security and strategic recovery inside a single
+      accountable contract chain. When a city loses power, when a hull loses pressure, when a
+      person loses a body — one chain of responsibility answers for the outcome.
+    </p>
+  </div>
+
+  <div class="split beam">
+    <div class="quote holo-panel holo-bracket" data-depth="0.22">
+      <p>“We were not built to prevent disaster. We were built to make sure disaster is survivable, and that somebody is still accountable afterward.”</p>
+      <span class="holo-data">FOUNDING STATEMENT // REVISED 2071</span>
+    </div>
+    <div class="origin holo-panel" data-depth="0.14">
+      <span class="holo-data">ORIGIN // FRASER DELTA, 2039</span>
+      <p class="holo-body">
+        Havelock began as a salvage and pumping contractor working a coastline that three levels of
+        government had already written off. The dikes had failed in sequence over eleven days. The
+        insurers were in litigation. The relief agencies were arguing about jurisdiction.
+      </p>
+      <p class="holo-body">
+        What the company sold was not equipment. It was a single signature — one organisation that
+        would take the whole failure, end to end, and answer for the result. Fifty-nine years later
+        that is still the only product.
+      </p>
+    </div>
+  </div>
+
+  <div class="explainer">
+    <article class="ex holo-panel beam" data-depth="0.12">
+      <span class="ex-num">A</span>
+      <b>We take the whole failure</b>
+      <p>Most contracts fragment a disaster into billable pieces and leave the seams unowned. People die in seams. Havelock contracts are written to cover the entire chain — detection through restoration — with one accountable party at every handoff.</p>
+    </article>
+    <article class="ex holo-panel beam" data-depth="0.12">
+      <span class="ex-num">B</span>
+      <b>We plan for the system failing</b>
+      <p>Every Havelock service is required to have a degraded mode that works without the mesh, without power, and without us. A system that only functions when everything functions is not a continuity system. It is a convenience.</p>
+    </article>
+    <article class="ex holo-panel beam" data-depth="0.12">
+      <span class="ex-num">C</span>
+      <b>We file what we did</b>
+      <p>Every contract closes with a public review. Not a summary — the record. Where we were slow, where we were wrong, and what it cost. Disclosure is scheduled rather than spontaneous, but it is not optional.</p>
+    </article>
+  </div>
+
+  <div class="principles beam">
+    <div><span class="holo-data">PRINCIPLE 01</span><b>Life before property.</b><p>No asset, contract or evidentiary interest outranks a living person. This is not a value statement; it is an operational instruction with a disciplinary consequence.</p></div>
+    <div><span class="holo-data">PRINCIPLE 02</span><b>Accountability survives the incident.</b><p>The obligation does not end when the cameras leave. Restoration and maintenance commitments outlive the news cycle, the contract term, and frequently the client.</p></div>
+    <div><span class="holo-data">PRINCIPLE 03</span><b>Capability is not ownership.</b><p>Havelock may require a person to meet a standard. It may not claim the person who meets it. The Human Capability Charter of 2092 made this binding on the company.</p></div>
+    <div><span class="holo-data">PRINCIPLE 04</span><b>Somebody has to decide.</b><p>Continuity work fails through hesitation more often than through error. Authority is pushed to the person nearest the loss, and that person is named in the record.</p></div>
+  </div>
+</section>
+
+<!-- ============ DIVISIONS ============ -->
+<section id="divisions" class="section">
+  <div class="section-head beam">
+    <div class="holo-kicker">02 // Operating Divisions</div>
+    <h2 class="holo-title t2">Six chains. <em>One accountability.</em></h2>
+    <p class="holo-body">Divisions are commercial units, not silos. A single continuity contract routinely draws on four of them, and the contract holder answers for all four. Open any division for its mandate, services and public commitments.</p>
+  </div>
+  <div class="card-grid">
+    <article class="card holo-panel holo-bracket beam" data-modal="d01" data-depth="0.16">
+      <span class="card-idx">D-01</span>
+      <b>Human Systems</b>
+      <p>Regenerative medicine, prosthetics, augmentation support, organ fabrication and long-horizon rehabilitation.</p>
+      <ul class="card-list">
+        <li>Trauma and reconstruction</li>
+        <li>Organ fabrication and transplant</li>
+        <li>Prosthetic fitting and maintenance</li>
+        <li>Consent Ledger administration</li>
+      </ul>
+      <span class="card-tag">CLINICAL // PACIFIC + ORBITAL <em>OPEN FILE →</em></span>
+    </article>
+    <article class="card holo-panel holo-bracket beam" data-modal="d02" data-depth="0.16">
+      <span class="card-idx">D-02</span>
+      <b>Infrastructure Continuity</b>
+      <p>Power, water, coastal flood protection, emergency housing and post-event civil recovery.</p>
+      <ul class="card-list">
+        <li>Grid hardening and black start</li>
+        <li>Water treatment and distribution</li>
+        <li>Seawall, pump and managed retreat</li>
+        <li>Emergency housing at scale</li>
+      </ul>
+      <span class="card-tag">CIVIL // 31 COUNTRIES <em>OPEN FILE →</em></span>
+    </article>
+    <article class="card holo-panel holo-bracket beam" data-modal="d03" data-depth="0.16">
+      <span class="card-idx">D-03</span>
+      <b>Emergency &amp; Recovery</b>
+      <p>Extraction, hazardous systems entry, critical-personnel protection and evidence recovery.</p>
+      <ul class="card-list">
+        <li>Search, extraction and rescue</li>
+        <li>Hazardous and collapsed structures</li>
+        <li>Protected personnel movement</li>
+        <li>Scene preservation and recovery</li>
+      </ul>
+      <span class="card-tag">FIELD // RAPID DEPLOY <em>OPEN FILE →</em></span>
+    </article>
+    <article class="card holo-panel holo-bracket beam" data-modal="d04" data-depth="0.16">
+      <span class="card-idx">D-04</span>
+      <b>Systems Intelligence</b>
+      <p>AI assurance, identity architecture, autonomous-system audit and incident analytics.</p>
+      <ul class="card-list">
+        <li>Autonomous system certification</li>
+        <li>Identity and trust anchoring</li>
+        <li>Post-incident forensic analytics</li>
+        <li>Common Mesh service assurance</li>
+      </ul>
+      <span class="card-tag">MESH // TRUST LAYER <em>OPEN FILE →</em></span>
+    </article>
+    <article class="card holo-panel holo-bracket beam" data-modal="d05" data-depth="0.16">
+      <span class="card-idx">D-05</span>
+      <b>Mobility &amp; Orbital</b>
+      <p>Protected freight, aerospace medical transport, debris response and orbital recovery.</p>
+      <ul class="card-list">
+        <li>Medical evacuation, air and orbital</li>
+        <li>Protected and hazardous cargo</li>
+        <li>Debris tracking and removal</li>
+        <li>Lift corridor coordination</li>
+      </ul>
+      <span class="card-tag">LIFT // NORTHSTAR CROWN <em>OPEN FILE →</em></span>
+    </article>
+    <article class="card holo-panel holo-bracket beam" data-modal="d06" data-depth="0.16">
+      <span class="card-idx">D-06</span>
+      <b>Risk &amp; Assurance</b>
+      <p>Continuity insurance, liability, identity restoration and institutional risk modelling.</p>
+      <ul class="card-list">
+        <li>Continuity underwriting</li>
+        <li>Identity theft and restoration</li>
+        <li>Liability and indemnity</li>
+        <li>Public risk modelling</li>
+      </ul>
+      <span class="card-tag">ACTUARIAL // PUBLIC FILINGS <em>OPEN FILE →</em></span>
+    </article>
+  </div>
+</section>
+
+<!-- ============ CONTINUITY DOCTRINE ============ -->
+<section id="continuity" class="section">
+  <div class="section-head beam">
+    <div class="holo-kicker">03 // Operating Doctrine</div>
+    <h2 class="holo-title t2">The continuity cycle.</h2>
+    <p class="holo-body">Every Havelock contract runs the same five phases, in the same order, with a recorded handoff between each. Phases may overlap. They may not be skipped. The cycle does not close until the review is filed.</p>
+  </div>
+
+  <div class="cycle beam">
+    <div class="cyc holo-panel" data-depth="0.1"><i>01</i><b>Detect</b><span>Sensor mesh, civil reporting and contract triggers. The clock starts at first credible signal, not at confirmation.</span></div>
+    <div class="cyc holo-panel" data-depth="0.1"><i>02</i><b>Stabilize</b><span>Stop the loss. Life before property, always. Nothing is investigated while it is still getting worse.</span></div>
+    <div class="cyc holo-panel" data-depth="0.1"><i>03</i><b>Recover</b><span>People, systems and evidence, in that order. The order is not negotiable and is audited afterward.</span></div>
+    <div class="cyc holo-panel" data-depth="0.1"><i>04</i><b>Restore</b><span>Return function to the client and to the public who depend on the client. Both, or the phase is not complete.</span></div>
+    <div class="cyc holo-panel" data-depth="0.1"><i>05</i><b>Review</b><span>Recorded, auditable and publicly filed. Including what went wrong and who authorised it.</span></div>
+  </div>
+
+  <div class="doctrine-bar beam">
+    <b>Life before evidence.</b><b>Capture before termination.</b><b>Containment before disclosure.</b>
+  </div>
+
+  <div class="doctrine-notes beam">
+    <div class="holo-panel" data-depth="0.1">
+      <span class="holo-data">LIFE BEFORE EVIDENCE</span>
+      <p>A perfectly preserved scene with a preventable death in it is a failed operation. Personnel are instructed to destroy evidence if that is what it takes to reach someone alive, and are protected from liability when they do.</p>
+    </div>
+    <div class="holo-panel" data-depth="0.1">
+      <span class="holo-data">CAPTURE BEFORE TERMINATION</span>
+      <p>Havelock field units are equipped and trained to end a threat without ending a person. Lethal force is a failure state with a reporting requirement, not a tactical option with a preference.</p>
+    </div>
+    <div class="holo-panel" data-depth="0.1">
+      <span class="holo-data">CONTAINMENT BEFORE DISCLOSURE</span>
+      <p>Information about an active hazard is released on a schedule that does not create a second incident. The schedule is recorded in advance and reviewed afterward. Delay is permitted. Silence is not.</p>
+    </div>
+    <div class="holo-panel" data-depth="0.1">
+      <span class="holo-data">RETURN TOGETHER</span>
+      <p>A dramatic act that leaves the team trapped, exposed or unable to extract is an operational failure regardless of outcome. Personnel are assessed on the state of the whole unit at the end of the task.</p>
+    </div>
+  </div>
+
+  <div class="tiers beam">
+    <div class="tiers-head"><span class="holo-data">RESPONSE TIERS // PUBLIC SUMMARY</span><span class="holo-data">ACTIVATION AUTHORITY</span></div>
+    <div class="tier"><b>Tier 1 — Local</b><span>Single site or single system. Standing regional crews. Activated by the duty officer.</span><em>DUTY OFFICER</em></div>
+    <div class="tier"><b>Tier 2 — Regional</b><span>Multiple systems or cross-jurisdictional loss. Regional continuity command assumes the contract.</span><em>REGIONAL DIRECTOR</em></div>
+    <div class="tier"><b>Tier 3 — Special Measures</b><span>Capability, containment or anomaly conditions beyond ordinary crews. Mission-specific authority, temporary and recorded.</span><em>DIVISION SPONSOR</em></div>
+    <div class="tier"><b>Tier 4 — High Frontier</b><span>Orbital, atmospheric-transit or lift-corridor events. Coordinated from Continuity Suite 19-C.</span><em>ORBITAL COMMAND</em></div>
+  </div>
+</section>
+
+<!-- ============ HIGH FRONTIER ============ -->
+<section id="frontier" class="section frontier">
+  <div class="slab">
+    <div class="slab-head beam">
+      <div class="holo-kicker">04 // High Frontier</div>
+      <h2 class="holo-title t2">Continuity does not stop<br><em>at atmosphere.</em></h2>
+      <p class="holo-body">
+        Havelock maintains medical evacuation, debris response, critical-cargo protection and
+        protected-personnel coordination aboard Northstar Crown and across the Pacific lift corridor.
+        Continuity Suite 19-C is the company's permanent orbital presence — staffed continuously,
+        never mothballed, funded whether or not anything goes wrong that quarter.
+      </p>
+      <p class="holo-body">
+        Orbit is the purest expression of the company's argument. There is no second responder.
+        There is no walking out. Everything either works or it doesn't, and somebody has to have
+        planned for the version where it doesn't.
+      </p>
+      <div class="hero-actions"><a class="holo-btn" href="#record">Public filings →</a><a class="holo-btn" href="#presence">Facilities →</a></div>
+    </div>
+    <div class="station holo-panel holo-bracket beam" data-depth="0.45" data-tilt>
+      <div class="station-head"><span class="holo-data">NORTHSTAR CROWN // STATION SCHEMATIC</span><em class="good">DOCKED</em></div>
+      <div class="station-body">
+        <div class="stat-ring r-a"></div>
+        <div class="stat-ring r-b"></div>
+        <div class="stat-core">19-C</div>
+        <div class="stat-spoke s1"></div><div class="stat-spoke s2"></div>
+        <div class="stat-spoke s3"></div><div class="stat-spoke s4"></div>
+      </div>
+      <div class="station-read">
+        <div><span>ROTATION</span><b>NOMINAL</b></div>
+        <div><span>PRESSURE</span><b>101.1 kPa</b></div>
+        <div><span>MED BAY</span><b>STAFFED</b></div>
+        <div><span>LIFT WINDOW</span><b>T-04:12</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="svc-grid beam">
+    <div class="svc holo-panel" data-depth="0.1"><span class="holo-data">S-01</span><b>Flight medicine</b><p>Pressure trauma, decompression injury, radiation exposure and long-rotation physiology. Two theatres held at readiness at all times.</p></div>
+    <div class="svc holo-panel" data-depth="0.1"><span class="holo-data">S-02</span><b>Orbital recovery</b><p>Crew and vehicle recovery across the corridor, including uncontrolled-attitude retrieval and hull breach response.</p></div>
+    <div class="svc holo-panel" data-depth="0.1"><span class="holo-data">S-03</span><b>Debris response</b><p>Tracking, characterisation and removal of conjunction hazards. Public conjunction warnings are issued free of charge.</p></div>
+    <div class="svc holo-panel" data-depth="0.1"><span class="holo-data">S-04</span><b>Cargo assurance</b><p>Protected, hazardous and temperature-critical freight, including transplant tissue and fabrication feedstock.</p></div>
+    <div class="svc holo-panel" data-depth="0.1"><span class="holo-data">S-05</span><b>Quarantine and isolation</b><p>Contained medical isolation for returning crews. Independent clinical oversight is mandatory and externally staffed.</p></div>
+    <div class="svc holo-panel" data-depth="0.1"><span class="holo-data">S-06</span><b>Repatriation</b><p>Recovery, identification and return of the dead. Performed at cost, for any operator, under a standing public commitment.</p></div>
+  </div>
+
+  <div class="strip inner beam">
+    <div><span class="holo-data">ORBIT</span><b>MEDIUM EARTH</b></div>
+    <div><span class="holo-data">SUITE</span><b>19-C // PERMANENT</b></div>
+    <div><span class="holo-data">CORRIDOR</span><b>PACIFIC LIFT</b></div>
+    <div><span class="holo-data">AGREEMENT</span><b>THROUGH 2104</b></div>
+    <div><span class="holo-data">CREW ROTATION</span><b>90 DAYS</b></div>
+  </div>
+</section>
+
+<!-- ============ PRESENCE ============ -->
+<section id="presence" class="section">
+  <div class="section-head beam">
+    <div class="holo-kicker">05 // Presence</div>
+    <h2 class="holo-title t2">Where the work <em>actually happens.</em></h2>
+    <p class="holo-body">Havelock facilities are held to one standard: a person who arrives in the worst hour of their life should find the lights on and somebody accountable behind the desk. Every site below maintains a physical fallback path that works with the mesh down.</p>
+  </div>
+
+  <div class="gallery">
+    <figure class="shot beam" data-shot="assets/img/northstar-reception.jpg" data-cap="Northstar Crown // Reception, Continuity Suite 19-C">
+      <img src="assets/img/northstar-reception-sm.jpg" alt="Havelock reception desk aboard Northstar Crown, Earth visible through the window">
+      <figcaption><b>Reception // Suite 19-C</b><span>NORTHSTAR CROWN // MEDIUM EARTH ORBIT</span></figcaption>
+    </figure>
+    <figure class="shot beam" data-shot="assets/img/security-checkpoint.jpg" data-cap="Northstar Operations // Security checkpoint, restricted access">
+      <img src="assets/img/security-checkpoint-sm.jpg" alt="Havelock protective services at a Northstar Operations security checkpoint">
+      <figcaption><b>Protective Services</b><span>NORTHSTAR ACCESS ONLY // CREDENTIALED</span></figcaption>
+    </figure>
+    <figure class="shot beam" data-shot="assets/img/northstar-suite.jpg" data-cap="Personnel quarters // Northstar Crown residential ring">
+      <img src="assets/img/northstar-suite-sm.jpg" alt="Havelock personnel quarters aboard Northstar Crown with a view of Earth">
+      <figcaption><b>Personnel Quarters</b><span>RESIDENTIAL RING // LONG-ROTATION STAFF</span></figcaption>
+    </figure>
+    <figure class="shot beam" data-shot="assets/img/executive-office.jpg" data-cap="Executive operations // Northstar Crown">
+      <img src="assets/img/executive-office-sm.jpg" alt="Havelock executive operations office aboard Northstar Crown">
+      <figcaption><b>Executive Operations</b><span>CORPORATE GOVERNANCE // ORBITAL</span></figcaption>
+    </figure>
+  </div>
+
+  <div class="registry beam">
+    <div class="registry-head"><span class="holo-data">FACILITY REGISTER // PUBLIC ENTRIES</span><span class="holo-data">PACIFIC REGION</span></div>
+    <div class="reg"><b>Havelock Centre</b><span>Vancouver // Primary</span><i>Corporate seat, clinical flagship, organ fabrication, records custody.</i><em>OPEN</em></div>
+    <div class="reg"><b>Continuity Suite 19-C</b><span>Northstar Crown // Medium Earth orbit</span><i>Permanent orbital facility. Flight medicine, recovery coordination, isolation.</i><em>OPEN</em></div>
+    <div class="reg"><b>Salish Corridor Works</b><span>Coastal British Columbia and Washington</span><i>Seawall, pump and managed-retreat infrastructure across eleven municipalities.</i><em>IN BUILD</em></div>
+    <div class="reg"><b>Pacific Commons Hubs</b><span>Seventeen sites // regional</span><i>Standing Tier 1 and Tier 2 crews, depots, clinics and emergency housing stock.</i><em>OPEN</em></div>
+    <div class="reg"><b>Muir Point</b><span>Restricted // environmental works</span><i>Remediation and monitoring under the 2094 consent order. Visitor access by arrangement.</i><em>RESTRICTED</em></div>
+    <div class="reg"><b>Field Measures</b><span>Pacific Special Measures // mobile</span><i>Tier 3 units. Deployment locations are not published.</i><em>NOT PUBLISHED</em></div>
+  </div>
+</section>
+
+<!-- ============ PERSONNEL RESOURCES ============ -->
+<section id="resources" class="section resources">
+  <div class="slab">
+    <div class="slab-head beam">
+      <div class="holo-kicker">06 // Personnel Resources</div>
+      <h2 class="holo-title t2">Read it before <em>you sign it.</em></h2>
+      <p class="holo-body">
+        Havelock publishes its new-hire material openly. Prospective personnel are expected to review
+        the company overview and the standard field agreement — and to bring independent counsel if
+        they want it. That right is written into the agreement itself, and the company pays for it.
+      </p>
+      <div class="dl-list">
+        <a class="dl holo-panel" href="downloads/Havelock_Company_Overview_Player_Handout.pdf" download>
+          <span class="dl-icon">▤</span>
+          <div>
+            <b>Company Overview &amp; New-Hire Guide</b>
+            <span>PDF // PUBLIC // ORIENTATION</span>
+          </div>
+          <em>DOWNLOAD ↓</em>
+        </a>
+        <a class="dl holo-panel" href="downloads/Havelock_FMU3_Employment_Agreement.pdf" download>
+          <span class="dl-icon">◫</span>
+          <div>
+            <b>FMU-3 Employment Agreement</b>
+            <span>PDF // HCRS-PAC-FMU3-2098-14 // STANDARD TERMS</span>
+          </div>
+          <em>DOWNLOAD ↓</em>
+        </a>
+        <a class="dl holo-panel" href="downloads/GOLDENAGE_2098_Master_Character_Dossier_Fillable.pdf" download>
+          <span class="dl-icon">◈</span>
+          <div>
+            <b>Personnel Dossier — Fillable</b>
+            <span>PDF // 12 PAGES // COMPLETE ON SCREEN</span>
+          </div>
+          <em>DOWNLOAD ↓</em>
+        </a>
+        <a class="dl holo-panel" href="downloads/GOLDENAGE_2098_Master_Character_Dossier_Print.pdf" download>
+          <span class="dl-icon">◇</span>
+          <div>
+            <b>Personnel Dossier — Print</b>
+            <span>PDF // 12 PAGES // PRINT AND COMPLETE BY HAND</span>
+          </div>
+          <em>DOWNLOAD ↓</em>
+        </a>
+        <div class="dl holo-panel locked">
+          <span class="dl-icon">⬡</span>
+          <div>
+            <b>Operational mission files</b>
+            <span>H3 COMPARTMENTED // AUTHENTICATED ACCESS REQUIRED</span>
+          </div>
+          <em>RESTRICTED</em>
+        </div>
+      </div>
+    </div>
+
+    <figure class="shot tall beam" data-shot="assets/img/contract-review.jpg" data-cap="Agreement review // Personnel Trust Room, Continuity Suite 19-C">
+      <img src="assets/img/contract-review-sm.jpg" alt="Havelock agreement review session with a director and prospective field personnel">
+      <figcaption><b>Agreement Review</b><span>PERSONNEL TRUST ROOM // INDEPENDENT COUNSEL PERMITTED</span></figcaption>
+    </figure>
+  </div>
+
+  <div class="faq beam">
+    <div class="faq-head"><span class="holo-data">COMMON QUESTIONS // PUBLIC ANSWERS</span></div>
+    <details class="holo-panel">
+      <summary>What is the Consent Ledger?</summary>
+      <p>A recorded, per-procedure log of every medical, augmentation and capability intervention performed on you while employed — what was done, who authorised it, what you were told beforehand, and what you agreed to. You hold a copy. It does not stay with the company when you leave, and the company cannot amend an entry without your countersignature.</p>
+    </details>
+    <details class="holo-panel">
+      <summary>Can I bring my own lawyer to the agreement review?</summary>
+      <p>Yes, and Havelock will pay for one if you do not have one. Reviewing the agreement with independent counsel is a right under the Human Capability Charter, and declining to exercise it is recorded rather than assumed.</p>
+    </details>
+    <details class="holo-panel">
+      <summary>What happens to my augmentations if I leave?</summary>
+      <p>Ordinary restoration and replacement organs are yours and cannot be repossessed. Medically necessary life-support maintenance continues after employment ends — the company cannot abandon it. Company-issued equipment that is not part of your body is returned under the Equipment Responsibility Schedule.</p>
+    </details>
+    <details class="holo-panel">
+      <summary>Does Havelock own capabilities I already had?</summary>
+      <p>No. The company may require you to meet a capability standard for a role, and may decline to place you if you do not. It may not claim ownership of a natural body, a naturally occurring power, or a personality. That limit is binding on the company, not discretionary.</p>
+    </details>
+    <details class="holo-panel">
+      <summary>What is protected identity, and who can see through it?</summary>
+      <p>Field personnel in certain roles operate under a sealed civic identity with a company-held recovery key. Unsealing requires a recorded request, a named authorising officer and notification to you — except where a court of the North American Alliance orders otherwise, in which case notification is deferred, not cancelled.</p>
+    </details>
+    <details class="holo-panel">
+      <summary>How do I report something without going through my supervisor?</summary>
+      <p>The Confidential Reporting Procedure routes to an independent advocate outside your division and outside your chain of command. Reports are logged with a case number you keep. Retaliation is a terminable offence for the retaliating party and is separately reportable.</p>
+    </details>
+  </div>
+</section>
+
+<!-- ============ PUBLIC RECORD ============ -->
+<section id="record" class="section">
+  <div class="section-head beam">
+    <div class="holo-kicker">07 // Public Record</div>
+    <h2 class="holo-title t2">Built in failure. <em>Expanded by responsibility.</em></h2>
+    <p class="holo-body">Havelock has filed continuously since listing in 2062. The record below is the public summary; the underlying filings are lodged with the North American Alliance registry and mirrored to this channel.</p>
+  </div>
+
+  <div class="record-grid">
+    <div class="rec holo-panel beam" data-depth="0.12"><b data-count="2039">2039</b><span>Founded in Vancouver after the Fraser Delta collapse</span></div>
+    <div class="rec holo-panel beam" data-depth="0.12"><b data-count="2062">2062</b><span>Publicly listed // continuous filing since</span></div>
+    <div class="rec holo-panel beam" data-depth="0.12"><b data-count="412">412K</b><span>Employees across 31 countries</span></div>
+    <div class="rec holo-panel beam" data-depth="0.12"><b data-count="2092">2092</b><span>Human Capability Charter ratified</span></div>
+  </div>
+
+  <div class="timeline beam">
+    <div class="tl-head"><span class="holo-data">COMPANY HISTORY // 2039 — 2098</span></div>
+    <div class="tl"><time>2039</time><div><b>Founded, Vancouver</b><p>Incorporated as a salvage and pumping contractor during the eleven-day failure of the Fraser Delta dike system.</p></div></div>
+    <div class="tl"><time>2047</time><div><b>First continuity contract</b><p>The company signs the first single-signature agreement covering detection through restoration. The model becomes the industry standard within a decade.</p></div></div>
+    <div class="tl"><time>2054</time><div><b>Human Systems established</b><p>Clinical operations formalised after a decade of field medicine. Organ fabrication begins at the Vancouver flagship.</p></div></div>
+    <div class="tl"><time>2062</time><div><b>Public listing</b><p>Havelock lists and commits to continuous public filing, including adverse findings. The commitment has not been suspended since.</p></div></div>
+    <div class="tl"><time>2071</time><div><b>Founding statement revised</b><p>The company restates its purpose after an internal review it did not have to publish, and published anyway.</p></div></div>
+    <div class="tl"><time>2079</time><div><b>High Frontier operations begin</b><p>First orbital medical and recovery obligations undertaken. Continuity Suite 19-C is commissioned aboard Northstar Crown.</p></div></div>
+    <div class="tl"><time>2086</time><div><b>Systems Intelligence formed</b><p>Autonomous-system audit and identity architecture split out as a division following three years of contested AI incident findings.</p></div></div>
+    <div class="tl"><time>2092</time><div><b>Human Capability Charter ratified</b><p>Binding limits on what the company may claim of a person. Negotiated with employee representation and lodged publicly.</p></div></div>
+    <div class="tl"><time>2094</time><div><b>Muir Point consent order</b><p>Havelock accepts a remediation and monitoring order. Independent monitoring is later extended beyond the regulatory minimum at the company's own request.</p></div></div>
+    <div class="tl"><time>2098</time><div><b>Current</b><p>412,000 employees across 31 countries. Orbital agreement renewed through 2104. Salish corridor works in third-phase public review.</p></div></div>
+  </div>
+
+  <div class="news beam">
+    <div class="news-head"><span class="holo-data">PUBLIC NEWS // LAST 90 DAYS</span><span class="holo-data">SOURCE: HAVELOCK PUBLIC TRUST CHANNEL</span></div>
+    <a class="news-item holo-panel" data-modal="news1">
+      <time>2098.06.11</time>
+      <b>Coastal continuity works extended along the Salish corridor</b>
+      <span>Third-phase seawall and pump infrastructure enters public review.</span>
+    </a>
+    <a class="news-item holo-panel" data-modal="news2">
+      <time>2098.06.04</time>
+      <b>Organ fabrication capacity raised at Vancouver and Suite 19-C</b>
+      <span>Waiting periods for replacement organs reduced across the Pacific Commons.</span>
+    </a>
+    <a class="news-item holo-panel" data-modal="news3">
+      <time>2098.05.22</time>
+      <b>Muir Point environmental restoration enters year four</b>
+      <span>Independent monitoring extended at the company's request.</span>
+    </a>
+    <a class="news-item holo-panel" data-modal="news4">
+      <time>2098.05.09</time>
+      <b>Northstar Crown emergency coordination agreement renewed</b>
+      <span>Havelock retains orbital medical and debris-response obligations through 2104.</span>
+    </a>
+    <a class="news-item holo-panel" data-modal="news5">
+      <time>2098.04.27</time>
+      <b>Conjunction warning service opened to all corridor operators</b>
+      <span>Debris tracking data released without charge or licence conditions.</span>
+    </a>
+    <a class="news-item holo-panel" data-modal="news6">
+      <time>2098.04.02</time>
+      <b>Annual review filed, including three adverse findings</b>
+      <span>Two response-time failures and one records handling breach disclosed in full.</span>
+    </a>
+  </div>
+
+  <div class="filings beam">
+    <div class="filings-head"><span class="holo-data">GOVERNANCE &amp; FILINGS</span></div>
+    <div class="filing"><b>Annual continuity review</b><span>Filed 2098.04.02 // includes adverse findings</span></div>
+    <div class="filing"><b>Directorships and remuneration</b><span>Filed annually // mirrored to public trust channel</span></div>
+    <div class="filing"><b>Related-party disclosures</b><span>Filed annually // Special Measures entries summarised</span></div>
+    <div class="filing"><b>Environmental consent compliance</b><span>Quarterly // Muir Point readings published in full</span></div>
+    <div class="filing"><b>Charter compliance audit</b><span>Biennial // employee representation participates</span></div>
+    <div class="filing"><b>Incident register</b><span>Rolling // Tier 3 entries recorded without operational detail</span></div>
+  </div>
+</section>
+
+<!-- ============ CHARTER ============ -->
+<section id="charter" class="section charter">
+  <div class="section-head beam">
+    <div class="holo-kicker">08 // Human Capability Charter</div>
+    <h2 class="holo-title t2">Your body is not <em>company property.</em></h2>
+    <p class="holo-body">Ratified 2092 after four years of negotiation with employee representation. The Charter binds Havelock. It is not a policy the company may revise at will, and its articles are enforceable against the company by the individual employee.</p>
+  </div>
+
+  <div class="charter-grid">
+    <div class="ch holo-panel holo-bracket beam" data-depth="0.1"><span class="holo-data">ARTICLE I</span><b>Employee right</b><p>Medical information in plain language, informed consent wherever consent is possible, protected identity where the role requires it, necessary maintenance for as long as it is necessary, independent counsel at company expense, and a recorded Consent Ledger the employee retains.</p></div>
+    <div class="ch holo-panel holo-bracket beam" data-depth="0.1"><span class="holo-data">ARTICLE II</span><b>Employee duty</b><p>Disclose capability or equipment changes that could endanger teammates, patients or the public. The duty runs to the person at risk, not to the company, and cannot be waived by a supervisor.</p></div>
+    <div class="ch holo-panel holo-bracket beam" data-depth="0.1"><span class="holo-data">ARTICLE III</span><b>Corporate limit</b><p>Havelock may require capability standards for a role. It may not claim ownership of a natural body, a naturally occurring power, a personality, or a medically necessary life-support system. No contract term may purport to transfer these.</p></div>
+    <div class="ch holo-panel holo-bracket beam" data-depth="0.1"><span class="holo-data">ARTICLE IV</span><b>Exit protection</b><p>Necessary life-support maintenance cannot be abandoned when employment ends, for any reason including dismissal for cause. Ordinary restoration and replacement organs cannot be repossessed, encumbered or used as leverage.</p></div>
+    <div class="ch holo-panel holo-bracket beam" data-depth="0.1"><span class="holo-data">ARTICLE V</span><b>Consent under duress</b><p>Consent obtained during an active incident, under sedation, or where refusal would cost the employee their post is presumed invalid and must be re-confirmed afterward in ordinary conditions. Emergency intervention to save life is permitted and separately recorded.</p></div>
+    <div class="ch holo-panel holo-bracket beam" data-depth="0.1"><span class="holo-data">ARTICLE VI</span><b>Enforcement</b><p>Charter claims go to an independent panel outside the employee's division, with employee representation and a published finding. The company bears the cost of the process regardless of outcome, and may not require confidentiality as a condition of remedy.</p></div>
+  </div>
+
+  <div class="charter-foot beam">
+    <span class="holo-data">RATIFIED 2092 // PUBLIC SUMMARY // FULL TEXT AVAILABLE ON REQUEST FROM ANY HAVELOCK TERMINAL</span>
+  </div>
+</section>
+
+<!-- ============ CAREERS ============ -->
+<section id="careers" class="section careers">
+  <div class="section-head beam">
+    <div class="holo-kicker">09 // Careers Mesh</div>
+    <h2 class="holo-title t2">Build what people <em>depend on.</em></h2>
+    <p class="holo-body">Openings synchronise by region, credential class and continuity specialty. Havelock recruits for careers measured in decades, not contracts — and is candid that the work is unglamorous most of the time and unsurvivable for equipment some of the time.</p>
+  </div>
+
+  <div class="roles">
+    <article class="role holo-panel beam" data-depth="0.12">
+      <span class="holo-data">PACIFIC OPERATIONS</span>
+      <b>Clinical, logistics, infrastructure, response</b>
+      <ul>
+        <li>Trauma and reconstruction clinicians</li>
+        <li>Prosthetic fitters and maintenance technicians</li>
+        <li>Grid, water and coastal engineers</li>
+        <li>Tier 1 and Tier 2 response crew</li>
+      </ul>
+      <span class="role-note">Standing regional posts // seventeen hubs</span>
+    </article>
+    <article class="role holo-panel beam" data-depth="0.12">
+      <span class="holo-data">HIGH FRONTIER</span>
+      <b>Flight medicine, orbital recovery, cargo assurance</b>
+      <ul>
+        <li>Flight surgeons and pressure-trauma specialists</li>
+        <li>Recovery operators, uncontrolled-attitude rated</li>
+        <li>Debris analysts and conjunction officers</li>
+        <li>Protected-cargo custodians</li>
+      </ul>
+      <span class="role-note">90-day rotations // Continuity Suite 19-C</span>
+    </article>
+    <article class="role holo-panel beam" data-depth="0.12">
+      <span class="holo-data">SYSTEMS INTELLIGENCE</span>
+      <b>AI assurance, identity, audit, incident analytics</b>
+      <ul>
+        <li>Autonomous-system certifiers</li>
+        <li>Identity and trust-anchor architects</li>
+        <li>Forensic incident analysts</li>
+        <li>Common Mesh service assurance</li>
+      </ul>
+      <span class="role-note">Vancouver, distributed and orbital</span>
+    </article>
+    <article class="role holo-panel beam" data-depth="0.12">
+      <span class="holo-data">SPECIAL MEASURES</span>
+      <b>Field Measures units // Tier 3</b>
+      <ul>
+        <li>Capability-rated field personnel</li>
+        <li>Containment and capture specialists</li>
+        <li>Protected-identity postings</li>
+        <li>Recruitment is by sponsorship only</li>
+      </ul>
+      <span class="role-note">Locations not published // sponsor-referred</span>
+    </article>
+  </div>
+
+  <div class="offer beam">
+    <div class="holo-panel" data-depth="0.1"><b>Medical</b><span>Full clinical coverage including augmentation maintenance, family cover, and continuation of necessary life support after employment ends.</span></div>
+    <div class="holo-panel" data-depth="0.1"><b>Identity</b><span>Protected identity where the role requires it, with a recorded unsealing procedure and notification to you.</span></div>
+    <div class="holo-panel" data-depth="0.1"><b>Counsel</b><span>Independent legal review of your agreement at company expense, before signature and at any later variation.</span></div>
+    <div class="holo-panel" data-depth="0.1"><b>Education</b><span>Credential and specialty training funded in full, retained by you, portable if you leave.</span></div>
+  </div>
+
+  <div class="cta beam">
+    <div>
+      <div class="holo-kicker">Apply</div>
+      <h2 class="holo-title t3">The mesh is <em>open.</em></h2>
+      <p class="holo-body">Existing personnel authenticate through the Common Mesh. Prospective personnel begin with the overview and the standard agreement.</p>
+    </div>
+    <div class="cta-actions">
+      <a class="holo-btn holo-btn--gold" href="employee/index.html">Employee Access</a>
+      <button class="holo-btn" data-modal="careers">View openings</button>
+      <a class="holo-btn" href="#resources">Read the agreement →</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOT RAIL ============ -->
+<footer class="foot">
+  <div class="foot-left">
+    <img src="assets/havelock_logo_light.png" alt="">
+    <span class="holo-data">HAVELOCK INDUSTRIES // PUBLIC TRUST CHANNEL // PACIFIC RELAY 07</span>
+  </div>
+  <nav class="foot-nav">
+    <a href="vancouver.html">Vancouver 2098</a>
+    <a href="#charter">Charter</a>
+    <button data-modal="leadership">Leadership</button>
+    <button data-modal="privacy">Mesh Privacy</button>
+    <button data-modal="accessibility">Accessibility</button>
+    <a href="employee/index.html">Employee Access →</a>
+  </nav>
+</footer>
+
+<!-- ============ SEARCH OVERLAY ============ -->
+<div class="overlay" id="searchOverlay" hidden>
+  <div class="overlay-card holo-panel holo-bracket">
+    <div class="overlay-head">
+      <span class="holo-data">PUBLIC MESH SEARCH // UNAUTHENTICATED</span>
+      <button id="searchClose" aria-label="Close">✕</button>
+    </div>
+    <input id="meshSearch" placeholder="Query the public record…" autocomplete="off">
+    <div id="searchResults" class="overlay-results"></div>
+    <span class="holo-data">PROTECTED MEDICAL, PERSONNEL AND OPERATIONAL RECORDS REQUIRE AN AUTHENTICATED TRUST CHANNEL.</span>
+  </div>
+</div>
+
+<!-- ============ MODAL ============ -->
+<div class="overlay" id="modalOverlay" hidden>
+  <div class="overlay-card holo-panel holo-bracket">
+    <div class="overlay-head">
+      <span class="holo-data" id="modalTag">PUBLIC RECORD</span>
+      <button id="modalClose" aria-label="Close">✕</button>
+    </div>
+    <h3 id="modalTitle">—</h3>
+    <div id="modalBody" class="overlay-body"></div>
+  </div>
+</div>
+
+<!-- ============ PLATE VIEWER ============ -->
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+  <figure class="lb-frame">
+    <img id="lbImg" src="" alt="">
+    <figcaption id="lbCap" class="holo-data"></figcaption>
+  </figure>
+</div>
+
+<script src="holo.js"></script>
+<script src="site.js"></script>
+<script src="audio.js"></script>
+</body>
+</html>
