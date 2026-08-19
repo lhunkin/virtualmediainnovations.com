@@ -65,18 +65,48 @@ H3 access phrase: H3-2098
 "Remember this terminal" stores a flag in `localStorage`, so the player skips the login next
 time. **LOCK** in the top bar clears it.
 
-**Changing the in-game date** — one line, near the bottom of `holo.js`:
-
-```js
-const IN_GAME_DATE = '2098.06.18';
-```
-
-Every clock on both pages reads from it.
+**The in-game date** advances on its own — see *The campaign clock* below.
 
 **HOLO toggle** — bottom-right corner of every page. Turns off scanlines, dust, flicker and the
 projector cone. Use it when players need to read long documents; the preference persists.
 
 **Keyboard** — `Ctrl/Cmd+K` opens mesh search. `Esc` closes anything open and skips the warm-up.
+
+## The campaign clock
+
+The in-game date moves on its own. It is interpolated between two anchors, set at the
+top of section 7 in `holo.js`:
+
+```js
+const CAMPAIGN = {
+  realStart: '2026-08-19',   gameStart: '2098-06-18',
+  realEnd:   '2026-11-02',   gameEnd:   '2098-12-21'
+};
+```
+
+That is roughly **2.5 in-game days per real day**, or **~17 per week** — so the campaign
+advances a bit over a fortnight between sessions, and lands on the solstice on 2 November.
+Every clock on all three pages reads from this. Nothing to maintain.
+
+| Real date | In-game | Countdown |
+|---|---|---|
+| 19 Aug 2026 | 2098.06.18 | T-186 D |
+| 16 Sep 2026 | 2098.08.26 | T-117 D |
+| 14 Oct 2026 | 2098.11.04 | T-47 D |
+| 2 Nov 2026 | 2098.12.21 | DUE |
+
+Past 2 November the clock keeps drifting at the same rate into 2099. To re-anchor for a
+second arc, set `realStart`/`gameStart` to where you are now and pick a new end.
+
+### The countdown
+
+A readout labelled **NEXT ANCHOR ROTATION** sits in the status strip on both public pages
+and in the employee ticker, counting down to 2098.12.21. It reads as routine mesh
+maintenance — the inbox already carries a message about a previous anchor rotation, so it
+has precedent and needs no explanation. It happens to be the winter solstice. Nothing on
+the site ever says why that matters.
+
+To hide it entirely, delete the elements carrying `data-holo-countdown`.
 
 ## Vancouver 2098 — the city page
 
