@@ -169,6 +169,47 @@ body{
 .msg p{margin:0 0 10px; font-size:12.5px; line-height:1.8; max-width:84ch}
 .msg i{color:var(--soft)}
 
+/* ── retention exception spool ────────────────────────────
+   Owner chips read as query refinement, not as a tab bar.
+   The mailbox header is a record header; the messages under
+   it are the same .msg used everywhere else, plus a state
+   flag that says how the item was supposed to have vanished.
+   ────────────────────────────────────────────────────────── */
+.mbx-f{display:flex; flex-wrap:wrap; gap:5px; margin:0 0 20px;
+  padding-bottom:14px; border-bottom:1px solid var(--line)}
+.mbx-f button{
+  background:none; border:1px solid var(--line); cursor:pointer;
+  font-family:var(--mono); font-size:9px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--soft); padding:5px 10px; min-height:28px;
+}
+.mbx-f button:hover{color:var(--grn); border-color:rgba(125,242,164,.4)}
+.mbx-f button.on{color:#040705; background:var(--grn); border-color:var(--grn)}
+.mbx-f button.x{color:var(--red); border-color:rgba(255,92,70,.35)}
+.mbx-f button.x.on{color:#040705; background:var(--red); border-color:var(--red)}
+
+.mbx{margin-bottom:34px}
+.mbx-h{display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 14px;
+  padding-bottom:8px; border-bottom:1px solid rgba(226,168,74,.34)}
+.mbx-h b{color:var(--amb); font-size:12.5px; letter-spacing:.11em}
+.mbx-h span{color:var(--txt); font-size:11px}
+.mbx-h i{font-style:normal; color:var(--grn-d); font-size:9.5px; margin-left:auto}
+.mbx-h em{font-style:normal; font-size:8px; letter-spacing:.15em; padding:2px 7px;
+  border:1px solid var(--line); color:var(--soft)}
+.mbx-h em.r{color:var(--red); border-color:rgba(255,92,70,.4)}
+.mbx-st{margin:9px 0 0; font-size:9px; letter-spacing:.11em; color:var(--grn-d)}
+.mbx-st.r{color:var(--red)}
+.mbx-n{margin:6px 0 14px; font-size:11.5px; color:var(--txt); opacity:.9; max-width:92ch}
+
+.msg.pv{border-left:2px solid rgba(226,168,74,.34)}
+.msg-t{margin:12px 0 0; padding-top:9px; font-size:8px; letter-spacing:.16em;
+  color:var(--grn-d); border-top:1px solid rgba(125,242,164,.09)}
+.msg-t::before{content:"⌫ "}
+
+@media(max-width:760px){
+  .mbx-h i{margin-left:0; width:100%}
+  .mbx-f{gap:4px}
+}
+
 /* ── avatar fragments — the least designed thing here ─────── */
 .frag{border-left:2px solid var(--red); padding:12px 0 12px 15px; margin-bottom:16px}
 .frag .src{display:block; font-size:8.5px; letter-spacing:.13em; color:var(--soft); margin-bottom:7px}

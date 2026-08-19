@@ -132,6 +132,9 @@
   el('o4Node').textContent = D.session.operator + ' // ' + D.session.node;
   el('o4Warn').textContent = D.session.banner;
 
+  /* Which mailbox owner the spool view is narrowed to. */
+  let pf = 'all';
+
   const stCls = s => /NOT AUTHORISED|SEALED|DENIED|ABSENT/.test(s) ? 'r' : /PARTIAL|TRUNCAT/.test(s) ? 'k' : 'g';
 
   /* Frames are attachments on a record — thumbnail only until opened. */
@@ -266,6 +269,46 @@
         </figcaption>
       </figure>`).join('') + `</div>`,
 
+  /* ── RETENTION EXCEPTION SPOOL ──────────────────────────
+     79 messages across 13 mailboxes is too much to dump at
+     once, so the view behaves like a hostile read should: you
+     narrow the query one owner at a time and the SQL line
+     rewrites itself to show what you just asked for.        */
+  private: () => {
+    const P = window.O4_PRIVATE;
+    if (!P) return QUERY('SELECT * FROM office.mailbox', 0, 0) +
+      `<div class="note-b">SPOOL UNREADABLE AT THIS AUTHORISATION</div>`;
+
+    const boxes = pf === 'all' ? P.boxes : P.boxes.filter(b => b.k === pf);
+    const shown = boxes.reduce((n, b) => n + b.msgs.length, 0);
+    const where = pf === 'all'
+      ? `SELECT * FROM office.mailbox WHERE retention='NONE' AND deleted_by_sender=1`
+      : `SELECT * FROM office.mailbox WHERE owner='${P.boxes.find(b => b.k === pf).n}'`;
+
+    const chips = `<div class="mbx-f">` +
+      `<button class="${pf==='all'?'on':''}" data-pf="all">all owners</button>` +
+      P.boxes.map(b => `<button class="${pf===b.k?'on':''} ${b.k==='unindexed'?'x':''}" data-pf="${b.k}">${b.k}</button>`).join('') +
+      `</div>`;
+
+    return QUERY(where, 61240, shown) +
+      `<p class="rows" style="color:var(--txt);font-size:11.5px;max-width:94ch">${P.intro}</p>` +
+      chips +
+      boxes.map(b => `<section class="mbx">
+        <div class="mbx-h">
+          <b>${b.n}</b><span>${b.r}</span>
+          <i>${b.box}</i><em class="${b.cl==='O-4'?'r':'s'}">${b.cl}</em>
+        </div>
+        <p class="mbx-st ${/PERMANENT/.test(b.st)?'r':''}">${b.st}</p>
+        <p class="mbx-n">${corrupt(b.note, 0.004)}</p>
+        ${b.msgs.map(m => `<article class="msg pv">
+          <div class="msg-h"><b>${b.n} <span class="s">→</span> ${m.to}</b><span>${m.d}</span></div>
+          <h3>${m.s}</h3>${m.b}
+          <p class="msg-t">${m.tag}</p>
+        </article>`).join('')}
+      </section>`).join('') +
+      `<div class="note-b">${P.foot}</div>`;
+  },
+
   tail: () => QUERY('SELECT * FROM session_note', 5, 5) + '<ul class="tail">' +
     D.tail.lines.map(l => `<li>${l.replace('%TIME%','<b data-elapsed>'+elapsed()+'</b>')}</li>`).join('') + '</ul>'
   };
@@ -303,6 +346,15 @@
 
   el('o4Nav').addEventListener('click', e => {
     const b = e.target.closest('[data-v]');
-    if (b) render(b.dataset.v);
+    if (b) { if (b.dataset.v !== 'private') pf = 'all'; render(b.dataset.v); }
+  });
+
+  /* Owner chips re-run the query rather than filtering the DOM,
+     so the row counts and the SQL line stay honest. */
+  view.addEventListener('click', e => {
+    const c = e.target.closest('[data-pf]');
+    if (!c) return;
+    pf = c.dataset.pf;
+    render('private');
   });
 })();
