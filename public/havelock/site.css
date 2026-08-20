@@ -915,3 +915,29 @@ main > section[id]::before{
   font-family:var(--mono); font-size:8px; letter-spacing:.16em; color:var(--text-faint);
 }
 .sheet-city:active{background:linear-gradient(90deg,rgba(72,52,12,.5),rgba(6,26,35,.4))}
+
+/* ============================================================
+   CORPORATE PANELS
+
+   Havelock's own published marketing panels, dropped inline in
+   the sections whose subject they cover. They carry baked-in
+   text, so the inline copy is only a legible preview — the
+   figure reuses the existing .shot lightbox hook so a reader
+   can open the full-resolution original and actually read it.
+
+   No new script and no change to the page shell. The panel is
+   a figure in the flow, nothing more.
+   ============================================================ */
+.hpanel{margin:0 0 26px; cursor:zoom-in}
+.hpanel img{display:block; width:100%; height:auto; aspect-ratio:1672/941;
+  border:1px solid rgba(229,178,67,.3); background:rgba(6,26,35,.5)}
+.hpanel:hover img,.hpanel:focus-visible img{border-color:var(--gold)}
+.hpanel:focus-visible{outline:none}
+.hpanel figcaption{padding:12px 2px 0; font-size:13.5px; line-height:1.72;
+  color:var(--text-soft); max-width:94ch}
+.hpanel figcaption .holo-data{display:block; margin-bottom:6px; color:var(--gold-dim)}
+.hpanel figcaption b{color:var(--proj); font-weight:400}
+
+/* Inside the charter section the panel sits above a six-card grid,
+   so it wants a little more air beneath it. */
+.charter .hpanel{margin-bottom:30px}
