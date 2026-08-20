@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#01060a">
+<meta name="description" content="Vehicles and street machines of 2098 — how traffic works, who builds the machines, what they cost, motorcycles, security AVs, construction robots and the civilian robot catalogue.">
+<title>Vehicles and Street Machines // Havelock World Index</title>
+<link rel="icon" href="/havelock/assets/havelock_logo_light.png">
+<link rel="stylesheet" href="/havelock/holo.css">
+<link rel="stylesheet" href="/havelock/site.css">
+<link rel="stylesheet" href="/havelock/vancouver.css">
+<link rel="stylesheet" href="/havelock/world.css">
+<link rel="stylesheet" href="/havelock/robotics.css">
+</head>
+<body>
+
+<!-- ============ TOP RAIL ============ -->
+<header class="rail">
+  <a class="rail-mark" href="/havelock/index.html"><img src="/havelock/assets/havelock_logo_light.png" alt="Havelock Industries"></a>
+
+  <nav class="rail-nav">
+    <a href="/havelock/world.html" class="rail-city rail-back"><i>↖</i> World Index</a>
+    <a href="#r-street">The Street</a>
+    <a href="#r-makers">Manufacturers</a>
+    <a href="#r-catalogue">Catalogue</a>
+    <a href="#r-cycles">Motorcycles</a>
+  </nav>
+
+  <div class="rail-status">
+    <span class="pip"></span>
+    <div class="rail-relay">
+      <b>VEHICLE INDEX</b>
+      <small>TRANSPORT // 2098</small>
+    </div>
+  </div>
+
+  <button class="rail-search" id="searchButton" aria-label="Search public mesh"><span>⌕</span> SEARCH MESH</button>
+
+  <div class="rail-clock">
+    <b data-holo-date>2098.06.18</b>
+    <small data-holo-time>07:14:28</small>
+  </div>
+
+  <a class="rail-access" href="/havelock/employee/index.html">EMPLOYEE ACCESS</a>
+
+  <button class="rail-menu" id="menuButton" aria-label="Open navigation" aria-expanded="false" aria-controls="navOverlay">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- ============ MOBILE NAVIGATION ============ -->
+<div class="navsheet" id="navOverlay" hidden>
+  <div class="navsheet-head">
+    <span class="holo-data">VEHICLES AND STREET MACHINES // NAVIGATION</span>
+    <button id="menuClose" aria-label="Close navigation">✕</button>
+  </div>
+  <nav class="navsheet-links">
+    <a href="#r-street"><i>01</i>What the Streets Look Like</a>
+    <a href="#r-makers"><i>02</i>Who Builds Them</a>
+    <a href="#r-catalogue"><i>03</i>The Catalogue</a>
+    <a href="#r-cycles"><i>04</i>Motorcycles and Hovercycles</a>
+    <a href="#r-security"><i>05</i>Security Hover AVs</a>
+    <a href="#r-construction"><i>06</i>Construction Robots</a>
+    <a href="#r-civrobots"><i>07</i>Robots in Ordinary Life</a>
+    <a href="/havelock/world.html" class="sheet-city"><i>↖</i>The World of 2098<em>World Index</em></a>
+    <a href="/havelock/robotics.html" class="sheet-city"><i>◈</i>Robotics and Autonomy<em>Supplement</em></a>
+  </nav>
+  <div class="navsheet-foot">
+    <button class="holo-btn" id="menuSearch">⌕ Search mesh</button>
+    <a class="holo-btn holo-btn--gold" href="/havelock/employee/index.html">Employee access</a>
+  </div>
+  <div class="navsheet-status">
+    <span class="pip"></span>
+    <div><b>PACIFIC RELAY 07</b><small data-holo-date>2098.06.18</small></div>
+  </div>
+</div>
+
+<main class="holo-world" id="top">
+
+<!-- ============ HERO ============ -->
+<section class="city-hero robo-hero vehicles-hero">
+  <div class="hero-plate" aria-hidden="true">
+    <img src="/havelock/assets/img/city/port-yard.jpg" alt="">
+  </div>
+  <div class="hero-copy" data-depth="0.3">
+    <div class="holo-kicker">Havelock World Index // Transport Supplement</div>
+    <h1 class="holo-title">Vehicles and<br><em>street machines.</em></h1>
+    <div id="rLede"></div>
+    <div class="hero-actions">
+      <a class="holo-btn holo-btn--gold" href="#r-street">Start with the street</a>
+      <a class="holo-btn" href="/havelock/world.html">← Back to the World Index</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LIVE STRIP ============ -->
+<section class="strip beam" id="rStats"></section>
+
+<!-- ============ SECTION NAV ============ -->
+<div class="r-jump beam" data-depth="0.03">
+  <span class="holo-data">IN THIS SUPPLEMENT</span>
+  <nav id="rNav"></nav>
+</div>
+
+<!-- ============ BODY — rendered from robotics/r-*.js ============ -->
+<div id="rBody"></div>
+
+<div class="r-scope beam" id="rFoot" data-depth="0.05"></div>
+
+</main>
+
+<footer class="foot">
+  <div class="foot-left">
+    <img src="/havelock/assets/havelock_logo_light.png" alt="">
+    <span class="holo-data">HAVELOCK WORLD INDEX // VEHICLES AND STREET MACHINES // 2098</span>
+  </div>
+  <nav class="foot-nav">
+    <a href="/havelock/world.html">World Index</a>
+    <a href="/havelock/robotics.html">Robotics</a>
+    <a href="/havelock/index.html">Havelock Industries</a>
+    <a href="/havelock/employee/index.html">Employee Access →</a>
+  </nav>
+</footer>
+
+<!-- ============ MESH SEARCH ============ -->
+<div class="overlay" id="searchOverlay" hidden>
+  <div class="overlay-box">
+    <div class="overlay-head">
+      <span class="holo-data">PUBLIC MESH // QUERY</span>
+      <button id="searchClose" aria-label="Close">✕</button>
+    </div>
+    <input id="meshSearch" placeholder="Query the public record…" autocomplete="off">
+    <div id="searchResults" class="overlay-results"></div>
+  </div>
+</div>
+
+<script src="/havelock/holo.js"></script>
+<script src="/havelock/audio.js"></script>
+
+<!-- Vehicles and Street Machines data. Core first; the rest set section order. -->
+<script src="/havelock/vehicles/v-core.js"></script>
+<script src="/havelock/vehicles/v-road.js"></script>
+<script src="/havelock/vehicles/v-machines.js"></script>
+<script src="/havelock/robotics.js"></script>
+<script src="/havelock/site.js"></script>
+</body>
+</html>

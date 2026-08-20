@@ -963,3 +963,14 @@ main > section[id]::before{
   border-top:1px solid var(--line)}
 .hpanel--closer{margin-bottom:0}
 .hpanel--closer figcaption{max-width:none}
+
+/* ── reference supplement grid, foot of the main page ─────── */
+.section.supps{padding-bottom:clamp(30px,4vh,54px)}
+.supp-grid{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+a.supp{display:block; padding:19px 21px; text-decoration:none;
+  border:1px solid var(--line); background:rgba(6,26,35,.42)}
+a.supp:hover{border-color:rgba(229,178,67,.5); background:rgba(229,178,67,.05)}
+a.supp b{display:block; margin:8px 0 9px; font-size:19px; font-weight:400; color:var(--gold)}
+a.supp p{margin:0 0 11px; font-size:13px; line-height:1.7; color:var(--text-soft)}
+a.supp em{font-style:normal; font-family:var(--mono); font-size:10px; letter-spacing:.16em;
+  color:var(--proj)}

@@ -1,34 +1,19 @@
 /* ============================================================
-   DRONES, REMOTE SYSTEMS AND THE MILITARY ANNEX
+   DRONES AND REMOTE SYSTEMS — SUMMARY AND HAND-OFF
 
-   SOURCE NOTE FOR LARRY — read before editing.
+   NOTE FOR LARRY: this used to be derived content, because the
+   robots document was written to sit after a drones chapter
+   that was not supplied. That chapter has since turned up —
+   "Eyes, Hands, and Swarms" — and is now a supplement of its
+   own at /havelock/drones.html, built from the real canon:
+   eight legal categories, six access codes, four control modes,
+   standing orders, and the full catalogue from sensor motes to
+   persistent high-altitude surveillance.
 
-   Your robotics document is a robots chapter, and it says so:
-   it is written to sit *after* a separate drones chapter that
-   was not in the file. There is no corridor law, no flight
-   ceiling, no civil UAV licensing and no swarm-behaviour canon
-   anywhere in it.
-
-   So this section is built strictly on top of what the robots
-   canon does establish, and nothing else:
-
-     • microdrones and sensor swarms are excluded from the
-       one-robot-per-five-people count
-     • NEMA combat drones are bounded equipment under the Human
-       Command and Engagement Annex, distributed among
-       human-led formations rather than massed
-     • the legal separation between a non-person combat drone
-       and a synthetic volunteer is load-bearing
-     • the operator rule: a unit runs on its own judgement OR
-       on its operator's, never both at once
-     • drone-handler robots and tenders exist as a role
-     • Rapid Breach Couriers and their ethical design rule
-     • LANTERN's public functions, and the White Crown
-
-   Everything else here is extension by the same logic — an
-   authenticated command packet is checked the way a spoken
-   order is. If you find the real drones chapter, replace this
-   file rather than patching it.
+   What remains here is the part that belongs on a robotics
+   page: where the judgement lives, the operator rule, and the
+   line between a bounded machine and a person. Everything
+   catalogue-shaped moved.
    ============================================================ */
 window.R.push(
 
@@ -48,16 +33,8 @@ window.R.push(
   {t:'note', h:'THE OPERATOR RULE',
     b:`The single most important line in remote-systems practice, and the one most often got wrong by people who ought to know better. <b>A unit under direct control runs on its operator's judgement instead of its own — not in addition to it.</b> A trained controller can make a rescue machine faster and more decisive than it would ever be alone. That same controller has, in taking the link, replaced the machine's own hazard model with their own. Both modes are competent. Assuming you have both at once is how people get hurt.`},
 
-  {t:'cards', items:[
-    { n:'Sensor swarms', s:'Uncounted, uncertified, everywhere',
-      b:`Disposable motes and microdrones seeded across flood works, fire grounds, port decks, agricultural blocks and disaster scenes. Individually trivial and individually worthless. Collectively they are the reason a coordination network can see a hazard four minutes before a human on the ground does. They are not certified, they are not audited, and what they record is owned by whoever released them.` },
-    { n:'Freight and utility craft', s:'Disciplined corridors',
-      b:`The visible layer of the drone economy — cargo lifts above the port, inspection craft along dikes and guideways, survey flights over agricultural land, courier traffic between towers. They operate on scheduled corridors and authenticated routing, and the single most common cause of an incident is not a mechanical failure but a routing instruction that validated correctly and should not have.` },
-    { n:'Handlers and tenders', s:'A machine that runs machines',
-      b:`Search-and-rescue handler units launch and manage small drones over a landslide or a collapsed structure, holding the picture together while human responders work. The handler is certified. The drones it carries are not. Where liability sits when one of them injures somebody is a question that has been litigated four times and settled differently each time.` },
-    { n:'Breach couriers', s:'Deliberately not clever',
-      b:`Fast bipedal, wheeled or quadrupedal machines that carry breaching charges, fire foam, structural anchors, emergency radios, medical packs, sensor beacons and power cells into conditions too dangerous for a human or too expensive for a rescue robot. They are built to a Grade 1 ceiling on purpose.` }
-  ]},
+  {t:'note', h:'THE FULL CATALOGUE IS A SUPPLEMENT OF ITS OWN',
+    b:`Eight legal categories, six access codes, four control modes, and roughly seventy machines from a 300-credit disposable sensor mote to a 650,000-credit persistent high-altitude flying wing — <a href="/havelock/drones.html">Drones and Remote Systems</a> covers all of it, along with swarms, micro-repair systems, and the five standing orders every important drone should carry.`},
 
   {t:'gallery', h:'THE VISIBLE LAYER', items:[
     {img:'field-drones', n:'Survey. ',

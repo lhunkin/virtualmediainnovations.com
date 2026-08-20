@@ -17,6 +17,11 @@
   const $ = s => document.querySelector(s);
   const esc = s => String(s);
 
+  /* Image names may carry their own folder — "city/port-yard".
+     A bare name means assets/img/robots, which is where this
+     supplement's own plates live. */
+  const IMG = n => '/havelock/assets/img/' + (n.includes('/') ? n : 'robots/' + n);
+
   /* ---- block renderers --------------------------------------- */
   const B = {
 
@@ -56,9 +61,8 @@
     /* One large image carrying a caption that adds information the
        prose does not. Click to open full size. */
     plate: b => `<figure class="r-plate" data-img="${b.img}">
-      <img src="/havelock/assets/img/robots/${b.img}.jpg"
-           srcset="/havelock/assets/img/robots/${b.img}-s.jpg 760w,
-                   /havelock/assets/img/robots/${b.img}.jpg 1500w"
+      <img src="${IMG(b.img)}.jpg"
+           srcset="${IMG(b.img)}-s.jpg 760w, ${IMG(b.img)}.jpg 1500w"
            sizes="(max-width:900px) 100vw, 1100px"
            alt="${b.alt}" loading="lazy" decoding="async">
       <figcaption>${b.ref ? `<span class="r-ref">${b.ref}</span>` : ''}${b.cap}</figcaption>
@@ -71,7 +75,7 @@
       ${b.h ? `<span class="holo-data r-gal-h">${b.h}</span>` : ''}
       <div class="r-gal-grid">${b.items.map(i => `
         <figure data-img="${i.img}">
-          <img src="/havelock/assets/img/robots/${i.img}-s.jpg"
+          <img src="${IMG(i.img)}-s.jpg"
                alt="${i.alt || ''}" loading="lazy" decoding="async">
           <figcaption>${i.n ? `<b>${i.n}</b>` : ''}${i.cap}</figcaption>
         </figure>`).join('')}</div>
@@ -130,8 +134,7 @@
   document.addEventListener('click', e => {
     const fig = e.target.closest('[data-img]');
     if (!fig) return;
-    document.getElementById('rViewImg').src =
-      `/havelock/assets/img/robots/${fig.dataset.img}.jpg`;
+    document.getElementById('rViewImg').src = IMG(fig.dataset.img) + '.jpg';
     document.getElementById('rViewCap').innerHTML =
       fig.querySelector('figcaption')?.innerHTML || '';
     lb.hidden = false;
