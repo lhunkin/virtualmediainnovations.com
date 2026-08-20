@@ -114,8 +114,10 @@ body{
 .rec>.off{color:var(--grn-d); font-size:9px; opacity:.7; padding-top:2px}
 .rec>.bod{min-width:0}
 .f{display:block; margin-bottom:3px; word-break:break-word}
-.f>i{font-style:normal; display:inline-block; min-width:112px; color:var(--soft);
-  font-size:9px; letter-spacing:.1em; vertical-align:top}
+/* min-width sets the column; padding-right keeps a long label from
+   running into its own value when it overshoots that column. */
+.f>i{font-style:normal; display:inline-block; min-width:112px; padding-right:12px;
+  color:var(--soft); font-size:9px; letter-spacing:.1em; vertical-align:top}
 .k{color:var(--amb)} .g{color:var(--grn)} .r{color:var(--red)} .s{color:var(--soft)}
 .rec .note{display:block; margin-top:7px; padding-left:112px; color:var(--txt); opacity:.9}
 @media(max-width:760px){ .rec{grid-template-columns:1fr} .rec>.off{display:none}

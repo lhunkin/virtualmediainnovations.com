@@ -207,6 +207,45 @@ Eighteen views. Content lives in two files:
 - `o4-private.js` — **the retention exception spool**. Every account on the public directory has
   a recovered private mailbox: 13 mailboxes, 79 messages.
 
+### The subject registry
+
+`registry.subject` holds Havelock's files on the legacy cohort — the Huntsmen. **Seven subjects,
+43 documents, one source file each** in `employee/o4/sf/`:
+
+```
+sf/sf-core.js     registry scaffolding, the 2095 event, the query log
+sf/sf-cain.js     CAIN, DAVID CURTIS      — The Long Hunter
+sf/sf-weian.js    LUI, MAY WEIAN          — Silver Serpent
+sf/sf-meeks.js    MEEKS, DARCY MORGAN     — Doctor Quantum
+sf/sf-garcia.js   GARCIA, JENNIFER MARIA  — Psyren
+sf/sf-bordens.js  BORDENS, LEWIS MALCOM   — The Artful Dodger
+sf/sf-mcgregor.js McGREGOR, JAMES DONALD  — Redshift
+sf/sf-adams.js    SF-2098-NIL             — The Night Hunter
+```
+
+Load order in `index.html` controls index order. Each file ends with a push into the registry;
+the field list is documented at the top of `sf-core.js`. To add an eighth subject, copy a file,
+change the fields, add one `<script>` tag.
+
+**The design rule.** Havelock never assembles a dossier — it holds fragments in compartments that
+don't talk. So each subject is a scatter of separately-filed documents (registry entry,
+acquisition memo, disposition record, standing instruction, recovered fragment), each with its own
+reference, originating office and classification. Status is carried in **two columns that
+disagree**: NEMA's and Havelock's. NEMA says deceased. Havelock says *file active — item in
+custody*.
+
+**AMN-2095-0009** runs underneath everything. Nine beneficiaries, amnesty unconditional as to
+their conduct, conditional entirely on one man's continuing service. Revocation on cessation is
+automatic and requires nobody to do anything. The beneficiaries were not told. Four were already
+known to Havelock; five entered Havelock's systems for the first time on the day he wrote their
+names down to protect them. Those five are unnamed — **space left deliberately for you to fill.**
+
+Cross-links already planted, none of them stated: the 2095 event date is the facility-mind
+partition date in `facility_mind`; the third process that has never acted runs a state check at
+the same interval as Garcia's sleep architecture; Meeks's telemetric control architecture is what
+programme O4-019 is built on; `OP-VAN-2098-017` appears in `operation` as CLOSED and in the
+registry as open since 2095, same reference, neither office aware of the other.
+
 ### The spool
 
 The conceit: deletion at Havelock is a flag, not an erasure. Deleted mail goes to an exception
