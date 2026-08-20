@@ -135,7 +135,7 @@
     $('#districtCount').textContent = list.length + (list.length === 1 ? ' district' : ' districts');
 
     grid.innerHTML = list.length ? list.map(d => `
-      <article class="dist holo-panel beam lit" data-zone="${d.zone}">
+      <article class="dist holo-panel beam" data-zone="${d.zone}">
         <div class="dist-head"><span class="dist-n">${String(d.n).padStart(2,'0')}</span><em>${d.tag}</em></div>
         <h3>${d.name}</h3>
         <p class="dist-txt">${d.txt}</p>

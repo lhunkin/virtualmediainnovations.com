@@ -217,6 +217,32 @@
         litAll(document.getElementById(a.getAttribute('href').slice(1)));
       }, true);
       litTarget();
+
+      /* ----------------------------------------------------
+         Late-arriving content.
+
+         The list above is captured once, at load. Any .beam
+         element injected afterwards by a data file — the
+         district atlas, the history eras, the descent plates —
+         would never be observed, and would sit at opacity:0
+         forever while still occupying its full height. That
+         reads to a visitor as a large unexplained gap.
+
+         So: adopt anything added to the DOM later. The public
+         hook is for scripts that want to be explicit; the
+         MutationObserver catches everyone who forgets.
+         ---------------------------------------------------- */
+      const adopt = root => {
+        if (!root || root.nodeType !== 1) return;
+        if (root.classList.contains('beam') && !root.classList.contains('lit')) io.observe(root);
+        root.querySelectorAll?.('.beam:not(.lit)').forEach(el => io.observe(el));
+      };
+
+      new MutationObserver(muts => {
+        for (const m of muts) m.addedNodes.forEach(adopt);
+      }).observe(document.body, { childList: true, subtree: true });
+
+      window.HOLO_BEAM = { adopt };
     }
   }
 
