@@ -315,6 +315,8 @@ ops: [
    actual:'Apparatus recovered. One occupant extracted and not referred. Site burned to the slab within 4 hours of exit.',
    note:'Sanitation of a scene is a containment measure. It is also how evidence stops existing. Both statements are true and the report only makes one of them.'},
 
+  /* This operation also appears in registry.subject, where it is
+     carried as open and has been since 2095. Same reference. */
   {img:'overwatch', ref:'OP-VAN-2098-017', name:'LONG LOOK', unit:'[COMPARTMENT]', auth:'O-3', st:'CLOSED',
    brief:'[NOT RELEASED]',
    actual:'Nine days of static observation on a residential address, Mount Pleasant. No entry. No contact. No arrest.',

@@ -134,6 +134,13 @@
 
   /* Which mailbox owner the spool view is narrowed to. */
   let pf = 'all';
+  /* Which subject file is open. 'index' is the registry listing. */
+  let sf = 'index';
+
+  const sfChips = S => `<div class="mbx-f">` +
+    `<button class="${sf==='index'?'on':''}" data-sf="index">registry index</button>` +
+    S.subjects.map(s => `<button class="${sf===s.k?'on':''} ${s.k==='nil'?'x':''}" data-sf="${s.k}">${s.k}</button>`).join('') +
+    `</div>`;
 
   const stCls = s => /NOT AUTHORISED|SEALED|DENIED|ABSENT/.test(s) ? 'r' : /PARTIAL|TRUNCAT/.test(s) ? 'k' : 'g';
 
@@ -269,6 +276,75 @@
         </figcaption>
       </figure>`).join('') + `</div>`,
 
+  /* ── SUBJECT FILE REGISTRY ──────────────────────────────
+     Havelock never assembles a dossier; it holds fragments in
+     compartments that don't talk. So the view renders each
+     subject as a scatter of separate documents, and the index
+     is the only place they have ever appeared together.     */
+  subjects: () => {
+    const S = window.O4_SF;
+    if (!S) return QUERY('SELECT * FROM registry.subject', 0, 0) +
+      `<div class="note-b">REGISTRY UNREADABLE AT THIS AUTHORISATION</div>`;
+
+    const docCount = s => s.docs.length;
+    const total = S.subjects.reduce((n, s) => n + docCount(s), 0);
+
+    /* Index only — the landing state. */
+    if (sf === 'index') {
+      return QUERY("SELECT code,name,status FROM registry.subject WHERE cohort='LEGACY'", 91104, S.subjects.length) +
+        `<p class="rows" style="color:var(--txt);font-size:11.5px;max-width:94ch">${S.intro}</p>` +
+        sfChips(S) +
+        S.subjects.map(s => `<button class="sfx" data-sf="${s.k}">
+          <span class="sfx-c">${s.code}</span>
+          <span class="sfx-n">${s.n}<em>${s.alias}</em></span>
+          <span class="sfx-s"><i>NEMA</i>${s.nema}</span>
+          <span class="sfx-s ${/ACTIVE|COVENANTOR/.test(s.hvlk)?'r':''}"><i>HAVELOCK</i>${s.hvlk}</span>
+          <span class="sfx-a">${s.amn}</span>
+          <span class="sfx-m">${s.sum}</span>
+          <span class="sfx-d">${docCount(s)} DOCUMENTS ACROSS ${docCount(s)} COMPARTMENTS &nbsp;›</span>
+        </button>`).join('') +
+        `<section class="blk" style="margin-top:26px">
+          <div class="blk-h"><b>${S.event.head} // ${S.event.ref}</b><i>${S.event.d}</i></div>
+          <h3>${S.event.name}</h3>
+          <p>${S.event.intro}</p>
+          ${S.event.lines.map(l => REC(F('time', l.t, 'k') + F('event', l.e, 'g'), l.n)).join('')}
+          <div class="flag">${S.event.note}</div>
+        </section>` +
+        `<section class="blk">
+          <div class="blk-h"><b>QUERY LOG — WHO HAS READ THESE FILES</b><i>ACCESS RETAINED</i></div>
+          ${S.log.map(l => REC(F('date', l.d, 'k') + F('identifier', l.who) + F('file', l.f, 's'), l.n)).join('')}
+        </section>` +
+        `<div class="note-b">${S.foot}</div>`;
+    }
+
+    /* One subject — its documents, each filed separately. */
+    const s = S.subjects.find(x => x.k === sf) || S.subjects[0];
+    return QUERY(`SELECT * FROM registry.document WHERE subject='${s.code}'`, 91104, s.docs.length) +
+      sfChips(S) +
+      `<section class="sfh">
+        <div class="sfh-t"><b>${s.code}</b><span>${s.n}</span><em>${s.alias}</em></div>
+        <p class="sfh-c">${s.cls}</p>
+        <div class="sfh-g">
+          ${F('status // NEMA', s.nema, 's')}
+          ${F('status // Havelock', s.hvlk, /ACTIVE|COVENANTOR/.test(s.hvlk) ? 'r' : 'k')}
+          ${F('amnesty', s.amn, /NOT A BENEFICIARY|HIS/.test(s.amn) ? 'r' : 'k')}
+        </div>
+        <p class="sfh-s">${corrupt(s.sum, 0.004)}</p>
+      </section>` +
+      s.docs.map(d => `<article class="doc">
+        <div class="doc-h">
+          <b>${d.ref}</b><span>${d.kind}</span>
+          <i>${d.src}</i><em class="${/LEVEL 5/.test(d.cls)?'r':''}">${d.cls}</em><u>${d.d}</u>
+        </div>
+        ${d.fields ? `<div class="doc-f">${d.fields.map(f => F(f[0], f[1],
+            /NOT GRANTED|NONE|NO ENTRY|AUTOMATIC|NOT ESTABLISHED|OUTSTANDING|STRUCK/.test(f[1]) ? 'r' : '')).join('')}</div>` : ''}
+        ${d.b || ''}
+        ${d.note ? `<p class="doc-n">${corrupt(d.note, 0.005)}</p>` : ''}
+        ${d.flag ? `<div class="flag">${d.flag}</div>` : ''}
+      </article>`).join('') +
+      `<div class="note-b">${s.docs.length} documents. They are held in ${s.docs.length} places by ${s.docs.length} offices, none of which can see the others. Reading them consecutively is not a permitted operation and there is no authorisation that grants it.</div>`;
+  },
+
   /* ── RETENTION EXCEPTION SPOOL ──────────────────────────
      79 messages across 13 mailboxes is too much to dump at
      once, so the view behaves like a hostile read should: you
@@ -348,7 +424,18 @@
 
   el('o4Nav').addEventListener('click', e => {
     const b = e.target.closest('[data-v]');
-    if (b) { if (b.dataset.v !== 'private') pf = 'all'; render(b.dataset.v); }
+    if (!b) return;
+    if (b.dataset.v !== 'private')  pf = 'all';
+    if (b.dataset.v !== 'subjects') sf = 'index';
+    render(b.dataset.v);
+  });
+
+  /* Subject chips and index rows both open a file. */
+  view.addEventListener('click', e => {
+    const c = e.target.closest('[data-sf]');
+    if (!c) return;
+    sf = c.dataset.sf;
+    render('subjects');
   });
 
   /* Owner chips re-run the query rather than filtering the DOM,

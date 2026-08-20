@@ -43,6 +43,7 @@
     <button data-v="incidents"    data-p="&gt;">nema.incident</button>
     <button data-v="ops"          data-p="&gt;">operation</button>
     <button data-v="profiles"     data-p="&gt;">containment_profile</button>
+    <button data-v="subjects"     data-p="!">registry.subject</button>
     <button data-v="evidence"     data-p="&gt;">evidence.frame</button>
     <button data-v="transfers"    data-p="&gt;">transfer_ledger</button>
     <hr>
@@ -69,6 +70,17 @@
 
 <script src="/havelock/employee/o4/o4-data.js"></script>
 <script src="/havelock/employee/o4/o4-private.js"></script>
+
+<!-- Subject file registry. sf-core.js first; the rest load in
+     the order they should appear in the index. -->
+<script src="/havelock/employee/o4/sf/sf-core.js"></script>
+<script src="/havelock/employee/o4/sf/sf-cain.js"></script>
+<script src="/havelock/employee/o4/sf/sf-weian.js"></script>
+<script src="/havelock/employee/o4/sf/sf-meeks.js"></script>
+<script src="/havelock/employee/o4/sf/sf-garcia.js"></script>
+<script src="/havelock/employee/o4/sf/sf-bordens.js"></script>
+<script src="/havelock/employee/o4/sf/sf-mcgregor.js"></script>
+<script src="/havelock/employee/o4/sf/sf-adams.js"></script>
 <script src="/havelock/employee/o4/o4.js"></script>
 </body>
 </html>

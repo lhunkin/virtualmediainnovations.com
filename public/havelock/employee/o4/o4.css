@@ -169,6 +169,68 @@ body{
 .msg p{margin:0 0 10px; font-size:12.5px; line-height:1.8; max-width:84ch}
 .msg i{color:var(--soft)}
 
+/* ── subject file registry ────────────────────────────────
+   The index rows are buttons that look like ledger lines. A
+   file, once open, is a run of separate documents — each with
+   its own reference, origin compartment and classification,
+   because that is how they are actually stored.
+   ────────────────────────────────────────────────────────── */
+.sfx{
+  display:grid; width:100%; text-align:left; cursor:pointer; margin-bottom:9px;
+  grid-template-columns:150px 1fr 200px 200px; gap:3px 16px;
+  background:var(--panel); border:1px solid var(--line); border-left:2px solid rgba(226,168,74,.4);
+  padding:13px 16px; font-family:var(--mono); color:var(--txt);
+}
+.sfx:hover{border-color:rgba(125,242,164,.42); background:rgba(14,26,17,.72)}
+.sfx-c{color:var(--grn-d); font-size:9.5px; letter-spacing:.1em; padding-top:2px}
+.sfx-n{color:var(--amb); font-size:12.5px; letter-spacing:.09em}
+.sfx-n em{display:block; font-style:normal; color:var(--grn); font-size:10px;
+  letter-spacing:.14em; margin-top:3px}
+.sfx-s{font-size:9.5px; color:var(--txt)}
+.sfx-s.r{color:var(--red)}
+.sfx-s>i{font-style:normal; display:block; color:var(--soft); font-size:7.5px;
+  letter-spacing:.16em; margin-bottom:2px}
+.sfx-a{grid-column:3/5; font-size:8.5px; letter-spacing:.1em; color:var(--grn-d)}
+.sfx-m{grid-column:2; font-size:11px; color:var(--txt); opacity:.86; max-width:74ch; margin-top:5px}
+.sfx-d{grid-column:1/-1; margin-top:9px; padding-top:8px; font-size:7.5px; letter-spacing:.17em;
+  color:var(--soft); border-top:1px solid rgba(125,242,164,.09)}
+.sfx:hover .sfx-d{color:var(--grn)}
+
+.sfh{border:1px solid rgba(226,168,74,.34); background:var(--panel);
+  padding:16px 18px; margin-bottom:18px}
+.sfh-t{display:flex; flex-wrap:wrap; align-items:baseline; gap:5px 14px}
+.sfh-t b{color:var(--grn-d); font-size:10px; letter-spacing:.12em}
+.sfh-t span{color:var(--amb); font-size:15px; letter-spacing:.1em}
+.sfh-t em{font-style:normal; color:var(--grn); font-size:11.5px; letter-spacing:.16em}
+.sfh-c{margin:7px 0 12px; font-size:9px; letter-spacing:.13em; color:var(--soft)}
+.sfh-g{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:2px 20px;
+  padding:11px 0; border-top:1px solid rgba(125,242,164,.12);
+  border-bottom:1px solid rgba(125,242,164,.12)}
+.sfh-s{margin:12px 0 0; font-size:11.5px; max-width:92ch}
+
+.doc{border:1px solid var(--line); border-left:2px solid rgba(125,242,164,.3);
+  background:var(--panel); padding:15px 17px; margin-bottom:10px}
+.doc-h{display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 12px;
+  padding-bottom:9px; border-bottom:1px solid rgba(125,242,164,.12)}
+.doc-h b{color:var(--amb); font-size:10.5px; letter-spacing:.11em}
+.doc-h span{color:var(--grn); font-size:9.5px; letter-spacing:.11em}
+.doc-h i{font-style:normal; color:var(--soft); font-size:8.5px; margin-left:auto}
+.doc-h em{font-style:normal; font-size:7.5px; letter-spacing:.15em; padding:2px 7px;
+  border:1px solid var(--line); color:var(--soft)}
+.doc-h em.r{color:var(--red); border-color:rgba(255,92,70,.4)}
+.doc-h u{text-decoration:none; color:var(--grn-d); font-size:9px}
+.doc-f{margin:12px 0}
+.doc p{margin:11px 0; font-size:12.5px; line-height:1.8; max-width:86ch}
+.doc i{color:var(--soft)}
+.doc-n{padding-left:13px; border-left:1px solid rgba(226,168,74,.3);
+  color:var(--txt); opacity:.9; font-size:11.5px}
+
+@media(max-width:900px){
+  .sfx{grid-template-columns:1fr}
+  .sfx-a,.sfx-m{grid-column:1}
+  .doc-h i{margin-left:0; width:100%}
+}
+
 /* ── retention exception spool ────────────────────────────
    Owner chips read as query refinement, not as a tab bar.
    The mailbox header is a record header; the messages under
