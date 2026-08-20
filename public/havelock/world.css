@@ -82,3 +82,11 @@
   .w-facts dt{padding-top:8px}
   .w-lede{font-size:14px}
 }
+
+/* ── supplement card ──────────────────────────────────────── */
+.w-supp{display:block; margin-top:18px; padding:20px 22px; text-decoration:none;
+  border:1px solid rgba(229,178,67,.34); background:rgba(229,178,67,.045)}
+.w-supp:hover{border-color:var(--gold); background:rgba(229,178,67,.08)}
+.w-supp b{display:block; margin:8px 0 8px; font-size:21px; font-weight:400; color:var(--gold)}
+.w-supp p{margin:0; font-size:13.5px; line-height:1.72; color:var(--text-soft); max-width:88ch}
+.w-supp em{font-style:normal; color:var(--proj); white-space:nowrap}

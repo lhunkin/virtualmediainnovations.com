@@ -1,0 +1,104 @@
+/* ============================================================
+   HAVELOCK WORLD INDEX // ROBOTICS AND AUTONOMY
+   robotics.css — block components
+
+   Loads after world.css and reuses the section rhythm. Only the
+   typed blocks the renderer draws live here.
+   ============================================================ */
+
+.robo-hero .hero-plate img{filter:saturate(.55) brightness(.5) contrast(1.08)}
+.r-hero-lede{margin:0 0 14px; font-size:clamp(17px,2vw,21px); line-height:1.5;
+  color:var(--gold); max-width:62ch}
+
+/* ── in-page jump nav ─────────────────────────────────────── */
+.r-jump{padding:16px clamp(20px,6vw,80px); border-bottom:1px solid var(--line);
+  background:rgba(6,26,35,.45)}
+.r-jump nav{display:flex; flex-wrap:wrap; gap:7px; margin-top:10px}
+.r-jump a{padding:7px 13px; border:1px solid var(--line); min-height:34px;
+  display:inline-flex; align-items:center;
+  font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--text-soft); text-decoration:none}
+.r-jump a:hover{color:var(--proj); border-color:rgba(111,227,242,.44)}
+
+.r-lede{color:var(--gold) !important; font-size:15.5px; max-width:80ch}
+.r-block{margin-bottom:14px}
+.r-block:last-child{margin-bottom:0}
+
+/* ── prose ────────────────────────────────────────────────── */
+.r-prose p{margin:0 0 12px; font-size:14px; line-height:1.76; color:var(--text-soft);
+  max-width:88ch}
+.r-prose p:last-child{margin-bottom:0}
+.r-prose b, .r-note b, .r-table b{color:var(--text)}
+
+/* ── cards ────────────────────────────────────────────────── */
+.r-cards{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.r-card{padding:18px 20px}
+.r-card b{display:block; font-size:17px; font-weight:500; color:var(--gold)}
+.r-card span{display:block; margin-top:3px; font-family:var(--mono); font-size:9.5px;
+  letter-spacing:.15em; text-transform:uppercase; color:var(--proj-dim)}
+.r-card p{margin:11px 0 0; font-size:13.5px; line-height:1.72; color:var(--text-soft)}
+
+/* ── ladder ───────────────────────────────────────────────── */
+.r-ladder{display:grid; gap:1px; border:1px solid var(--line)}
+.r-rung{display:grid; gap:4px 18px; padding:13px 17px;
+  grid-template-columns:minmax(190px,auto) 88px 1fr;
+  background:rgba(6,26,35,.42); border-bottom:1px solid var(--line)}
+.r-rung:last-child{border-bottom:none}
+.r-rung b{font-size:14px; font-weight:500; color:var(--gold)}
+.r-rung em{font-style:normal; font-family:var(--mono); font-size:9.5px; letter-spacing:.13em;
+  color:var(--proj-dim); padding-top:2px}
+.r-rung em.nil{color:var(--text-faint)}
+.r-rung p{margin:0; font-size:13px; line-height:1.66; color:var(--text-soft)}
+
+/* ── table ────────────────────────────────────────────────── */
+.r-tablewrap{overflow-x:auto; border:1px solid var(--line); background:rgba(6,26,35,.42)}
+table.r-table{width:100%; border-collapse:collapse; min-width:520px}
+.r-table th{text-align:left; padding:11px 16px; font-family:var(--mono); font-size:9px;
+  letter-spacing:.17em; text-transform:uppercase; color:var(--proj-dim);
+  border-bottom:1px solid rgba(229,178,67,.3); white-space:nowrap}
+.r-table td{padding:11px 16px; font-size:13px; line-height:1.6; color:var(--text-soft);
+  border-bottom:1px solid rgba(111,227,242,.09); vertical-align:top}
+.r-table tr:last-child td{border-bottom:none}
+.r-table td.r-key{color:var(--gold); font-weight:500}
+
+/* ── quote ────────────────────────────────────────────────── */
+blockquote.r-quote{margin:0; padding:22px 26px; background:rgba(6,26,35,.5)}
+.r-quote p{margin:0 0 10px; font-size:clamp(16px,2vw,20px); line-height:1.5;
+  color:var(--text); max-width:70ch}
+
+/* ── note ─────────────────────────────────────────────────── */
+.r-note{padding:16px 19px; border-left:2px solid var(--gold);
+  background:rgba(229,178,67,.055)}
+.r-note p{margin:7px 0 0; font-size:13.5px; line-height:1.74; color:var(--text-soft);
+  max-width:90ch}
+
+/* ── stats ────────────────────────────────────────────────── */
+.r-stats{display:grid; gap:1px; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  border:1px solid var(--line)}
+.r-stats>div{padding:15px 18px; background:rgba(6,26,35,.42)}
+.r-stats b{display:block; font-family:var(--mono); font-size:22px; color:var(--gold);
+  line-height:1}
+.r-stats span{display:block; margin-top:6px; font-size:12px; line-height:1.5;
+  color:var(--text-faint)}
+
+/* ── list ─────────────────────────────────────────────────── */
+.r-list{padding:16px 19px; border:1px solid var(--line); background:rgba(6,26,35,.42)}
+.r-list ol{margin:11px 0 0; padding:0; list-style:none; counter-reset:rl}
+.r-list li{counter-increment:rl; position:relative; padding:6px 0 6px 34px;
+  font-size:13.5px; line-height:1.66; color:var(--text-soft);
+  border-bottom:1px solid rgba(111,227,242,.08)}
+.r-list li:last-child{border-bottom:none}
+.r-list li::before{content:counter(rl,decimal-leading-zero); position:absolute; left:0; top:6px;
+  font-family:var(--mono); font-size:10px; letter-spacing:.1em; color:var(--proj-dim)}
+
+/* ── scope footer ─────────────────────────────────────────── */
+.r-scope{margin:0 clamp(20px,6vw,80px) 60px; padding:18px 22px;
+  border:1px solid var(--line); background:rgba(6,26,35,.4)}
+.r-scope p{margin:8px 0 0; font-size:13px; line-height:1.72; color:var(--text-soft);
+  max-width:92ch}
+
+@media(max-width:760px){
+  .r-rung{grid-template-columns:1fr auto; gap:3px 12px}
+  .r-rung p{grid-column:1/-1}
+  .r-stats b{font-size:19px}
+}
