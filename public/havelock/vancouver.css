@@ -319,3 +319,61 @@ ol.trust span{display:block; font-size:13px; line-height:1.7; color:var(--text-s
   dl.ident{grid-template-columns:1fr; gap:2px}
   dl.ident dt{padding-top:8px}
 }
+
+/* ============================================================
+   CITY IMAGERY
+
+   Plates and galleries, filled by vancouver-plates.js from a
+   marker in the markup. Every frame carries a caption that adds
+   something the prose does not — a figure, a consequence, a
+   thing the reader would otherwise have to be told twice.
+
+   The source frames are 16:9. Reserving that box means a lazy
+   image cannot push a thousand pixels of page down as it
+   arrives, shifting content under the reader mid-scroll.
+   ============================================================ */
+
+.cplate{margin:0 0 14px; position:relative; cursor:zoom-in}
+.cplate img{display:block; width:100%; height:auto; aspect-ratio:16/9; object-fit:cover;
+  border:1px solid var(--line); background:rgba(6,26,35,.5);
+  filter:saturate(.92) contrast(1.03) brightness(.95)}
+.cplate:hover img{filter:saturate(1) contrast(1.03) brightness(1);
+  border-color:rgba(229,178,67,.4)}
+.cplate figcaption{padding:13px 2px 0; font-size:13.5px; line-height:1.72;
+  color:var(--text-soft); max-width:92ch}
+.cref{display:inline-block; margin-right:11px; font-family:var(--mono); font-size:9px;
+  letter-spacing:.2em; color:var(--gold); vertical-align:1px}
+
+.cgal{margin:0 0 16px}
+.cgal-h{display:block; margin-bottom:11px}
+.cgal-grid{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+.cgal--wide .cgal-grid{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.cgal figure{margin:0; cursor:zoom-in}
+.cgal img{display:block; width:100%; aspect-ratio:16/9; object-fit:cover;
+  border:1px solid var(--line); background:rgba(6,26,35,.5);
+  filter:saturate(.9) contrast(1.03) brightness(.93)}
+.cgal figure:hover img{filter:saturate(1) contrast(1.03) brightness(1);
+  border-color:rgba(229,178,67,.4)}
+.cgal figcaption{padding:9px 1px 0; font-size:12.5px; line-height:1.62; color:var(--text-faint)}
+.cgal figcaption b{color:var(--gold); font-weight:500}
+
+/* ── full-size viewer ─────────────────────────────────────── */
+.cview{position:fixed; inset:0; z-index:120; display:flex; align-items:center;
+  justify-content:center; padding:clamp(14px,4vw,54px);
+  background:rgba(1,6,10,.95); backdrop-filter:blur(6px); cursor:zoom-out}
+.cview[hidden]{display:none}
+.cview figure{margin:0; max-width:1400px; width:100%; cursor:auto}
+.cview img{display:block; width:100%; height:auto; max-height:76vh; object-fit:contain;
+  border:1px solid var(--line)}
+.cview figcaption{padding:14px 2px 0; font-size:13.5px; line-height:1.72;
+  color:var(--text-soft); max-width:96ch}
+.cview figcaption b{color:var(--gold); font-weight:500}
+.cview-x{position:absolute; top:14px; right:16px; z-index:2; cursor:pointer;
+  width:40px; height:40px; background:none; border:1px solid var(--line);
+  color:var(--text-soft); font-size:15px}
+.cview-x:hover{color:var(--gold); border-color:var(--gold)}
+
+@media(max-width:760px){
+  .cgal-grid,.cgal--wide .cgal-grid{grid-template-columns:1fr}
+  .cplate figcaption{font-size:13px}
+}
