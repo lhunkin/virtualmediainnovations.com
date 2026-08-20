@@ -114,7 +114,11 @@ blockquote.r-quote{margin:0; padding:22px 26px; background:rgba(6,26,35,.5)}
    ============================================================ */
 
 .r-plate{margin:0; position:relative; cursor:zoom-in}
-.r-plate img{display:block; width:100%; height:auto; border:1px solid var(--line);
+/* The source frames are all 16:9. Reserving the box means a lazy
+   image cannot push 1,400px of page down as it arrives — which
+   was moving content under the reader's cursor mid-scroll. */
+.r-plate img{display:block; width:100%; height:auto; aspect-ratio:16/9; object-fit:cover;
+  border:1px solid var(--line); background:rgba(6,26,35,.5);
   filter:saturate(.9) contrast(1.03) brightness(.95)}
 .r-plate:hover img{filter:saturate(1) contrast(1.03) brightness(1);
   border-color:rgba(229,178,67,.4)}
