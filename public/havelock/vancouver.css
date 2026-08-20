@@ -169,38 +169,62 @@
 /* ============================================================
    HISTORY — the foundational decade, the era spine, the ledger
    ============================================================ */
-.section-sub{margin:52px 0 22px; max-width:78ch}
-.hist-lede{margin-bottom:26px; padding:20px 24px}
-.hist-lede p{margin:0 0 10px; font-size:16px; line-height:1.7; color:var(--text)}
+/* The history section runs tighter than the rest of the page:
+   the descent plates supply the breathing room, so the blocks
+   between them do not need to. */
+.section--tight{padding-bottom:clamp(36px,5vh,64px)}
+.section--tight .section-head{margin-bottom:0}
 
-.found-grid{display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
-.found{padding:20px 22px; position:relative}
-.found-y{display:block; font-family:var(--mono); font-size:26px; letter-spacing:.06em;
-  color:var(--gold); line-height:1; margin-bottom:10px}
-.found h3{margin:0 0 10px; font-size:17px; font-weight:500; color:var(--text)}
-.found p{margin:0 0 10px; font-size:13.5px; line-height:1.72; color:var(--text-soft)}
-.found-l{padding-top:10px; border-top:1px solid var(--line); color:var(--gold-dim);
-  font-size:12.5px; font-style:italic}
+/* ── descent plates ─────────────────────────────────────── */
+.descent{margin:30px 0; position:relative}
+.descent img{display:block; width:100%; height:clamp(190px,34vh,420px);
+  object-fit:cover; border:1px solid var(--line);
+  filter:saturate(.86) contrast(1.04) brightness(.94)}
+.descent::after{content:""; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(to bottom, rgba(1,6,10,.45) 0%, transparent 26%,
+    transparent 58%, rgba(1,6,10,.82) 100%);
+  box-shadow:inset 0 0 90px rgba(1,6,10,.7)}
+.desc-tel{position:absolute; top:0; left:0; right:0; z-index:2;
+  display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;
+  padding:11px 16px; font-family:var(--mono); font-size:9.5px; letter-spacing:.2em}
+.desc-band{color:var(--proj)}
+.desc-alt{color:var(--gold)}
+.desc-cap{position:absolute; left:0; right:0; bottom:0; z-index:2; margin:0;
+  padding:16px 18px; max-width:74ch; font-size:13.5px; line-height:1.68;
+  color:var(--text); text-shadow:0 1px 14px rgba(1,6,10,.95)}
+.descent--last{margin-bottom:26px}
 
-.era-grid{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
-.era{padding:19px 21px; border-left:2px solid rgba(111,227,242,.3)}
+/* ── history sub-heads ──────────────────────────────────── */
+.hist-head{margin:0 0 16px; max-width:80ch}
+.hist-head p{margin:6px 0 0; font-size:14.5px; line-height:1.68; color:var(--text-soft)}
+
+.found-grid{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+.found{padding:17px 19px; position:relative}
+.found-y{display:block; font-family:var(--mono); font-size:22px; letter-spacing:.06em;
+  color:var(--gold); line-height:1; margin-bottom:7px}
+.found h3{margin:0 0 8px; font-size:16px; font-weight:500; color:var(--text)}
+.found p{margin:0 0 9px; font-size:13px; line-height:1.66; color:var(--text-soft)}
+.found-l{padding-top:9px; border-top:1px solid var(--line); color:var(--gold-dim);
+  font-size:12px; font-style:italic; line-height:1.6}
+
+.era-grid{display:grid; gap:10px; grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.era{padding:16px 18px; border-left:2px solid rgba(111,227,242,.3)}
 .era--now{border-left-color:var(--gold); background:rgba(229,178,67,.05)}
-.era-p{display:flex; align-items:center; gap:10px; font-family:var(--mono); font-size:11px;
-  letter-spacing:.18em; color:var(--proj-dim); margin-bottom:7px}
-.era-p i{font-style:normal; font-size:8.5px; letter-spacing:.2em; color:#0a1620;
-  background:var(--gold); padding:2px 7px}
-.era h3{margin:0 0 4px; font-size:17px; font-weight:500; color:var(--text)}
-.era-pop{display:block; margin-bottom:9px; font-size:12px; font-style:italic; color:var(--text-faint)}
-.era p{margin:0; font-size:13.5px; line-height:1.74; color:var(--text-soft)}
+.era-p{display:flex; align-items:center; gap:9px; font-family:var(--mono); font-size:10.5px;
+  letter-spacing:.16em; color:var(--proj-dim); margin-bottom:5px}
+.era-p i{font-style:normal; font-size:8px; letter-spacing:.18em; color:#0a1620;
+  background:var(--gold); padding:2px 6px}
+.era h3{margin:0 0 3px; font-size:16px; font-weight:500; color:var(--text)}
+.era-pop{display:block; margin-bottom:7px; font-size:11.5px; font-style:italic; color:var(--text-faint)}
+.era p{margin:0; font-size:13px; line-height:1.68; color:var(--text-soft)}
 
-.firsts{margin-top:26px; padding:18px 22px; border:1px solid var(--line);
-  background:rgba(6,26,35,.4)}
-.firsts-track{display:grid; gap:1px; margin-top:12px;
-  grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
-.first{display:grid; grid-template-columns:88px 1fr; gap:14px; padding:8px 0;
+.firsts{padding:15px 19px; border:1px solid var(--line); background:rgba(6,26,35,.4)}
+.firsts-track{display:grid; gap:0 26px; margin-top:9px;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.first{display:grid; grid-template-columns:66px 1fr; gap:12px; padding:6px 0;
   border-bottom:1px solid var(--line)}
-.first b{font-family:var(--mono); font-size:12px; color:var(--gold); letter-spacing:.06em}
-.first span{font-size:13px; color:var(--text-soft)}
+.first b{font-family:var(--mono); font-size:11.5px; color:var(--gold); letter-spacing:.05em}
+.first span{font-size:12.5px; line-height:1.5; color:var(--text-soft)}
 
 /* ============================================================
    POPULATION TABLES
@@ -275,6 +299,13 @@ ol.trust span{display:block; font-size:13px; line-height:1.7; color:var(--text-s
 
 @media(max-width:820px){
   .cup{grid-template-columns:1fr}
+  .descent img{height:210px}
+  /* On phones the caption drops below the plate, so the vignette
+     that would otherwise sit over it is removed rather than
+     stretched across text. */
+  .desc-cap{position:static; padding:11px 0 0; text-shadow:none; font-size:13px; max-width:none}
+  .descent::after{display:none}
+  .desc-tel{background:linear-gradient(to bottom,rgba(1,6,10,.8),transparent)}
   .first{grid-template-columns:74px 1fr}
   dl.ident{grid-template-columns:1fr; gap:2px}
   dl.ident dt{padding-top:8px}
