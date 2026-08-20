@@ -102,3 +102,56 @@ blockquote.r-quote{margin:0; padding:22px 26px; background:rgba(6,26,35,.5)}
   .r-rung p{grid-column:1/-1}
   .r-stats b{font-size:19px}
 }
+
+/* ============================================================
+   IMAGERY
+
+   Two block types. A plate is a single large frame carrying a
+   caption that adds something the prose does not. A gallery is
+   a grid of smaller frames, each still captioned — a picture
+   with no caption is decoration, and this page is not
+   decorated. Both open full size on click.
+   ============================================================ */
+
+.r-plate{margin:0; position:relative; cursor:zoom-in}
+.r-plate img{display:block; width:100%; height:auto; border:1px solid var(--line);
+  filter:saturate(.9) contrast(1.03) brightness(.95)}
+.r-plate:hover img{filter:saturate(1) contrast(1.03) brightness(1);
+  border-color:rgba(229,178,67,.4)}
+.r-plate figcaption{padding:13px 2px 0; font-size:13.5px; line-height:1.72;
+  color:var(--text-soft); max-width:92ch}
+.r-ref{display:inline-block; margin-right:11px; font-family:var(--mono); font-size:9px;
+  letter-spacing:.2em; color:var(--gold); vertical-align:1px}
+
+.r-gal-h{display:block; margin-bottom:11px}
+.r-gal-grid{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+.r-gal--wide .r-gal-grid{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.r-gal figure{margin:0; cursor:zoom-in}
+.r-gal img{display:block; width:100%; aspect-ratio:16/9; object-fit:cover;
+  border:1px solid var(--line); filter:saturate(.88) contrast(1.03) brightness(.93)}
+.r-gal figure:hover img{filter:saturate(1) contrast(1.03) brightness(1);
+  border-color:rgba(229,178,67,.4)}
+.r-gal figcaption{padding:9px 1px 0; font-size:12.5px; line-height:1.62;
+  color:var(--text-faint)}
+.r-gal figcaption b{color:var(--gold); font-weight:500}
+
+/* ── full-size viewer ─────────────────────────────────────── */
+.r-view{position:fixed; inset:0; z-index:120; display:flex; align-items:center;
+  justify-content:center; padding:clamp(14px,4vw,54px);
+  background:rgba(1,6,10,.95); backdrop-filter:blur(6px); cursor:zoom-out}
+.r-view[hidden]{display:none}
+.r-view figure{margin:0; max-width:1400px; width:100%; cursor:auto}
+.r-view img{display:block; width:100%; height:auto; max-height:76vh; object-fit:contain;
+  border:1px solid var(--line)}
+.r-view figcaption{padding:14px 2px 0; font-size:13.5px; line-height:1.72;
+  color:var(--text-soft); max-width:96ch}
+.r-view figcaption b{color:var(--gold); font-weight:500}
+.r-view-x{position:absolute; top:14px; right:16px; z-index:2; cursor:pointer;
+  width:40px; height:40px; background:none; border:1px solid var(--line);
+  color:var(--text-soft); font-size:15px}
+.r-view-x:hover{color:var(--gold); border-color:var(--gold)}
+
+@media(max-width:760px){
+  .r-gal-grid,.r-gal--wide .r-gal-grid{grid-template-columns:1fr}
+  .r-plate figcaption{font-size:13px}
+}

@@ -41,6 +41,10 @@ window.R.push(
     `This is why drones are not counted in the population figures. Microdrones and disposable sensor motes are equipment in the way a torch is equipment. Nobody proposes that a torch be certified, and nobody has yet made a convincing argument that ten thousand of them together should be.`
   ]},
 
+  {t:'plate', img:'landslide-handler', ref:'PLATE 4.1',
+   alt:'Rescue machines and responders working a landslide with small drones overhead',
+   cap:`A handler unit working a slide with responders. The machine on the ground is certified and answerable. The drones above it are not certified, are not audited, and belong — legally — to whoever released them. Where liability sits if one of them injures somebody has been litigated four times and settled differently each time.`},
+
   {t:'note', h:'THE OPERATOR RULE',
     b:`The single most important line in remote-systems practice, and the one most often got wrong by people who ought to know better. <b>A unit under direct control runs on its operator's judgement instead of its own — not in addition to it.</b> A trained controller can make a rescue machine faster and more decisive than it would ever be alone. That same controller has, in taking the link, replaced the machine's own hazard model with their own. Both modes are competent. Assuming you have both at once is how people get hurt.`},
 
@@ -55,6 +59,17 @@ window.R.push(
       b:`Fast bipedal, wheeled or quadrupedal machines that carry breaching charges, fire foam, structural anchors, emergency radios, medical packs, sensor beacons and power cells into conditions too dangerous for a human or too expensive for a rescue robot. They are built to a Grade 1 ceiling on purpose.` }
   ]},
 
+  {t:'gallery', h:'THE VISIBLE LAYER', items:[
+    {img:'field-drones', n:'Survey. ',
+     cap:'Agricultural blocks flown on scheduled routing, the picture assembled by a ground unit that never leaves the row it is standing in.'},
+    {img:'fire-drones', n:'Fire ground. ',
+     cap:'Overhead thermal and a hose crew working the same incident. The drones see it four minutes earlier and cannot do anything about it.'},
+    {img:'street-delivery', n:'Courier traffic. ',
+     cap:'The commonest drone incident is not a mechanical failure. It is a routing instruction that authenticated correctly and should not have.'},
+    {img:'fire-suppression', n:'The spent machine. ',
+     cap:'Doctrine in one frame: put the equipment where the person would have had to stand, and lose the equipment.'}
+  ]},
+
   {t:'note', h:'THE ETHICAL DESIGN RULE',
     b:`A lawful breach courier may not contain a persistent social personality, a human-derived memory model, a childlike voice, a personhood-capable learning architecture, or a concealed passenger mind. The rule is not squeamishness. It exists because asking a socially aware machine to knowingly destroy itself turned out to be politically intolerable, and the industry would rather be forbidden from building one than have to argue about it again.`},
 
@@ -62,6 +77,10 @@ window.R.push(
     `Military and emergency units do not run on the Three Safeguards at all. They operate under a separate restricted directive set — the <b>Human Command and Engagement Annex</b> — which permits force against authenticated hostile targets while retaining civilian, surrender, medical and proportionality protections. The practical detail worth carrying: <b>an ordinary member of the public cannot command or redirect one.</b> Not by speaking to it, not by presenting credentials, not in an emergency.`,
     `NEMA distributes its combat and rescue units among human-led formations rather than assembling independent robot forces. Doctrine is explicit about why: the machines exist to support human operatives, recover the wounded, clear debris, provide cover, and be spent instead of people.`
   ]},
+
+  {t:'plate', img:'night-response', ref:'PLATE 4.2',
+   alt:'A night emergency scene with responders, blue lights and heavy machines in the rain',
+   cap:`Units operating under the Annex, alongside the people they are there to spend themselves for. Nothing in this frame will take an instruction from a member of the public — not from a bystander, not from someone presenting credentials, not in an emergency. That is the design, and on a night like this it is also the point.`},
 
   {t:'note', h:'A DISTINCTION WORTH KNOWING BEFORE YOU NEED IT',
     b:`A NEMA combat drone is bounded equipment. A <b>synthetic volunteer</b> is a recognised digital person who has signed a service contract, holds rank, carries legal accountability, may refuse an unlawful order, cannot be copied to produce more soldiers without consent, and cannot be restored from a backup and quietly declared the same casualty returned to duty. If its continuity ends, it has been killed rather than destroyed. Mistaking one for the other has caused an international incident, and the two are not reliably distinguishable by looking.`},

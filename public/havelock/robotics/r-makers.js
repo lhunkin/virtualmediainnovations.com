@@ -10,6 +10,10 @@ window.R.push(
     `The Hearthline silhouette is common enough to be read instantly by anyone in the Alliance — but different firms supply the panels, the voices, the hands, the uniforms, the software and the service package behind that outline.`
   ]},
 
+  {t:'plate', img:'assembly-arm', ref:'PLATE 3.1',
+   alt:'A large assembly manipulator on a factory line with workers in high-visibility clothing',
+   cap:`The badge on a chest panel is a service relationship. This line assembles frames that will leave wearing four different marques, and the recall notice for any one of them has to name every firm in the chain before it can name a fault.`},
+
   {t:'table', head:['Firm', 'Builds', 'Institutional character'], rows:[
     ['Cyberworks Aerospace Network', 'Premium servants, artificial minds, immersive and lunar robotics, hazardous systems',
      'Brilliant, proprietary, and increasingly unsure where the tool ends and the person begins'],
@@ -39,12 +43,52 @@ window.R.push(
      'Can free a machine from corporate dependence, or create an undocumented hazard']
   ]},
 
+  {t:'gallery', wide:true, h:'THE FIRMS, IN THE FIELD', items:[
+    {img:'penthouse-service', n:'Cyberworks. ',
+     cap:'The prestige end of the domestic market, and the silhouette everyone else designs against.'},
+    {img:'kingsway-transit', n:'Cascadia. ',
+     cap:'Municipal, transit and shared-housing machines, built open-repair on purpose. Cheapest to keep and permanently short of money.'},
+    {img:'emergency-dept', n:'Solace. ',
+     cap:'Medicine, care, rescue and casualty transport. Compassionate service wrapped in insurance, triage and data ownership.'},
+    {img:'flood-wall', n:'Meridian. ',
+     cap:'Flood, power, climate and fire. The firm that builds the machines society cannot easily permit to fail.'},
+    {img:'station-concourse', n:'Pacifica. ',
+     cap:'Identity, audit and authorisation. Builds comparatively few chassis and decides what all of them recognise.'},
+    {img:'public-order', n:'Aegis. ',
+     cap:'Non-lethal security, custody and public order. Professional and restrained in public; vulnerable to a coercive contract.'},
+    {img:'apron-service', n:'Northstar. ',
+     cap:'Vacuum, aerospace, lift and station work. Expensive machines that depend on a specialised service chain.'},
+    {img:'underwater-inspect', n:'Blue Cedar. ',
+     cap:'Port, ferry, salvage and underwater. Rugged coastal design and a strong local repair culture.'},
+    {img:'night-response', n:'Harker-Morrow. ',
+     cap:'Defence robotics, electronic warfare and heavy security. Restricted, politically connected, protective of its telemetry.'},
+    {img:'rehab-gait', n:'Helix-Kestrel. ',
+     cap:'Human-machine medical interfaces and clinical manipulators. Treats patient data as care record and research asset at once.'},
+    {img:'clinical-door', n:'Havelock. ',
+     cap:'Clinical robotics, rehabilitation and containment. A functioning machine can continue protecting people.'},
+    {img:'depot-bay', n:'Grey Workshops. ',
+     cap:'Unsupported repair and local autonomy. Can free a machine from corporate dependence, or create an undocumented hazard.'}
+  ]},
+
   {t:'note', h:'THE CHOKEPOINT',
     b:`Pacifica Data Trust is the firm to understand. It manufactures comparatively little and it decides, across most of the Alliance, which credentials a machine will accept as authority. A company that can be persuaded to change who a robot recognises has more practical power over that robot than the company that welded it together.`},
 
   {t:'prose', b:[
     `Cascadia dominates the public and municipal market — the Commonhand in shared housing, the Wayfinder in transit stations, the Streetwright on civic maintenance, the Fieldhand across the agricultural belt, the Longshore mule on the port. Its designs are deliberately open-repair, which is why they are cheaper to keep and why the cooperative is permanently short of money.`,
     `Cyberworks holds the prestige end. The Hearthline family is the visual symbol of domestic robot culture in a way that no competitor has managed to dislodge in thirty years.`
+  ]},
+
+  {t:'gallery', h:'CASCADIA IN SERVICE — THE PUBLIC FLEET', items:[
+    {img:'building-pool', n:'Commonhand. ',
+     cap:'Shared residential, assigned across several floors. Time is rationed per household and every hour of it is logged.'},
+    {img:'skytrain-access', n:'Wayfinder. ',
+     cap:'Transit attendant — guidance, luggage, accessibility equipment, and a medical summons that works before anybody finds a button.'},
+    {img:'road-works', n:'Streetwright. ',
+     cap:'Civic maintenance. Sixteen hours of endurance, which is exactly one long night shift plus the walk back to the depot.'},
+    {img:'vertical-farm', n:'Fieldhand. ',
+     cap:'Agriculture across the Cloverdale belt — soil, pollination, irrigation and livestock health.'},
+    {img:'port-container', n:'Longshore. ',
+     cap:'Two tons safely, four briefly, twelve hours at a time. Costs more than three household servants and earns it back in a quarter.'}
   ]},
 
   {t:'note', h:'CATALOGUE — PUBLISHED LIST PRICES, 2098',
@@ -72,6 +116,15 @@ window.R.push(
     ['2 tons',   'LM-40 safe lift — 4 tons short duration'],
     ['40 tons',  'CB-4 static hold when properly braced'],
     ['3,000 ft', 'HSR-3 maximum depth, at 35 mph underwater']
+  ]},
+
+  {t:'gallery', h:'THE EXPENSIVE END', items:[
+    {img:'hangar-heavy', n:'Heavy and orbital frames. ',
+     cap:'Purpose-built chassis, specialised actuators, separate certification. Nothing about this is an upgrade package fitted to something smaller.'},
+    {img:'tunnel-crew', n:'Hazard and confined space. ',
+     cap:'Machines rated for atmospheres that would kill the crew standing beside them, which is the entire justification for the price.'},
+    {img:'operating-theatre', n:'Clinical manipulators. ',
+     cap:'Licensed to one field, audited on every action, and worth more per hour of theatre time than the theatre.'}
   ]},
 
   {t:'note', h:'WHAT THE PRICE DOES NOT INCLUDE',

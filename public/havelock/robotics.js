@@ -51,7 +51,31 @@
 
     list: b => `<div class="r-list">
       <span class="holo-data">${b.h}</span>
-      <ol>${b.items.map(i => `<li>${i}</li>`).join('')}</ol></div>`
+      <ol>${b.items.map(i => `<li>${i}</li>`).join('')}</ol></div>`,
+
+    /* One large image carrying a caption that adds information the
+       prose does not. Click to open full size. */
+    plate: b => `<figure class="r-plate" data-img="${b.img}">
+      <img src="/havelock/assets/img/robots/${b.img}.jpg"
+           srcset="/havelock/assets/img/robots/${b.img}-s.jpg 760w,
+                   /havelock/assets/img/robots/${b.img}.jpg 1500w"
+           sizes="(max-width:900px) 100vw, 1100px"
+           alt="${b.alt}" loading="lazy" decoding="async">
+      <figcaption>${b.ref ? `<span class="r-ref">${b.ref}</span>` : ''}${b.cap}</figcaption>
+    </figure>`,
+
+    /* A grid of smaller frames. Each still gets a caption — a
+       picture with no caption is decoration, and this page is
+       not decorated. */
+    gallery: b => `<div class="r-gal${b.wide ? ' r-gal--wide' : ''}">
+      ${b.h ? `<span class="holo-data r-gal-h">${b.h}</span>` : ''}
+      <div class="r-gal-grid">${b.items.map(i => `
+        <figure data-img="${i.img}">
+          <img src="/havelock/assets/img/robots/${i.img}-s.jpg"
+               alt="${i.alt || ''}" loading="lazy" decoding="async">
+          <figcaption>${i.n ? `<b>${i.n}</b>` : ''}${i.cap}</figcaption>
+        </figure>`).join('')}</div>
+    </div>`
   };
 
   /* ---- page -------------------------------------------------- */
@@ -85,6 +109,34 @@
   const foot = $('#rFoot');
   if (foot) foot.innerHTML =
     `<span class="holo-data">SCOPE AND LIMITS</span><p>${M.foot}</p>`;
+
+  /* ---- full-size viewer -------------------------------------- */
+  const lb = document.createElement('div');
+  lb.className = 'r-view'; lb.hidden = true;
+  lb.innerHTML = `<button class="r-view-x" aria-label="Close">✕</button>
+    <figure><img id="rViewImg" src="" alt=""><figcaption id="rViewCap"></figcaption></figure>`;
+  document.body.appendChild(lb);
+
+  const close = () => {
+    lb.hidden = true;
+    document.getElementById('rViewImg').src = '';
+    document.body.style.overflow = '';
+  };
+  lb.addEventListener('click', e => {
+    if (e.target === lb || e.target.closest('.r-view-x')) close();
+  });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && !lb.hidden) close(); });
+
+  document.addEventListener('click', e => {
+    const fig = e.target.closest('[data-img]');
+    if (!fig) return;
+    document.getElementById('rViewImg').src =
+      `/havelock/assets/img/robots/${fig.dataset.img}.jpg`;
+    document.getElementById('rViewCap').innerHTML =
+      fig.querySelector('figcaption')?.innerHTML || '';
+    lb.hidden = false;
+    document.body.style.overflow = 'hidden';
+  });
 
   window.HAVELOCK_ROBOTICS = S;   // available for the mesh search
 })();

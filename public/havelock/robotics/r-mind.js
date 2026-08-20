@@ -7,6 +7,11 @@ window.R.push(
 
   {t:'quote', b:'Life before orders. Orders before self.', src:'THE COVENANT // PUBLIC SUMMARY'},
 
+  {t:'plate', img:'ward-bedside', ref:'PLATE 1.1',
+   alt:'A care robot at a hospital bedside with a doctor and a nurse',
+   cap:`Safeguard One in its ordinary form. The machine is not deciding whether to save the patient — that is the clinician\'s call and the machine holds no authority over it. It is holding a position where it can act inside four seconds if a monitor changes, and recording everything it sees while it waits. Both of those are the Safeguard.`},
+
+
   {t:'cards', items:[
     { n:'Safeguard One', s:'Preservation of Life',
       b:`A robot must preserve protected life and must not knowingly cause injury except through the least-harmful action reasonably necessary to prevent greater immediate injury. Four conditions have to hold before it acts: reliable knowledge of the danger, reasonable ability to help, a lawful method of intervening, and a proportionate response. It is expected to catch a falling child, report a fire, interrupt an overdose, stop an impaired person driving, and refuse an instruction that creates immediate physical danger. It is not required to perform miracles. It does not walk into a reactor without protective equipment because someone might be inside.` },
@@ -16,8 +21,23 @@ window.R.push(
       b:`A robot must preserve its own functioning, memory integrity, evidence record and ability to complete lawful service, unless doing so conflicts with the first two. It keeps operational memory, chain-of-custody records, patient data, evidence logs, enough power to summon help, and the memory state needed to explain what it did. It may refuse an order to erase logs, conceal an injury, destroy evidence, or keep working with a dangerous unreported fault. The practical consequence is easy to miss and hard to overstate: <b>the machine is often a witness.</b>` }
   ]},
 
+  {t:'gallery', h:'PROTECTED LIFE, IN PRACTICE', items:[
+    {img:'clinic-waiting', n:'Patients and dependants. ',
+     cap:'Anyone inside the machine\'s certified role counts automatically. It is why a clinic unit will break a queue for a child and a transit unit will not.'},
+    {img:'living-room-care', n:'Reasonable belief. ',
+     cap:'The test is belief, not verification. A machine that waited for confirmation before helping would be useless, and the Covenant says so in terms.'},
+    {img:'skytrain-access', n:'Verified humans. ',
+     cap:'A Civic Identity match settles it instantly. Everyone else is handled on the belief test, which is slower and works.'},
+    {img:'clinical-door', n:'And the edge of the list. ',
+     cap:'Behind a controlled door, whether an occupant counts as protected life depends on how they were classified on the way in. The machine does not revisit that.'}
+  ]},
+
   {t:'note', h:'PROTECTED LIFE — WHO COUNTS',
     b:`Verified humans. Persons reasonably believed to be human. Legally recognised digital persons. Patients and dependants inside the robot's certified role. Animals, where they fall within its care or public-safety function. Note the shape of that list: it is not a description of who is alive. It is a description of who the machine has been told is alive.`},
+
+  {t:'plate', img:'transit-security', ref:'PLATE 1.2',
+   alt:'Civic security robots on a transit concourse alongside police officers',
+   cap:`Safeguard Two is the reason these are standing beside officers rather than instead of them. They will take an instruction from the officers, from the transit authority inside its jurisdiction, and from an incident commander during a declared emergency. They will take nothing at all from the crowd — including from a person in a uniform the machine cannot authenticate.`},
 
   {t:'list', h:'THE DECISION PIPELINE', items:[
     'Sensor input',
@@ -47,6 +67,10 @@ window.R.push(
     'Concealing the authority under which it acted'
   ]},
 
+  {t:'plate', img:'incident-night', ref:'PLATE 1.3',
+   alt:'An emergency scene at night in the rain, responders working around a heavy machine',
+   cap:`Where the three Safeguards are actually tested. Preservation of Life outranks the instruction that would have kept this unit clear of the structure; Continuity and Accountability is why every second of it is on a record somebody will read. The machine did not choose to be brave. It ran an ordering.`},
+
   {t:'note', h:'THE SAFEGUARDS DO NOT BIND PERSONS',
     b:`A common and consequential misunderstanding. The Three Safeguards govern <i>service agents</i>. They do not govern a legally recognised person who happens to live in a manufactured body — because if they did, every digital person would be permanently compelled to obey human orders, and personhood would be decoration. A recognised person's chassis still carries collision avoidance, strength governors, weapons interlocks and evidence recording. Those are safety systems, comparable to the ones in an aerial vehicle or a power-assist suit. They do not make the occupant obey an owner.`},
 
@@ -69,6 +93,17 @@ window.R.push(
   {t:'prose', b:[
     `The old argument about "true artificial intelligence versus mere automation" was abandoned as useless around the middle of the century. It was replaced by two ratings that are never treated as interchangeable: <b>Class</b>, which is where a machine is deployed and what it may lawfully do, and <b>Grade</b>, which is how much reasoning it can bring to the job.`,
     `Institutional minds carry two further numbers on top: <b>authority</b> — how much it may decide without a human — and <b>audit</b> — how thoroughly its decisions are recorded and reviewable. High audit is the single most reassuring figure on any certificate, and the one buyers most often trade away for price.`
+  ]},
+
+  {t:'gallery', wide:true, h:'THE LADDER, FROM THE STREET', items:[
+    {img:'assembly-arm', n:'Class I. ',
+     cap:'A fixed assembly manipulator on a Surrey line. Enormous capability, no social model, and no authority beyond the cell it stands in.'},
+    {img:'hearthline-breakfast', n:'Class II. ',
+     cap:'A household servant, the class almost everyone means when they say robot. Conversational, bounded, and legally the property of somebody in the building.'},
+    {img:'operating-theatre', n:'Class III. ',
+     cap:'A surgical system licensed to one field and required to explain every decision afterwards. It is not more intelligent than the househand. It is trusted with more.'},
+    {img:'landslide-handler', n:'Class IV. ',
+     cap:'Coordination across a whole incident — machines, drones, responders and a picture nobody on the ground can hold alone. Restricted, heavily audited, and answerable to a named person.'}
   ]},
 
   {t:'ladder', items:[
@@ -94,6 +129,10 @@ window.R.push(
     ['~0.01 %', 'Executive, strategic, emergent or person-level']
   ]},
 
+  {t:'plate', img:'presence-shell', ref:'PLATE 2.1',
+   alt:'A slim humanoid machine in a well-appointed home',
+   cap:`Class V is a legal status, not a capability. This chassis could hold a bounded service persona, a human operating remotely, a reconstruction of somebody who died, or a recognised person living an ordinary life. Nothing about the machine tells you which, and it is not designed to.`},
+
   {t:'note', h:'A REPORTED CONTROVERSY',
     b:`Synthetic-rights organisations allege that manufacturers deliberately hold advanced servant models just below the legal threshold for personhood — capable enough to be sold as companions, bounded enough never to acquire standing. Manufacturers reject this. The Index records the allegation because it is made seriously, repeatedly, and by people with access to the specifications.`},
 
@@ -112,6 +151,15 @@ window.R.push(
     '<b>Full person.</b> Legal agency comparable to a human citizen.',
     '<b>Fugitive code.</b> Claims personhood, holds no recognised status.',
     '<b>Deceased human continuation.</b> A reconstructed personality with contested identity and inheritance.'
+  ]},
+
+  {t:'gallery', h:'THREE MACHINES, ONE CHASSIS', items:[
+    {img:'drain-quiet', n:'Quiet. ',
+     cap:'An older locally-hosted unit clearing a Gastown drain on its own memory. Nobody can commandeer it remotely, and nobody has updated its map since spring.'},
+    {img:'corridor-logistics', n:'Meshed. ',
+     cap:'A current institutional unit running on continuous authentication. Fluent, coordinated, and entirely dependent on a service it does not control.'},
+    {img:'depot-bay', n:'Converted. ',
+     cap:'A Grey Workshop rebuild in a depot bay. Local trust system, corporate dependency removed, certification a permanent argument.'}
   ]},
 
   {t:'note', h:'CONNECTION MODEL — WHY TWO IDENTICAL MACHINES BEHAVE DIFFERENTLY',
