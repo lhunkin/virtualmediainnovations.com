@@ -955,3 +955,11 @@ main > section[id]::before{
 /* Inside the charter section the panel sits above a six-card grid,
    so it wants a little more air beneath it. */
 .charter .hpanel{margin-bottom:30px}
+
+/* The closing panel runs wider than a normal section and carries
+   the company's own sign-off, so it gets more air above it and a
+   hairline to separate it from the last content section. */
+.section.closer{padding-top:clamp(40px,6vh,74px); padding-bottom:clamp(30px,4vh,56px);
+  border-top:1px solid var(--line)}
+.hpanel--closer{margin-bottom:0}
+.hpanel--closer figcaption{max-width:none}
