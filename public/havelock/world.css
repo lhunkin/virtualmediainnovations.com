@@ -1,0 +1,84 @@
+/* ============================================================
+   HAVELOCK WORLD INDEX // 2098
+   world.css — regional briefings
+
+   Loads after vancouver.css and reuses its section rhythm and
+   the shared .holo-* shell. Only the index-specific components
+   live here.
+   ============================================================ */
+
+.world-hero .hero-plate img{filter:saturate(.7) brightness(.55) contrast(1.06)}
+
+/* ── legend ───────────────────────────────────────────────── */
+.w-legend{display:grid; gap:22px; margin-top:20px; padding:20px 22px;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  border:1px solid var(--line); background:rgba(6,26,35,.4)}
+.w-legend p{margin:8px 0 0; font-size:13.5px; line-height:1.7; color:var(--text-soft)}
+.w-legend b{color:var(--gold)}
+
+/* ── controls ─────────────────────────────────────────────── */
+.w-controls{margin-bottom:22px}
+.w-chips{display:flex; flex-wrap:wrap; gap:7px; margin-bottom:14px}
+.w-chips button{
+  display:inline-flex; align-items:center; gap:8px; cursor:pointer; min-height:36px;
+  padding:7px 13px; background:none; border:1px solid var(--line);
+  font-family:var(--mono); font-size:10px; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--text-soft);
+}
+.w-chips button em{font-style:normal; font-size:9px; color:var(--proj-dim);
+  border-left:1px solid var(--line); padding-left:8px}
+.w-chips button:hover{color:var(--proj); border-color:rgba(111,227,242,.44)}
+.w-chips button.on{color:#01060a; background:var(--gold); border-color:var(--gold)}
+.w-chips button.on em{color:#01060a; border-left-color:rgba(1,6,10,.35)}
+
+/* ── region band ──────────────────────────────────────────── */
+.w-band{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;
+  margin:34px 0 12px; padding-bottom:9px; border-bottom:1px solid rgba(229,178,67,.32)}
+.w-band:first-child{margin-top:0}
+.w-band h3{margin:0; font-size:20px; font-weight:400; color:var(--gold)}
+.w-band span{font-size:12.5px; color:var(--text-faint)}
+.w-band i{margin-left:auto; font-style:normal; font-family:var(--mono);
+  font-size:9.5px; letter-spacing:.16em; color:var(--proj-dim)}
+
+/* ── entry ────────────────────────────────────────────────── */
+.w-grid{display:block}
+.w-entry{padding:20px 22px; margin-bottom:12px; scroll-margin-top:112px}
+.w-head{display:flex; align-items:baseline; gap:6px 14px; flex-wrap:wrap;
+  padding-bottom:10px; border-bottom:1px solid var(--line)}
+.w-head b{font-size:19px; font-weight:500; color:var(--text); letter-spacing:.01em}
+.w-head em{font-style:normal; font-family:var(--mono); font-size:9px; letter-spacing:.15em;
+  color:var(--proj-dim); border:1px solid var(--line); padding:3px 8px}
+.w-reg{margin-left:auto; font-family:var(--mono); font-size:8.5px; letter-spacing:.16em;
+  color:var(--text-faint); text-transform:uppercase}
+
+.w-lede{margin:13px 0 14px; font-size:15px; line-height:1.62; color:var(--gold);
+  max-width:84ch}
+.w-body p{margin:0 0 11px; font-size:13.5px; line-height:1.74; color:var(--text-soft);
+  max-width:88ch}
+
+.w-facts{display:grid; gap:3px 20px; margin:14px 0 0; padding:13px 0 0;
+  grid-template-columns:minmax(150px,auto) 1fr; border-top:1px solid var(--line)}
+.w-facts dt{font-family:var(--mono); font-size:9.5px; letter-spacing:.13em;
+  color:var(--text-faint); text-transform:uppercase; padding-top:3px}
+.w-facts dd{margin:0 0 6px; font-size:13px; line-height:1.6; color:var(--text-soft)}
+
+.w-strain{margin-top:15px; padding:13px 16px; border-left:2px solid var(--gold);
+  background:rgba(229,178,67,.055)}
+.w-strain span{display:block; font-family:var(--mono); font-size:9px; letter-spacing:.22em;
+  color:var(--gold); margin-bottom:6px}
+.w-strain p{margin:0; font-size:13.5px; line-height:1.72; color:var(--text); max-width:88ch}
+
+.w-empty{padding:34px 0; text-align:center; color:var(--text-faint); font-size:14px}
+
+.w-foot{margin-top:26px; padding:16px 20px; border:1px solid var(--line);
+  background:rgba(6,26,35,.4)}
+.w-foot p{margin:8px 0 0; font-size:13px; line-height:1.7; color:var(--text-soft); max-width:92ch}
+
+@media(max-width:760px){
+  .w-head b{font-size:17px}
+  .w-reg{margin-left:0; width:100%}
+  .w-band i{margin-left:0}
+  .w-facts{grid-template-columns:1fr; gap:1px}
+  .w-facts dt{padding-top:8px}
+  .w-lede{font-size:14px}
+}

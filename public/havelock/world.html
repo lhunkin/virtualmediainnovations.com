@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#01060a">
+<meta name="description" content="Havelock World Index — the world of 2098. Thirty-nine regional briefings covering the North American Alliance, Europe, Asia, Africa, South America, Oceania and the High Frontier.">
+<title>The World of 2098 // Havelock World Index</title>
+<link rel="icon" href="/havelock/assets/havelock_logo_light.png">
+<link rel="stylesheet" href="/havelock/holo.css">
+<link rel="stylesheet" href="/havelock/site.css">
+<link rel="stylesheet" href="/havelock/vancouver.css">
+<link rel="stylesheet" href="/havelock/world.css">
+</head>
+<body>
+
+<!-- ============ TOP RAIL ============ -->
+<header class="rail">
+  <a class="rail-mark" href="/havelock/index.html"><img src="/havelock/assets/havelock_logo_light.png" alt="Havelock Industries"></a>
+
+  <nav class="rail-nav">
+    <a href="/havelock/index.html" class="rail-city rail-back"><i>↖</i> Havelock Industries</a>
+    <a href="/havelock/vancouver.html">Vancouver</a>
+    <a href="#index">Regions</a>
+    <a href="#w-naa">The Alliance</a>
+    <a href="#w-frontier">High Frontier</a>
+  </nav>
+
+  <div class="rail-status">
+    <span class="pip"></span>
+    <div class="rail-relay">
+      <b>WORLD INDEX</b>
+      <small>2098 // THIRTY-NINE ENTRIES</small>
+    </div>
+  </div>
+
+  <button class="rail-search" id="searchButton" aria-label="Search public mesh"><span>⌕</span> SEARCH MESH</button>
+
+  <div class="rail-clock">
+    <b data-holo-date>2098.06.18</b>
+    <small data-holo-time>07:14:28</small>
+  </div>
+
+  <a class="rail-access" href="/havelock/employee/index.html">EMPLOYEE ACCESS</a>
+
+  <button class="rail-menu" id="menuButton" aria-label="Open navigation" aria-expanded="false" aria-controls="navOverlay">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- ============ MOBILE NAVIGATION ============ -->
+<div class="navsheet" id="navOverlay" hidden>
+  <div class="navsheet-head">
+    <span class="holo-data">HAVELOCK WORLD INDEX // NAVIGATION</span>
+    <button id="menuClose" aria-label="Close navigation">✕</button>
+  </div>
+  <nav class="navsheet-links">
+    <a href="#top"><i>01</i>The World of 2098</a>
+    <a href="#index"><i>02</i>Regional Briefings</a>
+    <a href="#w-naa"><i>↳</i>The North American Alliance</a>
+    <a href="#w-frontier"><i>↳</i>The High Frontier</a>
+    <a href="/havelock/vancouver.html" class="sheet-city"><i>↖</i>Vancouver 2098<em>Civic Index</em></a>
+    <a href="/havelock/index.html" class="sheet-city"><i>↖</i>Havelock Industries<em>Corporate terminal</em></a>
+  </nav>
+  <div class="navsheet-foot">
+    <button class="holo-btn" id="menuSearch">⌕ Search mesh</button>
+    <a class="holo-btn holo-btn--gold" href="/havelock/employee/index.html">Employee access</a>
+  </div>
+  <div class="navsheet-status">
+    <span class="pip"></span>
+    <div><b>PACIFIC RELAY 07</b><small data-holo-date>2098.06.18</small></div>
+  </div>
+</div>
+
+<main class="holo-world" id="top">
+
+<!-- ============ HERO ============ -->
+<section class="city-hero world-hero">
+  <div class="hero-plate" aria-hidden="true">
+    <img src="/havelock/assets/img/descent-1-orbit.jpg" alt="">
+  </div>
+  <div class="hero-copy" data-depth="0.3">
+    <div class="holo-kicker">Havelock World Index // Issued to Personnel</div>
+    <h1 class="holo-title">The world of<br><em>2098.</em></h1>
+    <p class="holo-body">
+      One species, eight regional systems, roughly a hundred thousand people living off the
+      planet, and a civilisation that works because its parts have agreed to recognise each
+      other. Thirty-nine briefings on what each region is good at, how it treats the people
+      inside it, and where it is under strain.
+    </p>
+    <div class="hero-actions">
+      <a class="holo-btn holo-btn--gold" href="#index">Open the regional index</a>
+      <a class="holo-btn" href="/havelock/vancouver.html">Vancouver 2098 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LIVE STRIP ============ -->
+<section class="strip beam">
+  <div><span class="holo-data">ENTRIES</span><b>39</b></div>
+  <div><span class="holo-data">REGIONAL SYSTEMS</span><b>8</b></div>
+  <div><span class="holo-data">OFF-WORLD POPULATION</span><b>~100K</b></div>
+  <div><span class="holo-data">NEAR MARS</span><b>&lt;400</b></div>
+  <div><span class="holo-data">INDEX STATUS</span><b class="good">CURRENT</b></div>
+  <div><span class="holo-data">REVISED</span><b>2098.06</b></div>
+</section>
+
+<!-- ============ WHY THIS EXISTS ============ -->
+<section id="scope" class="section section--tight">
+  <div class="section-head beam">
+    <div class="holo-kicker">01 // Scope</div>
+    <h2 class="holo-title t2">A briefing,<br><em>not an encyclopaedia.</em></h2>
+    <div id="wIntro"></div>
+  </div>
+
+  <div class="w-legend beam" data-depth="0.05">
+    <div>
+      <span class="holo-data">HOW TO READ AN ENTRY</span>
+      <p><b>Tag</b> — what kind of thing the region is: a bloc, a superpower, a corridor, a
+        frontier. <b>Lede</b> — the entry in one sentence. <b>Body</b> — capability, governance
+        and daily life. <b>Facts</b> — the figures and names worth carrying. <b>Strain</b> — the
+        pressure point.</p>
+    </div>
+    <div>
+      <span class="holo-data">A WARNING ABOUT CREDENTIALS</span>
+      <p>The most common cause of a stranded employee is not danger. It is a credential that
+        stops being recognised at a border. Confirm identity, medical authority, augmentation
+        registration and professional licensing separately for every jurisdiction on your route,
+        and do not assume that an Alliance credential travels beyond the Alliance.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE INDEX ============ -->
+<section id="index" class="section section--tight">
+  <div class="section-head beam">
+    <div class="holo-kicker">02 // Regional Briefings</div>
+    <h2 class="holo-title t2">Thirty-nine entries.</h2>
+    <p class="holo-body">
+      Filter by region, or search across every entry — capability, city, institution, station or
+      pressure point.
+    </p>
+  </div>
+
+  <div class="w-controls beam" data-depth="0.04">
+    <div class="w-chips" id="wChips"></div>
+    <div class="dist-search">
+      <input id="wSearch" placeholder="Search the index — try &ldquo;fusion&rdquo;, &ldquo;lift terminal&rdquo;, &ldquo;water&rdquo;, &ldquo;augmentation&rdquo;…" autocomplete="off">
+      <span class="holo-data" id="wCount">39 entries</span>
+    </div>
+  </div>
+
+  <div class="w-grid" id="wGrid"></div>
+
+  <div class="w-foot beam" id="wFoot" data-depth="0.05"></div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot-mark"><img src="/havelock/assets/havelock_logo_light.png" alt="Havelock Industries"></div>
+  <div class="foot-line">HAVELOCK WORLD INDEX // 2098 // ISSUED TO PERSONNEL</div>
+  <nav class="foot-nav">
+    <a href="/havelock/index.html">Havelock Industries</a>
+    <a href="/havelock/vancouver.html">Vancouver 2098</a>
+    <a href="index.html#resources">Resources</a>
+    <a href="/havelock/employee/index.html">Employee Access →</a>
+  </nav>
+</footer>
+
+<!-- ============ MESH SEARCH ============ -->
+<div class="overlay" id="searchOverlay" hidden>
+  <div class="overlay-box">
+    <div class="overlay-head">
+      <span class="holo-data">PUBLIC MESH // QUERY</span>
+      <button id="searchClose" aria-label="Close">✕</button>
+    </div>
+    <input id="meshSearch" placeholder="Query the public record…" autocomplete="off">
+    <div id="searchResults" class="overlay-results"></div>
+  </div>
+</div>
+
+<script src="/havelock/holo.js"></script>
+<script src="/havelock/audio.js"></script>
+
+<!-- World Index data. Core first; the rest set the index order. -->
+<script src="/havelock/world/w-core.js"></script>
+<script src="/havelock/world/w-namerica.js"></script>
+<script src="/havelock/world/w-samerica.js"></script>
+<script src="/havelock/world/w-europe.js"></script>
+<script src="/havelock/world/w-mideast.js"></script>
+<script src="/havelock/world/w-africa.js"></script>
+<script src="/havelock/world/w-asia.js"></script>
+<script src="/havelock/world/w-oceania.js"></script>
+<script src="/havelock/world/w-orbit.js"></script>
+<script src="/havelock/world.js"></script>
+<script src="/havelock/site.js"></script>
+</body>
+</html>
