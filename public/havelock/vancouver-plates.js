@@ -83,6 +83,10 @@
       alt:'The interior of a False Creek water shuttle with passengers and route displays',
       cap:`Four networks, one credential — and this is what the credential looks like when it works. Nobody on this boat has thought about the tap, the route, the transfer or the fare since they boarded. A damaged identity would turn every one of those into a separate problem before the vessel reached Granville Island.` },
 
+    'commercial-drive': { ref:'PLATE 16',
+      alt:'Commercial Drive at dusk with a market table, families, a courier machine and transit behind',
+      cap:`A neighbourhood that has spent a century declining to be standardised, and is still declining. A community board with paper notices on it, an offline market table, and a courier machine working its way around a dog. Every district in the region is required to keep some manual-access service. Here it is not a legal obligation. It is the point of the street.` },
+
     'sea-island-terminal': { ref:'PLATE 15',
       alt:'Passenger processing at the Sea Island orbital terminal',
       cap:`Sea Island orbital processing. Ninety-one departures a week from a building where a passenger clears identity, medical screening and customs for three jurisdictions without stopping walking. The Pacific's advantage was never geography — the tether sites are equatorial and always will be. It was assembly, and it was decided here in the 2080s.` }
