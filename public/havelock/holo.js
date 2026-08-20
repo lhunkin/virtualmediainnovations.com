@@ -242,7 +242,41 @@
         for (const m of muts) m.addedNodes.forEach(adopt);
       }).observe(document.body, { childList: true, subtree: true });
 
-      window.HOLO_BEAM = { adopt };
+      /* ----------------------------------------------------
+         Failsafe sweep.
+
+         IntersectionObserver coalesces callbacks. On a fast
+         scroll — a flick on a phone, a scripted jump, a mouse
+         wheel spun hard — an element can be reported once,
+         already out of view, with isIntersecting false, and
+         then never reported again because it never re-enters.
+         It stays dark permanently while occupying its height.
+
+         So on every scroll frame, light anything that has
+         reached the fold and somehow missed its turn. The
+         observer still drives the normal staggered reveal;
+         this only catches what it drops.
+         ---------------------------------------------------- */
+      let queued = false;
+      const sweep = () => {
+        queued = false;
+        const fold = innerHeight * 0.98;
+        document.querySelectorAll('.beam:not(.lit)').forEach(el => {
+          if (el.getBoundingClientRect().top < fold) {
+            el.classList.add('lit');
+            io.unobserve(el);
+          }
+        });
+      };
+      addEventListener('scroll', () => {
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(sweep);
+      }, { passive: true });
+      addEventListener('resize', sweep, { passive: true });
+      addEventListener('load', sweep);
+
+      window.HOLO_BEAM = { adopt, sweep };
     }
   }
 
