@@ -131,9 +131,12 @@
       <p>${e.txt}</p>
     </article>`).join('');
 
+  /* The fifth event is the one that produced the Alliance, so it
+     spans the row as a capstone — which also stops it orphaning
+     into a second row with three empty columns beside it. */
   const found = $('#foundTrack');
-  if (found) found.innerHTML = FOUNDATIONS.map(f => `
-    <article class="found holo-panel beam" data-depth="0.06">
+  if (found) found.innerHTML = FOUNDATIONS.map((f, i, a) => `
+    <article class="found holo-panel beam${i === a.length - 1 ? ' found--last' : ''}" data-depth="0.06">
       <b class="found-y">${f.y}</b>
       <h3>${f.name}</h3>
       <p>${f.txt}</p>
