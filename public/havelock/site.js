@@ -282,10 +282,14 @@
   const LIMIT = 40;
 
   function render(q = '') {
-    const term = q.toLowerCase().trim();
-    const hits = INDEX
-      .filter(r => !term || r.join(' ').toLowerCase().includes(term))
-      .slice(0, LIMIT);
+    /* Every word has to appear somewhere in the row, but not
+       together and not in order — "orbital habitat" should find
+       the High Frontier even though no summary uses that phrase. */
+    const terms = q.toLowerCase().trim().split(/\s+/).filter(Boolean);
+    const match = r => { const hay = r.join(' ').toLowerCase();
+                         return terms.every(t => hay.includes(t)); };
+    const all = terms.length ? INDEX.filter(match) : INDEX;
+    const hits = all.slice(0, LIMIT);
 
     if (!hits.length) {
       results.innerHTML = '<div class="result"><b>No public record match</b>' +
@@ -302,7 +306,7 @@
     });
 
     results.innerHTML =
-      `<div class="result-count">${hits.length}${INDEX.filter(r => !term || r.join(' ').toLowerCase().includes(term)).length > LIMIT ? '+' : ''} of ${INDEX.length} records</div>` +
+      `<div class="result-count">${hits.length}${all.length > LIMIT ? '+' : ''} of ${INDEX.length} records</div>` +
       order.map(g =>
         `<div class="result-group">${g}</div>` +
         groups[g].map(r =>
