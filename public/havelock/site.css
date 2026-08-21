@@ -996,3 +996,30 @@ a.supp em{font-style:normal; font-family:var(--mono); font-size:10px; letter-spa
   color:var(--gold);
   box-shadow:inset 0 -1px 0 rgba(229,178,67,.3);
 }
+
+/* ── mesh directory: the area tiles and the way back ────────
+   Opening the overlay lands on these rather than on forty rows
+   of text. Same .result base so hover, focus and the hairline
+   separators all behave identically — the tile only adds the
+   count and a heavier title.
+   ────────────────────────────────────────────────────────── */
+.result-area b{
+  display:flex; align-items:baseline; justify-content:space-between; gap:14px;
+  font-size:15px; letter-spacing:.01em; color:var(--gold);
+}
+.result-area b em{
+  flex:none; font-style:normal;
+  font-family:var(--mono); font-size:9px; letter-spacing:.16em;
+  color:var(--text-faint);
+}
+.result-area:hover b{color:#f2c661}
+.result-area:hover b em{color:var(--proj)}
+
+.result-back{
+  display:block; width:100%; text-align:left; cursor:pointer;
+  padding:11px 18px; background:#031017; border:none;
+  font-family:var(--mono); font-size:9px; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--text-soft); transition:.2s;
+}
+.result-back i{font-style:normal; margin-right:8px; color:var(--proj)}
+.result-back:hover{color:var(--proj); background:rgba(14,50,64,.7)}

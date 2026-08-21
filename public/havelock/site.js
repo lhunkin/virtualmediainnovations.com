@@ -276,60 +276,120 @@
   const input   = $('#meshSearch');
   const results = $('#searchResults');
 
-  /* The overlay is a navigation tool, so results are grouped by
-     destination and an empty query browses the whole site rather
-     than showing an arbitrary first eight. */
+  /* The overlay is a directory first and a search box second.
+     Opening it offers the areas of the site; picking one lists
+     what is inside it; typing at any point searches everything.
+     Most people arriving here want to go somewhere, not to
+     compose a query, and forty rows of text is a wall rather
+     than a menu. */
   const LIMIT = 40;
+
+  /* Running order and blurb for the top level. A group that is
+     in the index but missing here still appears, filed after
+     these in the order the index first mentions it. */
+  const AREAS = [
+    ['Havelock',  'Divisions, continuity doctrine, the public record, careers'],
+    ['Vancouver', 'The city in 2098 — history, districts, operations, places to visit'],
+    ['World',     'Thirty-nine regional briefings, pole to pole'],
+    ['Robotics',  'How robots work, who builds them, what the law allows'],
+    ['Vehicles',  'Traffic as a utility, the firms that build it, the catalogue'],
+    ['Drones',    'Categories, access codes, control methods, the catalogue'],
+    ['Arms',      'Service calibres, the heavy end, doctrine and the record'],
+    ['Equipment', 'Possession, access, condition, and what a role carries'],
+    ['Frontier',  'Orbit, the Moon, and the hundred thousand living off Earth'],
+    ['Employee',  'Authenticated terminal — credentials required']
+  ];
+
+  let area = null;            // the area being browsed, or null at the top
+
+  const countOf = name => INDEX.filter(r => r[3] === name).length;
+
+  const rowHTML = r =>
+    `<button class="result" type="button" data-href="${r[2]}">` +
+    `<b>${r[0]}</b><span>${r[1]}</span></button>`;
 
   function render(q = '') {
     /* Every word has to appear somewhere in the row, but not
        together and not in order — "orbital habitat" should find
        the High Frontier even though no summary uses that phrase. */
     const terms = q.toLowerCase().trim().split(/\s+/).filter(Boolean);
-    const match = r => { const hay = r.join(' ').toLowerCase();
-                         return terms.every(t => hay.includes(t)); };
-    const all = terms.length ? INDEX.filter(match) : INDEX;
-    const hits = all.slice(0, LIMIT);
 
-    if (!hits.length) {
-      results.innerHTML = '<div class="result"><b>No public record match</b>' +
-        '<span>Protected records require an authenticated trust channel.</span></div>';
+    /* ---- typing searches everything, area or no area ---- */
+    if (terms.length) {
+      const match = r => { const hay = r.join(' ').toLowerCase();
+                           return terms.every(t => hay.includes(t)); };
+      const all  = INDEX.filter(match);
+      const hits = all.slice(0, LIMIT);
+
+      if (!hits.length) {
+        results.innerHTML = '<div class="result"><b>No public record match</b>' +
+          '<span>Protected records require an authenticated trust channel.</span></div>';
+        return;
+      }
+      const order = [], groups = {};
+      hits.forEach(r => {
+        const g = r[3] || 'Public record';
+        if (!groups[g]) { groups[g] = []; order.push(g); }
+        groups[g].push(r);
+      });
+      results.innerHTML =
+        `<div class="result-count">${hits.length}${all.length > LIMIT ? '+' : ''} of ${INDEX.length} records</div>` +
+        order.map(g => `<div class="result-group">${g}</div>` +
+                       groups[g].map(rowHTML).join('')).join('');
       return;
     }
 
-    // Preserve index order within a group, and group order by first appearance.
-    const order = [], groups = {};
-    hits.forEach(r => {
-      const g = r[3] || 'Public record';
-      if (!groups[g]) { groups[g] = []; order.push(g); }
-      groups[g].push(r);
-    });
+    /* ---- inside one area ---- */
+    if (area) {
+      const rows = INDEX.filter(r => r[3] === area);
+      results.innerHTML =
+        `<button class="result-back" type="button" data-back="1">` +
+        `<i>←</i> All areas</button>` +
+        `<div class="result-group">${area} — ${rows.length} ` +
+        `${rows.length === 1 ? 'record' : 'records'}</div>` +
+        rows.map(rowHTML).join('');
+      return;
+    }
+
+    /* ---- the top level: the areas of the site ---- */
+    const named = AREAS.map(a => a[0]);
+    const extra = [...new Set(INDEX.map(r => r[3]))].filter(g => g && !named.includes(g));
+    const list  = AREAS.concat(extra.map(g => [g, '']));
 
     results.innerHTML =
-      `<div class="result-count">${hits.length}${all.length > LIMIT ? '+' : ''} of ${INDEX.length} records</div>` +
-      order.map(g =>
-        `<div class="result-group">${g}</div>` +
-        groups[g].map(r =>
-          `<button class="result" type="button" data-href="${r[2]}">` +
-          `<b>${r[0]}</b><span>${r[1]}</span></button>`
-        ).join('')
+      `<div class="result-count">${INDEX.length} records across ` +
+      `${list.filter(a => countOf(a[0])).length} areas — pick one, or type to search</div>` +
+      list.filter(a => countOf(a[0])).map(([name, blurb]) =>
+        `<button class="result result-area" type="button" data-area="${name}">` +
+        `<b>${name}<em>${countOf(name)}</em></b>` +
+        `<span>${blurb}</span></button>`
       ).join('');
-
-    results.querySelectorAll('[data-href]').forEach(el => el.addEventListener('click', () => {
-      const href = el.dataset.href;
-      closeSearch();
-      if (!href.startsWith('#')) { window.location.href = href; return; }
-      const target = document.querySelector(href);
-      // Anchors that do not exist on this page belong to the main terminal.
-      if (target) target.scrollIntoView({ behavior: 'smooth' });
-      else window.location.href = '/havelock/index.html' + href;
-    }));
   }
+
+  /* One delegated listener rather than rebinding on every
+     render, so the three views cannot drift apart. */
+  results?.addEventListener('click', e => {
+    const el = e.target.closest('[data-href],[data-area],[data-back]');
+    if (!el) return;
+
+    if (el.dataset.back !== undefined) { area = null; render(''); results.scrollTop = 0; return; }
+    if (el.dataset.area) { area = el.dataset.area; render(''); results.scrollTop = 0; return; }
+
+    const href = el.dataset.href;
+    closeSearch();
+    if (!href.startsWith('#')) { window.location.href = href; return; }
+    const target = document.querySelector(href);
+    // Anchors that do not exist on this page belong to the main terminal.
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+    else window.location.href = '/havelock/index.html' + href;
+  });
 
   function openSearch() {
     if (!overlay) return;
     overlay.hidden = false;
     document.body.style.overflow = 'hidden';
+    area = null;                 // always open at the top level
+    if (input) input.value = '';
     render('');
     setTimeout(() => input?.focus(), 40);
   }
@@ -345,7 +405,14 @@
   input?.addEventListener('input', () => render(input.value));
 
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { closeSearch(); closeModal(); closePlate(); closeSheet(); }
+    if (e.key === 'Escape') {
+      /* Inside an area, Escape steps back to the directory
+         rather than throwing away the whole overlay. */
+      if (overlay && !overlay.hidden && area && !input?.value.trim()) {
+        area = null; render(''); results.scrollTop = 0; return;
+      }
+      closeSearch(); closeModal(); closePlate(); closeSheet();
+    }
     // Ctrl/Cmd+K opens the mesh, the way every terminal in 2098 does.
     if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); openSearch(); }
   });
