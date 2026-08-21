@@ -987,3 +987,9 @@ a.supp em{font-style:normal; font-family:var(--mono); font-size:10px; letter-spa
   color:var(--gold); border-bottom:1px solid rgba(229,178,67,.28);
   background:linear-gradient(to bottom, rgba(3,16,23,.98) 70%, rgba(3,16,23,0))}
 .result-group:first-of-type{margin-top:2px}
+
+/* A long rail used to push EMPLOYEE ACCESS off the right edge
+   rather than giving way. The nav is the part that can afford
+   to lose a little; the access button is not. */
+.rail-nav{min-width:0; flex-shrink:1; overflow:hidden}
+.rail-mark,.rail-search,.rail-clock,.rail-access{flex:none}

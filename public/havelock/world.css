@@ -90,3 +90,8 @@
 .w-supp b{display:block; margin:8px 0 8px; font-size:21px; font-weight:400; color:var(--gold)}
 .w-supp p{margin:0; font-size:13.5px; line-height:1.72; color:var(--text-soft); max-width:88ch}
 .w-supp em{font-style:normal; color:var(--proj); white-space:nowrap}
+
+/* Introduces the supplement shelf, and gives the rail's
+   "Supplements" link somewhere to land. */
+.w-supphead{margin-top:34px; padding-bottom:2px; border-bottom:1px solid rgba(229,178,67,.22); scroll-margin-top:104px}
+.w-supphead p{margin:8px 0 0; font-size:13.5px; line-height:1.72; color:var(--text-soft); max-width:70ch}
