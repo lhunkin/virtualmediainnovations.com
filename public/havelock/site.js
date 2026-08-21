@@ -263,50 +263,54 @@
   /* --------------------------------------------------------
      3. Public mesh search
      -------------------------------------------------------- */
-  const INDEX = [
-    ['Human Systems',          'Regenerative medicine, prosthetics, augmentation, rehabilitation', '#divisions'],
-    ['Infrastructure Continuity', 'Power, water, flood protection, emergency housing',             '#divisions'],
-    ['Emergency & Recovery',   'Extraction, hazardous systems, evidence recovery',                 '#divisions'],
-    ['Systems Intelligence',   'AI assurance, identity architecture, autonomous-system audit',     '#divisions'],
-    ['Mobility & Orbital',     'Protected freight, aerospace medical transport, debris response',  '#divisions'],
-    ['Risk & Assurance',       'Continuity insurance, liability, identity restoration',            '#divisions'],
-    ['Continuity cycle',       'Detect, Stabilize, Recover, Restore, Review',                      '#continuity'],
-    ['Response tiers',         'Tier 1 local, Tier 2 regional, Tier 3 special measures, Tier 4 orbital', '#continuity'],
-    ['Field doctrine',         'Life before evidence, capture before termination, return together','#continuity'],
-    ['Facility register',      'Havelock Centre, Suite 19-C, Salish works, Muir Point',            '#presence'],
-    ['Careers and roles',      'Pacific operations, high frontier, systems intelligence, special measures', '#careers'],
-    ['Consent Ledger',         'Per-procedure record of every intervention, retained by the employee', '#resources'],
-    ['Company history',        'Timeline 2039 to 2098, listing, charter, orbital operations',      '#record'],
-    ['Governance and filings', 'Annual review, adverse findings, related-party disclosures',       '#record'],
-    ['Northstar Crown',        'Orbital emergency coordination, Continuity Suite 19-C',            '#frontier'],
-    ['Havelock history',       'Founded in Vancouver in 2039, listed since 2062',                  '#record'],
-    ['Human Capability Charter','Body autonomy, consent ledger, exit protection',                  '#record'],
-    ['Public news',            'Coastal continuity, organ fabrication, Muir Point, Northstar',     '#record'],
-    ['Facilities & presence',  'Northstar Crown reception, checkpoints, quarters, executive ops',  '#presence'],
-    ['Company Overview PDF',   'New-hire guide // public orientation download',                    '#resources'],
-    ['FMU-3 Employment Agreement','Standard field agreement // HCRS-PAC-FMU3-2098-14',             '#resources'],
-    ['Vancouver 2098',         'City region, district atlas, operations and visitor guide',        '/havelock/vancouver.html'],
-    ['The Golden Age',         'What works, what it costs, and what is not discussed',             '/havelock/vancouver.html#goldenage'],
-    ['District atlas',         'Burrard Core, Surrey Metroplex, the Underlayer, Orbital Vancouver','/havelock/vancouver.html#atlas'],
-    ['Places to visit',        'Stanley Park, Gastown Memory Quarter, Steveston, Blue June',       '/havelock/vancouver.html#visit'],
-    ['City operations',        'Common Mesh, fusion grid, watersheds, flood defence, NEMA',        '/havelock/vancouver.html#operations'],
-    ['Employee access',        'Authenticated Common Mesh terminal for Havelock personnel',        '/havelock/employee/index.html']
+  /* The index lives in mesh-index.js so every page shares one
+     copy. The inline fallback keeps search working if that file
+     is ever missing. Each row: [ title, summary, href, group ]. */
+  const INDEX = window.HAVELOCK_MESH || [
+    ['Vancouver 2098', 'City region, district atlas, operations and visitor guide', '/havelock/vancouver.html', 'Vancouver'],
+    ['The World of 2098', 'Thirty-nine regional briefings', '/havelock/world.html', 'World'],
+    ['Employee access', 'Authenticated Common Mesh terminal for Havelock personnel', '/havelock/employee/index.html', 'Employee']
   ];
 
   const overlay = $('#searchOverlay');
   const input   = $('#meshSearch');
   const results = $('#searchResults');
 
+  /* The overlay is a navigation tool, so results are grouped by
+     destination and an empty query browses the whole site rather
+     than showing an arbitrary first eight. */
+  const LIMIT = 40;
+
   function render(q = '') {
     const term = q.toLowerCase().trim();
-    const hits = INDEX.filter(r => !term || r.join(' ').toLowerCase().includes(term)).slice(0, 8);
+    const hits = INDEX
+      .filter(r => !term || r.join(' ').toLowerCase().includes(term))
+      .slice(0, LIMIT);
+
     if (!hits.length) {
-      results.innerHTML = '<div class="result"><b>No public record match</b><span>Protected records require an authenticated trust channel.</span></div>';
+      results.innerHTML = '<div class="result"><b>No public record match</b>' +
+        '<span>Protected records require an authenticated trust channel.</span></div>';
       return;
     }
-    results.innerHTML = hits.map(r =>
-      `<button class="result" type="button" data-href="${r[2]}"><b>${r[0]}</b><span>${r[1]}</span></button>`
-    ).join('');
+
+    // Preserve index order within a group, and group order by first appearance.
+    const order = [], groups = {};
+    hits.forEach(r => {
+      const g = r[3] || 'Public record';
+      if (!groups[g]) { groups[g] = []; order.push(g); }
+      groups[g].push(r);
+    });
+
+    results.innerHTML =
+      `<div class="result-count">${hits.length}${INDEX.filter(r => !term || r.join(' ').toLowerCase().includes(term)).length > LIMIT ? '+' : ''} of ${INDEX.length} records</div>` +
+      order.map(g =>
+        `<div class="result-group">${g}</div>` +
+        groups[g].map(r =>
+          `<button class="result" type="button" data-href="${r[2]}">` +
+          `<b>${r[0]}</b><span>${r[1]}</span></button>`
+        ).join('')
+      ).join('');
+
     results.querySelectorAll('[data-href]').forEach(el => el.addEventListener('click', () => {
       const href = el.dataset.href;
       closeSearch();
