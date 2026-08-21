@@ -343,7 +343,8 @@
    ------------------------------------------------------------ */
 .overlay{
   position:fixed; inset:0; z-index:9300;
-  display:grid; place-items:start center; padding:12vh 20px 20px;
+  display:grid; place-items:start center;
+  padding:clamp(16px,12vh,140px) 20px 20px;
   background:rgba(0,4,7,.86); backdrop-filter:blur(8px);
   animation:fadeIn .25s ease;
 }
@@ -352,7 +353,18 @@
 .overlay-card{
   width:min(720px,100%); padding:26px 28px 30px;
   animation:beamIn .55s cubic-bezier(.16,1,.3,1) forwards;
+  /* The card has to be able to run out of room. Without this
+     the list simply grew past the bottom of the screen with no
+     way to reach it — on a phone the results below the fold
+     were unreachable entirely. The head and input hold still
+     and .overlay-results takes the scrolling. */
+  display:flex; flex-direction:column;
+  max-height:calc(100dvh - clamp(16px,12vh,140px) - 20px);
 }
+.overlay-card > .overlay-head,
+.overlay-card > #meshSearch{flex:none}
+/* the trust-channel notice under the list */
+.overlay-card > .holo-data{flex:none; padding-top:18px}
 .overlay-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:20px}
 .overlay-head button{
   background:none; border:1px solid var(--line); color:var(--text-soft);
@@ -366,7 +378,15 @@
 }
 #meshSearch::placeholder{color:var(--text-faint)}
 #meshSearch:focus{box-shadow:inset 0 0 24px rgba(111,227,242,.16), 0 0 30px -10px rgba(111,227,242,.9)}
-.overlay-results{margin:16px 0 20px; display:flex; flex-direction:column; gap:1px; background:var(--line)}
+.overlay-results{
+  margin:16px 0 0; display:flex; flex-direction:column; gap:1px; background:var(--line);
+  flex:1 1 auto; min-height:0; overflow-y:auto; overscroll-behavior:contain;
+  scrollbar-width:thin; scrollbar-color:rgba(111,227,242,.35) transparent;
+}
+.overlay-results::-webkit-scrollbar{width:8px}
+.overlay-results::-webkit-scrollbar-track{background:rgba(2,14,20,.6)}
+.overlay-results::-webkit-scrollbar-thumb{background:rgba(111,227,242,.3)}
+.overlay-results::-webkit-scrollbar-thumb:hover{background:rgba(111,227,242,.5)}
 .result{
   padding:15px 18px; background:rgba(3,16,23,.9); cursor:pointer;
   border-left:2px solid transparent; transition:.2s; text-align:left; width:100%;
