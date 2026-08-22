@@ -1043,3 +1043,13 @@ a.supp em{font-style:normal; font-family:var(--mono); font-size:10px; letter-spa
 }
 .result-back i{font-style:normal; margin-right:8px; color:var(--proj)}
 .result-back:hover{color:var(--proj); background:rgba(14,50,64,.7)}
+
+/* A full-screen overlay closed by a 30px target is a poor
+   trade on a phone, where it covers everything. */
+@media (max-width:900px),(hover:none){
+  .overlay-head button{width:44px; height:44px; font-size:16px}
+  /* Short words in the footer nav ended up 26px wide and
+     shoulder to shoulder with their neighbours. */
+  .foot-nav{gap:10px 18px}
+  .foot-nav a,.foot-nav button{padding:0 10px; margin:0 -10px}
+}

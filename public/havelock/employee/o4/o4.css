@@ -361,3 +361,17 @@ body{
   background:rgba(2,6,3,.9); border:1px solid var(--line); color:var(--grn); font-size:14px}
 .fv-x:hover{border-color:var(--grn)}
 @media(max-width:760px){ .fr{max-width:none} .ev-grid{grid-template-columns:1fr} }
+
+/* ── touch fixes ────────────────────────────────────────────
+   Frame thumbnails are lazy-loaded and had no reserved box, so
+   until the image arrived the button collapsed to a 2px line —
+   present, but impossible to see or hit. The thumbnails are
+   520x293, near enough 16/9.
+   ────────────────────────────────────────────────────────── */
+.fr img{aspect-ratio:16/9; object-fit:cover}
+
+@media (max-width:900px),(hover:none){
+  /* Owner and subject chips are how these two views are
+     navigated, and 28px is short for a thumb. */
+  .mbx-f button{min-height:44px; display:inline-flex; align-items:center}
+}

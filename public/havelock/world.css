@@ -95,3 +95,26 @@
    "Supplements" link somewhere to land. */
 .w-supphead{margin-top:34px; padding-bottom:2px; border-bottom:1px solid rgba(229,178,67,.22); scroll-margin-top:104px}
 .w-supphead p{margin:8px 0 0; font-size:13.5px; line-height:1.72; color:var(--text-soft); max-width:70ch}
+
+/* ── the index filter box ───────────────────────────────────
+   .dist-search had no rule anywhere, so this was a raw browser
+   default input sitting on the projection — pale, 13px, and
+   small enough that iOS zooms the whole page when it is tapped.
+   Matched to .atlas-search, which is the same control on the
+   Vancouver page.
+   ────────────────────────────────────────────────────────── */
+.dist-search{display:flex; flex-direction:column; gap:9px; align-items:flex-end;
+  flex:1 1 300px; min-width:0}
+.dist-search input{
+  width:100%; max-width:460px; padding:13px 16px;
+  font-family:var(--mono); font-size:12px; letter-spacing:.04em;
+  color:#eafaff; background:rgba(2,14,20,.8); border:1px solid var(--line); outline:none;
+}
+.dist-search input::placeholder{color:var(--text-faint)}
+.dist-search input:focus{border-color:var(--line-hot); box-shadow:0 0 28px -12px rgba(111,227,242,.9)}
+
+/* 16px or iOS zooms the page on focus and never zooms back. */
+@media (max-width:900px),(hover:none){
+  .dist-search{align-items:stretch}
+  .dist-search input{max-width:none; font-size:16px}
+}

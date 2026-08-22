@@ -159,3 +159,10 @@ blockquote.r-quote{margin:0; padding:22px 26px; background:rgba(6,26,35,.5)}
   .r-gal-grid,.r-gal--wide .r-gal-grid{grid-template-columns:1fr}
   .r-plate figcaption{font-size:13px}
 }
+
+/* The section jump links are the main navigation on these
+   pages and were 34px tall — aimable with a mouse, fiddly
+   with a thumb. */
+@media (max-width:900px),(hover:none){
+  .r-jump a{min-height:44px; display:inline-flex; align-items:center; padding:9px 14px}
+}
