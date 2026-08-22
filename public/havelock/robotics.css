@@ -166,3 +166,25 @@ blockquote.r-quote{margin:0; padding:22px 26px; background:rgba(6,26,35,.5)}
 @media (max-width:900px),(hover:none){
   .r-jump a{min-height:44px; display:inline-flex; align-items:center; padding:9px 14px}
 }
+
+/* ── the tables swipe, and now they say so ──────────────────
+   Every table on these pages has a 520px minimum, so on a phone
+   the last column sits off the right edge. It is reachable —
+   .r-tablewrap scrolls — but nothing said so, and a column that
+   is cut off with no affordance reads as missing content rather
+   than as more content.
+
+   Pure CSS: the two 'local' layers travel with the content and
+   cover the shadows when there is nothing more that way, while
+   the two 'scroll' layers stay pinned to the edges. So the glow
+   appears on whichever side still has table left.
+   ────────────────────────────────────────────────────────── */
+.r-tablewrap{
+  background:
+    linear-gradient(to right, rgba(6,26,35,.98), rgba(6,26,35,0)) 0 0 / 26px 100% no-repeat local,
+    linear-gradient(to left,  rgba(6,26,35,.98), rgba(6,26,35,0)) 100% 0 / 26px 100% no-repeat local,
+    radial-gradient(farthest-side at 0 50%, rgba(111,227,242,.30), rgba(111,227,242,0)) 0 0 / 14px 100% no-repeat scroll,
+    radial-gradient(farthest-side at 100% 50%, rgba(111,227,242,.30), rgba(111,227,242,0)) 100% 0 / 14px 100% no-repeat scroll,
+    rgba(6,26,35,.42);
+  -webkit-overflow-scrolling:touch;
+}
